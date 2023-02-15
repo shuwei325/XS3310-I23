@@ -59,9 +59,6 @@ Virtual</a>
 </td>
 </tr>
 <tr>
-<td ROWSPAN="2">
-1
-</td>
 <td>
 17/03
 </td>
