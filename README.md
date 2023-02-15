@@ -101,6 +101,8 @@ inferior de Cramér-Rao</a>
 <td ROWSPAN="2">
 Práctica: 9.1 - 9.14 de Mendenhall
 </td>
+</tr>
+<td>
 <td>
 <a href="XS3310-I23_4.html">Clase04</a>
 </td>
