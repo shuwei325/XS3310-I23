@@ -19,11 +19,6 @@ está aquí: <http://lya.fciencias.unam.mx/lars/0398/index.html>
 [Programa del
 curso](https://shuwei325.github.io/XS3310-II23/Programa-XS3310.pdf)
 
-| Semana | Fecha | Clase                   | Videos                                                                                                                       | Actividades             |
-|-----------|------------|-------------|--------|-----------------------------|
-| 1      | 14.03 | [Clase01](Clase01.html) | [Población y Muestra](https://youtu.be/JLNaZ1TxS_8) <br> [¿Qué es la estadística inferencial?](https://youtu.be/N_Bnk9Wq7E4) | [Llenar cuestionario]() |
-| 1      | 17.03 |                         |                                                                                                                              |                         |
-
 <table style="width:100%">
 <tr>
 <th width="15%">
@@ -47,10 +42,10 @@ Actividades
 1
 </td>
 <td>
-29 de marzo
+14/03
 </td>
 <td>
-<a href="XS3310-I20_1.html">Clase 1</a>
+<a href="XS3310-I23_1.html">Clase01</a>
 </td>
 <td>
 <a href="https://youtu.be/JLNaZ1TxS_8">Población y Muestra</a> <br>
@@ -64,11 +59,14 @@ Virtual</a>
 </td>
 </tr>
 <tr>
-<td>
-09 de abril
+<td ROWSPAN="2">
+1
 </td>
 <td>
-<a href="XS3310-I20_2.html">Clase 2</a>
+17/03
+</td>
+<td>
+<a href="XS3310-I23_2.html">Clase02</a>
 </td>
 <td>
 <a href="https://youtu.be/-9who67ocEQ">¿Qué es la estimación
@@ -80,13 +78,19 @@ Práctica: 8.1 - 8.20 de Mendenhall
 </td>
 </tr>
 <tr>
-<td>
-05 y 08 de abril
+<td ROWSPAN="2">
+2
 </td>
 <td>
-<a href="XS3310-I20_3y4.html">Clase 3 y 4</a>
+21/03
 </td>
 <td>
+<a href="XS3310-I23_3.html">Clase03</a>
+</td>
+<td>
+<a href="XS3310-I23_4.html">Clase04</a>
+</td>
+<td ROWSPAN="2">
 <a href="https://youtu.be/-VQvT1ZV8dc">Insesgamiento y eficiencia</a>
 <br> <a href="https://youtu.be/zuuNAjb-fx8">Insesgamiento asintótico</a>
 <br> <a href="https://youtu.be/ya03V8ySoBI">Sesgo y error cuadrático
@@ -100,8 +104,29 @@ inferior de Cramér-Rao</a> <br>
 <a href="https://youtu.be/faFsaP1YE4U">Segundo ejemplo sobre la cota
 inferior de Cramér-Rao</a>
 </td>
-<td>
+<td ROWSPAN="2">
 Práctica: 9.1 - 9.14 de Mendenhall
+</td>
+</tr>
+<tr>
+<td ROWSPAN="2">
+3
+</td>
+<td>
+28/03
+</td>
+<td>
+<a href="XS3310-I20_5.html">Clase 5</a>
+</td>
+<td>
+<a href="https://youtu.be/cgKK92xrfqo">Consistencia</a> <br>
+<a href="https://youtu.be/wAQ7zs-TmmY">Relación entre consistencia e
+insesgamiento</a> <br>
+<a href="https://youtu.be/vzG_dIdV5MA">Suficiencia</a> <br>
+<a href="https://youtu.be/1R4QauxorMQ">Ejemplos sobre suficiencia</a>
+</td>
+<td>
+Práctica 9.15 - 9.36 de Mendenhall
 </td>
 </tr>
 </table>
