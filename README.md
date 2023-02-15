@@ -84,9 +84,6 @@ Práctica: 8.1 - 8.20 de Mendenhall
 <td>
 <a href="XS3310-I23_3.html">Clase03</a>
 </td>
-<td>
-<a href="XS3310-I23_4.html">Clase04</a>
-</td>
 <td ROWSPAN="2">
 <a href="https://youtu.be/-VQvT1ZV8dc">Insesgamiento y eficiencia</a>
 <br> <a href="https://youtu.be/zuuNAjb-fx8">Insesgamiento asintótico</a>
@@ -103,6 +100,9 @@ inferior de Cramér-Rao</a>
 </td>
 <td ROWSPAN="2">
 Práctica: 9.1 - 9.14 de Mendenhall
+</td>
+<td>
+<a href="XS3310-I23_4.html">Clase04</a>
 </td>
 </tr>
 <tr>
