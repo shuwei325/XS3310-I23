@@ -23,3 +23,29 @@ curso](https://shuwei325.github.io/XS3310-II23/Programa-XS3310.pdf)
 |-----------|------------|-------------|--------|-----------------------------|
 | 1      | 14.03 | [Clase01](Clase01.html) | [Población y Muestra](https://youtu.be/JLNaZ1TxS_8) <br> [¿Qué es la estadística inferencial?](https://youtu.be/N_Bnk9Wq7E4) | [Llenar cuestionario]() |
 | 1      | 17.03 |                         |                                                                                                                              |                         |
+
+<table>
+<TR>
+<TD ROWSPAN="4">
+Type
+</TD>
+<TD COLSPAN="1">
+data-1
+</TD>
+</TR>
+<TR>
+<TD>
+data-2
+</TD>
+</TR>
+<TR>
+<TD>
+data-3
+</TD>
+</TR>
+<TR>
+<TD>
+data-4
+</TD>
+</TR>
+</table>
