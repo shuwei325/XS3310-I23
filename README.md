@@ -104,6 +104,9 @@ Práctica: 9.1 - 9.14 de Mendenhall
 </tr>
 <td>
 <td>
+24/03
+</td>
+<td>
 <a href="XS3310-I23_4.html">Clase04</a>
 </td>
 </tr>
