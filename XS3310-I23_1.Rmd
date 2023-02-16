@@ -1,9 +1,9 @@
 ---
 title: "XS3310 Teoría Estadística"
-subtitle: "I Semetre 2022"  
+subtitle: "I Semetre 2023"  
 author: 
   - "Escuela de Estadística"
-date: '`r Sys.Date()`'
+date: '14-03-2023'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -18,67 +18,46 @@ output:
 options(htmltools.dir.version = FALSE)
 ```
 
+
 ## Bienvenida
 
-### Alejandro Salas Vargas
+### Shu Wei Chu Chen
 
-* Licenciado en la Enseñanaza de la Matemática
-* MSc en Estadística
-* Profesor en UNED y UCR
+* Profesor adjunto (3er año invitado) en la Escuela de Estadística (UCR)
+* Bach. en Estadística (UCR)
+* MSc. en Estadística (UCR)
+* PhD. en Estadística (Universidad de São Paulo)
+
 
 ### Áreas de interés
 
-* Matemática y su enseñanaza
-* Estadística Bayesiana
-* Análisis de Datos Funcionales
-* Teoría Estadística
-* Ciencia de Datos
+* Teoría Estadística (frecuentista y Bayesiana).
+* Series temporales.
+* Análisis espacio-temporal.
+* Ciencia de Datos.
 
-<!--   
-## Bienvenida
-
-### Maikol Solís
-
-* Profesor Asociado, Escuela de Matemática 
-* Bach. Ciencias Actuariales. 
-* Msc. en Matemática Aplicada, Université Paul Sabatier. 
-* Msc. en Matemática Aplicada, Universidad de Costa Rica.
-* Ph.D en Estadística, Université Paul Sabatier. 
-
-### Áreas de interés
-
-Mi trabajo reciente se enfoca en el análisis de sensibilidad en modelos estadísticos a través de distintos métodos: 
-* Estadística no paramétrica,
-* Teoría topológica y geometría,
-* Usando "relative weight analysis". 
-
-Además, como parte de una colaboración interdisciplinaria, estoy colaborando en proyecto para la generación de estrategias de muestreo masivo para la detección de enfermedades virales (SARS-COV2). 
--->
 ---
 
 ## Bienvenida
 ### Acerca de ustedes
 
-* Compartan su nombre, año de carrera y algo que le gustaría compartir
-
+* Compartan su nombre, año de carrera, por lo menos un objetivo específico que quieran alcanzar al finalizar este curso, y algo que gusten compartir con la clase.
 
 ---
 
 ## Información importante
 
-## Mediación virtual 
 
-[Mediación Virtual](https://mv1.mediacionvirtual.ucr.ac.cr/course/view.php?id=21179)
-
-### Carta al estudiante
-
-[Programa del curso](http://www.estadistica.ucr.ac.cr/images/EEST/Programas/Bachi/2022/IC/Programa-XS-3310.pdf)
-
-### Pendientes para ustedes: 
+**[Mediación Virtual](https://mv1.mediacionvirtual.ucr.ac.cr/course/view.php?id=21179)**
 
 
-* Rellenar este formulario: 
-[Llenar el formulario](https://forms.gle/q8CR77qTxJE8cwoZ8)
+**[Programa del curso](http://www.estadistica.ucr.ac.cr/images/EEST/Programas/Bachi/2022/IC/Programa-XS-3310.pdf)**
+
+
+**Pendientes para ustedes:**
+
+
+* [Llenar el formulario]()
 
 
 ---
@@ -89,7 +68,11 @@ class: center, middle
 
 En medio del auge de ciencia de datos, datos grandes, y tantas puertas que la tecnología nos ha abierto.
 
-![Ciencia de Datos vs Estadística](figs/ciencia_de_datos.png)
+
+```{r, echo=FALSE, out.width="100%", fig.cap="Ciencia de Datos vs Estadística."}
+knitr::include_graphics("figs/ciencia_de_datos.png")
+```
+
 
 
 
@@ -123,20 +106,14 @@ Es decir, si tomamos el promedio de un conjunto de dato,
 
 ## Repaso de Inferencia Estadística
 
-### Variable aleatoria (v.a.)
-
-###  Muestra aleatoria (m.a.)
-
-###  Parámetro
-
-###  Estadístico
-###  Estimador 
-
-###  Modos de convergencia 
-
-### Ley de lo grandes números 
-
-### Teorema del límite central
+- Variable aleatoria (v.a.)
+- Muestra aleatoria (m.a.)
+- Parámetro
+- Estadístico
+- Estimador 
+- Modos de convergencia 
+- Ley de lo grandes números 
+- Teorema del límite central
 
 
 ---
@@ -239,7 +216,7 @@ Suponga que  $X_{1}, \ldots, X_{n}$ es una muestra de una distribución con medi
 ## Parámetros, estadísticos y estimadores 
 ### Convergencia en distribución 
 
-Suponga que se tienen una secuencia de funciones de distribución $F_1, \ldots, F_n$ para la muestra $X_1,\ldots,X_n$. Se dice que $X_1,\ldots$  converge en distribución a $F^*$ si 
+Suponga que se tienen una secuencia de funciones de distribución $F_1, \ldots, F_n$ para la muestra $X_1,\ldots,X_n$. Se dice que $X_1,\ldots,X_n,\ldots$  converge en distribución a $X*$, cuya función de distribución es $F^*$, si 
 
 
 \begin{equation*}
@@ -247,7 +224,7 @@ Suponga que se tienen una secuencia de funciones de distribución $F_1, \ldots, 
 \end{equation*}
 Se denota también como 
 \begin{equation*}
-\bar{F}_{n}(x) \stackrel{d}{\longrightarrow} F^*(x)
+X_n \stackrel{d}{\longrightarrow} X^*
 \end{equation*}
 
 ### Teorema del límite central
@@ -324,3 +301,19 @@ Para estimar la varianza poblacional o la desviación estándar, se necesita con
 $$X^2= \displaystyle \frac{(n-1)S^2}{\sigma^2}$$
 
 tiene una distribución muestral que es una distribución $\chi^2$ con $gl= n-1$ grados de libertad, es decir, $$\displaystyle \frac{\left(n-1\right)S^2}{\sigma^2} \sim \chi^{2}_\left(n-1\right)$$. 
+
+
+
+
+---
+
+class: center, middle
+
+# ¡Gracias!
+
+Slides creadas via R package [**xaringan**](https://github.com/yihui/xaringan).
+
+El chakra viene de [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+
+
+
