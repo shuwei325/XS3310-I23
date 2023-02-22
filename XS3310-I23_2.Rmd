@@ -150,7 +150,7 @@ n^{1 / 2}\left(2(\bar{X}_{n})^{1/2}-2(\theta)^{1/2}\right)
 \end{align*}
 
 
-**Después de la transformación, la normal no depende del paramétro.**
+**Después de la transformación, la distribución asintótica (normal) no depende del paramétro.**
 ---
 <!-- ## Algunos conceptos básicos previos -->
 	
@@ -209,7 +209,7 @@ Antes de entrar en este tema, recordemos 5 teoremas que explican las distribucio
 
 ## Distribuciones de medias y variancias muestrales en poblaciones normales
 
-> **Teorema 1.1.** Si $\bar{X}_n$ es la media muestral de una muestra aleatoria de tamaño $n$ de una distribución normal de media $\mu$ y variancia $\sigma^2$, entonces $\bar{X}_n$ tiene una distribución normal con media $\mu$ y variancia $\sigma^2/n$. El decir, $\bar{X}_n \thicksim N(\mu,\sigma^2/n)$
+> **Teorema 1.1.** Si $\bar{X}_n$ es la media muestral de una muestra aleatoria de tamaño $n$ de una distribución normal de media $\mu$ y variancia $\sigma^2$, entonces $\bar{X}_n$ tiene una distribución normal con media $\mu$ y variancia $\sigma^2/n$, es decir, $\bar{X}_n \thicksim N(\mu,\sigma^2/n)$
 
 Aplicación más común: valores de la tabla z (normal estándar).
 
@@ -237,7 +237,7 @@ $$ P(12 < \bar{X}_n < 17) = P(\frac{ 12-15 }{ 4/3 }<Z<\frac{ 17-15 }{ 4/3 })$$
 La prueba de este teorema está fuera de los contenidos de este curso.
 
 **Nota:** 
-La parte $b$ se puede usar para probar que $Var(S^2) = \frac{2\sigma^4}{n-1}$ cuando asumimos que $X_1, X_2, ..., X_n$ es una muestra aleatoria con distribución normal con media $\mu$ y variancia $\sigma^2$.
+Se puede usar para probar que $Var(S^2) = \frac{2\sigma^4}{n-1}$ cuando asumimos que $X_1, X_2, ..., X_n$ es una muestra aleatoria con distribución normal con media $\mu$ y variancia $\sigma^2$.
 
 ---
 
