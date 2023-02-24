@@ -116,7 +116,7 @@ Práctica: 9.1 - 9.14 de Mendenhall
 28/03
 </td>
 <td>
-<a href="XS3310-I20_5.html">Clase 5</a>
+<a href="XS3310-I20_5.html">Clase05</a>
 </td>
 <td>
 <a href="https://youtu.be/cgKK92xrfqo">Consistencia</a> <br>
@@ -129,4 +129,82 @@ insesgamiento</a> <br>
 Práctica 9.15 - 9.36 de Mendenhall
 </td>
 </tr>
+<tr>
+<td>
+31/03
+</td>
+<td>
+<a href="XS3310-I23_6.html">Clase06</a>
+</td>
+<td>
+<a href="https://www.youtube.com/watch?v=Vgn4gdbqd0M">Teorema de
+factorización</a> <br>
+<a href="https://www.youtube.com/watch?v=xI9H4F35eVw">Ejemplos de
+aplicación del teorema de factorización</a> <br>
+<a href="https://www.youtube.com/watch?v=38qjzQ0PRRE">Esperanza
+condicional</a> <br>
+<a href="https://www.youtube.com/watch?v=o4O8eKhd0u0">Teorema de
+Rao-Blackwell</a> <br>
+<a href="https://www.youtube.com/watch?v=K3PKgkFKqMA">Ejemplos de
+aplicación del teorema de Rao-Blackwell</a> <br>
+<a href="https://www.youtube.com/watch?v=rgZ-BiwRf2o">Completez</a> <br>
+<a href="https://www.youtube.com/watch?v=et3U9snQTgk">Teorema de
+Lehmann-Sheffé</a> <br>
+<a href="https://www.youtube.com/watch?v=RS_xpKi5bXU">Ejemplo de
+aplicación del teorema de Lehmann-Sheffé</a> <br>
+<a href="https://www.youtube.com/watch?v=oNguqtL_ndU">Suficiencia e
+información</a> <br>
+<a href="https://www.youtube.com/watch?v=OTE9OD-DfZM">Suficiencia
+conjunta</a> <br>
+<a href="https://www.youtube.com/watch?v=5pq1lj1h_Qo">Suficiencia
+minimal</a> <br>
+<a href="https://www.youtube.com/watch?v=WvlYG_TKPLw">Ejemplos de
+estadísticas suficientes minimales</a>
+</td>
+<td>
+Práctica 9.37 - 9.68 de Mendenhall <br> DeGroot: 6.3: 13 y 14 <br> 7.5:
+5, 9, 11 <br> 7.6: 4, 10 (OJO no deriven Γ(x)), 16, 21 y 23 <br> 7.7:
+1-10 <br> 7.9: 12 y 13
+</td>
+</tr>
+<tr>
+<td ROWSPAN="2">
+4
+</td>
+<td>
+11/04
+</td>
+<td>
+<a href="XS3310-I23_1.html">Clase07</a>
+</td>
+<td ROWSPAN="2">
+<a href="https://www.youtube.com/watch?v=aMZupzrioao">Método de
+momentos</a> <br>
+<a href="https://www.youtube.com/watch?v=Ow582XJJEiM">Comentarios sobre
+el método de momentos</a> <br>
+<a href="https://www.youtube.com/watch?v=e3ZJ-7QZM9I">Método de máxima
+verosimilitud</a> <br>
+<a href="https://www.youtube.com/watch?v=et-gUA8Uh90">Otros ejemplos del
+método de máxima verosimilitud</a> <br>
+<a href="https://www.youtube.com/watch?v=ClxKI5pENzQ">Comentarios sobre
+el método de máxima verosimilitud</a> <br>
+<a href="https://www.youtube.com/watch?v=bfAPE1aF76Q">Funciones
+parametrales y máxima verosimilitud</a> <br>
+<a href="https://www.youtube.com/watch?v=O-mnQ4dWtt4">Principio de
+invarianza</a>
+</td>
+<td ROWSPAN="2">
+Mendenhall 9.69 - 9.97 <br> Práctica Casella: Capítulo 6 Ejercicios <br>
+(pp. 300 to 307): 6.1, 6.2, 6.3, 6.9, 6.15(b) sin completitud. <br>
+Casella: Capítulo 7 Ejercicios (pp. 355 to 367): <br> 7.2, 7.6, 7.7,
+7.10, 7.12, 7.19, 7.20, 7.21, 7.37, 7.38, 7.49
+</td>
+</tr>
+<td>
+14/04
+</td>
+<td>
+<a href="XS3310-I23_8.html">Clase08</a>
+</td>
+<tr>
 </table>
