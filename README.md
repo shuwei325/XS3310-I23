@@ -21,10 +21,10 @@ curso](https://shuwei325.github.io/XS3310-II23/Programa-XS3310.pdf)
 
 <table style="width:100%">
 <tr>
-<th width="15%">
+<th width="10%">
 Semana
 </th>
-<th width="15%">
+<th width="10%">
 Fecha
 </th>
 <th width="10%">
@@ -33,7 +33,7 @@ Clase
 <th width="50%">
 Videos
 </th>
-<th width="25%">
+<th width="30%">
 Actividades
 </th>
 </tr>
@@ -207,4 +207,5 @@ Casella: Capítulo 7 Ejercicios (pp. 355 to 367): <br> 7.2, 7.6, 7.7,
 <a href="XS3310-I23_8.html">Clase08</a>
 </td>
 <tr>
+\<!–
 </table>
