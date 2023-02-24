@@ -16,7 +16,8 @@ este repositorio es para el material de clase. Los vídeos de los links
 pertencen a la colección del prof. Luis Rincón de la UNAM. Su página web
 está aquí: <http://lya.fciencias.unam.mx/lars/0398/index.html>
 
-[Programa del curso](Programa-XS3310.pdf)
+<a href="https://shuwei325.github.io/XS-3310/Programa-XS3310.pdf">Programa
+del curso</a>
 
 <table style="width:100%">
 <tr>
