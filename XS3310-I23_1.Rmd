@@ -57,7 +57,7 @@ options(htmltools.dir.version = FALSE)
 **Pendientes para ustedes:**
 
 
-* [Llenar el formulario]()
+* [Llenar el formulario](https://forms.gle/GwQ1YXYzgeL4ur1W6)
 
 
 ---

@@ -53,7 +53,7 @@ Actividades
 inferencial?</a>
 </td>
 <td>
-<a href="https://forms.gle/q8CR77qTxJE8cwoZ8">Llenar cuestionario</a>,
+<a href="https://forms.gle/GwQ1YXYzgeL4ur1W6">Llenar cuestionario</a>,
 <a href="https://mv1.mediacionvirtual.ucr.ac.cr/login/index.php">Mediación
 Virtual</a>
 </td>
