@@ -62,7 +62,7 @@ class: center, middle, inverse, title-slide
 **[Mediación Virtual](https://mv1.mediacionvirtual.ucr.ac.cr/course/view.php?id=21179)**
 
 
-**[Programa del curso](http://www.estadistica.ucr.ac.cr/images/EEST/Programas/Bachi/2022/IC/Programa-XS-3310.pdf)**
+**[Programa del curso](http://www.estadistica.ucr.ac.cr/images/EEST/Programas/Bachi/2023/IC/Programa-XS-3310.pdf)**
 
 
 **Pendientes para ustedes:**
@@ -86,6 +86,7 @@ En medio del auge de ciencia de datos, datos grandes, y tantas puertas que la te
 &lt;/div&gt;
 
 
+¿Para qué necesitamos Teoría Estadística?
 
 
 ---
@@ -178,7 +179,7 @@ Cuando un estadístico, llámese `\(\hat{\theta}\)`, se utiliza para aproximar e
 
 ## Modos de convergencia 
 
-## Desigualdad de Markov  
+### Desigualdad de Markov  
 
 Si `\(X\)` es una v.a. tal que  `\(\operatorname{Pr}(X \geq 0)=1\)`. Entonces para cada número real  `\(t&gt;0\)`, se tiene que 
 
@@ -186,7 +187,7 @@ Si `\(X\)` es una v.a. tal que  `\(\operatorname{Pr}(X \geq 0)=1\)`. Entonces pa
 \operatorname{Pr}(X \geq t) \leq \frac{E(X)}{t}
 \end{equation}`
 
-## Desigualdad de Chebyshev 
+### Desigualdad de Chebyshev 
 
 Si  `\(X\)` es una v.a. que cumple que  `\(\operatorname{Var}(X)\)` existe. Entonces para cada número  `\(t&gt;0\)`
 
@@ -197,11 +198,11 @@ $$
 
 ## Modos de convergencia 
 
-## Propiedades de la media muestral 
+### Propiedades de la media muestral 
 
 Sea `\(X_{1}, \ldots, X_{n}\)` una v.a. con una  distribución con media  `\(\mu\)` y varianza `\(\sigma^{2}\)`. Sea  `\(\bar{X}_{n}\)` la media muestral. Entonces,  `\(E\left(\overline{X}_{n}\right)=\mu\)` y `\(\operatorname{Var}\left(\bar{X}_{n}\right)=\sigma^{2} / n\)`
 
-## Convergencia en probabilidad 
+### Convergencia en probabilidad 
 
 Decimos que  `\(Z_{1}, Z_{2}, \ldots\)` de v.a. converge a `\(b\)` en probabilidad si para cada número  `\(\varepsilon&gt;0\)`,
 
@@ -232,22 +233,26 @@ Suponga que se tienen una secuencia de funciones de distribución `\(F_1, \ldots
 
 
 `\begin{equation*}
-\lim _{n \rightarrow \infty} F_{n}(x)=F^{*}(x)
+\lim _{n \rightarrow \infty} F_{n}(x)=F^{*}(x).
 \end{equation*}`
 Se denota también como 
 `\begin{equation*}
-X_n \stackrel{d}{\longrightarrow} X^*
+X_n \stackrel{d}{\longrightarrow} X^*.
 \end{equation*}`
+
+---
+## Parámetros, estadísticos y estimadores 
 
 ### Teorema del límite central
 
-Si `\(X_1,\ldots, X_n\)` es una muestra aleatoria de tamaño `\(n\)`, y la distribución tiene media `\(\mu\)` y varianza `\(\sigma^2&lt;0\)`. Entonces se cumple que 
+Si `\(X_1,\ldots, X_n\)` es una muestra aleatoria de tamaño `\(n\)`, y la distribución tiene media `\(\mu\)` y varianza `\(0&lt;\sigma^2&lt; \infty\)`. Entonces se cumple que 
 
 `$$Z_{n} = \frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}} \stackrel{d}{\longrightarrow} N\left(0,1\right) \quad si\quad n \rightarrow \infty$$`
 o lo que es equivalente 
 `\(\overline{X} \xrightarrow{\text{d}} N\left(\mu, \frac{\sigma^2}{n}\right) \quad si\quad n \rightarrow \infty.\)`
 ---
-## Relaciones entre los modos de convergencia 
+## Parámetros, estadísticos y estimadores 
+### Relaciones entre los modos de convergencia 
 
 Se puede probar que 
 `\begin{equation*}
@@ -285,12 +290,12 @@ https://www.youtube.com/watch?v=bTMnnrw0v2Y
 Podemos demostrar que `\(E\left(S^2\right)=\sigma^2\)` y `\(Var\left(S^2\right)=\frac{2\sigma^4}{n-1}\)`.
 
 
-En la sección siguiente, probaremos que si la población es `\(N\left(\mu,\sigma^2\right)\)`, entonces, `$$\displaystyle \frac{\left(n-1\right)S^2}{\sigma^2} \sim \chi^{2}_\left(n-1\right).$$` 
+En la siguiente sección, probaremos que si la población es `\(N\left(\mu,\sigma^2\right)\)`, entonces, `$$\displaystyle \frac{\left(n-1\right)S^2}{\sigma^2} \sim \chi^{2}_\left(n-1\right).$$` 
 Además sabemos que el valor esperado de una `\(\chi^2\)` son sus grados de libertad y la varianza son dos veces los grados de libertad. Por lo tanto,
-F
+
 $$ E\left(\frac{\left(n-1\right)S^2}{\sigma^2}\right) = n-1  \\
     \Rightarrow \frac{\left(n-1\right)E\left(S^2\right)}{\sigma^2} = n-1 \\
-	  \Rightarrow E\left(S^2\right) = \sigma^2 $$
+	  \Rightarrow E\left(S^2\right) = \sigma^2. $$
 
 ---
 
@@ -302,7 +307,7 @@ Podemos hacer lo mismo para encontrar la varianza cuando la población es Normal
 $$  Var\left(\frac{\left(n-1\right)S^2}{\sigma^2}\right) = 2\left(n-1\right) $$ 
 
 $$ \Rightarrow \frac{\left(n-1\right)^2}{\sigma^4}Var\left(S^2\right) = 2\left(n-1\right) \\
-\Rightarrow Var\left(S^2\right) = \frac{2\sigma^4}{n-1} $$
+\Rightarrow Var\left(S^2\right) = \frac{2\sigma^4}{n-1}. $$
 ---
 ## Parámetros, estadísticos y estimadores
 
