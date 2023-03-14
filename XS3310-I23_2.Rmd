@@ -38,7 +38,8 @@ options(htmltools.dir.version = FALSE)
 ---
 
 # Teorema del límite central
-*Recuerde que,*
+
+Recuerde que:
 
 Si $X_1,\ldots, X_n$ es una muestra aleatoria de tamaño $n$, y la distribución tiene media $\mu$ y varianza $\theta=\sigma^2<\infty$. Entonces se cumple que 
 
@@ -75,7 +76,8 @@ Si $X_1,X_2,\dots$ es una sucesión de variables aleatorias y con alguna distrib
 Suponga que $a_n(\hat{\theta}-\theta) \xrightarrow{d} N(0,\sigma^{2})$. 
 
 Si $g$ es una función tal que $g^{\prime}(\theta)\ne 0$, entonces
-$$a_n[g(\hat{\theta})-g(\theta)] \xrightarrow{d} N(0,\sigma^2 (g^{\prime}(\theta))^{2})$$
+
+$$a_n\left[g(\hat{\theta})-g(\theta)\right] \xrightarrow{d} N\left(0,\sigma^2 \left(g^{\prime}(\theta)\right)^{2}\right)$$
 
 ---
 
@@ -89,14 +91,14 @@ $$ \sqrt{n}(\overline{X}_{n} -\mu)\xrightarrow{d}N(0,\sigma^{2})$$
 
 Si $g(\mu) = \dfrac 1\mu$ con $\mu\neq0$, ¿Cuál es su varianza asintótica?
 
-Entonces por el método Delta $\sqrt{n}[g(\bar X_n)-g(\mu)]\xrightarrow{d}N(0,\sigma^2 (g^{\prime}(\mu))^{2})$
+Entonces por el método Delta $\sqrt{n}\left[g(\bar X_n)-g(\mu)\right]\xrightarrow{d}N\left(0,\sigma^2 \left(g^{\prime}(\mu)\right)^{2}\right)$
 
 Para la función $g$ seleccionada se tiene que  $g'(\mu) = -\dfrac{1}{\mu^2}$. Entonces por el método Delta
 
-$$ \sqrt{n}\bigg[\dfrac{1}{\overline{X}_n}-\dfrac 1\mu\bigg]\xrightarrow{d}N(0,\dfrac{\sigma ^2}{\mu ^4}) $$
+$$ \sqrt{n}\bigg[\dfrac{1}{\overline{X}_n}-\dfrac 1\mu\bigg]\xrightarrow{d}N\left(0,\dfrac{\sigma ^2}{\mu ^4}\right) $$
 
 
-La varianza asintótica es $\dfrac{\sigma^2}{\mu ^4}$
+La varianza asintótica es $\dfrac{\sigma^2}{\mu ^4}$.
 ---
 # Estabilización de la varianza 
 
@@ -195,13 +197,13 @@ Se pueden tener varios estimadores para un mismo parámetro, entonces la pregunt
 
 Este buen estimador debe cumplir las siguientes propiedades:
 
-1. Insesgado
+1. Insesgamiento
 
-2. Eficiente
+2. Eficiencia
 
-3. Consistente
+3. Consistencia
 
-4. Suficiente
+4. Suficiencia
 
 Antes de entrar en este tema, recordemos 5 teoremas que explican las distribuciones muestrales de las medias y las variancias en poblaciones normales, además de las definiciones de estadísticos de orden.
 
@@ -217,7 +219,7 @@ Aplicación más común: valores de la tabla z (normal estándar).
 
 Si $X$ es una variable aleatoria con distribución normal con media 15 y variancia 16. Se toman muestras aleatorias de tamaño 9. Calcular $P(12 < \bar{X}_n < 17)$.
 
-$$ P(12 < \bar{X}_n < 17) = P(\frac{ 12-15 }{ 4/3 }<Z<\frac{ 17-15 }{ 4/3 })$$
+$$ P(12 < \bar{X}_n < 17) = P\left(\frac{ 12-15 }{ 4/3 }<Z<\frac{ 17-15 }{ 4/3 }\right)$$
     $$ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ = P(-2.25 < Z <1.5) = 0.9210$$
 
 

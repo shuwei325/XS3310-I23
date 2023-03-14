@@ -21,7 +21,7 @@ options(htmltools.dir.version = FALSE)
 
 ## Bienvenida
 
-### Shu Wei Chu Chen
+### Shu Wei Chou Chen
 
 * Profesor adjunto (3er año invitado) en la Escuela de Estadística (UCR)
 * Bach. en Estadística (UCR)
@@ -217,7 +217,7 @@ Suponga que  $X_{1}, \ldots, X_{n}$ es una muestra de una distribución con medi
 ## Parámetros, estadísticos y estimadores 
 ### Convergencia en distribución 
 
-Suponga que se tienen una secuencia de funciones de distribución $F_1, \ldots, F_n$ para la muestra $X_1,\ldots,X_n$. Se dice que $X_1,\ldots,X_n,\ldots$  converge en distribución a $X*$, cuya función de distribución es $F^*$, si 
+Suponga que se tienen una secuencia de funciones de distribución $F_1, \ldots, F_n$ para la muestra $X_1,\ldots,X_n$. Se dice que $X_1,\ldots,X_n,\ldots$  converge en distribución a $X^*$, cuya función de distribución es $F^*$, si 
 
 
 \begin{equation*}
