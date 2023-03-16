@@ -59,7 +59,7 @@ $$\sqrt{n}(\overline{X}-\mu) \stackrel{d}{\longrightarrow} N\left(0,\theta \righ
 # Teorema del límite central
 
 
-*Realmente que pasa si $X_1, X_2, ..., X_n$ no son normales, pero $n$ es grande?*
+Realmente que pasa si $X_1, X_2, ..., X_n$ no son normales, pero $n$ es grande?
 
 $$\sqrt{n}(\overline{X}-\mu) \stackrel{d}{\longrightarrow} N\left(0, V_{\infty}(\theta)\right)  \quad si\quad n \rightarrow \infty$$
  
@@ -72,10 +72,8 @@ $$V_n(\theta)\xrightarrow[n\to \infty]{}V_{\infty}(\theta)<\infty$$
 # Método Delta 
 
 
-Si $X_1,X_2,\dots$ es una sucesión de variables aleatorias y con alguna distribución continua. Sea $\theta\in \mathbb R$ y $\{a_n\}$ sucesión de números positivos tal que $a_n \nearrow\infty$.
-Suponga que $a_n(\hat{\theta}-\theta) \xrightarrow{d} N(0,\sigma^{2})$. 
-
-Si $g$ es una función tal que $g^{\prime}(\theta)\ne 0$, entonces
+Si $X_1,X_2,\dots$ es una sucesión de variables aleatorias y con alguna distribución continua. Sea $\theta\in \mathbb R$ y $\{a_n\}$ sucesión de números positivos tal que $a_n \nearrow\infty$.  
+Suponga que $a_n(\hat{\theta}-\theta) \xrightarrow{d} N(0,\sigma^{2})$. Si $g$ es una función tal que $g^{\prime}(\theta)\ne 0$, entonces
 
 $$a_n\left[g(\hat{\theta})-g(\theta)\right] \xrightarrow{d} N\left(0,\sigma^2 \left(g^{\prime}(\theta)\right)^{2}\right)$$
 

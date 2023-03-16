@@ -51,7 +51,7 @@ options(htmltools.dir.version = FALSE)
 **[Mediación Virtual](https://mv1.mediacionvirtual.ucr.ac.cr/course/view.php?id=21179)**
 
 
-**[Programa del curso](http://www.estadistica.ucr.ac.cr/images/EEST/Programas/Bachi/2023/IC/Programa-XS-3310.pdf)**
+**[Programa del curso](http://www.estadistica.ucr.ac.cr/images/EEST/Programas/Bachi/2023/IC/Programa-XS-3310v2.pdf)**
 
 
 **Pendientes para ustedes:**
