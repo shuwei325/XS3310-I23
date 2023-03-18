@@ -98,9 +98,8 @@ inferior de Cramér-Rao</a> <br>
 <a href="https://youtu.be/faFsaP1YE4U">Segundo ejemplo sobre la cota
 inferior de Cramér-Rao</a>
 </td>
-<td ROWSPAN="2">
-Práctica: 8.1 - 8.20 de Mendenhall <br> Práctica: 9.1 - 9.8 de
-Mendenhall
+<td>
+Práctica: 8.1 - 8.20 de Mendenhall
 </td>
 </tr>
 <td>
@@ -108,6 +107,9 @@ Mendenhall
 </td>
 <td>
 <a href="XS3310-I23_4.html">Clase04</a>
+</td>
+<td>
+Práctica: 9.1 - 9.8 de Mendenhall
 </td>
 <tr>
 <td ROWSPAN="2">
