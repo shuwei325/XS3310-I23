@@ -212,4 +212,4 @@ Casella: Capítulo 7 Ejercicios (pp. 355 to 367): <br> 7.2, 7.6, 7.7,
 <tr>
 <!-- </table> -->
 
-<a href="guia_debate.pdf" class="image fit">
+<a href="guia_debate.pdf" class="image fit"> Debate</a>
