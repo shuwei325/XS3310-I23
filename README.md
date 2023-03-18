@@ -19,7 +19,8 @@ está aquí: <http://lya.fciencias.unam.mx/lars/0398/index.html>
 <a href="http://www.estadistica.ucr.ac.cr/images/EEST/Programas/Bachi/2023/IC/Programa-XS-3310v2.pdf">Programa
 del curso</a>
 
-<a href="guia_debate.pdf" class="image fit"> Debate</a>
+<a href="guia_debate.pdf" class="image fit"> Guía de un debate
+académico.</a>
 
 <table style="width:100%">
 <tr>
