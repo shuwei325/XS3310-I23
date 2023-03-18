@@ -122,7 +122,7 @@ Práctica: 9.1 - 9.8 de Mendenhall
 28/03
 </td>
 <td>
-<a href="XS3310-I20_5.html">Clase05</a>
+<a href="XS3310-I23_5.html">Clase05</a>
 </td>
 <td>
 <a href="https://youtu.be/cgKK92xrfqo">Consistencia</a> <br>
