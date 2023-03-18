@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>XS3310 Teoría Estadística</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Escuela de Estadística" />
+    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# XS3310 Teoría Estadística
+]
+.subtitle[
+## I Semestre 2023
+]
+.author[
+### Escuela de Estadística
+]
+.date[
+### 31-03-2023
+]
+
+---
+
+
+
+
+ 
+# ¿Qué vamos a discutir hoy?
+
+* Mapa de recursos ¿dónde encuentro qué?
+
+
+* Suficiencia: Técnicas de suficiencia
+* Teorema 4.1 Técnica de suficiencia (y ejemplo)
+* Teorema 4.2 Técnica de la familia exponencial (y ejemplo)
+* Método de determinar estimadores
+* Estimador de Rao-Blackwell
+* Definición 5.1 (Completitud)
+* Teorema 5.1 (Rao-Blackwell) y ejemplo
+
+---
+ 
+# Vídeos
+
+
+* [Esperanza condicional](https://www.youtube.com/watch?v=38qjzQ0PRRE)
+* [Teorema de Rao-Blackwell](https://www.youtube.com/watch?v=o4O8eKhd0u0)
+* [Ejemplos de aplicaci&amp;oacute;n del teorema de Rao-Blackwell](https://www.youtube.com/watch?v=K3PKgkFKqMA)
+* [Completez](https://www.youtube.com/watch?v=rgZ-BiwRf2o)
+* [Teorema de Lehmann-Sheff&amp;eacute;](https://www.youtube.com/watch?v=et3U9snQTgk)
+* [Ejemplo de aplicaci&amp;oacute;n del teorema de Lehmann-Sheff&amp;eacute;](https://www.youtube.com/watch?v=RS_xpKi5bXU)
+* [Suficiencia e informaci&amp;oacute;n](https://www.youtube.com/watch?v=oNguqtL_ndU)
+* [Suficiencia conjunta](https://www.youtube.com/watch?v=OTE9OD-DfZM)
+* [Suficiencia minimal](https://www.youtube.com/watch?v=5pq1lj1h_Qo)
+* [Ejemplos de estad&amp;iacute;sticas suficientes minimales](https://www.youtube.com/watch?v=WvlYG_TKPLw)
+
+---
+# Técnicas para demostrar suficiencia
+
+En la clase pasada vimos:
+
+&gt; **Teorema 4.1. Técnica de factorización.** Si `\(U\)` es un estadístico definido sobre una muestra aleatoria `\(X_{1}, X_{2}, ... , X_{n}\)` de una población con parámetro desconocido `\(\theta\)` y `\(\mathcal{L}(X_{1}, X_{2}, ... , X_{n}|\theta) = \mathcal{L}(\theta)\)` es la función de verosimilitud entonces `\(U\)` es suficiente para `\(\theta\)` si y solo si existen funciones `\(g(u,\theta)\)` y `\(h(x_{1}, x_{2}, ... , x_{n})\)` tal que `\(\mathcal{L}(\theta) = g(u,\theta) \cdot h(x_{1}, x_{2}, ... , x_{n})\)` donde `\(g(\cdot)\)` depende de `\(X_{1}, X_{2}, ... , X_{n}\)` solo por medio de `\(U\)` y `\(h(\cdot)\)` no depende de `\(\theta\)`. 
+
+	
+
+---
+
+# Suficiencia para familias exponenciales
+
+&gt; **Teorema 4.2.** Técnica de la familia exponencial. Si `\(X\)` es una variable aleatoria cuyo dominio no depende de un parámetro desconocido `\(\theta\)` y la función de densidad/probabilidad de X dado `\(\theta\)` pertenece a la familia exponencial, es decir que tiene la forma:
+&gt; `$$f_{X}(x|\theta) = b(x)c(\theta)e^{-a(x)d(\theta)}, \qquad a(x) \neq 1$$`
+&gt; entonces `\(U = \sum_{i=1}^{n} a(X_{i})\)` es un estadístico suficiente mínimo para estimar `\(\theta\)`. 
+
+**Prueba.** Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria tal que `\(X_{i}\)` pertenece a la familia exponencial. Entonces se cumple,
+	
+`$$\mathcal{L}(\theta) = \prod_{i=1}^{n} b(X_{i})c(\theta)e^{-a(X_{i})d(\theta)} = c(\theta)^{n} \prod_{i=1}^{n} b(X_{i}) e^{-d(\theta)\sum_{i=1}^{n} a(X_{i}) }$$`
+
+
+---
+
+
+Si tomamos como
+
+`\begin{align}
+U &amp;= \sum_{i=1}^{n} a(X_{i}) \\
+u(X_{1}, X_{2}, \ldots , X_{n}) &amp;= \prod_{i=1}^{n} b(X_{i}) \\ 
+v(U,\theta) &amp;= c(\theta)^{n} e^{-d(\theta)U}
+\end{align}`
+
+ 
+  entonces, por la técnica de factorización, se cumple que `\(U\)` es suficiente mínimo para `\(\theta\)`. 
+
+
+---
+
+
+# Suficiencia
+
+**Ejemplo.** Sea `\(X_1,X_2,...,X_n\)` una m.a. tal que `\(X_i \sim Poisson(\lambda)\)`, encuentre el estadístico suficiente mínimo utilizando la técnica de la familia exponencial.
+
+**Solución.** Lo primero consiste en demostrar que la función de probabilidad de una Poisson tiene la forma de la familia exponencial. Viendo la función de probabilidad de una Poisson, `\(f(x|\lambda) = \frac{\lambda^{x}e^{-\lambda}}{x!}\)`, esta pareciera no cumplir la forma de la familia exponencial, no obstante podemos realizar algunas operaciones algebraicas para alcanzar esa forma: 
+
+`\begin{align*}
+f(x|\lambda) &amp;= \frac{\lambda^{x}e^{-\lambda}}{x!} = e^{\ln\left(\frac{\lambda^{x}e^{-\lambda}}{x!}\right)}= e^{\ln(\lambda^{x}) + \ln(e^{-\lambda}) - \ln(x!)}\\
+&amp;= e^{x\ln(\lambda) - \lambda - \ln(x!)} = e^{-\lambda}e^{x\ln(\lambda)}\frac{1}{x!}
+\end{align*}`
+
+
+
+---
+
+# Suficiencia
+
+Podemos ver que esta expresión tiene la forma de la familia exponencial con 
+
+`\(\begin{matrix} a(x)=x &amp; c(\lambda )={ e }^{ -\lambda  } \\ b(x)=\frac { 1 }{ x! }  &amp; d(\lambda )=-\ln { (\lambda ) }  \end{matrix}\)`
+	
+Por lo tanto podemos concluir que `\(U = \sum_{j=1}^{n} X_{j}\)` es un estadístico suficiente mínimo para `\(\lambda\)`. 
+	
+**Ejemplo.** Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria de una población con función de densidad:
+	
+`\(f_{X}(x) = \begin{cases}\frac{\alpha x^{\alpha-1}}{\theta} e^{-\frac{x^{\alpha}}{\theta}} \quad si \quad x &gt; 0 \\	0 \quad si \quad x \leq 0	\end{cases}\)`
+	
+Encuentre un estadístico suficiente mínimo para `\(\theta\)`. 
+
+---
+
+# Suficiencia
+
+**Solución.** Podemos apreciar de la función de densidad anterior lo siguiente: 
+	
+`\(\begin{matrix} a(x) = x^{\alpha} &amp; c(\theta) = \frac{1}{\theta} \\ b(x) = \alpha x^{\alpha-1} &amp; d(\theta) = \frac{1}{\theta} \end{matrix}\)`
+	
+Por lo tanto, por la técnica de la familia exponencial, el estadístico 
+
+`$$U = \sum_{j=1}^{n} X_{j}^{\alpha}$$` 
+
+es suficiente mínimo para `\(\theta\)`. 
+
+Supongamos que para este caso si quisieramos saber cuál sería un estadístico suficiente mínimo para `\(\alpha\)`. De las técnicas vistas hasta el momento no es posible obtener una respuesta, no obstante veremos posteriormente una estrategia para resolver este problema. 
+
+---
+
+# Completitud
+	
+&gt; **Definición 5.1. Completitud**. Sea `\(U\)` un estadístico de una muestra aleatoria `\(X_{1}, X_{2}, ... , X_{n}\)` con función de densidad/probabilidad `\(f_{X}(x|\theta)\)` si `\(a \leq u \leq b\)` y `\(\alpha_{1} \leq \theta \leq \alpha_{2}\)` y sea `\(g(u)\)` una función continua en `\([a,b]\)`.   
+&gt; Se dice que el estadístico `\(U\)` es **completo** para la distribución `\(f_{X}(x|\theta)\)` si se cumple que   
+&gt; si `\(E(g(U)) = 0 \quad \forall \theta \in [\alpha_{1}, \alpha_{2}]\)`   entonces `\(g(U) = 0\)` con probabilidad 1. 
+
+- Con un estadístico que no es completo puede pasar que `\(g(U) \neq 0\)` para algún `\(\theta\)`, pero que  `\(E(g(U))=0\)`. 
+- Es decir, que existe "algo más" aparte del estadístico `\(U\)` que hace que la esperanza sea igual a 0. 
+- Un estadístico completo, no tiene ese "algo más" y concuerda si `\(g(U) = 0\)` con `\(E(g(U))=0\)`. 
+- Un estadístico completo, puede que no aporte información relevante sobre el parametro. Solo dice que es congruente. 
+- Para que un estadístico completo, sea útil, debe ser suficiente. 
+
+
+---
+
+# Completitud
+
+**Ejemplo:** Sea `\(U = \sum_{j=1}^{n} X_{j}\)` un estadístico suficiente de una muestra aleatoria de una población Bernoulli con probabilidad de éxito `\(p\)`. Demuestre que U es un estadístico completo si el espacio paramétrico de `\(p\)` es `\(] 0,1 [\)`.
+	
+**Solución:** Sabemos de antemano que el estadístico `\(U = \sum_{j=1}^{n} X_{j}\)` tiene distribución Binomial(n,p). Con esto procedemos a encontrar `\(E(g(U))\)` para cualquier función `\(g(\cdot)\)`. 
+
+`\begin{align*}
+E(g(U)) 
+&amp;= \sum_{u=0}^{n} g(u) \binom{n}{u} p^{u}\left(1-p\right)^{n-u} \\
+&amp;= \left(1-p\right)^{n} \sum_{u=0}^{n} g(u) \binom{n}{u} \left(\frac{p}{1-p}\right)^{u}
+\end{align*}`
+
+---
+
+Observe que como el dominio de `\(p\)` no incluye el 0 o 1 entonces esta expresión solo puede ser cero si y solo si 
+
+`$$\sum_{u=0}^{n} g(u) \binom{n}{u} \left(\frac{p}{1-p}\right)^{u} = 0$$`
+
+
+Como esta expresión es un polinomio de `\(\left(\frac{p}{1-p}\right)\)` entonces esta solo puede ser cero si sus coeficientes son cero, y esto solo va a suceder si y solo si `\(g(u) = 0\)`. 
+
+Por lo tanto concluimos que `\(U\)` es un estadístico completo para la familia de distribuciones Bernoulli. 
+
+En general, vamos a estar trabajando con estadísticos completos en este curso y no nos vamos a estar deteniendo en las demostraciones de que estos lo sean pues ya sale de los propósitos del curso. No obstante, esta propiedad tendrá mayor uso con los teoremas siguientes. 
+
+---
+
+# Estimadores Rao-Blackwell
+	
+&gt; **Teorema 5.1. Teorema de Rao-Blackwell**. Sea `\(U = T(X_{1}, X_{2}, ... , X_{n})\)` es un estadístico suficiente minimal para estimar `\(\theta\)` y sea `\(\hat{\theta}\)` un estimador cualquiera de `\(\theta\)`. Si definimos otro estimador como `\(\hat{\theta}^{*}=E(\hat{\theta}|U)\)` se cumple que `\(ECM(\hat{\theta}^{*}) \leq ECM(\hat{\theta})\)`. Es decir, a partir de un estimador `\(\hat{\theta}\)` se puede encontrar un estimador `\(\hat{\theta}^{*}\)` óptimo. 
+
+**NOTA:** ¿Es el mismo señor Rao de Cramer-Rao? SI!
+
+**NOTA:** se puede demostrar que si `\(\hat{\theta}\)` es insesgado, entonces el estimador mejorado `\(\hat{\theta}^{*}\)` también será insesgado.
+
+---
+
+# Estimadores Rao-Blackwell
+	
+**Ejemplo:** Suponga que una operadora de llamadas recibe llamadas de acuerdo a un proceso Poisson con promedio de llamadas por minuto, `\(\lambda\)`. Se obtiene una muestra aleatoria `\(X_{1}, X_{2}, ... , X_{n}\)` de las llamadas telefónicas que llegaron en `\(n\)` periodos sucesivos de un minuto. Para estimar la probabilidad de que el siguiente periodo de un minuto pase sin llamadas ( `\(e^{-\lambda}\)` ) se utiliza el siguiente estimador:
+
+`$$\hat{\lambda} = \begin{cases} 1 \quad si \quad X_{1} = 0 \\0 \quad en \quad otros \quad casos \end{cases}$$`
+
+Es decir, se estima la probabilidad en 1 si no se recibieron llamadas en el primer minuto y cero en el caso contrario. Con base en esto, obtenga el estimador de Rao-Blacwell. 
+
+---
+
+### Estimadores Rao-Blackwell
+**Solución:**  `\(U = \sum_{j=1}^{n} X_{j}\)` es un estadístico suficiente minimal para `\(\lambda\)`, por lo que encontramos el estimador de Rao-Blackwell a partir de este estadístico:
+
+`\begin{align*}
+\hat{\lambda}^{*} = E(\hat{\lambda}|U = u) 
+&amp;= P\left(X_{1} = 0 | \sum_{j=1}^{n} X_{j} = u\right) \\
+&amp;=\frac{P\left(X_{1} = 0 , \sum_{j=1}^{n} X_{j} = u\right)}{P\left(\sum_{j=1}^{n} X_{j} = u\right)} 
+=\frac{P\left(\sum_{j=2}^{n} X_{j} = u\right)}{P\left(\sum_{j=1}^{n} X_{j} = u\right)} \\
+&amp;= \dfrac{e^{-\lambda}\frac{((n-1)\lambda)^{u}e^{-(n-1)\lambda}}{u!} }{\frac{(n\lambda)^{u}e^{-n\lambda}}{u!}}\\
+&amp;= \left(\frac{n-1}{n}\right)^{u} = \left(1-\frac{1}{n}\right)^{u}
+\end{align*}`
+
+Por lo tanto `\(\hat{\lambda}^{*} = \left(1-\frac{1}{n}\right)^{\sum_{j=1}^{n}X_{j}}\)` es un estimador suficiente con menor ECM que `\(\hat{\lambda}\)`.  
+
+
+---
+
+# Teorema de Lehmann-Scheffé
+
+&gt; **Teorema 5.2. Teorema de Lehmann-Scheffé**. Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria de una población con función de densidad/probabilidad `\(f_{X}(x|\theta)\)`. Si `\(U = T(X_{1}, X_{2}, ... , X_{n})\)` es un estadístico suficiente y completo para `\(\theta\)` y además se cumple que `\(E(h(U))\)` es insesgado para estimar `\(\theta\)` entonces `\(h(U)\)` es el único estimador insesgado de varianza mínima para `\(\theta\)`. 
+
+**Prueba:** 
+	
+Sabemos por el Teorema de Rao-Blackwell que si `\(\hat{\theta}\)` es un estimador insesgado de `\(\theta\)` entonces `\(\hat{\theta}^{*} = E(\hat{\theta}|U)\)` es un estimador insesgado de varianza mínima para `\(\theta\)`.
+
+---
+
+# Teorema de Lehmann-Scheffé
+
+Para demostrar unicidad supongamos que tenemos otro estimador `\(\hat{\phi}^{*}\)` que es insesgado y de varianza mínima para `\(\theta\)`. Por lo tanto se debe cumplir lo siguiente:
+
+`$$E(\hat{\theta}^{*}) = E(\hat{\phi}^{*}) = \theta \Rightarrow E(\hat{\theta}^{*}) - E(\hat{\phi}^{*}) = E(\hat{\theta}^{*} - \hat{\phi}^{*}) = E(g(U))= 0$$`
+
+
+Como se cumple que `\(f_{X}(x|\theta)\)` es una familia completa en el estadístico suficiente `\(U\)` entonces se cumple que `\(g(U) = 0\)`, es decir `\(\hat{\theta}^{*} - \hat{\phi}^{*} = 0\)`, que es equivalente a decir `\(\hat{\theta}^{*} = \hat{\phi}^{*}\)`. Por lo tanto concluimos que solo existe un único estimador insesgado de varianza mínima. 
+
+---
+
+# Estimadores Insesgados de Varianza Mínima (EIVM)
+	
+Con los resultados anteriores, para distribuciones completas, si tenemos un estadístico `\(U\)` que es suficiente minimal para estimar `\(\theta\)` entonces solo debemos encontrar una función `\(h(\cdot)\)` que sea insesgada y por lo tanto obtendremos un **estimador insesgado de varianza mínima**, el cual es único. 
+	
+**Ejemplo.** Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria tal que `\(X_{j} \sim Bernoulli(p)\)`. Encuentre un EIVM para `\(p\)`. 
+	
+**Solución.** Ya habiamos demostrado con anterioridad que `\(U = \sum_{j=1}^{n} X_{j}\)` es un estadístico suficiente minimal y completo en una distribución Bernoulli. Para encontrar el EIVM  solo debemos encontrar una función de `\(U\)` que sea insesgada para `\(p\)`. 
+	
+`$$E(U) = E\left(\sum_{j=1}^{n} X_{j}\right) = np \Rightarrow \hat{p} = \frac{U}{n} = \frac{\sum_{j=1}^{n} X_{j}}{n}$$`
+
+es un EIVM para `\(p\)`.
+	
+---
+
+
+**Ejemplo.** Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria tal que `\(X_{j} \sim Exp(\beta)\)`. Demuestre que `\(\overline{X}\)` es un EIVM para `\(\beta\)`. 
+	
+**Solución.** Suponiendo que la exponencial es una familia completa, debemos encontrar un estadístico suficiente para `\(\beta\)`. Recordemos la función de densidad:
+	
+`\(f_{X}(x) = \frac{1}{\beta}e^{-\frac{x}{\beta}}\)`. En este caso es evidente la forma de la familia exponencial:
+	
+`\(\begin{matrix} a(x) = x &amp; c(\beta) = \frac{1}{\beta} &amp; b(x) = 1 &amp; d(\beta) = \frac{1}{\beta} \end{matrix}\)`
+	
+Por lo tanto decimos que `\(U = \sum_{j=1}^{n} X_{j}\)` es un estadístico suficiente minimal para `\(\beta\)`. Por lo tanto, `\(E(U) = E\left(\sum_{j=1}^{n} X_{j}\right) = n\beta\)`. 
+	
+Concluimos, por el Teorema de Rao-Blackwell y Lehmann-Scheffé que `\(\overline{X}\)` es un EIVM para `\(\beta\)`. 
+	
+---
+
+### Ejercicios:
+
+1. Sea `\(Y_1, ..., Y_n\)` una muestra independiente e idénticamente distribuida de una `\(N(\mu, \sigma^2)\)`. Entonces:
+
+  a. Si `\(\mu\)` es desconocido y `\(\sigma^2\)` es conocida, entonces muestre que `\(\bar{Y}\)` es suficiente para `\(\mu\)`.
+
+  b. Si `\(\mu\)` es conocido y `\(\sigma^2\)` es desconocida, entonces muestre que `\(\sum_{i=1}^{n} (Y_i - \mu)^2\)` es suficiente para `\(\sigma^2\)`. 
+
+  c. Si `\(\mu\)` y `\(\sigma^2\)` son desconocidas, muestre que `\(\sum_{i=1}^{n} Y_i\)` y `\(\sum_{i=1}^{n} Y_i^2\)` son conjuntamente suficientes para `\(\mu\)` y `\(\sigma^2\)`. 
+
+2. Sea `\(Y_1, ..., Y_n\)` una muestra independiente e idénticamente distribuida con función de densidad
+$$
+f(y|\theta)= \left\lbrace 
+`\begin{aligned}
+\frac{3 y^2}{\theta^3}, &amp; &amp; 0\leq y \leq  \theta  \\
+0, &amp; &amp;  otro~caso.
+\end{aligned}`
+\right. 
+$$
+Muestre que `\(Y_{(n)}=max \{ X_1 ,...,X_n \}\)` es suficiente para `\(\theta\)`.
+
+
+
+
+
+
+---
+
+# Ejercicios
+
+### ¿Por qué demostrar que un estimador es EIVM es importante?
+
+Revisar los ejemplo 9.6 - 9.9 de Mendenhall
+
+### Práctica 9.37 - 9.68 de Mendenhall.
+
+
+---
+class: center, middle
+
+# ¿Qué discutimos hoy?
+
+Suficiencia, técnicas para encontrar estimadores suficientes. Propiedades de los estimadores puntuales: **completitud**. Teorema de Rao-Blackwell, Teorema de Lehmann-Scheffé, EIVM.
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

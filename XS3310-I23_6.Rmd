@@ -1,9 +1,9 @@
 ---
 title: "XS3310 Teoría Estadística"
-subtitle: "I Semestre 2022"  
+subtitle: "I Semestre 2023"  
 author: 
   - "Escuela de Estadística"
-date: '`r Sys.Date()`'
+date: '31-03-2023'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -49,12 +49,15 @@ knitr::opts_chunk$set(echo = TRUE)
 * [Ejemplos de estad&iacute;sticas suficientes minimales](https://www.youtube.com/watch?v=WvlYG_TKPLw)
 
 ---
+# Técnicas para demostrar suficiencia
 
+En la clase pasada vimos:
 
+> **Teorema 4.1. Técnica de factorización.** Si $U$ es un estadístico definido sobre una muestra aleatoria $X_{1}, X_{2}, ... , X_{n}$ de una población con parámetro desconocido $\theta$ y $\mathcal{L}(X_{1}, X_{2}, ... , X_{n}|\theta) = \mathcal{L}(\theta)$ es la función de verosimilitud entonces $U$ es suficiente para $\theta$ si y solo si existen funciones $g(u,\theta)$ y $h(x_{1}, x_{2}, ... , x_{n})$ tal que $\mathcal{L}(\theta) = g(u,\theta) \cdot h(x_{1}, x_{2}, ... , x_{n})$ donde $g(\cdot)$ depende de $X_{1}, X_{2}, ... , X_{n}$ solo por medio de $U$ y $h(\cdot)$ no depende de $\theta$. 
 
+	
 
-
-
+---
 
 # Suficiencia para familias exponenciales
 
@@ -134,7 +137,9 @@ Supongamos que para este caso si quisieramos saber cuál sería un estadístico 
 
 # Completitud
 	
-> **Definición 5.1.** Completitud. Sea $U$ un estadístico de una muestra aleatoria $X_{1}, X_{2}, ... , X_{n}$ con función de densidad/probabilidad $f_{X}(x|\theta)$ si $a \leq u \leq b$ y $\alpha_{1} \leq \theta \leq \alpha_{2}$ y sea $g(u)$ una función continua en $[a,b]$. Se dice que el estadístico $U$ es **completo** para la distribución $f_{X}(x|\theta)$ si se cumple que si $E(g(U)) = 0 \quad \forall \theta \in [\alpha_{1}, \alpha_{2}]$   entonces $g(U) = 0$ con probabilidad 1. 
+> **Definición 5.1. Completitud**. Sea $U$ un estadístico de una muestra aleatoria $X_{1}, X_{2}, ... , X_{n}$ con función de densidad/probabilidad $f_{X}(x|\theta)$ si $a \leq u \leq b$ y $\alpha_{1} \leq \theta \leq \alpha_{2}$ y sea $g(u)$ una función continua en $[a,b]$.   
+> Se dice que el estadístico $U$ es **completo** para la distribución $f_{X}(x|\theta)$ si se cumple que   
+> si $E(g(U)) = 0 \quad \forall \theta \in [\alpha_{1}, \alpha_{2}]$   entonces $g(U) = 0$ con probabilidad 1. 
 
 - Con un estadístico que no es completo puede pasar que $g(U) \neq 0$ para algún $\theta$, pero que  $E(g(U))=0$. 
 - Es decir, que existe "algo más" aparte del estadístico $U$ que hace que la esperanza sea igual a 0. 
@@ -145,7 +150,7 @@ Supongamos que para este caso si quisieramos saber cuál sería un estadístico 
 
 ---
 
-
+# Completitud
 
 **Ejemplo:** Sea $U = \sum_{j=1}^{n} X_{j}$ un estadístico suficiente de una muestra aleatoria de una población Bernoulli con probabilidad de éxito $p$. Demuestre que U es un estadístico completo si el espacio paramétrico de $p$ es $] 0,1 [$.
 	
@@ -174,7 +179,7 @@ En general, vamos a estar trabajando con estadísticos completos en este curso y
 
 # Estimadores Rao-Blackwell
 	
-> **Teorema 5.1.** Teorema de Rao-Blackwell. Sea $U = T(X_{1}, X_{2}, ... , X_{n})$ es un estadístico suficiente minimal para estimar $\theta$ y sea $\hat{\theta}$ un estimador cualquiera de $\theta$. Si definimos otro estimador como $\hat{\theta}^{*}=E(\hat{\theta}|U)$ se cumple que $ECM(\hat{\theta}^{*}) \leq ECM(\hat{\theta})$. Es decir, a partir de un estimador $\hat{\theta}$ se puede encontrar un estimador $\hat{\theta}^{*}$ óptimo. 
+> **Teorema 5.1. Teorema de Rao-Blackwell**. Sea $U = T(X_{1}, X_{2}, ... , X_{n})$ es un estadístico suficiente minimal para estimar $\theta$ y sea $\hat{\theta}$ un estimador cualquiera de $\theta$. Si definimos otro estimador como $\hat{\theta}^{*}=E(\hat{\theta}|U)$ se cumple que $ECM(\hat{\theta}^{*}) \leq ECM(\hat{\theta})$. Es decir, a partir de un estimador $\hat{\theta}$ se puede encontrar un estimador $\hat{\theta}^{*}$ óptimo. 
 
 **NOTA:** ¿Es el mismo señor Rao de Cramer-Rao? SI!
 
@@ -211,13 +216,15 @@ Por lo tanto $\hat{\lambda}^{*} = \left(1-\frac{1}{n}\right)^{\sum_{j=1}^{n}X_{j
 
 # Teorema de Lehmann-Scheffé
 
-> **Teorema 5.2.** Teorema de Lehmann-Scheffé. Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria de una población con función de densidad/probabilidad $f_{X}(x|\theta)$. Si $U = T(X_{1}, X_{2}, ... , X_{n})$ es un estadístico suficiente y completo para $\theta$ y además se cumple que $E(h(U))$ es insesgado para estimar $\theta$ entonces $h(U)$ es el único estimador insesgado de varianza mínima para $\theta$. 
+> **Teorema 5.2. Teorema de Lehmann-Scheffé**. Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria de una población con función de densidad/probabilidad $f_{X}(x|\theta)$. Si $U = T(X_{1}, X_{2}, ... , X_{n})$ es un estadístico suficiente y completo para $\theta$ y además se cumple que $E(h(U))$ es insesgado para estimar $\theta$ entonces $h(U)$ es el único estimador insesgado de varianza mínima para $\theta$. 
 
 **Prueba:** 
 	
 Sabemos por el Teorema de Rao-Blackwell que si $\hat{\theta}$ es un estimador insesgado de $\theta$ entonces $\hat{\theta}^{*} = E(\hat{\theta}|U)$ es un estimador insesgado de varianza mínima para $\theta$.
 
 ---
+
+# Teorema de Lehmann-Scheffé
 
 Para demostrar unicidad supongamos que tenemos otro estimador $\hat{\phi}^{*}$ que es insesgado y de varianza mínima para $\theta$. Por lo tanto se debe cumplir lo siguiente:
 
@@ -289,9 +296,9 @@ Muestre que $Y_{(n)}=max \{ X_1 ,...,X_n \}$ es suficiente para $\theta$.
 
 ### ¿Por qué demostrar que un estimador es EIVM es importante?
 
- Ejemplo 9.6 - 9.9 de Mendenhall
+Revisar los ejemplo 9.6 - 9.9 de Mendenhall
 
-### Ejercicio para hacer en clase: Práctica 9.37 - 9.68 de Mendenhall.
+### Práctica 9.37 - 9.68 de Mendenhall.
 
 
 ---

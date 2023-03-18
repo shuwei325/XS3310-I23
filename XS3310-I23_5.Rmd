@@ -1,9 +1,9 @@
 ---
 title: "XS3310 Teoría Estadística"
-subtitle: "I Semestre 2022"  
+subtitle: "I Semestre 2023"  
 author: 
   - "Escuela de Estadística"
-date: '`r Sys.Date()`'
+date: '28-03-2023'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -69,35 +69,24 @@ hace de manera más rápida.
 
 Haciendo una simulación, con $\theta$ = 5, podemos observar que ambos estimadores convergen a $\theta$ conforme el tamaño de muestra va aumentando. Podemos decir que $\hat{\theta}_{1}$ y $\hat{\theta}_{2}$ son estimadores consistentes para estimar $\theta$. 
 	
-![Figura 1. Consistencia para dos estimadores insesgados de $\theta$](figs/consistencia.jpg)
+	
+
+```{r pressure, echo=FALSE, fig.cap="Figura 1. Consistencia para dos estimadores insesgados de $\\theta$ ", out.width = '80%'}
+knitr::include_graphics("figs/consistencia.jpg")
+```
 
 ---
 
 # Consistencia
 
-> **Definición 3.1.** Consistencia. Se dice que un estimador $\hat{\theta}$ es consistente para estimar $\theta$ ( $\hat{\theta}$ converge en probabilidad a $\theta$ ) si $\forall \varepsilon>0$ se cumple que: $\lim_{n \to +\infty}P\left(\left|\hat{\theta}-\theta\right|\leq \varepsilon\right) = 1$
+> **Definición 3.1. Consistencia.** Se dice que un estimador $\hat{\theta}$ es consistente para estimar $\theta$ ( $\hat{\theta}$ converge en probabilidad a $\theta$ ) si $\forall \varepsilon>0$ se cumple que: $\lim_{n \to +\infty}P\left(\left|\hat{\theta}-\theta\right|\leq \varepsilon\right) = 1$
 		
 O lo que es equivalente: $\lim_{n \to +\infty} P\left(\left|\hat{\theta}-\theta\right|> \varepsilon\right) = 0$
 
+Se puede denotar con la definición de la convergencia en probabilidad,
 
----
+$$\hat{\theta} \stackrel{p}{\longrightarrow} \theta.$$
 
-# Recordatorio
-
-## Desigualdad de Chebyshev (version 1)
-
-Si $X$ es una v.a. con $\mathbb{E}[X^{2}]\leq \infty$, entonces para cualquier $\varepsilon>0$, se tiene que 
-
-$$\mathrm{P}(\vert X\vert > \varepsilon) \leq \frac{\mathbb{E}[X^2]}{\varepsilon^2}$$. 
-
----
-
-
-## Desigualdad de Chebyshev (version 2)
-
-Si $\hat{\theta}$ es una v.a. que cumple que  $\operatorname{Var}(\hat{\theta})$ existe. Entonces para cada número  $\varepsilon>0$
-
-$$\operatorname{P}(|\hat{\theta}-\theta| \geq \varepsilon) \leq  \frac{\mathbb{E}[(\hat{\theta}-\theta)^2]}{\varepsilon^2}=\frac{\operatorname{MSE}(\hat{\theta})}{\varepsilon^{2}}$$
 
 ---
 # Consistencia
@@ -106,8 +95,14 @@ $$\operatorname{P}(|\hat{\theta}-\theta| \geq \varepsilon) \leq  \frac{\mathbb{E
 
 **Prueba:**
 
-$$\operatorname{P}(|\hat{\theta}-\theta| \geq \varepsilon) \leq  \frac{\mathbb{E}[(\hat{\theta}-\theta)^2]}{\varepsilon^2}=\frac{\operatorname{MSE}(\hat{\theta})}{\varepsilon^{2}}$$
-Entonces, se tiene que
+Recuerde que la *Desigualdad de Chebyshev* establece que si $X$ es una v.a. con $\mathbb{E}[X^{2}] < \infty$, entonces para cualquier $\varepsilon>0$, se tiene que 
+
+$$\mathrm{P}(\vert X\vert > \varepsilon) \leq \frac{\mathbb{E}[X^2]}{\varepsilon^2}.$$
+
+Tome $X=\hat{\theta}-\theta$. Si $\hat{\theta}$ es una v.a. que cumple que  $\operatorname{Var}(\hat{\theta})$ existe. Entonces para cada número  $\varepsilon>0$
+
+$$\operatorname{P}(|\hat{\theta}-\theta| \geq \varepsilon) \leq  \frac{\mathbb{E}[(\hat{\theta}-\theta)^2]}{\varepsilon^2}=\frac{\operatorname{MSE}(\hat{\theta})}{\varepsilon^{2}}.$$
+Finalmente, se tiene que
 
 $$\lim_{n \to +\infty}\operatorname{P}(|\hat{\theta}-\theta| \geq \varepsilon) \leq  \frac{1}{\varepsilon^{2}} \cdot \lim_{n\to\infty}\operatorname{MSE}(\hat{\theta})=\frac{1}{\varepsilon^{2}} \cdot 0=0$$
 
@@ -117,9 +112,14 @@ $$\lim_{n \to +\infty}\operatorname{P}(|\hat{\theta}-\theta| \geq \varepsilon) \
 
 > **Teorema 3.1** Si $\hat{\theta}$ es un estimador de $\theta$ entonces $\hat{\theta}$ es un estimador consistente si:
 
-> a. $\hat{\theta}$ es insesgado para $\theta$ 
+> a. $\hat{\theta}$ es insesgado para $\theta$, y  
 
-> b. $\lim_{n \to +\infty} Var(\hat{\theta}) = 0$
+> b. $\lim_{n \to +\infty} Var(\hat{\theta}) = 0$.
+
+
+**Prueba:** Ejercicio.
+
+
 
 ---
 
@@ -227,7 +227,7 @@ b. Pruebe que $S$ es un estimador consistente para estimar $\sigma$.
 
 # Consistencia
 
-> **Teorema 1.25.** Teorema de Slutsky. Suponga que $U_n$ es una variable aleatoria que tiene distribución que converge a una $N(0,1)$ cuando $n \to +\infty$. Además $W_n$ es una variable aleatoria que converge en probabilidad a 1. Se cumple, entonces, que la variable aleatoria $\frac{U_n}{W_n}$ tiene distribución que converge a una $N(0,1)$, cuando $n \to +\infty$.
+> **Teorema 1.25. Teorema de Slutsky.** Suponga que $U_n$ es una variable aleatoria que tiene distribución que converge a una $N(0,1)$ cuando $n \to +\infty$. Además $W_n$ es una variable aleatoria que converge en probabilidad a 1. Se cumple, entonces, que la variable aleatoria $\frac{U_n}{W_n}$ tiene distribución que converge a una $N(0,1)$, cuando $n \to +\infty$.
 
 **Ejemplo.** 
 Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria de una población con media $\mu$ y variancia $\sigma^2$. Demuestre que $V = \frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}}$ converge a una $N(0,1)$ cuando $n \to +\infty$. 
@@ -242,144 +242,104 @@ Entonces se cumple que $V = \frac{\overline{X}-\mu}{\frac{S}{\sqrt{n}}} \xrighta
 ---
 
 
-# Estadísticos suficientes
-
-
-
+# Suficiencia
 
 	
 Hasta el momento la selección de estimadores ha sido intuitiva, sin embargo en esta sección utilizaremos la propiedad de suficiencia para determinar estimadores a partir de ciertos estadísticos. Se dice que un estadístico es suficiente si **hace uso de toda la información de la muestra**. Ejemplos: $\overline{X}, S^{2}, X_{(n)}$.
 	
-> **Definición 4.1.** _Suficiencia_. Si $X_{1}, X_{2}, ... , X_{n}$ es una muestra aleatoria sobre una población con parámetro desconocido $\theta$ y función de densidad/probabilidad $f_{X}(x|\theta)$. Se dice que un estadístico $U = g(X_{1}, X_{2}, ... , X_{n})$ es **suficiente** para estimar $\theta$ si la distribución condicional de $X_{1}, X_{2}, ... , X_{n}$ dado $U=u$ es independiente de $\theta$. 
+> **Definición 4.1. Suficiencia mínima.** Si $X_{1}, X_{2}, ... , X_{n}$ es una muestra aleatoria sobre una población con parámetro desconocido $\theta$ y función de densidad/probabilidad $f_{X}(x|\theta)$. Se dice que un estadístico $U = g(X_{1}, X_{2}, ... , X_{n})$ es **suficiente mínimo** para estimar $\theta$ si la distribución condicional de $X_{1}, X_{2}, ... , X_{n}$ dado $U=u$ es independiente de $\theta$. 
 
 > Es decir, $P(X_{1}, X_{2}, ... , X_{n} \vert U =u)$ no depende de $\theta$.
 
+
 ---
 
-## Teorema de Factorización de Fisher
+# Suficiencia
 
-Otra forma de entender el resultado anterior es usando este teorema:
-
-
-**Teorema**. Si $X_1,\dots,X_n$ es una muestra aleatoria de $f(X|\theta)$, el
-parámetro $\theta$ es desconocido. Un estadístico $U=U(X_1,\dots,X_n)$ es
-suficiente si y solo si 
-
-$$f_n(X_1,\dots,X_n|\theta) = u(X_1,\dots,X_n)v(U(X_1,\dots,X_n),\theta)\;\forall \theta \in \mathbb R.$$
-
-Las funciones $u$ y $v$  son no negativas. 
+De otra forma, se puede decir que un estadístico $U = T(X_{1}, X_{2}, ... , X_{n})$, de una muestra aleatoria $X_{1}, X_{2}, ... , X_{n}$, es suficiente mínimo para estimar $\theta$ si no se puede encontrar otro estadístico que realice una mejor reducción de los datos que la que realiza $U$. Es decir, el estadístico suficiente mínimo logra **explicar toda la información del parámetro que se presenta en la muestra aleatoria**.
+	
+Ejemplo. Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria tal que $X_{j} \sim Bernoulli(p)$. Pruebe que $U = \sum_{j=1}^{n} X_{j}$ es suficiente para estimar $p$.
+	
+Solución. Sabemos que la función de probabilidad de una Bernoulli viene dada por la siguiente expresión:
+	
+$f_{X}(x|p) = \begin{cases} p^{x}\left(1-p\right)^{1-x} \quad si \quad x \in \left\lbrace 0,1\right\rbrace  \\ 0 \quad en \quad otros \quad casos \end{cases}$
+	
+También sabemos de antemano que la suma de Bernoulli es una Binomial, por lo que $U \sim Bin(n,p)$, por lo que tiene la siguiente función de probabilidad:
+	
+$f_{U}(u|p) = \begin{cases} \binom{n}{u}p^{u}\left(1-p\right)^{n-u} \quad si \quad u \in \left\lbrace0,1,2,...,n\right\rbrace \\ 0 \quad en \quad otros \quad casos \end{cases}$
+	
 ---
 
-# Suficiencia 
+# Suficiencia
 
-Suficiencia se refiere a que el estadistico $U$ contiene toda la información necesaria para estimar $\theta$. Por eso el paramétro está junto con el estadistico en la función $v(U(X_1,\dots,X_n),\theta)$. 
+Ahora tenemos que encontrar la función de probabilidad condicional de $X_{1}, X_{2}, ... , X_{n}$ dado $U=u$, que por lo visto en cursos anteriores sabemos que es:
+	
+$$f(x_{1}, ... , x_{n} | U = u) = \frac{f(x_{1}, ... , x_{n}, u)}{f_{U}(u)}$$
 
-
-**Ejemplo.** Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria tal que $X_{j} \sim Bernoulli(p)$. Pruebe que $U = \sum_{j=1}^{n} X_{j}$ es suficiente para estimar $p$.
-
-
-Recordemos que bajo independencia $f(x_{1}, ... , x_{n}) = \prod_{j=1}^{n}f_{X_{j}}(x_{j}|p)$. Esta función también lleva el nombre de **función de verosimilitud** y se denota como $\mathcal{L}(x_{1}, ... , x_{n}|p)$ o también solo como $\mathcal{L}(p)$. 
-
-\begin{align*}
-\mathcal{L}(x_{1}, ... , x_{n}|p) =  
-\prod_{j=1}^{n} p^{x_{j}}\left(1-p\right)^{1-x_{j}} 
-&= p^{\sum_{j=1}^{n}x_{j}}\left(1-p\right)^{n-\sum_{j=1}^{n}x_{j}} \\
-&= p^{u}\left(1-p\right)^{n-u}
-\end{align*}
+En este caso el numerador es la función de probabilidad conjunta de $X_{1}, X_{2}, ... , X_{n}$ y $U$, pero al estar este en términos de toda la muestra aleatoria entonces quedamos con solo la función de probabilidad conjunta de $X_{1}, X_{2}, ... , X_{n}$, $f(x_{1}, ... , x_{n})$. Recordemos que bajo independencia $f(x_{1}, ... , x_{n}) = \prod_{j=1}^{n}f_{X_{j}}(x_{j}|p)$. Esta función también lleva el nombre de **función de verosimilitud** y se denota como $\mathcal{L}(x_{1}, ... , x_{n}|p)$ o también solo como $\mathcal{L}(p)$. 
+	
+$$\mathcal{L}(x_{1}, ... , x_{n}|p) =  \prod_{j=1}^{n} p^{x_{j}}\left(1-p\right)^{1-x_{j}}= p^{\sum_{j=1}^{n}x_{j}}\left(1-p\right)^{n-\sum_{j=1}^{n}x_{j}} = p^{u}\left(1-p\right)^{n-u}.$$
 
 
 ---
 
-\begin{align*}
-\mathcal{L}(x_{1}, ... , x_{n}|p) = p^{u}\left(1-p\right)^{n-u}
-\end{align*}
+# Suficiencia
 
-
-Tome $u(x) = 1$,  $v(u,p) = p^{u}\left(1-p\right)^{n-u}$. Por el teorema de factorización de Fisher, $U = \sum_{j=1}^{n} X_{j}$ es suficiente para estimar $p$.
-
-
-<!-- # Suficiencia -->
-
-<!-- <\!-- De otra forma, se puede decir que un estadístico $U = T(X_{1}, X_{2}, ... , X_{n})$, de una muestra aleatoria $X_{1}, X_{2}, ... , X_{n}$, es suficiente para estimar $\theta$ si no se puede encontrar otro estadístico que realice una mejor reducción de los datos que la que realiza $U$. Es decir, el estadístico suficiente mínimo logra **explicar toda la información del parámetro que se presenta en la muestra aleatoria**. -\-> -->
-
-<!-- **Ejemplo.** Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria tal que $X_{j} \sim Bernoulli(p)$. Pruebe que $U = \sum_{j=1}^{n} X_{j}$ es suficiente para estimar $p$. -->
+Por lo tanto, $f(x_{1}, ... , x_{n} | U = u) = \frac{p^{u}\left(1-p\right)^{n-u}}{\binom{n}{u}p^{u}\left(1-p\right)^{n-u}} = \frac{1}{\binom{n}{u}}$
 	
-<!-- **Solución.** Sabemos que la función de probabilidad de una Bernoulli viene dada por la siguiente expresión: -->
+Como vemos, esta función condicional no depende de $p$, por lo que decimos que $U$ es suficiente para estimar $p$. 
+
+Ejemplo. Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria de una población Uniforme en el intervalo $(0,\theta)$. Demuestre que el máximo muestral es un estimador suficiente para $\theta$. 
 	
-<!-- $f_{X}(x|p) = \begin{cases} p^{x}\left(1-p\right)^{1-x} \quad si \quad x \in \left\lbrace 0,1\right\rbrace  \\ 0 \quad en \quad otros \quad casos \end{cases}$ -->
-	
-<!-- También sabemos de antemano que la suma de Bernoulli es una Binomial, por lo que $U \sim Bin(n,p)$, por lo que tiene la siguiente función de probabilidad: -->
-	
-<!-- $f_{U}(u|p) = \begin{cases} \binom{n}{u}p^{u}\left(1-p\right)^{n-u} \quad si \quad u \in \left\lbrace0,1,2,...,n\right\rbrace \\ 0 \quad en \quad otros \quad casos \end{cases}$ -->
-	
-<!-- --- -->
-
-<!-- # Suficiencia -->
-
-<!-- Ahora tenemos que encontrar la función de probabilidad condicional de $X_{1}, X_{2}, ... , X_{n}$ dado $U=u$, que por lo visto en cursos anteriores sabemos que es: -->
-	
-<!-- $f(x_{1}, ... , x_{n} | U = u) = \frac{f(x_{1}, ... , x_{n}, u)}{f_{U}(u)}$ -->
-
-<!-- En este caso el numerador es la función de probabilidad conjunta de $X_{1}, X_{2}, ... , X_{n}$ y $U$, pero al estar este en términos de toda la muestra aleatoria entonces quedamos con solo la función de probabilidad conjunta de $X_{1}, X_{2}, ... , X_{n}$, $f(x_{1}, ... , x_{n})$. Recordemos que bajo independencia $f(x_{1}, ... , x_{n}) = \prod_{j=1}^{n}f_{X_{j}}(x_{j}|p)$. Esta función también lleva el nombre de **función de verosimilitud** y se denota como $\mathcal{L}(x_{1}, ... , x_{n}|p)$ o también solo como $\mathcal{L}(p)$.  -->
-	
-<!-- $\mathcal{L}(x_{1}, ... , x_{n}|p) =  \prod_{j=1}^{n} p^{x_{j}}\left(1-p\right)^{1-x_{j}}= p^{\sum_{j=1}^{n}x_{j}}\left(1-p\right)^{n-\sum_{j=1}^{n}x_{j}} = p^{u}\left(1-p\right)^{n-u}$ -->
-
-
-<!-- --- -->
-
-<!-- # Suficiencia -->
-
-<!-- Por lo tanto, $f(x_{1}, ... , x_{n} | U = u) = \frac{p^{u}\left(1-p\right)^{n-u}}{\binom{n}{u}p^{u}\left(1-p\right)^{n-u}} = \frac{1}{\binom{n}{u}}$ -->
-	
-<!-- Como vemos, esta función condicional no depende de $p$, por lo que decimos que $U$ es suficiente para estimar $p$.  -->
-
-
----
-
-# Minimalidad
-
-
->**Definición**. Un estadístico $T$ es **suficiente minimal** si $T$ es
->suficiente y es función de cualquier otro estadístico suficiente.
-
->**Teorema**. Si $U = U(X_1,\dots, X_n)$ es un estadístico suficiente para
-> $\theta$, entonces el MLE $\hat\theta$ de $\theta$ depende de $X_1,\dots, X_n$
->solamente a través de $U$. Además, si $\hat \theta$ es suficiente entonces $\hat\theta$ es minimal.
-
-
-
-
-
-
-
-
-
-
----
-
-**Ejemplo.**Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria de una población Uniforme en el intervalo $(0,\theta)$. Demuestre que el máximo muestral es un estimador suficiente para $\theta$. 
-
-**Solución.**  
-
-\begin{align*}
-\mathcal{L}(x_{1}, ... , x_{n}|\theta) 
-&= \prod_{j=1}^{n} \frac{1}{\theta} \quad 0\leq x_{1}, ... , x_{n}\leq  \theta \\
-&=  \frac{1}{\theta^n} \quad 0\leq x_{1}, ... , x_{n}\leq  \theta \\
-&=  \frac{1}{\theta^n} \quad 0\leq \max\{x_{1}, ... , x_{n}\}\leq  \theta \\
-&=  \frac{1}{\theta^n} \quad 0\leq X_{(n)}\leq  \theta 
-\end{align*}
-
----
-
-Otra forma es que ya habiamos demostrado que $U = X_{(n)} \sim Potencial(n,\theta)$, por lo que conocemos su función de densidad:
+Solución. Ya habiamos demostrado con anterioridad que para este caso $U = X_{(n)} \sim Potencial(n,\theta)$, por lo que conocemos su función de densidad:
 
 $f_{U}(u) = \frac{nu^{n-1}}{\theta^n}$
 	
 Con esto podemos encontrar la función de densidad marginal:
 	
-$f(x_{1}, ... , x_{n} | U = u) = \dfrac{\frac{1}{\theta^{n}}}{\dfrac{nu^{n-1}}{\theta^n}} = \dfrac{1}{nu^{n-1}}$
+$f(x_{1}, ... , x_{n} | U = u) = \frac{\theta^{-n}}{\frac{nu^{n-1}}{\theta^n}} = \frac{1}{nu^{n-1}}$
 	
 Como esta expresión no depende de $\theta$ entonces decimos que el máximo muestral es suficiente para estimar $\theta$. 
+
+
+
+---
+
+# Técnicas para demostrar suficiencia
+
+1. Técnica de factorización
+2. Técnica de la familia exponencial.
+	
+> **Teorema 4.1. Técnica de factorización.** Si $U$ es un estadístico definido sobre una muestra aleatoria $X_{1}, X_{2}, ... , X_{n}$ de una población con parámetro desconocido $\theta$ y $\mathcal{L}(X_{1}, X_{2}, ... , X_{n}|\theta) = \mathcal{L}(\theta)$ es la función de verosimilitud entonces $U$ es suficiente para $\theta$ si y solo si existen funciones $g(u,\theta)$ y $h(x_{1}, x_{2}, ... , x_{n})$ tal que $\mathcal{L}(\theta) = g(u,\theta) \cdot h(x_{1}, x_{2}, ... , x_{n})$ donde $g(\cdot)$ depende de $X_{1}, X_{2}, ... , X_{n}$ solo por medio de $U$ y $h(\cdot)$ no depende de $\theta$. 
+
+
+
+---
+
+# Suficiencia
+
+Ejemplo. Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria tal que $X_{j} \sim Bernoulli(p)$. Pruebe que $U = \sum_{j=1}^{n} X_{j}$ es un estadístico suficiente mínimo para $p$. 
+
+Solución. En el caso de una muestra aleatoria Bernoulli, su función de verosimilitud viene dada por
+	
+$$\mathcal{L}(p) = \prod_{j=1}^{n} p^{x_{j}}\left(1-p\right)^{1-x_{j}} = p^{\sum x_{j}}\left(1-p\right)^{n-\sum x_{j}} = p^{u}\left(1-p\right)^{n-u}$$
+	
+Si tomamos $g(u,p) = p^{u}\left(1-p\right)^{n-u}$ y $h(x_{1}, x_{2}, ... , x_{n}) = 1$ podemos ver que se cumple el teorema anterior por lo que queda demostrado que $U = \sum_{j=1}^{n} X_{j}$ es un estadístico suficiente mínimo para $p$.
+---
+
+# Suficiencia
+
+Ejemplo. Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria de una población Poisson con media $\lambda$. Encuentre un estadístico suficiente mínimo para $\lambda$. 
+	
+Solución. Primero debemos encontrar la función de verosimilitud para una muestra aleatoria Poisson,
+	
+$$\mathcal{L}(\lambda) = \prod_{j=1}^{n} \frac{\lambda^{x_{j}}e^{-\lambda}}{x_{j}!} = \frac{\lambda^{\sum x_{j}}e^{-n\lambda}}{\prod x_{j}! }$$
+
+Si tomamos $U = \sum_{j=1}^{n} X_{j}$ entonces podemos observar que $g(u,\lambda) = \lambda^{u} e^{-n\lambda}$ y $h(x_{1}, x_{2}, ... , x_{n}) = \frac{1}{\prod x_{j}! }$ cumplen que su producto sea igual a la verosimilitud, por lo que $U = \sum_{j=1}^{n} X_{j}$ es un estadístico suficiente mínimo. 
+
+
+
+
 
 
 ---
@@ -393,7 +353,6 @@ Como esta expresión no depende de $\theta$ entonces decimos que el máximo mues
 $$\frac{\sum_{i=1}^n(x_i-\bar{x})^2+\sum_{i=1}^n(y_i-\bar{y})^2}{2n-2}$$
 es un estimador consistente de $\sigma^2$.
 
-- Suponga que $X_1,\dots,X_n \sim Poisson(\lambda)$, ¿Cuál sería un estimador suficiente minimal para $\lambda$?  
 
 ---
 class: center, middle
