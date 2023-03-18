@@ -19,6 +19,8 @@ está aquí: <http://lya.fciencias.unam.mx/lars/0398/index.html>
 <a href="http://www.estadistica.ucr.ac.cr/images/EEST/Programas/Bachi/2023/IC/Programa-XS-3310v2.pdf">Programa
 del curso</a>
 
+<a href="guia_debate.pdf" class="image fit"> Debate</a>
+
 <table style="width:100%">
 <tr>
 <th width="10%">
@@ -211,5 +213,3 @@ Casella: Capítulo 7 Ejercicios (pp. 355 to 367): <br> 7.2, 7.6, 7.7,
 </td>
 <tr>
 <!-- </table> -->
-
-<a href="guia_debate.pdf" class="image fit"> Debate</a>
