@@ -1,13 +1,13 @@
 ---
 title: "XS3310 Teoría Estadística"
-subtitle: "I Semetre 2022"  
+subtitle: "I Semetre 2023"  
 author: 
   - "Escuela de Estadística"
-date: '`r Sys.Date()`'
+date: '21-03-2023'
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: xaringan-themer.css
+    css: [default, xaringan-themer.css]
     nature:
       highlightStyle: github
       highlightLines: true
@@ -20,11 +20,12 @@ options(htmltools.dir.version = FALSE)
 
 # ¿Qué vamos a discutir hoy?
 
+* Discusión de la práctica.
 * Estimador cuadrático medio y propiedades de los estimadores: insesgado, eficiente, consistente y suficiente.
 
 
-<!--
 
+---
 ## Ejercicios
 
 1. Suponga que $X_1, X_2, ..., X_n$ es una muestra aleatoria exponencial con paramétro $\theta$. Se sabe que la esperanza es $1/\theta$ y varianza $1/\theta ^2$. Encuentre una función $g(\theta)$ de modo que la convergencia en distribución de $\overline{X}$ no depende de $\theta$. 
@@ -40,7 +41,7 @@ options(htmltools.dir.version = FALSE)
       
       e) Como la media muestral es un estimador insesgado, tenemos asegurado que $\bar{X} = \mu$
 
--->
+
 
 ---
 
@@ -241,13 +242,24 @@ Se cumple que ambos estimadores son asintóticamente insesgados para sus respect
 	
 **NOTA:** También se cumple que un estimador $\hat{\theta}$ es asintóticamente insesgado para $\theta$ si $\displaystyle\lim_{n\rightarrow\infty}{E(\hat{\theta})} = \theta$.
 	
+
 ---
 
-# Sesgo y ECM
+# Sesgo
 
-**NOTA:** Si un estimador $\hat{\theta}$ es insesgado para $\theta$ se cumple que $ECM(\hat{\theta}) = Var(\hat{\theta})$. 
-	
-```{r echo=F, out.width = '100%', fig.height = 4, warnings=FALSE}
+Ejemplo: En las siguientes dos figuras muestran $n = 100$ puntos muestrales para una población infinita con $N(\mu = 1,\sigma^2=1)$, con la densidad en en rojo, pero con:
+
+.pull-left[
+- la media muestral estimada con $\bar{X}=1.1176$
+]
+
+.pull-right[
+- la log media estimada $log(\bar{X})=0.145$
+- $log(\mu)=0$
+]
+
+
+```{r echo=F, fig.height=3, warning=FALSE, out.width='100%', warnings=FALSE}
 library(tidyr)
 library(ggplot2)
 library(gridExtra)
@@ -273,7 +285,7 @@ p1 <- ggplot(df, aes(x = x, y = prob)) +
   geom_line(data = df.pdf, aes(x=x, y=prob))+
   geom_vline(aes(xintercept = theta_hat1), linetype = 2) + ylim(c(0,0.5))+
   theme_bw() + 
-  geom_vline(aes(xintercept = 1), linetype = 1, color="red") + ggtitle("n = 100 \n Puntos muestrales para una \n población infinita, y su media \n estimada. La curva muestra la \n distribución  poblacional, \n con media = 1 (en rojo).")
+  geom_vline(aes(xintercept = 1), linetype = 1, color="red") + ggtitle("")
 
 estimator2 <- function(samples){
   log(mean(x_samples))
@@ -296,7 +308,7 @@ p2 <-ggplot(df, aes(x = x, y = prob)) +
   geom_line(data = df.pdf, aes(x=x, y=prob))+
   geom_vline(aes(xintercept = theta_hat2), linetype = 2) + geom_vline(aes(xintercept = 1), linetype = 1, color="red") +
   ylim(c(0,0.5))+
-  theme_bw()+ ggtitle("n = 100 \n Puntos muestrales para una \n población infinita, y su log media \n estimada. La curva muestra la \n distribución  poblacional, \n con media = 1 (en rojo).")
+  theme_bw()+ ggtitle("")
 
 grid.arrange(p1, p2, nrow = 1)
 ```
@@ -352,6 +364,16 @@ grid.arrange(p3, p4, nrow = 1)
 &= E\left[\left(\hat{\theta} - E(\hat{\theta})\right)^{2}\right] + 2B(\hat{\theta}) E\left(\hat{\theta} - E(\hat{\theta})\right) + B(\hat{\theta})^{2} \\
 &= Var(\hat{\theta}) +  2B(\hat{\theta}) \cdot 0 + B(\hat{\theta})^{2} = Var(\hat{\theta}) +  B(\hat{\theta})^{2}
 \end{align*}
+
+
+---
+
+# Sesgo y ECM
+
+**NOTA:** Si un estimador $\hat{\theta}$ es insesgado para $\theta$ se cumple que $ECM(\hat{\theta}) = Var(\hat{\theta})$. 
+	
+	
+	
 ---
 
 # Error Cuadrático Medio
@@ -465,147 +487,55 @@ Podemos apreciar la eficiencia relativa de estos dos estimadores en la Figura 2.
 ![Figura 3.](figs/eficienciarelativa.jpg)
 
 
----
-
-# ¿Cómo cuantificar la información de un estadístico?
-
-
-Sea $X\sim f(x|\theta)$, $\theta \in \Omega \subset \mathbb R$ parámetro fijo.
-
-* *Supuesto 1*: para cada $x \in \mathcal X$ (espacio muestral de $X$) $f(x|\theta)> 0$ $\forall \theta \in \Omega$. Esto quiere decir que la imagen de la variable aleatoria no puede depender de $\theta$.
-
-* *Supuesto 2*: $f(x|\theta)$ es dos veces diferenciable.
-* *Supuesto 3:* $\dfrac d{d\theta}\int_{\mathcal X}f(x|\theta)dx =  \int_{\mathcal X}\dfrac d{d\theta}f(x|\theta)dx$.
 
 ---
 
-**Definición**. Se define la **función Score** como:
-$$\lambda(x|\theta)=\ln f(x|\theta)$$
+# Eficiencia
 
-cuyas derivadas son
+En general, para buscar la eficiencia al estimar un parámetro se requiere determinar el estimador insesgado $\hat{\theta}$ que tiene variancia mínima. 
 
-$\lambda'(x|\theta) = \dfrac \partial{\partial \theta}\ln f(x|\theta)$
-
-$\lambda''(x|\theta) = \dfrac {\partial^2}{\partial \theta^2}\ln f(x|\theta)$
-
-
-
-**Definición**. Si $X$ y $f(x|\theta)$ satisfacen los supuestos anteriores, la **información de Fisher** ( $I(\theta)$ ) de $X$ es
-$I(\theta) =\mathbb E[(\lambda'(x|\theta))^2]$
-donde la esperanza es integral o suma, dependiendo de $X$.
-
-Por ejemplo si $f(x\vert\theta)$
-\begin{equation}
-I(\theta)=\int_{\mathcal{X}}\left[\lambda^{\prime}(x \mid \theta)\right]^{2} f(x \mid \theta) d x
-\end{equation}
+> **Teorema 1.22. Desigualdad de Cramer-Rao.** Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria sobre una población con parámetro desconocido $\theta$ con función de densidad $f_{X}(x|\theta)$, cuyo dominio no depende de $\theta$. Si $\hat{\theta}$ es un estimador insesgado para $\theta$, entonces en general: $Var(\hat{\theta}) \geq 1/I(\theta)$ donde $I(\theta)$ se llama la **información de Fisher** y se define como $I(\theta) = \left[nE\left(-\frac{\partial^{2}\ln(f_{X}(x))}{\partial \theta^{2}}\right)\right]$. Si $Var(\hat{\theta}) = 1/I(\theta)$ entonces $\hat{\theta}$ es un estimador insesgado de variancia mínima para $\theta$. 
 
 ---
 
-**Teorema**. Bajo las condiciones anteriores, y suponiendo que las dos derivadas
-de $\int_{\mathcal X}f(x|\theta)dx$ con respecto a $\theta$ (*Supuesto 3*) se
-pueden calcular al intercambiar el orden de integración y derivación. Entonces
-
-$$I(\theta) = -\mathbb E_{\theta}[\lambda''(x|\theta)] = \text{Var}[\lambda'(x|\theta)].$$
-
-
----
-
-**Ejemplo**. $X\sim N(\mu,\sigma^2)$, $\mu$ desconocida, $\sigma^2$ conocida.
-$$f(x|\mu) = \dfrac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\dfrac 1{2\sigma^2}(x-\mu)^2\right)$$
-
-Vea que
-\begin{align*}
-&\dfrac d{d\mu}\int_{\mathbb R} f(x|\mu)dx  = \int_{\mathbb R}f'(x|\mu)dx = \int_{\mathbb R} -\dfrac 1{\sqrt{2\pi\sigma^2}}\dfrac {2(x-\mu)^2}{2\sigma^2} dx\\
-& = -\dfrac 1\sigma \underbrace{\int_{\mathbb R}\dfrac{u}{\sqrt{2\pi}}e^{-\frac{u}2}du}_{\mathbb E[N(0,1)]} = 0 \quad \text{usando el cambio de variable } \dfrac{x-\mu}\sigma
-\end{align*}
-
-por lo que cumple el tercer supuesto.
-
----
-
-
-Entonces
-
-* $\lambda(x|\mu) = \dfrac 12 \ln (2\pi\sigma^2)-\dfrac 1{2\sigma^2}(x-\mu)^2$.
-
-* $\lambda'(x|\mu) = \dfrac 1{2\sigma^2}2(x-\mu) = \dfrac{x-\mu}{\sigma^2}$.
-
-* $\lambda''(x|\mu) = -\dfrac 1{\sigma^2}$.
-
-Por lo que
-
-$$I(\mu) = -\mathbb E[\lambda''(x|\mu)] = \dfrac{1}{\text{Var}(X)}$$
-
-**IMPORTANTE**. Suponga que $X = (X_1,\dots,X_n)$ muestra de $f(x|\theta)$ donde $f$ satisface las condiciones anteriores. La información de Fisher de la muestra es 
-
-$$I_n(\theta) = nI(\theta)$$ 
----
-
-# Desigualdad de Cramer-Rao
-
-En general, para buscar la eficiencia al estimar un parámetro se requiere determinar el estimador insesgado $\hat{\theta}$ que tiene varianza mínima. 
-
-**Teorema.** (**Desigualdad de Cramer-Rao**). Sea $X_{1}, X_{2}, ... ,X_{n}$ una muestra aleatoria sobre una población con parámetro desconocido $\theta$ con función de densidad $f_{X}(x|\theta)$, cuyo dominio no depende de $\theta$. Sea $T$ cualquier estimador de $\theta$, con $m(\theta)=\mathbb{E}_{\theta}(T)$ y asuma que $m$ es diferenciable. Entonces siempre se cumple la siguiente desigualdad:
-
- $$\text{Var}_\theta(T)\geq \dfrac{[m'(\theta)]^2}{I_n(\theta)} =\dfrac{[m'(\theta)]^2}{nI(\theta)} .$$
- 
- Si $T$ es insesgado, entonces la desigualdad se simplifica a 
-
- $$\text{Var}_\theta(T)\geq \dfrac{1}{I_n(\theta)} =\dfrac{1}{nI(\theta)} .$$
-
-**NOTA:** Si existe un estimador $T$ tal que $Var(T) = \dfrac{1}{nI(\theta)}$,  entonces le decimos que es un estimador insesgado de varianza mínima para $\theta$. 
-
----
-  
 # Eficiencia
 	
-**Ejemplo:** Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria de una población Normal con media $\mu$ y varianza $\sigma^{2}$. Demuestre que $\overline{X}$ es un estimador insesgado de varianza mínima (EIVM) para $\mu$.
+Ejemplo: Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria de una población Normal con media $\mu$ y variancia $\sigma^{2}$. Demuestre que $\overline{X}$ es un estimador insesgado de variancia mínima (EIVM) para $\mu$.
 	
-**Solución:** Sabemos que $\mathbb{E}[\overline{X} ] = \mu$. Basta probar que tiene varianza mínima. 
+Solución: Ya sabemos de ejemplos anteriores que $\overline{X}$ es insesgado para $\mu$. Hay que demostrar que es de variancia mínima utilizando la desigualdad de Cramer-Rao. 
+	
 Sabemos que en este caso $f_{X}(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$.
-
-* $\lambda(x|\mu) = -\dfrac 12 \ln (2\pi\sigma^2)-\dfrac 1{2\sigma^2}(x-\mu)^2$.
-
-* $\lambda'(x|\mu) = -\dfrac 1{2\sigma^2}2(x-\mu)\cdot -1 = \dfrac{x-\mu}{\sigma^2}$.
-
-* $\lambda''(x|\mu) = -\dfrac 1{\sigma^2}$.
-
----
-
-* $I(\mu) = - \mathbb{E}(\lambda''(x|\mu)) = \dfrac 1{\sigma^2}$
-* $I_{n}(\mu) = nI(\mu) = \dfrac n{\sigma^2}$
-* Cota de Cramer-Rao = $\dfrac{\sigma^2}n$
-
-
-De antemano ya sabiamos que $Var(\overline{X}) = \dfrac{\sigma^2}{n}$ que como vemos es igual a la cota de Cramer-Rao para $\mu$, por lo que podemos concluir que $\overline{X}$ es un estimador insesgado de varianza mínima para $\mu$.
+	
+$\Rightarrow \ln(f_{X}(x)) = \ln\left(\frac{1}{\sqrt{2\pi}\sigma}\right) - \frac{(x-\mu)^2}{2\sigma^2} \Rightarrow \frac{\partial\ln(f_{X}(x))}{\partial\mu} = \frac{x-\mu}{\sigma^{2}}$
+	
+$\Rightarrow \frac{\partial^{2}\ln(f_{X}(x))}{\partial\mu^{2}} = \frac{-1}{\sigma^2} \Rightarrow -\frac{\partial^{2}\ln(f_{X}(x))}{\partial\mu^{2}} = \frac{1}{\sigma^2} \Rightarrow I(\mu) =  \left[nE\left(-\frac{\partial^{2}\ln(f_{X}(x))}{\partial \mu^{2}}\right)\right]^{-1} = \left[ \frac{n}{\sigma^2}\right]^{-1}  = \frac{\sigma^2}{n}$ 
+	
+De antemano ya sabiamos que $Var(\overline{X}) = \frac{\sigma^2}{n}$ que como vemos es igual a la información de Fisher para $\mu$, por lo que podemos concluir que $\overline{X}$ es un estimador insesgado de variancia mínima para $\mu$. 
 
 ---
-
 # Ejercicios
 
-Sea $X_1, . . . , X_n$ denote una variable aleatoria que se distribuye como Uniforme $(0, \theta)$, con $\theta >0$ es un parámetro desconocido. Denote $\bar{X}$ como la media muestral.
+1. Sea $X_1, . . . , X_n$ denote una variable aleatoria que se distribuye como Uniforme $(0, \theta)$, con $\theta >0$ es un parámetro desconocido. Denote $\bar{X}$ como la media muestral.
 
 a) ¿Es $\bar{X}$ un estimador insesgado para $\theta$? Explique su respuesta.
 
 b) Encuentre un estimador insesgado para $\theta$.
 
-c) Encuentre la varianza del estimador de la parte anterior. 
+c) Encuentre la variancia del estimador de la parte anterior. 
 
 d) Sugiera un estimador alternativo para $\theta$.
 
 ---
-
 # Ejercicios
 
 
-Sean $X_1, . . . , X_n, X_{n + 1}, . . . , X_{n+m}$ variables aleatorias independientes e idénticamente distribuidas con densidad Normal de media $\mu$ y varianza $\sigma^2_X$. Se desea estimar $\mu$, pero los valores individuales de la variables se han extraviado y se dispone sólo de las medias:
+2. Sean $X_1, . . . , X_n, X_{n + 1}, . . . , X_{n+m}$ variables aleatorias independientes e idénticamente distribuidas con densidad Normal de media $\mu$ y varianza $\sigma^2_X$. Se desea estimar $\mu$, pero los valores individuales de las variables se han extraviado y se dispone sólo de las medias:
 
-$\bar{X_1}=\frac{1}{n}\sum_{i=1}^{n}X_i$
-
-$\bar{X_2}=\frac{1}{m}\sum_{i=n+1}^{n+m}X_i$
+$\bar{X_1}=\frac{1}{n}\sum_{i=1}^{n}X_i$, $\bar{X_2}=\frac{1}{m}\sum_{i=n+1}^{n+m}X_i$
 
 Para integrar las dos fuentes de información se utiliza un estimador de la forma $\hat{X} = \lambda \bar{X_1} + (1 − \lambda)\bar{X_2}$, donde $0 \leq \lambda \leq 1$. 
 Probar que un estimador de este tipo es insesgado para $\mu$ indicando además qué valor define el mejor $\lambda$ de todos ellos.
+
 
 ---
 
@@ -628,3 +558,8 @@ ECM y propiedades de los estimadores: insesgado, eficiente.
 Práctica en grupos.
 
 Próxima clase: consistente y suficiente. 
+
+
+Slides creadas via R package [**xaringan**](https://github.com/yihui/xaringan).
+
+El chakra viene de [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
