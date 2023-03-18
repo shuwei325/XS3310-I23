@@ -71,7 +71,7 @@ puntual?</a> <br> <a href="https://youtu.be/muIrBvecff8">Muestras
 aleatorias, estadísticas y estimadores</a>
 </td>
 <td>
-Práctica: 8.1 - 8.20 de Mendenhall
+<a href="https://shuwei325.github.io/XS3310-I23/XS3310-I23_2.html#27">Ejercicios</a>
 </td>
 </tr>
 <tr>
@@ -99,7 +99,8 @@ inferior de Cramér-Rao</a> <br>
 inferior de Cramér-Rao</a>
 </td>
 <td ROWSPAN="2">
-Práctica: 9.1 - 9.14 de Mendenhall
+Práctica: 8.1 - 8.20 de Mendenhall <br> Práctica: 9.1 - 9.8 de
+Mendenhall
 </td>
 </tr>
 <td>
