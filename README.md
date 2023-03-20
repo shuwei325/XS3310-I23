@@ -109,7 +109,8 @@ Práctica: 8.1 - 8.20 de Mendenhall
 24/03
 </td>
 <td>
-<a href="XS3310-I23_4.html">Clase04</a>
+continua <br> <a href="XS3310-I23_3.html">Clase03</a> <br>
+<a href="guia_debate.pdf" class="image fit"> Debate.</a>
 </td>
 <td>
 Práctica: 9.1 - 9.8 de Mendenhall
