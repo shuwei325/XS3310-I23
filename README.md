@@ -102,7 +102,8 @@ inferior de Cramér-Rao</a> <br>
 inferior de Cramér-Rao</a>
 </td>
 <td>
-Práctica: 8.1 - 8.20 de Mendenhall
+Práctica: 8.1 - 8.20 de Mendenhall <br> Ej. 13 y 14 de DeGroot (Método
+Delta)
 </td>
 </tr>
 <td>
