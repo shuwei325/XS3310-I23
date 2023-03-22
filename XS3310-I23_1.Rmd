@@ -1,6 +1,6 @@
 ---
 title: "XS3310 Teoría Estadística"
-subtitle: "I Semetre 2023"  
+subtitle: "I Semestre 2023"  
 author: 
   - "Escuela de Estadística"
 date: '14-03-2023'
