@@ -3,11 +3,11 @@ title: "XS3310 Teoría Estadística"
 subtitle: "I Semestre 2021"  
 author: 
   - "Escuela de Estadística"
-date: '`r Sys.Date()`'
+date: '11-04-2023'
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: xaringan-themer.css
+    css: [default, xaringan-themer.css]
     nature:
       highlightStyle: github
       highlightLines: true

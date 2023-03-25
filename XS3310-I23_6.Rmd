@@ -61,7 +61,7 @@ En la clase pasada vimos:
 
 # Suficiencia para familias exponenciales
 
-> **Teorema 4.2.** Técnica de la familia exponencial. Si $X$ es una variable aleatoria cuyo dominio no depende de un parámetro desconocido $\theta$ y la función de densidad/probabilidad de X dado $\theta$ pertenece a la familia exponencial, es decir que tiene la forma:
+> **Teorema 4.2. Técnica de la familia exponencial.** Si $X$ es una variable aleatoria cuyo dominio no depende de un parámetro desconocido $\theta$ y la función de densidad/probabilidad de X dado $\theta$ pertenece a la familia exponencial, es decir que tiene la forma:
 > $$f_{X}(x|\theta) = b(x)c(\theta)e^{-a(x)d(\theta)}, \qquad a(x) \neq 1$$
 > entonces $U = \sum_{i=1}^{n} a(X_{i})$ es un estadístico suficiente mínimo para estimar $\theta$. 
 

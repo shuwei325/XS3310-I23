@@ -1,0 +1,115 @@
+---
+title: "Ilustración del Teorema de Límite Central"
+author: "Shu Wei"
+date: "2023-03-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Teorema de Límite Central (simulación)
+
+Este documento ilustra de manera intuitiva el Teorema de Límite Central por medio de simulaciones.
+
+### Población con distribución exponencial
+
+Suponga que $X_1,...,X_n \sim Exp(2)$. Una muestra aleatoria simulada con $n=100$ se observa como sigue:
+```{r}
+set.seed(100000)
+n <- 100
+x <- rexp(n,2)
+hist(x)
+mean(x)
+var(x)
+```
+Observe que teóricamente $E(X)=0.5$ y $Var(X)=0.5^2$.
+
+
+Ahora, tomo $K=1000$ muestras aleatorias y las guardo en una lista `X`.
+
+```{r}
+K <- 1000
+n <- 100
+X <- list()
+for(i in 1:K){
+  X[[i]] <- rexp(n,2) #X es una lista de las K muestras de tamaño 100.
+}
+```
+
+Calculo la media muestral para $k=1,...,K$ y obtengo la media y variancia (empírica) de las $K=1000$ medias muestrales.
+```{r}
+media_X <- sapply(X,mean)
+hist(media_X)
+mean(media_X)
+var(media_X)
+```
+Observe que teóricamente $E(\bar{X})=0.5$ y $Var(\bar{X})=0.5^2/n=0.5^2/100=0.0025$. Además, el histograma muestra que con la distribución muestral de $\bar{X}$ es aproximadamente simétrica y quizás normal.
+
+
+#### Repito el mismo procedimiento para $n=10$
+
+```{r}
+K <- 1000
+n <- 10
+X <- list()
+for(i in 1:K){
+  X[[i]] <- rexp(n,2) #X es una lista de las K muestras de tamaño 100.
+}
+```
+
+
+```{r}
+media_X <- sapply(X,mean)
+hist(media_X)
+mean(media_X)
+var(media_X)
+```
+
+Observe que teóricamente $E(\bar{X})=0.5$ y $Var(\bar{X})=0.5^2/n=0.5^2/10=0.025$. Además, el histograma muestra que con la distribución muestral de $\bar{X}$ es asimétrica. Es decir, que no se parece a una distribución normal.
+
+
+#### Repito el mismo procedimiento para $n=1000$
+
+```{r}
+K <- 1000
+n <- 1000
+X <- list()
+for(i in 1:K){
+  X[[i]] <- rexp(n,2) #X es una lista de las K muestras de tamaño 100.
+}
+```
+
+
+```{r}
+media_X <- sapply(X,mean)
+hist(media_X)
+mean(media_X)
+var(media_X)
+```
+
+Observe que teóricamente $E(\bar{X})=0.5$ y $Var(\bar{X})=0.5^2/n=0.5^2/1000=0.00025$. Además, el histograma muestra que la distribución muestral de $\bar{X}$ se parece más a los dos casos anteriores. Es decir, que se aproxima más a una distribución normal.
+
+El TLC nos garantiza que 
+$$
+Z=\frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \overset{d}{\rightarrow} N(0,1)
+$$
+Es decir, $Z$ se aproxima cada vez a la normal estándar cuando $n\rightarrow \infty$. Por ejemplo, con solo $n=1000$, tenemos 
+
+
+```{r}
+Z=(media_X-0.5)/(sqrt(0.5^2/n))
+hist(Z,prob=TRUE)
+Z2 <- seq(min(Z), max(Z), length = 40)
+lines(Z2, dnorm(Z2, mean = 0, sd = 1), col = 2, lwd = 2)
+abline()
+mean(Z)
+var(Z)
+```
+
+
+### Ejercicios: copiar estos códigos y hagan ustedes el ejercicio aumentando el valor de $n$ gradualmente. Pruebe con distintas distribuciones.
+
+
+

@@ -216,3 +216,7 @@ Casella: Capítulo 7 Ejercicios (pp. 355 to 367): <br> 7.2, 7.6, 7.7,
 </td>
 <tr>
 <!-- </table> -->
+
+### Materiales complementarios.<br>
+
+1.  <a href="Materia_extra_html">Ilustración de TLC.</a>
