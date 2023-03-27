@@ -1,9 +1,9 @@
 ---
 title: "XS3310 Teoría Estadística"
-subtitle: "I Semestre 2022"  
+subtitle: "I Semestre 2023"  
 author: 
   - "Escuela de Estadística"
-date: '08-04-2023'
+date: '18-04-2023'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -18,19 +18,6 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-
-<!--# Anuncios
-
-* Horas consulta de Andrea: cambian a Jueves de 1 a 3pm
-
-* Repo actualizado: https://malfaro2.github.io/XS3310-I20/
-
-* Notas del examen se postearán en Mediación Virtual la otra semana
-
-* Hoy iniciamos el Tema II y luego vendrá el tema III para completar el material del II Parcial.-->
-
-
 
 
 ## ¿Qué hemos visto hasta ahora?

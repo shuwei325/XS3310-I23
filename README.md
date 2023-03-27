@@ -26,6 +26,7 @@ académico.</a>
 
 1.  <a href="Materia_extra.html">Ilustración de TLC.</a>
 
+<b>Tema 1: Estimación Puntual </b>
 <table style="width:100%">
 <tr>
 <th width="10%">
@@ -187,7 +188,7 @@ Práctica 9.37 - 9.68 de Mendenhall <br> DeGroot: 6.3: 13 y 14 <br> 7.5:
 11/04
 </td>
 <td>
-<a href="XS3310-I23_1.html">Clase07</a>
+<a href="XS3310-I23_7.html">Clase07</a>
 </td>
 <td ROWSPAN="2">
 <a href="https://www.youtube.com/watch?v=aMZupzrioao">Método de
@@ -207,8 +208,8 @@ invarianza</a>
 </td>
 <td ROWSPAN="2">
 Mendenhall 9.69 - 9.97 <br> Práctica Casella: Capítulo 6 Ejercicios <br>
-(pp. 300 to 307): 6.1, 6.2, 6.3, 6.9, 6.15(b) sin completitud. <br>
-Casella: Capítulo 7 Ejercicios (pp. 355 to 367): <br> 7.2, 7.6, 7.7,
+(pp.300 to 307): 6.1, 6.2, 6.3, 6.9, 6.15(b) sin completitud. <br>
+Casella: Capítulo 7 Ejercicios (pp.355 to 367): <br> 7.2, 7.6, 7.7,
 7.10, 7.12, 7.19, 7.20, 7.21, 7.37, 7.38, 7.49
 </td>
 </tr>
@@ -216,7 +217,7 @@ Casella: Capítulo 7 Ejercicios (pp. 355 to 367): <br> 7.2, 7.6, 7.7,
 14/04
 </td>
 <td>
-<a href="XS3310-I23_8.html">Clase08</a>
+Quiz 1 y repaso
 </td>
 <tr>
-<!-- </table> -->
+</table>
