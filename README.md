@@ -26,8 +26,6 @@ académico.</a>
 
 1.  <a href="Materia_extra.html">Ilustración de TLC.</a>
 
-### Tema 1: Estimación Puntual
-
 <table style="width:100%">
 <tr>
 <th width="10%">
@@ -221,9 +219,6 @@ Casella: Capítulo 7 Ejercicios (pp.355 to 367): <br> 7.2, 7.6, 7.7,
 Quiz 1 y repaso
 </td>
 <tr>
-
-### Tema 2: Estimación por intervalo
-
 <table style="width:100%">
 <tr>
 <th width="10%">
