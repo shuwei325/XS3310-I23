@@ -221,7 +221,6 @@ Casella: Capítulo 7 Ejercicios (pp.355 to 367): <br> 7.2, 7.6, 7.7,
 Quiz 1 y repaso
 </td>
 <tr>
-</table>
 
 ### Tema 2: Estimación por intervalo
 
@@ -333,10 +332,5 @@ Práctica incluida en la presentación
 <td>
 Quiz 2 y repaso
 </td>
-<td>
-</td>
-<td>
-</td>
 </tr>
 <tr>
-</table>
