@@ -222,24 +222,6 @@ Casella: Capítulo 7 Ejercicios (pp.355 to 367): <br> 7.2, 7.6, 7.7,
 Quiz 1 y repaso
 </td>
 <tr>
-<table style="width:100%">
-<tr>
-<th width="10%">
-Semana
-</th>
-<th width="10%">
-Fecha
-</th>
-<th width="10%">
-Clase
-</th>
-<th width="50%">
-Videos
-</th>
-<th width="30%">
-Actividades
-</th>
-</tr>
 <td colspan="5" style="text-align: center">
   <b> Tema 2: Estimación por intervalo </b>
 </td>
