@@ -26,7 +26,8 @@ académico.</a>
 
 1.  <a href="Materia_extra.html">Ilustración de TLC.</a>
 
-<b>Tema 1: Estimación Puntual </b>
+### Tema 1: Estimación Puntual
+
 <table style="width:100%">
 <tr>
 <th width="10%">
@@ -219,5 +220,123 @@ Casella: Capítulo 7 Ejercicios (pp.355 to 367): <br> 7.2, 7.6, 7.7,
 <td>
 Quiz 1 y repaso
 </td>
+<tr>
+</table>
+
+### Tema 2: Estimación por intervalo
+
+<table style="width:100%">
+<tr>
+<th width="10%">
+Semana
+</th>
+<th width="10%">
+Fecha
+</th>
+<th width="10%">
+Clase
+</th>
+<th width="50%">
+Videos
+</th>
+<th width="30%">
+Actividades
+</th>
+</tr>
+<tr>
+<td ROWSPAN="2">
+5
+</td>
+<td>
+18/04
+</td>
+<td>
+<a href="XS3310-I23_9.html">Clase09</a>
+</td>
+<td>
+<a href="https://www.youtube.com/watch?v=nNZH9FXnjvM">¿Qué es un
+intervalo de confianza?</a><br>
+<a href="https://www.youtube.com/watch?v=LO2BOtWxMyY">Método
+pivotal</a><br>
+</td>
+<td>
+Mendenhall 8.39 - 8.49
+</td>
+</tr>
+<tr>
+<td>
+21/04
+</td>
+<td>
+<a href="XS3310-I23_10.html">Clase10</a>
+</td>
+<td>
+<a href="https://www.youtube.com/watch?v=vWnMWhoKad0">Intervalo de
+confianza: distribución Bernoulli</a><br>
+<a href="https://www.youtube.com/watch?v=VTrZ10vbJfw">Intervalo de
+confianza: distribución exponencial</a><br>
+</td>
+<td>
+Casella: 9.1,9.2,9.3,9.8,9.9, 9.12,9.13
+</td>
+</tr>
+<tr>
+<td ROWSPAN="2">
+6
+</td>
+<td>
+25/04
+</td>
+<td>
+<a href="XS3310-I23_11.html">Clase11</a>
+</td>
+<td ROWSPAN="2">
+<a href="https://www.youtube.com/watch?v=D_wakA5YsQc">Intervalos de
+confianza: distribución normal</a>
+</td>
+<td>
+Práctica: 8.1 - 8.20 de Mendenhall, <br> Ej. 13 y 14 de Cap. 6 DeGroot
+(Método Delta)
+</td>
+</tr>
+<td>
+28/04
+</td>
+<td>
+Continua <br> <a href="XS3310-I23_11.html">Clase11</a> <br>
+</td>
+<td>
+<a href="https://docs.google.com/document/d/1YJ_CPac33nAJDXokrHzahu5aWRJAwmoaKkBfpzj1wMw/edit?usp=sharing">Ejercicios
+Extra</a>
+</td>
+<tr>
+<td ROWSPAN="2">
+7
+</td>
+<td>
+02/05
+</td>
+<td>
+<a href="XS3310-I23_13.html">Clase13</a>
+</td>
+<td ROWSPAN="2">
+<a href="https://www.youtube.com/watch?v=Cx5pgZCdDGM">Bootstrap</a>
+</td>
+<td ROWSPAN="2">
+Práctica incluida en la presentación
+</td>
+</tr>
+<tr>
+<td>
+05/05
+</td>
+<td>
+Quiz 2 y repaso
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
 <tr>
 </table>
