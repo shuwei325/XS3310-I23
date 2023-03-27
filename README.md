@@ -44,6 +44,9 @@ Videos
 Actividades
 </th>
 </tr>
+<td colspan="5" style="text-align: center">
+  <b> Tema 1: Estimación Puntual </b>
+</td>
 <tr>
 <td ROWSPAN="2">
 1
@@ -237,6 +240,9 @@ Videos
 Actividades
 </th>
 </tr>
+<td colspan="5" style="text-align: center">
+  <b> Tema 2: Estimación por intervalo </b>
+</td>
 <tr>
 <td ROWSPAN="2">
 5
