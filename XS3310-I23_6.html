@@ -60,20 +60,63 @@ class: center, middle, inverse, title-slide
 * [Suficiencia minimal](https://www.youtube.com/watch?v=5pq1lj1h_Qo)
 * [Ejemplos de estad&amp;iacute;sticas suficientes minimales](https://www.youtube.com/watch?v=WvlYG_TKPLw)
 
+
+
+
+
 ---
-# Técnicas para demostrar suficiencia
-
-En la clase pasada vimos:
-
-&gt; **Teorema 4.1. Técnica de factorización.** Si `\(U\)` es un estadístico definido sobre una muestra aleatoria `\(X_{1}, X_{2}, ... , X_{n}\)` de una población con parámetro desconocido `\(\theta\)` y `\(\mathcal{L}(X_{1}, X_{2}, ... , X_{n}|\theta) = \mathcal{L}(\theta)\)` es la función de verosimilitud entonces `\(U\)` es suficiente para `\(\theta\)` si y solo si existen funciones `\(g(u,\theta)\)` y `\(h(x_{1}, x_{2}, ... , x_{n})\)` tal que `\(\mathcal{L}(\theta) = g(u,\theta) \cdot h(x_{1}, x_{2}, ... , x_{n})\)` donde `\(g(\cdot)\)` depende de `\(X_{1}, X_{2}, ... , X_{n}\)` solo por medio de `\(U\)` y `\(h(\cdot)\)` no depende de `\(\theta\)`. 
+# Suficiencia
 
 	
+En la clase pasada:
+
+Introducimos el concepto de suficiencia de un estadístico y vimos dos ejemplos: población con distribución Bernoulli y Uniforme.
+
+	
+&gt; **Definición 4.1. Suficiencia mínima.** Si `\(X_{1}, X_{2}, ... , X_{n}\)` es una muestra aleatoria sobre una población con parámetro desconocido `\(\theta\)` y función de densidad/probabilidad `\(f_{X}(x|\theta)\)`. Se dice que un estadístico `\(U = g(X_{1}, X_{2}, ... , X_{n})\)` es **suficiente mínimo** para estimar `\(\theta\)` si la distribución condicional de `\(X_{1}, X_{2}, ... , X_{n}\)` dado `\(U=u\)` es independiente de `\(\theta\)`. 
+
+&gt; Es decir, `\(P(X_{1}, X_{2}, ... , X_{n} \vert U =u)\)` no depende de `\(\theta\)`.
+
+
+---
+
+# Técnicas para demostrar suficiencia
+
+1. Técnica de factorización
+2. Técnica de la familia exponencial.
+	
+&gt; **Teorema 4.1. Técnica de factorización.** Si `\(U\)` es un estadístico definido sobre una muestra aleatoria `\(X_{1}, X_{2}, ... , X_{n}\)` de una población con parámetro desconocido `\(\theta\)` y `\(\mathcal{L}(X_{1}, X_{2}, ... , X_{n}|\theta) = \mathcal{L}(\theta)\)` es la función de verosimilitud entonces `\(U\)` es suficiente para `\(\theta\)` si y solo si existen funciones `\(g(u,\theta)\)` y `\(h(x_{1}, x_{2}, ... , x_{n})\)` tal que `\(\mathcal{L}(\theta) = g(u,\theta) \cdot h(x_{1}, x_{2}, ... , x_{n})\)` donde `\(g(\cdot)\)` depende de `\(X_{1}, X_{2}, ... , X_{n}\)` solo por medio de `\(U\)` y `\(h(\cdot)\)` no depende de `\(\theta\)`. 
+
+
+
+---
+
+# Suficiencia
+
+Ejemplo. Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria tal que `\(X_{j} \sim Bernoulli(p)\)`. Pruebe que `\(U = \sum_{j=1}^{n} X_{j}\)` es un estadístico suficiente mínimo para `\(p\)`. 
+
+Solución. En el caso de una muestra aleatoria Bernoulli, su función de verosimilitud viene dada por
+	
+`$$\mathcal{L}(p) = \prod_{j=1}^{n} p^{x_{j}}\left(1-p\right)^{1-x_{j}} = p^{\sum x_{j}}\left(1-p\right)^{n-\sum x_{j}} = p^{u}\left(1-p\right)^{n-u}$$`
+	
+Si tomamos `\(g(u,p) = p^{u}\left(1-p\right)^{n-u}\)` y `\(h(x_{1}, x_{2}, ... , x_{n}) = 1\)` podemos ver que se cumple el teorema anterior por lo que queda demostrado que `\(U = \sum_{j=1}^{n} X_{j}\)` es un estadístico suficiente mínimo para `\(p\)`.
+---
+
+# Suficiencia
+
+Ejemplo. Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria de una población Poisson con media `\(\lambda\)`. Encuentre un estadístico suficiente mínimo para `\(\lambda\)`. 
+	
+Solución. Primero debemos encontrar la función de verosimilitud para una muestra aleatoria Poisson,
+	
+`$$\mathcal{L}(\lambda) = \prod_{j=1}^{n} \frac{\lambda^{x_{j}}e^{-\lambda}}{x_{j}!} = \frac{\lambda^{\sum x_{j}}e^{-n\lambda}}{\prod x_{j}! }$$`
+
+Si tomamos `\(U = \sum_{j=1}^{n} X_{j}\)` entonces podemos observar que `\(g(u,\lambda) = \lambda^{u} e^{-n\lambda}\)` y `\(h(x_{1}, x_{2}, ... , x_{n}) = \frac{1}{\prod x_{j}! }\)` cumplen que su producto sea igual a la verosimilitud, por lo que `\(U = \sum_{j=1}^{n} X_{j}\)` es un estadístico suficiente mínimo. 
 
 ---
 
 # Suficiencia para familias exponenciales
 
-&gt; **Teorema 4.2.** Técnica de la familia exponencial. Si `\(X\)` es una variable aleatoria cuyo dominio no depende de un parámetro desconocido `\(\theta\)` y la función de densidad/probabilidad de X dado `\(\theta\)` pertenece a la familia exponencial, es decir que tiene la forma:
+&gt; **Teorema 4.2. Técnica de la familia exponencial.** Si `\(X\)` es una variable aleatoria cuyo dominio no depende de un parámetro desconocido `\(\theta\)` y la función de densidad/probabilidad de X dado `\(\theta\)` pertenece a la familia exponencial, es decir que tiene la forma:
 &gt; `$$f_{X}(x|\theta) = b(x)c(\theta)e^{-a(x)d(\theta)}, \qquad a(x) \neq 1$$`
 &gt; entonces `\(U = \sum_{i=1}^{n} a(X_{i})\)` es un estadístico suficiente mínimo para estimar `\(\theta\)`. 
 
