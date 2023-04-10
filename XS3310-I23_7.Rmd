@@ -124,7 +124,7 @@ $$\hat{\beta} = \frac{(n-1)S^{2}}{n\overline{X}}$$
 
 ---
 
-# Estimadores de máxima verosimilitud
+## Estimadores de máxima verosimilitud
 	
 Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria sobre una población con distribución que incluye parámetros $\theta_{1}, \theta_{2}, ... , \theta_{k}$. La función de verosimilitud $\mathcal{L}(x_{1}, ... , x_{n}|\theta_{1}, \theta_{2}, ... , \theta_{k})$, mejor expresada como $\mathcal{L}(\theta_{1}, \theta_{2}, ... , \theta_{k})$, se dice que es una función de los parámetros para un específico resultado de la muestra aleatoria. 
 	
@@ -141,7 +141,7 @@ $f(y;2)$      | .098 | .001 | .001 | .900
 
 ---
 
-# Estimadores de máxima verosimilitud
+## Estimadores de máxima verosimilitud
 	
 		
 Supongamos que obtuvimos una muestra aleatoria de tamaño cuatro donde observamos los siguientes datos: 4,4,3,4. ¿Cuál es el valor de $\theta$ que máximiza la función de verosimilitud? 
@@ -162,7 +162,7 @@ $$\mathcal{L}(2) = (0.900)^{3} \cdot (0.001) = 0.00729$$
 
 ---
 
-# Estimadores de máxima verosimilitud
+## Estimadores de máxima verosimilitud
 	
 En este caso obtenemos la mayor verosimilitud cuando $\theta=1$, por lo tanto el estimador de máxima verosimilitud sería $\hat{\theta} = 1$.
 	
@@ -176,7 +176,7 @@ $\mathcal{L}(p) = p^{u}(1-p)^{n-u} \quad donde \quad u = \sum_{j=1}^{n} x_{j}$
 	
 ---
 
-# Estimadores de máxima verosimilitud
+## Estimadores de máxima verosimilitud
 	
 Derivamos esta función con respecto a $p$ e igualamos a cero. No obstante podemos notar como esto va a ser un proceso tedioso pues existe un producto de distintas funciones de $p$. Para facilitar este cálculo podemos utilizar una propiedad matemática que establece que si $f(x)$ tiene un punto extremo en $x_0$ y $f(x) > 0$ entonces $\ln f(x)$ también tiene un valor extremo en $x_0$. Por lo tanto podemos hacer uso de la *log-verosimilitud*:
 	
@@ -194,7 +194,7 @@ Por lo tanto, concluimos que $\hat{p}$ es el estimador de máxima verosimilitud.
 
 ---
 
-# Estimadores de máxima verosimilitud
+## Estimadores de máxima verosimilitud
 	
 		
 **Ejemplo.** Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria tal que $X_{j} \sim N(\mu, \sigma^2)$. Encuentre los estimadores máximo-verosímiles para $\mu$ y $\sigma^2$. 
@@ -216,7 +216,7 @@ $$\frac{\partial^{2} \ell(\mu,\sigma^2)}{\partial \mu^{2}} = -\frac{n}{\sigma^2}
 	
 ---
 
-# Estimadores de máxima verosimilitud
+## Estimadores de máxima verosimilitud
 	
 	
 Ahora procedemos a derivar con respecto a $\sigma^2$. Para no confundirnos llamemos $\omega = \sigma^2$. 
@@ -225,12 +225,12 @@ $$\frac{\partial \ell(\mu,\omega)}{\partial \omega} = -\frac{n}{2\omega} + \frac
 	
 $$\Rightarrow \sum(x_{j} -\mu)^2 = n\omega \Rightarrow \hat{\omega} = \hat{\sigma}^{2} = \frac{\sum(x_{j} -\mu)^2}{n}$$
 	
-$$\frac{\partial^{2} \ell(\mu,\sigma^2)}{\partial \omega^{2}} = \frac{n}{2\omega^2} - \frac{\sum(x_{j} -\mu)^2}{\omega^3} < 0 \quad cuando \quad \omega = \frac{\sum(x_{j} -\mu)^2}{n}$$
+$$\frac{\partial^{2} \ell(\mu,\sigma^2)}{\partial \omega^{2}} = \frac{n}{2\omega^2} - \frac{\sum(x_{j} -\mu)^2}{\omega^3} < 0 \quad \text{, cuando} \quad \omega = \frac{\sum(x_{j} -\mu)^2}{n}$$
 
 
 ---
 
-# Estimadores de máxima verosimilitud
+## Estimadores de máxima verosimilitud
 	
 		
 Nótese que este estimador está en términos de un parámetro desconocido, $\mu$, por lo que podemos sustituirlo por su respectivo estimador de máxima verosimilitud. Por lo tanto obtenemos el estimador 
@@ -241,7 +241,7 @@ Concluimos que $\overline{X}$ y $\frac{(n-1)}{n} S^{2}$ son los estimadores de m
 
 ---
 
-# Estimadores de máxima verosimilitud
+## Estimadores de máxima verosimilitud
 	
 		
 **Ejemplo.** Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria tal que $X_{j} \sim Unif(0, \theta)$. Encuentre el estimador de máxima verosimilitud de $\theta$. 
@@ -258,21 +258,21 @@ $$\frac{\partial \ell (\theta)}{\partial \theta} = \frac{-n}{\theta} < 0$$
 
 ---
 
-# Estimadores de máxima verosimilitud
+## Estimadores de máxima verosimilitud
 	
 
 Esto significa que $\ell (\theta)$ no tiene puntos críticos pero sí podemos encontrar un máximo local. Como es una función decreciente sabemos que el máximo se encuentra en el valor mínimo que $\theta$ puede tomar. Recordemos que la verosimilitud es una función de $\theta$ para un resultado específico de la muestra aleatoria, por lo que los valores de $\theta$ van a depender de los valores de la muestra aleatoria. Siendo $\theta$ el máximo poblacional es lógico pensar que para una muestra aleatoria dada lo mínimo que puede ser este valor es el máximo muestral $X_{(n)}$. Por lo tanto, concluimos que el estimador de máxima verosimilitud de $\theta$ es $X_{(n)}$. 
 
 ---
 
-# Estimadores de máxima verosimilitud
+## Estimadores de máxima verosimilitud
 
 
 ![Figura 4. Verosimilitud de una $Unif(0,\theta)$ a partir de una muestra aleatoria.](figs/maxvero.jpg)	
 
 ---
 
-# Propiedades de los estimadores de máxima verosimilitud
+## Propiedades de los estimadores de máxima verosimilitud
 	
 *	Si $\mathcal{L}(\theta)$ es función de verosimilitud entonces para un estadístico suficiente $U = T(X_{1}, X_{2}, ... , X_{n})$ para estimar $\theta$ se cumple, 
 		
@@ -288,7 +288,7 @@ Con lo anterior se demuestra que el EMV de $\theta$ debe ser función de $U$. Po
 
 ---
 
-# Propiedades de los estimadores de máxima verosimilitud
+## Propiedades de los estimadores de máxima verosimilitud
 
 **Ejemplo.** Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria Normal con $\mu$ y $\sigma^2$ desconocidos. Encuentre el EMV de $\sigma$. 
 	
