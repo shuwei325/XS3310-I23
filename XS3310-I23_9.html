@@ -22,7 +22,7 @@ class: center, middle, inverse, title-slide
 ### Escuela de Estadística
 ]
 .date[
-### 21-04-2023
+### 18-04-2023
 ]
 
 ---
@@ -31,234 +31,267 @@ class: center, middle, inverse, title-slide
 
 
 
+
+## ¿Qué hemos visto hasta ahora?
+
+Todo sobre estimadores puntuales.
+
+## ¿Qué vamos a discutir hoy?
+
+Intervalos de confianza clásicos 
+
+---
+
 class: center, middle
 
-# ¿Qué hemos visto hasta ahora?
-
-Todo sobre estimadores puntuales + intro a los pivotes.
-
-# ¿Qué vamos a discutir hoy?
-
-Intervalos de confianza clásicos.
-
-
+# ¿Qué es un intervalo de confianza?
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/nNZH9FXnjvM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
 
 ---
 
-### Cómo leer  los cuantiles de las tablas en los libros 
+# Estimación por Intervalo
 
-Algunas tablas en los libros se expresan sus cuantiles de formas diferentes. 
+* Una estimación por intervalo para un parámetro desconocido `\(\theta\)` viene dada por un rango o intervalo que posee cierta probabilidad `\(1-\alpha\)` de contener a dicho parámetro.
 
-Hay que tener mucho cuidado si acumulan hacia la izquierda o hacia la derecha.
+* Usualmente este concepto de *confianza* se interpreta diciendo que si obtenemos 100 intervalos entonces `\(\alpha \%\)` de ellos no van a incluir el valor del parámetro. Es decir, si tenemos 100 intervalos del `\(95\%\)` de confianza entonces se espera que 5 de ellos no incluyan el valor del parámetro, o que de 20 intervalos haya uno que no lo incluya.
 
-Ver ejemplos.
  
----
+Visualmente:
+https://seeing-theory.brown.edu/frequentist-inference/es.html
 
-class: justify
-
-## IC para poblaciones normales
-	
- 
-  
-### Intervalos de confianza para `\(\mu\)`
-	
-Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria de una población Normal con media `\(\mu\)` y variancia `\(\sigma^2\)`, donde `\(\mu\)` es desconocido pero `\(\sigma^2\)` es conocido. Vamos a construir un intervalo de confianza bilateral para `\(\mu\)` con probabilidad `\(1-\alpha\)`. 
-	
-Primero debemos encontrar un pivote que dependa de la muestra y de `\(\mu\)` en su forma de cálculo pero cuya distribución no dependa de `\(\mu\)`. Como habiamos visto en un ejemplo anterior podemos utilizar como pivote a `\(Z = \dfrac{\overline{X} - \mu}{\dfrac{\sigma}{\sqrt{n}}}\)`, ya que `\(Z \sim N(0,1)\)`. Luego procedemos a encontrar los valroes `\(a\)` y `\(b\)` que satisfacen `\(P(a \leq Z \leq b) = 1-\alpha\)` y `\(P(Z &lt; a) = P(Z &gt; b) = \frac{\alpha}{2}\)`. 
-
-Como no conocemos una expresión cerrada para la función de distribución de una Normal Estándar, procedemos a utilizar las tablas. Estas tablas acumulan hacia la izquierda (a menos de), por lo que `\(a\)` es el valor de la tabla que acumula a su izquierda una probabilidad de `\(\frac{\alpha}{2}\)`, mientras que `\(b\)` es el valor de la tabla que acumula a su izquierda `\(1 - \frac{\alpha}{2}\)`. Por simplicidad llamaremos a estos valores `\(z_{\frac{\alpha}{2}}\)` y `\(z_{1-\frac{\alpha}{2}}\)`, respectivamente. 
 
 ---
 
-
-Sin embargo, sabemos que la distribución Normal Estándar es simétrica alrededor de cero, por lo que `\(z_{\frac{\alpha}{2}} = -z_{1-\frac{\alpha}{2}}\)`. Por lo tanto tenemos que, `\(a = -z_{1-\frac{\alpha}{2}}\)` y `\(b = z_{1-\frac{\alpha}{2}}\)`
-	
-![Cuantiles de una distribución N(0,1)](figs/normal.jpeg)
----
+# Estimación por Intervalo
 
 
-
-Con estos valores podemos proceder a despejar `\(\mu\)` de la expresión `\(P(a \leq Z \leq b) = 1-\alpha\)`: 
-	
-`\(P(a \leq Z \leq b) = P\left(-z_{1-\frac{\alpha}{2}} \leq \dfrac{\overline{X} - \mu}{\dfrac{\sigma}{\sqrt{n}}} \leq z_{1-\frac{\alpha}{2}} \right)\)`
-
-
-`\(= P\left( \overline{X} - z_{1-\frac{\alpha}{2}} \dfrac{\sigma}{\sqrt{n}} \leq \mu \leq \overline{X} + z_{1-\frac{\alpha}{2}} \dfrac{\sigma}{\sqrt{n}} \right) = 1-\alpha\)`
-		
-Por lo tanto, con confianza del `\((1-\alpha)\%\)`, el intervalo `\(\overline{X} \pm z_{1-\frac{\alpha}{2}} \dfrac{\sigma}{\sqrt{n}}\)` contiene al valor de `\(\mu\)`. 
+![](XS3310-I23_9_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
 
 ---
 
-	
-### ¿Qué sucede si `\(\sigma^2\)` es desconocido? 
-	
-Si esto pasa no podemos hacer uso del mismo pivote pues no cumple la primera condición de ser un pivote. Recordemos que esta condición nos pide que el pivote esté en términos de la muestra y el parámetro desconocido, pero además no puede estar en términos de otro parámetro desconocido. Hasta el momento todos los otros parámetros que no eran en el de interés eran conocidos, pero ahora `\(\sigma^2\)`, que formaba parte del pivote, ya no es conocido. Por lo tanto, debemos hacer uso de un nuevo pivote. 
-	
-En este caso podemos usar la siguiente variable aleatoria: 
-	
-`$$T = \dfrac{\overline{X} - \mu}{\dfrac{s}{\sqrt{n}}}$$`
-	
-Recordemos que esta variable aleatoria se distribuye como una t-student con `\(n-1\)` grados de libertad. Nótese que esta variable aleatoria sí cumple todas las condiciones de un pivote pues está en términos de la muestra aleatoria (a través de `\(\overline{X}\)` y `\(S\)`) y del parámetro desconocido `\(\mu\)` y ya no depende del parámetro desconocido `\(\sigma^2\)`. Adicionalmente su distribución es conocida y no depende de `\(\mu\)`. Ahora procedemos a encontrar los valores de `\(a\)` y `\(b\)`. 
+# Estimación por Intervalo
 
+Existen dos tipos de estimaciones por intervalos:
+
+* Intervalos bilaterales
+* Intervalos unilaterales
+	
+En el primer caso se tienen dos valores `\(a\)` y `\(b\)` que constituyen los límites inferior y superior del intervalo. Es decir, el intervalo `\(\left[a, b\right]\)` contiene el valor de `\(\theta\)` con una confianza del `\((1-\alpha)\cdot 100\%\)`. 
+	
+En el segundo caso, se determina solamente un límite que puede ser inferior `\((a)\)` o superior `\((b)\)`, dependiendo del interés del estudio. Se tiene así intervalos de la forma `\(\left[ a, +\infty \right[\)` o `\(\left] -\infty, b \right]\)`. Los valores `\(\pm \infty\)` pueden ser sustituidos por el mínimo o máximo valor del dominio del parámetro de interés. 
+	
 ---
 
 
-
-Las tablas de la t-student que utilizamos acumulan hacia la derecha, por lo que `\(a\)` es el valor de la tabla con `\(n-1\)` grados de libertad que acumula a su derecha una probabilidad de `\(1-\frac{\alpha}{2}\)` y por lo tanto `\(b\)` es el valor de la misma tabla que acumula a su derecha `\(\frac{\alpha}{2}\)`. Por simplicidad llamaremos a estos valores `\(t_{1-\frac{\alpha}{2}, n-1}\)` y `\(t_{\frac{\alpha}{2}, n-1}\)`, respectivamente. Nuevamente, podemos hacer uso de la simetría alrededor de cero que tiene la t-student. Por lo tanto, 
+## Técnica para estimaciones por intervalo
 	
-`\(a = -t_{\frac{\alpha}{2}, n-1}\)` y `\(b = t_{\frac{\alpha}{2}, n-1}\)`
+Existen varias técnicas para obtener estimaciones por intervalo, sin embargo en este curso nos enfocaremos en la **técnica del pivote**.
+
+En la versión en línea verán un video acá
+
+&lt;p&gt;&lt;/p&gt;
+	
+&lt;div align="center"&gt;&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/LO2BOtWxMyY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
 
 ---
 
-
-![Cuantiles de una t-student con v grados de libertad](figs/tstud.jpeg)
+# Técnica del pivote
 	
-Si despejamos el valor de `\(\mu\)` de `\(P(a \leq T \leq b) = 1-\alpha\)`, obtenemos el intervalo `\(\overline{X} \pm t_{\frac{\alpha}{2}, n-1} \dfrac{s}{\sqrt{n}}\)`. Por lo tanto podemos concluir que con una confianza del `\((1-\alpha)\%\)` el intervalo `\(\overline{X} \pm t_{\frac{\alpha}{2}, n-1} \dfrac{s}{\sqrt{n}}\)` contiene el verdadero valor de `\(\mu\)`. 
-
----
-
-## Intervalos de confianza para `\(\mu_{1} - \mu_{2}\)`
+Esta técnica consiste en definir una variable aleatoria, `\(U\)`, que llamaremos **pivote**. El pivote debe cumplir con las siguientes condiciones: 
 	
-Ahora supongamos que tenemos dos poblaciones Normales e independientes y que obtenemos una muestra de cada una. Sean `\(X_{1}, X_{2}, ... , X_{n}\)` y `\(Y_{1}, Y_{2}, ... , Y_{m}\)` estas dos muestras aleatorias, tal que `\(X_{j} \sim N(\mu_{1}, \sigma^{2}_{1})\)` y `\(Y_{i} \sim N(\mu_{2}, \sigma^{2}_{2})\)`, donde `\(\mu_{1}\)` y `\(\mu_2\)` son parámetros desconocidos y `\(\sigma^{2}_{1}\)` y `\(\sigma^{2}_{2}\)` son parámetros conocidos. Nos interesa construir un intervalo bilateral, con una confianza del `\((1-\alpha)\%\)`, para `\(\mu_{1} - \mu_{2}\)`.
-	
-Igual que siempre, nuesto primer paso es obtener una cantidad pivote. Ya conocemos como se distribuyen los promedios muestrales, por lo que podemos partir de ahí. Recordemos que `\(\overline{X} \sim N\left(\mu_{1}, \dfrac{\sigma^{2}_{1}}{n}\right)\)` y `\(\overline{Y} \sim N\left(\mu_{2}, \dfrac{\sigma^{2}_{2}}{m}\right)\)`. Como ambos son Normales entonces una combinación lineal de ellos también sería Normal; necesitamos una combinación lineal de estos dos que tenga como parámetro a `\(\mu_{1} - \mu_{2}\)`. 
+* Para una muestra aleatoria `\(X_{1}, X_{2}, ... , X_{n}\)` y un parámetro desconocido `\(\theta\)`, `\(U\)` debe estar definido en términos de los elementos de la muestra aleatoria y del parámetro desconocido, donde el parámetro desconocido `\(\theta\)` sea la única cantidad desconocida. 
+
+* La distribución de probabilidad de U debe ser conocido y no depender de `\(\theta\)`. 
 
 ---
 
 
 
-Esto lo podemos lograr utilizando `\(\overline{X} - \overline{Y}\)`, la cual se distribuye Normal con media `\(\mu_{1} - \mu_{2}\)` y variancia `\(\dfrac{\sigma^{2}_{1}}{n} + \dfrac{\sigma^{2}_{2}}{m}\)`. Dado que esta variancia es conocida podemos usar como pivote una Normal Estandár, la cual tendría la siguiente forma:
+**Ejemplo:** Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria tal que `\(X_{j} \sim N(\mu, \sigma^2)\)`, donde `\(\mu\)` es deconocido y `\(\sigma^2\)` es conocido. Obtenga una variable aleatoria que funcione como un pivote. 
 	
-`$$Z = \dfrac{(\overline{X} - \overline{Y}) - (\mu_{1} - \mu_{2})}{\sqrt{\dfrac{\sigma^{2}_{1}}{n} + \dfrac{\sigma^{2}_{2}}{m}}}$$`
+**Solución:** Debemos encontrar una variable aleatoria que esté definida en términos de la muestra y de `\(\mu\)`. 
+
+* Una forma de resumir toda la información de la muestra en una sola variable aleatoria. Lo ideal sería utilizar un estadístico suficiente: `\(\sum_{j=1}^{n} X_{j}\)` es suficiente para estimar `\(\mu\)`, por lo que podriamos usar alguna función de este estadístico en el pivote. 
+
+* `\(\overline{X}\)` resume la información de la muestra aleatoria, pues está en términos de un estadístico suficiente y además sabemos que se distribuye `\(N(\mu, \dfrac{\sigma^2}{n})\)`. Ahora debemos encontrar alguna transformación de `\(\overline{X}\)` que incluya a `\(\mu\)` y cuya distribución no dependa de `\(\mu\)`. 
 	
-Ya con esto podemos proceder como habiamos hecho en el primer caso de esta sección. De esta manera volveriamos a obtener que `\(a = -z_{1-\frac{\alpha}{2}}\)` y `\(b = z_{1-\frac{\alpha}{2}}\)`. Ahora procedemos a despejar nuestro parámetro de interés, `\(\mu_{1} - \mu_{2}\)`, de la expresión `\(P(a \leq Z \leq b) = 1-\alpha\)`. Después de hacer el despeje podemos ver que con una confianza del `\((1-\alpha)\%\)`, el intervalo `\((\overline{X} - \overline{Y}) \pm z_{1-\frac{\alpha}{2}} \sqrt{\dfrac{\sigma^{2}_{1}}{n} + \dfrac{\sigma^{2}_{2}}{m}}\)` incluye el verdadero valor de `\(\mu_{1} - \mu_{2}\)`. 
+---
+
+
+
+* `\(U = \dfrac{\overline{X} - \mu}{\dfrac{\sigma}{\sqrt{n}}}\)`, se distribuye `\(N(0,1)\)`. U cumple con las propiedades de un pivote pues está definida en términos de la muestra y del parámetro desconocido `\(\mu\)` al igual que su distribución ya no depende de `\(\mu\)`. 
+
+**NOTA:** U no es la única opción de pivote. Por ejemplo, `\(\overline{X} - \mu\)` es otra variable aleatoria que también cumple las condiciones para ser un pivote. Existe una infinidad de variables aleatorias que cumplen esta condición, pero como veremos más adelante algunas son más útiles que otras. 
 	
+Ahora debemos seguir con el procedimiento para encontrar un intervalo de confianza por medio de la técnica del pivote. Hay dos caminos:
+
+* Caso bilateral
+* Caso unilateral
 
 ---
 
-	
-	
-Si fuese el caso donde las variancias poblaciones son conocidas (*i.e.* `\(\sigma^{2}_{1} = \sigma^{2}_{2} = \sigma^{2}\)`) Entonces podriamos escribir el intervalo como: 
-	
-`$$(\overline{X} - \overline{Y}) \pm z_{1-\frac{\alpha}{2}} \cdot \sigma \sqrt{\dfrac{1}{n} + \dfrac{1}{m}}$$`
-	
 
----
 
-	
-	
-Nuevamente podemos postular la interrogante: ¿qué sucede si se desconocen las variancias poblaciones? 
-	
-En este caso vamos a hacer el supuesto de que `\(\sigma^{2}_{1} = \sigma^{2}_{2} = \sigma^{2}\)` (homoscedasticidad) para poder encontrar un pivote satisfactorio. Podemos intentar volver a utilizar una t-student para solventar el problema de las variancias desconocidas. Recordemos que para una variable aleatoria `\(T\)`, esta se distribuye t-student si 
-	
-`$$T = \dfrac{Z}{\sqrt{\dfrac{W}{v}}}$$`
-	
-donde `\(Z \sim N(0,1)\)` y `\(W \sim \chi^{2}(v)\)`. Para este caso podemos usar la misma `\(Z\)` que usamos anteriormente:
-	
-`$$Z = \dfrac{(\overline{X} - \overline{Y}) - (\mu_{1} - \mu_{2})}{\sigma \sqrt{\dfrac{1}{n} + \dfrac{1}{m}}}$$`
+* **Caso bilaterial:** se requiere encontrar valores `\(a\)` y `\(b\)` tales que `\(P(a \leq U \leq b) = 1-\alpha\)` y por lo tanto también se cumple que `\(P(U &lt; a) + P(U &gt; b) = \alpha\)`. Sin embargo, estas condiciones generan un número infinito de posibilidades para `\(a\)` y `\(b\)` por lo que se tiene que limitar de alguna manera. Para ello, se acostumbra utilizar la condición de cada una de las probabilidades de las "colas" sean iguales, es decir `\(P(U &lt; a) = P(U &gt; b) = \dfrac{\alpha}{2}\)`. 
 
----
-
-	
-	
-Ahora debemos construir una `\(\chi^2\)` adecuada que nos permita cancelar el `\(\sigma\)` que se encuentra en `\(Z\)`. Sabemos lo siguiente:
-	
-`$$\dfrac{(n-1)S^{2}_1}{\sigma^{2}} \sim \chi^{2}(n-1) \qquad \dfrac{(m-1)S^{2}_2}{\sigma^{2}} \sim \chi^{2}(m-1)$$`
-	
-donde `\(S^{2}_1\)` y `\(S^{2}_2\)` son las variancias muestrales de la primera y segunda población, respectivamente. También sabemos que la suma de ji-cuadrado es una ji-cuadrado con la suma de los grados de libertad:
-	
-`$$W = \dfrac{(n-1)S^{2}_{1} + (m-1)S^{2}_{2} }{\sigma^{2}} \sim \chi^{2}(n+m-2)$$`
-
----
-
-	
-		
-Si procedemos a dividir esta ji-cuadrado entre sus grados de libertad obtenemos:
-	
-`$$\dfrac{W}{v} = \dfrac{(n-1)S^{2}_{1} + (m-1)S^{2}_{2} }{\sigma^{2}(n+m-2)}$$`
-	
-Para simplificar un poco esta expresión vamos a definir `\(S^{2}_{p} = \dfrac{(n-1)S^{2}_{1} + (m-1)S^{2}_{2}}{(n+m-2)}\)`, por lo tanto
-	
-`$$\dfrac{W}{v} = \dfrac{S^{2}_{p}}{\sigma^{2}}$$`
-	
-Ya con esto podemos montar una t-student, la cual tendría la forma:
-	
-`$$T = \dfrac{(\overline{X} - \overline{Y}) - (\mu_{1} - \mu_{2})}{S_{p} \sqrt{\dfrac{1}{n} + \dfrac{1}{m}}}$$`
-
----
-
-	
-Esta es una t-student con `\(n+m-2\)` grados de libertad y la podemos usar como pivote pues cumple todas las condiciones y ya no está en términos de parámetros desconocidos. El procedimiento a seguir es similar al otro caso donde teniamos una t-student y luego de desarrollarlo obtenemos el intervalo 
-	
-`$$\displaystyle (\overline{X} - \overline{Y}) \pm t_{\frac{\alpha}{2}, n+m-2} \cdot S_{p} \sqrt{\frac{1}{n} + \dfrac{1}{m}}$$` 
-	
-Concluimos que con una confianza del `\((1-\alpha)\%\)` el intervalo `\(\displaystyle (\overline{X} - \overline{Y}) \pm t_{\frac{\alpha}{2}, n+m-2} \cdot S_{p} \sqrt{\dfrac{1}{n} + \dfrac{1}{m}}\)` contiene el verdadero valor de `\(\mu_{1} - \mu_{2}\)`. 
+* **Caso unilaterial:** podemos tener un límite inferior o superior. Dependiendo del que nos interese y de la forma del pivote debemos encontrar un valor `\(a\)` o `\(b\)` que cumpla `\(P(U \geq a) = 1-\alpha\)` o `\(P(U \leq b) = 1 -\alpha\)`. Finalmente, como `\(U\)` está en términos de la muestra aleatoria y del parámetro `\(\theta\)` entonces despejamos `\(\theta\)` dentro de la probabilidad y con esto obtenemos los límites inferiores y superiores. 
 
 
 ---
 
-# Pivotes para distribuciones con forma posición-escala
 
-En los ejercicios 9.8 y 9.9 de Casella y Berger, se utiliza la siguiente tabla para clasificar las distribuciones de densidad según forma. En esta tabla se refieren a la mayoría de distribuciones de la familia Exponencial, en las cuales la función de densidad (o pdf) se puede reescribir siguiendo la forma de la primera columna.
 
-Forma del pdf        | Tipo de pdf      | Pivote       |
----------------------|------------------|--------------|
-`\(f(x-\mu)\)`           | Posición         | `\(\bar{X}-\mu\)`|
-`\(\dfrac{1}{\sigma}f(x/\sigma)\)` | Escala  | `\(\dfrac{\bar{X}}{\sigma}\)`|
-`\(\dfrac{1}{\sigma}f\left( \dfrac{x-\mu}{\sigma}\right)\)`|Posición-Escala| `\(\dfrac{\bar{X}-\mu}{S}\)`|
+**Ejemplo:** Sea `\(Y\)` una variable aleatoria con distribución Exponencial con media `\(\beta\)` desconocida. Utilice este valor para construir un intervalo bilateral para `\(\beta\)` con una confianza del `\(90\%\)`.
+	
+**Solución:** En este caso podemos utilizar como pivote `\(U = \dfrac{Y}{\beta}\)` ya que está en términos de la variable aleatoria y de `\(\beta\)` al igual que se puede demostrar que su distribución no depende de `\(\beta\)`. En este caso `\(U \sim Exp(1)\)`. 
 
----
+Nuestro siguiente paso es buscar los valores `\(a\)` y `\(b\)` tales que:
+	
+`\(P(a \leq U \leq b) = 0.9  \quad y \quad P(U &lt; a) = P(U &gt; b) = 0.05\)`
 
-# Pivotes para distribuciones con forma posición-escala
-
-Para aclarar un poco más la columna de formas, voy a poner un ejemplo para cada una. 
-
-Para `\(f(x-\mu)\)`:
-
-Sea `\(X \sim N(\mu, 1)\)`, entonces la función de densidad es:
-
-`$$f(x) = \dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}(x-\mu)^2\right)} = g(z)$$`
-en donde `\(z = x-\mu\)`, y `\(g(z)=\dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}(z)^2\right)}\)`.
+Recordemos que en el caso de una variable aleatoria continua `\(P(U &lt; a) = P(U \leq a) = F_{U}(a)\)`. Podemos usar nuestro conocimiento de la función de distribución de la exponencial para encontrar el valor de `\(a\)`:
+	
+`\(P(U &lt; a) = F_{U}(a) = 1 - e^{-a} = 0.05, \quad \Rightarrow  a = -\ln(0.95)\)`
 
 ---
 
-# Pivotes para distribuciones con forma posición-escala
 
 
-Para `\(\dfrac{1}{\sigma}f(x/\sigma)\)`:
+Podemos hacer lo mismo para encontrar el valor de `\(b\)`: 
+	
+`\(P(U &gt; b) = 1 - P(U \leq b) = 1 - F_{U}(b) = e^{-b} = 0.05, \quad \Rightarrow b = -\ln(0.05)\)`.
 
-Sea `\(X \sim N(0, \sigma^2)\)`, entonces la función de densidad es:
+Nuestro último paso ahora es despejar el valor de `\(\beta\)` de la probabilidad que acumula `\(0.90\)`:
+`\begin{align*}
+P(a \leq U \leq b) &amp;= P\left( -\ln(0.95) \leq \dfrac{Y}{\beta} \leq -\ln(0.05) \right) \\ 
+ &amp;= P\left( \dfrac{-1}{\ln(0.95)} \geq \dfrac{\beta}{Y} \geq \dfrac{-1}{\ln(0.05)} \right) = P\left( \dfrac{-Y}{\ln(0.95)} \geq \beta \geq \dfrac{-Y}{\ln(0.05)} \right)\\ 
+ &amp; = 0.90
+\end{align*}`
+	
+Por lo tanto tenemos que `\(a = \dfrac{-Y}{\ln(0.05)}\)` y `\(b = \dfrac{-Y}{\ln(0.95)}\)` por lo que podemos concluir que con una confianza del `\(90\%\)` el intervalo `\(\left[ \dfrac{-Y}{\ln(0.05)}, \dfrac{-Y}{\ln(0.95)} \right]\)` incluye el valor de `\(\beta\)`. 
+	
+---
 
-`$$f(x) = \dfrac{1}{\sigma}\dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}(x/\sigma)^2\right)} = \dfrac{1}{\sigma} g(z)$$`
-en donde `\(z = x/\sigma\)`, y `\(g(z)=\dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}(z)^2\right)}\)`.
+
+
+**Ejemplo:** Sea `\(X\)` una variable aleatoria Uniformemente distribuida en el intervalo `\((0, \theta)\)`, con `\(\theta\)` desconocido. Determine un intervalo de confianza unilateral inferior para `\(\theta\)` del `\(95\%\)`.
+	
+**Solución:** Primero debemos encontrar una cantidad pivote satisfactoria. En este caso podemos utilizar `\(U = \dfrac{X}{\theta}\)` como pivote ya que cumple ambas condiciones. Se puede demostrar que `\(U \sim Unif(0,1)\)` por medio de la segunda técnica de transformaciones: 
+	
+Sea `\(U = h(X) = \dfrac{X}{\theta}\)`, por lo tanto `\(h^{-1}(U) = U\theta \quad \Rightarrow \dfrac{dh^{-1}(u)}{du} = \theta\)`
+
+Aplicando la técnica tenemos:
+	
+`\(f_{U}(u) = f_{X}(u\theta) \cdot \theta = \dfrac{1}{\theta} \cdot \theta = 1\)`
 
 ---
 
-# Pivotes para distribuciones con forma posición-escala
-
-Finalmente, para `\(\dfrac{1}{\sigma}f\left(\dfrac{x-\mu}{\sigma}\right)\)`:
-
-Sea `\(X \sim N(\mu, \sigma^2)\)`, entonces la función de densidad es:
-
-`$$f(x) = \dfrac{1}{\sigma}\dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}\left(\dfrac{x-\mu}{\sigma}\right)^2\right)} = \dfrac{1}{\sigma} g(z)$$`
-en donde `\(z = \dfrac{x-\mu}{\sigma}\)`, y `\(g(z)=\dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}(z)^2\right)}\)`.
 
 
+Al ser el dominio original `\(0 &lt; x &lt; \theta\)` al sustituir `\(x\)` por `\(u\theta\)` obtenemos el nuevo dominio: `\(0 &lt; u &lt; 1\)`. Por lo tanto concluimos que `\(U \sim Unif(0,1)\)`. 
+	
+Ahora podemos usar esto para encontrar el valor de `\(b\)` tal que `\(P(U \leq b) = 0.95\)`:
+	
+`\(P(U \leq b) = F_{U}(b) = 0.95, \quad \Rightarrow b = 0.95\)`
+
+
+Con este valor podemos proceder a despejar el valor de `\(\theta\)` de esta probabilidad y obtener así el límite inferior de nuestro intervalo:
+	
+`\(P(U \leq b) = P\left( \dfrac{X}{\theta} \leq 0.95  \right) = P\left( \theta \geq \dfrac{X}{0.95}  \right) = 0.95\)`
+	
+Por lo tanto podemos concluir que con un `\(95\%\)` de confianza el intervalo `\(\left[ \dfrac{X}{0.95}, +\infty \right[\)` incluye el valor de `\(\theta\)`. 
+
+---
+
+
+
+
+&lt;!-- **Ejemplo:** Suponiendo que `\(\theta = 50\)` simule un valor que pertenece a la población del ejemplo anterior y evalueelo en el intervalo encontrado.  --&gt;
+	
+&lt;!-- **Solución:** Recordemos que para simular debemos igualar la función de distribución de la variable aleatoria objetivo con la de una Uniforme `\((0,1)\)`. En nuestro caso tenemos la siguiente función de distribución para `\(X\)`: --&gt;
+	
+&lt;!-- `\(F_{X}(x)=\begin{cases}0\quad si \quad x \leq 0 \\ \dfrac{x}{\theta} \quad si \quad 0 &lt; x &lt; \theta \\ 1 \quad si \quad x &gt; \theta \end{cases}\)` --&gt;
+
+&lt;!-- Por lo tanto para simular un valor de esta distribución debemos hacer lo siguiente: --&gt;
+	
+&lt;!-- `$$U = \dfrac{X}{\theta} \Rightarrow X = \theta U$$` --&gt;
+	
+&lt;!-- Usando la función para valores aleatorios entre cero y uno de una calculadora obtuvimos que `\(u = 0.821\)`, por lo tanto el valor simulado sería `\(x = 41.05\)`, con `\(\theta = 50\)`.  --&gt;
+
+&lt;!-- --- --&gt;
+
+
+
+
+&lt;!-- Evaluando este valor en el intervalo obtenido tenemos que con un `\(95\%\)` de confianza el intervalo `\(\left[ 43.21, +\infty \right[\)` incluye el valor de `\(\theta\)`. Podemos ver que en este caso nuestro intervalo acertó el verdadero valor de `\(\theta\)`.  --&gt;
+	
+&lt;!-- **NOTA:** Es posible observar que si `\(u &gt; 0.95\)` entonces el intervalo no va a incluir el valor de `\(\theta = 50\)`, para una confianza del `\(95\%\)`.  --&gt;
+	
+**Ejemplo:** Sea `\(X_{1}, X_{2}, ... , X_{20}\)` una muestra aleatoria tal que `\(X_{j} \sim Exp(\beta)\)`. Determine un intervalo de confianza bilateral para `\(\beta\)` con una confianza del `\((1-\alpha)\%\)`. Utilice como pivote una función de `\(\sum_{j=1}^{20} X_{j}\)`. 
+
+---
+
+
+
+
+**Solución:** Sabemos de antemano que `\(T = \sum_{j=1}^{20} X_{j} \sim Gamma(\alpha = 20,\beta)\)`. 
+	
+`\(T\)` no sirve como pivote pues no depende de `\(\beta\)` y su distribución todavía depende de `\(\beta\)`. Debemos encontrar alguna transformación de `\(T\)` que haga que se cumplan las dos condiciones.
+
+
+**Primera opción:**
+
+Recordemos que la función generadora de momentos de una Gamma `\((\alpha,\beta)\)` es `\((1-\beta t)^{-\alpha}\)`. Por lo tanto, si `\(U = \dfrac{T}{\beta}\)` entonces,
+	
+`$$m_{U}(t) = m_{T}\left(\dfrac{t}{\beta}\right) = \left(1-t\right)^{-20}$$`
+	
+Esto quiere decir que `\(U \sim Gamma(20,1)\)` y por lo tanto se puede emplear como un pivote pues cumple las dos condiciones. Ahora procedemos a encontrar los valores `\(a\)` y `\(b\)` tales que `\(P(U &lt; a) = P(U &gt; b) = \dfrac{\alpha}{2}\)`. Como la Gamma no tiene una función de distribución en forma cerrada debemos proceder a integrar la función de densidad:
+	
+`$$P(U &lt; a) = \int_{0}^{a} \dfrac{u^{19}e^{-u}}{\Gamma(20)} du = \dfrac{\alpha}{2}$$`
+
+---
+
+
+
+
+Esta integral es posible de calular a mano, pero su desarrollo necesita de 19 veces de "por partes" que hacen su cálculo extremadamente largo y tedioso. Sin embargo, podemos hacer uso de tablas estadísticas que nos dan cuartiles para ciertas probabilidades. En este caso no tenemos una tabla para una Gamma con estos parámetros, pero sí tenemos para otra Gamma: la `\(\chi^2\)`-cuadrado.
+
+**Segunda opción:**
+
+Afortunadamente existe una forma para pasar de cualquier Gamma a una `\(\chi^2\)`: 
+	
+Sea `\(V = \dfrac{2T}{\beta}\)` entonces,
+	
+`$$m_{V}(t) = m_{T}\left(\dfrac{2t}{\beta}\right) = \left(1-\beta \left(\frac{2t}{\beta}\right)\right)^{-20} = \left(1-2t\right)^{-\frac{40}{2}}$$`
+	
+Esta es la función generadora de momentos de una `\(\chi^2\)`-cuadrado con 40 grados de libertad, de la cuál sí tenemos tablas para encontrar cuantiles. Ahora si podemos proceder a encontrar los valores de `\(a\)` y `\(b\)`, sabiendo que gráficamente lucen de la siguiente manera: 
+	
+---
+
+
+
+	
+![Cuantiles de una `\(\chi^2\)`-cuadrado con 40gl](figs/chi.jpeg)
+
+---
+
+
+
+
+Como la tabla de la `\(\chi^2\)`-cuadrado acumula hacia la derecha (a más de), esto significa que `\(a\)` es el valor de la tabla de una `\(\chi^2\)`-cuadrado con `\(40\)`gl que acumula a su derecha una probabilidad de `\(1-\frac{\alpha}{2}\)`. Por consiguiente `\(b\)` es el valor de la tabla que acumula a su derecha una probabilidad de `\(\frac{\alpha}{2}\)`. Para simiplicidad vamos a llamar estos valores `\(\chi^{2}_{1-\frac{\alpha}{2}, 40}\)` y `\(\chi^{2}_{\frac{\alpha}{2}, 40}\)`, respectivamente. 
+	
+Ya encontrados los valores de `\(a\)` y `\(b\)` podemos proceder a despejar `\(\beta\)` de la probabilidad que acumula `\(1-\alpha\)`:
+
+`$$P(a \leq V \leq b) = P\left( \chi^{2}_{1-\frac{\alpha}{2}, 40} \leq \frac{2T}{\beta} \leq \chi^{2}_{\frac{\alpha}{2}, 40} \right) =  P\left(  \frac{2T}{\chi^{2}_{\frac{\alpha}{2}, 40}} \leq \beta \leq \frac{2T}{\chi^{2}_{1-\frac{\alpha}{2}, 40}}  \right) = 1 -\alpha$$`
+	
+Por lo tanto, con una confianza de `\((1-\alpha)\%\)` el intervalo `\(\left[ \frac{2\sum_{j=1}^{20} X_{j}}{\chi^{2}_{\frac{\alpha}{2}, 40}}, \frac{2\sum_{j=1}^{20} X_{j}}{\chi^{2}_{1-\frac{\alpha}{2}, 40}}  \right]\)` incluye el valor de `\(\beta\)`. 
 
 ---
 class: center, middle
 
 # ¿Qué discutimos hoy?
 
-Estimación por intervalos, método del pivote. Fórmulas para las estimaciones por intervalo más comunes (media, diferencias de medias para distribuciones normales), 
-
-# ¿Qué nos falta para el I Parcial?
-
-Intervalos de confianza para variancias, para muestras grandes
-
-Bootstrap y contrastes de hipótesis.
-
+Estimación por intervalos, método del pivote
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

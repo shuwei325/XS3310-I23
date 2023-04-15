@@ -3,7 +3,7 @@ title: "XS3310 Teoría Estadística"
 subtitle: "I Semestre 2023"
 author:
   - "Escuela de Estadística"
-date: '28-04-2023'
+date: '25-04-2023'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -23,438 +23,514 @@ class: center, middle
 
 # ¿Qué hemos visto hasta ahora?
 
-Todo sobre estimadores puntuales + pivotes e intervalos de confianza.
+Todo sobre estimadores puntuales + intro a los pivotes. Algunos intervalos de confianza clásicos.
 
 # ¿Qué vamos a discutir hoy?
 
-Bootstrap
+Otros intervalos de confianza clásicos. Intervalos de confianza para muestras grandes. Funciones estabilizadores de varianza.
 
 ---
 
-## Bootstrap
 
-* La inferencia frecuentista se basa en modelos y supuestos. En muchos casos, las expresiones acerca de la exactitud (tales como el error estándar) están basadas en teoría asintótica, y por lo tanto no deberían usarse con muestras pequeñas.
+# Técnica del pivote
 
-* En otros casos, no estamos usando teoría asintótica, pero no sabemos cómo hacer una suposición acerca de la distribución poblacional, debido a que la muestra no se parece a ninguna forma conocida.
+**La semana pasada:**
 
-* Una alternativa "moderna" es el método de bootstrap, introducida por Efron así casi 40 años (1979). Bootstrap es un método de remuestreo que es computacionalmente intensivo, y que es aplicable a una gran variedad de casos, incluyendo aquellos en los que los supuestos son más realistas.
+Esta técnica consiste en definir una variable aleatoria, $U$, que llamaremos **pivote**. El pivote debe cumplir con las siguientes condiciones:
 
-Visualmente:
-https://seeing-theory.brown.edu/frequentist-inference/es.html
+* Para una muestra aleatoria $X_{1}, X_{2}, ... , X_{n}$ y un parámetro desconocido $\theta$, $U$ debe estar definido en términos de los elementos de la muestra aleatoria y del parámetro desconocido, donde el parámetro desconocido $\theta$ sea la única cantidad desconocida.
 
+* La distribución de probabilidad de U debe ser conocido y no depender de $\theta$.
 
----
+* Se recomienda iniciar con un estadístico suficiente
 
-## Bootstrap
-
-¿De dónde viene la expresión?
-
-
-
-![](./figs/boot.jpeg)
-
-https://www.huffpost.com/entry/pull-yourself-up-by-your-bootstraps-nonsense_n_5b1ed024e4b0bbb7a0e037d4
+* Se puede usar como guía las distribuciones con parámetros de posición - escala.
 
 ---
 
-## Dr. Bradley Efron
 
-https://www.youtube.com/embed/Cx5pgZCdDGM
+# Ejemplo de un IC para $\mu$ cuando la varianza es desconocida.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Cx5pgZCdDGM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Se toma el tiempo en milisegundos para que los nervios se recuperen después de administrar una droga a 4 ratones.
 
----
+$$1.7, 1.6, 1.8, 1.9$$
 
-## Principios de Bootstrap
-
-* Si no existe información acerca de la distribución, en la muestra observada podemos encontrar información acerca de la distribución subyacente. Por lo tanto, re-muestrear la muestra es la mejor forma de acercarnos a lo que obtendríamos si se pudiera la oportunidad de re-muestrear de la distribución poblacional.
-
-* Suponga que una muestra $X = (X_1, \dots, X_n)^T$ es utilizada para estimar un parámetro $\theta$. Sea $\hat{\theta}= s(X)$ un estadístico para estimar el parámetro $\theta$. Para hacer inferencia acerca de $\theta$, nos interesa la distribución muestral de $\hat{\theta}$, o ciertos aspectos acerca de esa distribución: la exactitud de nuestra estimación, el intervalo de confianza, etc. En muchas aplicaciones, la distribución muestral de $\hat{\theta}$ no se puede encontrar.
-
-* Si conociéramos la distribución poblacional $P$, podríamos sacar muestras $X^{(b)}, b=1,\dots,B$ de $P$ usando métodos de Monte Carlo para estimar la distribución muestral del estimador. Sin embargo, si $F$ es desconocido, entonces bootstrap sugiere que podemos aproximar ese muestreo re-muestreando nuestra muestra original. Así, podemos encontrar la distribución *empírica* del estimador.
-
-https://seeing-theory.brown.edu/frequentist-inference/es.html
+Si se supone que la población es nornal, entonces calcule un intervalo de confianza para  el promedio este tiempo a un 90% de confianza.
 
 ---
 
-## Distribución Empírica
+**Solución:**
 
-Para una muestra $X_1, \dots, X_n$ de variables aleatorias con valores reales, independientes con distribución $P$, definimos la distribución $\hat{P}$ como:
+Para este caso tenemos que $\bar{X} = 1.75$ y $S^{2} = 0.017$ y $S = \sqrt{0.017} = 0.13$.
 
-$\hat{P} (A) = \frac{1}{n}\sum_{i=1}^{n} 1_A(X_i)$ para $A \subseteq \mathbb{R}$.
+En este caso vamos a tomar una $t_{0.05,3} = 2.353 \ (\alpha/2 = 0.1/2 = 0.05$)
 
-$\hat{P}$ es la distribución empírica de la muestra $X$. $\hat{P}$ puede pensarse como una distribución que pone masa $1/n$ en cada observación $X_i$ (para valores que ocurren más de una vez la masa será un múltiplo de $1/n$). Entonces, $\hat{P}$ es una distribución de probabilidad discreta con un espacio efectivo de muestreo ${X_1, \dots, X_n}$.
+\begin{align*}
+& P\left(\bar{X}- t_{0.05,3} \cdot  \frac{s}{\sqrt{4}} \leq \mu \leq \bar{X}+ t_{0.05,3} \cdot  \frac{s}{\sqrt{n}}\right) \\
+& = P\left(1.75- 2.353 \cdot \frac{0.13}{2}  \leq \mu \leq 1.75+ 2.353 \cdot  \frac{0.13}{2} \right) \\
+&= P\left(1.597  \leq \mu \leq 1.903 \right) = 0.9.
+\end{align*}
 
-Puede demostrarse que $\hat{P}$ es el estimador máximo verosimil no paramétrico de $P$, lo cual justifica que podamos estimar $P$ con $\hat{P}$ sin tener otra información acerca de P (como por ejemplo si P pertenece a una familia paramétrica).
-
----
-
-## Distribución Empírica
-
-### Resultados teóricos
-
-Sea $A \subseteq \mathbb{R}$ (tal que $P(A)$ está definido), entonces tenemos: $\hat{P}(A) \xrightarrow{d} P(A)$ cuando $n \rightarrow \infty$.
-
-De forma alternativa, podemos ver este resultado  como una consecuencia directa de La Ley de los Grandes Números, ya que:
-
-$$n \hat{P}(A) = \sum_{i=0}^{n} 1_A(X_i) \sim Bin(n, P(A))$$
-
-por lo que $\hat{P}(A)$ tiende a su valor esperado $P(A)$ cuando $n \rightarrow \infty$.
-
-El teorema de Glivenko-Cantelli formaliza este resultado:
-
-$$\sup_{A\in I}|\hat{P}(A)-P(A)| \rightarrow 0 \quad \text{si} \quad n \rightarrow \infty$$
-donde $I$ es el conjunto de intervalos en $\mathbb{R}$. En otras palabras, la distribución P(A) puede ser aproximada por $\hat{P}(A)$ igual de bien para toda $A\in I$.
+Por lo que, con una confianza del 90%, el intervalo $[1.597, 1.903]$ contiene al verdadero valor de $\mu$.
 
 ---
 
-## Distribución Empírica
 
-### Muestras de una distribución empírica $\hat{P}$
+## Ejemplos de un intervalo de confianza para la diferencia de medias
 
-Suponga que queremos una muestra iid de $\hat{P}$: $X^* = (X^*_1, \dots, X^*_n)^T$. Como mencionamos antes, $\hat{P}$ pone masa $1/n$ en cada observación $X_i$. Entonces, cuando muestreamos de $\hat{P}$, la observación i-ésima $X_i$ en la muestra original puede ser seleccionada con probabilidad $1/n$. Esto nos lleva al siguiente proceso:
+En un hospital se realiza un estudio sobre la influencia del estrés en el peso
+de los bebés al nacer. Se consideran dos grupos de mujeres embarazadas: aquellas
+que viven en el campo y aquellas que viven en la ciudad, y se obtienen los
+siguientes datos sobre el peso de sus hijos.
 
-* Seleccione $i_1, \dots, i_n$ independientemente de una distribución uniforme en ${1, \dots, n}$.
 
-* Ahora haga $X_{j}^{*} = X_{i_{j}}$ y $X^* = (X^*_1, \dots, X^*_n)^T$.
+$$\begin{equation*} \begin{array}{|c|c||c|c|} \hline & \text { Muestra } & \begin{array}{c} \text { Peso medio } \\ \text { de los bebés } \end{array} & \begin{array}{c} \text { Desviación } \\ \text { estándar } \end{array} \\ \hline \text { campo } & \mathrm{n}_{1}=320 & \overline{\mathrm{X}}_{1}=3.8 & \sigma_{1}=0.6 \\ \hline \text { ciudad } & \mathrm{n}_{2}=240 & \overline{\mathrm{X}}_{2}=3.4 &\sigma_{2}=0.8 \\\hline\end{array}\end{equation*}$$
 
-En otras palabras, saque una muestra aleatoria con reemplazo de la muestra original $X_1, \dots, X_n$.
 
----
-
-## El Principio de Bootstrap
-
-* $X = (X_1, \dots, X_n)^T$ es una muestra aleatoria de una distribución $P$.
-
-* $\theta = t(P)$ es algún parámetro de la distribución.
-
-* $\hat{\theta} = s(X)$ es un estimador para $\theta$.
-
-La distribución muestral de $\hat{\theta}$ es entonces estimada por su equivalente de bootstrap:
-
-$$\hat{P}(\hat{\theta} \in A) = P^*(\hat{\theta} \in A)$$
+Asumiendo que los datos son normales, determine cómo influye que la madre viva en el campo o en la ciudad en el peso de su hijo al nacer, utilizando un intervalo de confianza para la diferencia de medias con un nivel de confianza del 95%.
 
 ---
 
-## El Principio de Bootstrap
+**Solución:** 
 
-![Diagrama](figs/BOOT.png)
+Intervalo de confianza del $95 \%$ :
+
+$1-\alpha=0.95 \Rightarrow \alpha=1-0,95=0,05$
+
+Buscamos en el la tabla de normales aquel valor que cumpla $P(Z\leq z_{\alpha / 2}) = 0.05/2 = 0.025$
+
+Obtenemos que $\Rightarrow z_{\alpha / 2}=z_{0.025}=1.96$
+
+$$\begin{align*}&\left(\left(\overline{\mathrm{X}}_{1}-\overline{\mathrm{X}}_{2}\right)-z_{\alpha / 2}\sqrt{\frac{\sigma_{1}^{2}}{\mathrm{n}_{1}}+\frac{\sigma_{2}^{2}}{\mathrm{n}_{2}}},\left(\overline{\mathrm{X}}_{1}-\overline{\mathrm{X}}_{2}\right)+z_{\alpha / 2}\sqrt{\frac{\sigma_{1}^{2}}{\mathrm{n}_{1}}+\frac{\sigma_{2}^{2}}{\mathrm{n}_{2}}}\right)\\&=\left((3.8-3.4)-1.96 \sqrt{\frac{0.6^{2}}{320}+\frac{0.8^{2}}{240}},(3.8-3.4)+1.96\sqrt{\frac{0.6^{2}}{320}+\frac{0.8^{2}}{240}}\right)\\&=[0.279,0.520]\end{align*}$$
 
 
 ---
 
 
+## Intervalos de confianza para poblaciones normales
 
-# Ejemplo concreto
+### Intervalo de confianza para $\sigma^2$
 
-```{r, CommuteAtlanta}
-CommuteAtlanta <- read.csv2("data/CommuteAtlanta.csv")
-```
+Nos interesa constuir un intervalo de confianza de probabilidad $1-\alpha$ para la variancia poblacional, $\sigma^2$. En este caso nuestra población sigue siendo Normal con parámetros $\mu$ y $\sigma^2$, donde ambos parámetros son desconocidos. Si queremos obtener una estimación por intervalo para $\sigma^2$ debemos primero obtener una variable aleatoria que funcione como pivote. En este caso esta variable aleatoria debe estar en términos de $X_{1}, X_{2}, ... , X_{n}$ y de $\sigma^2$, y su distribución no puede depender de $\sigma^2$. Con lo que conocemos de transformaciones a partir de muestras Normales podríamos utilizar el siguiente pivote:
 
+$$U = \frac{(n-1)S^{2}}{\sigma^2}$$
 
-```{r, echo=FALSE}
-knitr::kable(head(CommuteAtlanta))
-```
+---
+
+## Intervalo de confianza para $\sigma^2$
+
+Sabemos que $U \sim \chi^{2}(n-1)$. Por lo tanto esta variable aleatoria cumple todas las condiciones necesarias para ser un pivote. Ahora debemos encontrar los valores de $a$ y $b$ tales que:
+
+$$P(U < a) = \frac{\alpha}{2} \qquad P(U > b) = \frac{\alpha}{2}$$
+
+ El valor de $a$ es aquel que acumula $1-\frac{\alpha}{2}$ a su derecha, mientras que el valor de $b$ solo acumula $\frac{\alpha}{2}$ a la derecha. Por lo tanto tenemos que $a = \chi^{2}_{1-\frac{\alpha}{2}, n-1}$ y $b = \chi^{2}_{\frac{\alpha}{2}, n-1}$. En este caso no hay simetría que podamos utilizar para poner $a$ en términos de $b$ como hemos estado haciendo anteriormente. Ahora despejamos $\sigma^2$:
+
+$$\begin{align*}P(a \leq U \leq b) &= P\left( \chi^{2}_{1-\frac{\alpha}{2}, n-1}  \leq\frac{(n-1)S^{2}}{\sigma^2} \leq \chi^{2}_{\frac{\alpha}{2}, n-1} \right) \\
+&= P\left( \frac{(n-1)S^{2}}{\chi^{2}_{\frac{\alpha}{2}, n-1}}  \leq \sigma^2 \leq  \frac{(n-1)S^{2}}{\chi^{2}_{1-\frac{\alpha}{2}, n-1}}  \right) = 1 - \alpha\end{align*}$$
 
 
 ---
 
+## Intervalo de confianza para $\sigma^2$
 
-# La aproximación de Monte Carlo
+Por lo tanto, con una confianza del $(1 - \alpha)\%$ el intervalo $\left[ \frac{(n-1)S^{2}}{\chi^{2}_{\frac{\alpha}{2}, n-1}}  ,  \frac{(n-1)S^{2}}{\chi^{2}_{1-\frac{\alpha}{2}, n-1}} \right]$ incluye el valor de $\sigma^2$.
 
-* En algunas ocasiones la forma de la distribución poblacional es conocida, pero la evaluación de la distribución exacta de la distribución muestral no es calculable.
-
-* El procedimiento consiste en:
-
-    - Escoja B muestras bootstrap independientes $X^{*(1)}, \dots, X^{*(B)}$ de $\hat{P}$: $X_1^{*(b)}, \dots, X^{*(b)}_n \sim_{iid} \hat{P}$ para $b = 1, \dots, B$.
-    - Evalúe las repeticiones de bootstrap: $\hat{\theta}^{*(b)}=s(X^{*(b)})$.
-    - Estime la distribución muestral de $\theta$ con la distribución empírica de las repeticiones bootstrap: $\hat{\theta}^{*(1)}, \dots,\hat{\theta}^{*(B)}$:
-
-    $$\hat{P}(\hat{\theta}(A)) = \frac{1}{B}\sum_{b=1}^{B} 1_A(\hat{\theta}^{*(b)})$$
-
-para conjuntos apropiados de $A \subseteq \mathbb{R}^p$ (si $\hat{\theta} \in \mathbb{R}^p$).
-
-Pero, ¿y si solo queremos una cantidad de esa distribución muestral? pues hay fórmulas para calcularlas directamente.
+Ahora volvemos al caso donde tenemos dos poblaciones independientes, una de las cuales es $N(\mu_{1}, \sigma^{2}_{1})$ y la otra es $N(\mu_{2}, \sigma^{2}_{2})$. Supongase que se obtiene una muestra $X_{1}, X_{2}, ... , X_{n}$ de la primera población y otra $Y_{1}, Y_{2}, ... , Y_{m}$ de la segunda. Nuestro interés yace en encontrar una estimación por intervalo, con probabilidad $1-\alpha$, para el parámetro $\frac{\sigma^2_{1}}{\sigma^2_{2}}$.
 
 
 ---
 
-## Bootstrap para calcular errores estándar
+## Intervalo de confianza para $\frac{\sigma^2_{1}}{\sigma^2_{2}}$
 
-Sea $\hat{\theta}$ un estimador de $\theta$ y suponga que queremos conocer el error estándar de $\hat{\theta}$. Un error estándar estimado de bootstrap se puede obtener con el siguiente algoritmo:
 
-  - Escoja B muestras bootstrap independientes $X^{*(1)}, \dots, X^{*(B)}$ de $\hat{P}$: $X_1^{*(b)}, \dots, X^{*(b)}_n \sim_{iid} \hat{P}$ para $b = 1, \dots, B$.
-  - Evalúe las repeticiones de bootstrap: $\hat{\theta}^{*(b)}=s(X^{*(b)})$.
-  - Estime los errores estándar con la desviación estándar de las B repeticiones:
+Debemos construir un parámetro que incluya las dos muestras aleatorias y al
+parámetros desconocido. En el caso anterior habiamos usado una $\chi^{2}$-cuadrado como pivote ya que esta incluía la muestra aleatoria y la varianza poblacional. Podriamos pensar en hacer lo mismo para cada muestra y de alguna forma juntar ambas $\chi^{2}$-cuadrado. Para ello recordemos la forma de una distribución F:
+                                                                                                                                                                                                        $$F =\frac{\frac{V}{v_1}}{\frac{W}{v_2}}$$
 
-$$\hat{s}_{boot} = \sqrt{\frac{1}{B-1}\sum_{b=1}^{B}\left(\hat{\theta}^{*(b)}-\hat{\theta}^{*(.)}\right)^2}$$
+donde $V \sim \chi^{2}(v_1)$ y $W \sim \chi^{2}(v_2)$. Sabemos de antemano que $\frac{(n - 1)S^{2}_{1}}{\sigma^{2}_{1}} \sim \chi^{2}(n-1)$ y $\frac{(m - 1)S^{2}_{2}}{\sigma^{2}_{2}} \sim \chi^{2}(m-1)$. Podemos usar estas variables aleatorias en la construcción de una F que incluya el parámetro de interés:
 
-donde $\hat{\theta}^{*(.)} = \frac{1}{B}\sum_{b=1}^{B}\hat{\theta}^{*(b)}$.
-
----
-
-# Estimadores usuales
-
-```{r, assign-Time-to-x}
-x <- CommuteAtlanta$Time
-(n <- length(x))
-```
-```{r, varTime}
-(Tn <- var(x))
-```
+$$F = \frac{\frac{\frac{(n - 1)S^{2}_{1}}{\sigma^{2}_{1}}}{n-1}}{\frac{\frac{(m - 1)S^{2}_{2}}{\sigma^{2}_{2}}}{m-1}} = \frac{S^{2}_{1}}{S^{2}_{2}} \cdot \frac{\sigma^{2}_{2}}{\sigma^{2}_{1}} \sim F(n-1,m-1)$$
 
 
 ---
 
-# Muestra bootstrap
-```{r}
-B <- 1000
-Tboot_b <- NULL
-for(b in 1:B) {
-  xb <- sample(x, size = n, replace = TRUE)
-  Tboot_b[b] <- var(xb)
-}
-Tboot_b[1:10]
-```
+## Intervalo de confianza para $\frac{\sigma^2_{1}}{\sigma^2_{2}}$
+
+
+Esta variable aleatoria cumple todas las condiciones para ser un pivote y podemos usarlo para encontrar los valores de $a$ y $b$. Recordemos que se debe cumplir que $P(F<a) = P(F>b) = \frac{\alpha}{2}$. Podemos hacer uso de las tablas de la F, la cual acumula hacia la derecha. Por lo tanto tenemos que $a$ es el valor F que acumula $1-\frac{\alpha}{2}$ a la derecha mientras que $b$ acumula $\frac{\alpha}{2}$. Podemos notar estos valores como
+
+$a = F_{1-\frac{\alpha}{2}, n-1, m-1}   \qquad  b = F_{\frac{\alpha}{2}, n-1, m-1}$
+
+No obstante, vemos que hay un problema al usar las tablas para encontrar $F_{1-\frac{\alpha}{2}, n-1, m-1}$ si la probabilidad que se busca es mayor a 0.20, el cual es el caso en la gran mayoría de los casos. Para ello podemos hacer uso de una propiedad de la distribución F, que dice que la inversa multiplicativa de una F también se distribuye F pero con los grados de libertad del numerador y denominador intercambiados. Por lo tanto podemos decir que: $a = F_{1-\frac{\alpha}{2}, n-1, m-1} = F^{-1}_{\frac{\alpha}{2}, m-1, n-1}$.
 
 ---
 
-# Distribución $\hat{P}$
+## Intervalo de confianza para $\frac{\sigma^2_{1}}{\sigma^2_{2}}$
 
+Finalmente podemos proceder a despejar el valor del parámetro de interés de la expresión $P(a \leq F \leq b)$ y obtenemos el siguiente intervalo:
 
-```{r}
-hist(Tboot_b, main= "Distribución de var(X)*")
-```
+$$\left[ \frac{\frac{S^{2}_{1}}{S^{2}_{2}}}{F_{\frac{\alpha}{2}, n-1, m-1}} , \frac{\frac{S^{2}_{1}}{S^{2}_{2}}}{F^{-1}_{\frac{\alpha}{2}, m-1, n-1}} \right]$$
 
-
----
-
-
-## Bootstrap para calcular el sesgo
-
-Suponga que queremos estimar un parámetro $\theta = t(P)$ con el estadístico $\hat{\theta}= s(X)$. El sesgo de un estimador $\hat{\theta}$ está definido como:
-
-$$bias(\hat{\theta})= E(\hat{\theta})-\theta$$
-
-Si sustituimos $P$ por la distribución empírica $\hat{P}$, entonces obtenemos el estimado bootstrap del sesgo:
-
-$$\widehat{bias(\hat{\theta})}= bias^*(\hat{\theta}^*) =  E(\hat{\theta}^*)-\hat{\theta}$$
-donde $\hat{\theta}$ es el estimador empírico de la muestra.
-
----
-
-# Cálculo de estadísticos bootstrap
-
-```{r, }
-(Tboot <- mean(Tboot_b))
-```
-
-```{r, }
-(Vboot <- var(Tboot_b))
-```
-
-```{r, }
-(sdboot <- sqrt(Vboot))
-```
-
-El sesgo bootstrap es
-
-```{r}
-mean(Tboot_b) - Tn
-```
+el cual incluye el valor de $\frac{\sigma^{2}_{1}}{\sigma^{2}_{2}}$ con una confianza del  $(1-\alpha)\%$.
 
 ---
 
 
+## Ejercicio
 
-## Bootstrap para calcular el intervalo de confianza
-
-Si tenemos las repeticiones bootstrap $\hat{\theta}^{*(1)}, \dots,\hat{\theta}^{*(B)}$, podemos estimar la distribución muestral de $\hat{\theta}$. A partir de esto, podemos construir intervalos de confianza para $\theta$. Hay cuatro opciones: IC estándar, IC bootstrap t, IC percentiles, IC percentiles corregido por sesgo.
-
-* IC normal: Utilizamos el resultado del TLC para decir que $\hat{\theta}$ es distribuido aproximadamente normal con media $\theta$ y variancia $s(\hat{\theta})^2$. Entonces, un IC $(1-\alpha)$ aproximado para $\theta$ está dado por:
-
-$$\hat{\theta} \pm z_{\alpha/2} \hat{s}_{boot}(\hat{\theta})$$
+Un instituto de investigaciones agronómicas siembra, en cinco parcelas diferentes, dos tipos de maíz híbrido. Las producciones en quintales métricos por hectárea son:
 
 
----
+$$\begin{equation*} \begin{array}{|l|c|c|c|c|c|} \hline \text{Tipo de maíz} & 1 & 2 & 3 & 4 & 5 \\ \hline \text { Híbrido I } & 90 & 85 & 95 & 76 & 80 \\ \hline \text { Híbrido II } & 84 & 87 & 90 & 92 & 90 \\ \hline \end{array} \end{equation*}$$
 
 
-
-# Cálculo de IC normal
-
-
-```{r, }
-(z <- qnorm(1 - 0.05 / 2))
-```
-
-```{r, }
-c(Tn - z * sdboot, Tn + z * sdboot)
-```
----
-
-
-## Bootstrap para calcular el intervalo de confianza
-
-
-* IC bootstrap studentizado: Utilizando el mismo resultado anterior, pero ahora usando $\hat{s}_X(\hat{\theta})$ como estimador de $s(\hat{\theta})$ basado en la muestra $X$. De las muestras bootstrap $X^{*(b)}$ se calcula:
-
-$$Z^{*(b)} = \frac{\hat{\theta}^{*(b)}-\hat{\theta}}{\hat{s}_{X^*}(\hat{\theta})}$$
-
-De los valores $Z^{*(b)}$, podemos estimar el valor crítico $z_{\alpha/2}$ como $\hat{z}_{\alpha/2}$ tal que:
-
-$$\frac{1}{B} \sum_{b=1}^{B} 1_{[ Z^{*(b)} \leq \hat{z}_{\alpha} ]} \approx \alpha$$
-
-Entonces:
-
-$$\left[\hat{\theta} - \hat{z}_{1-\alpha /2}s(\hat{\theta}), \hat{\theta} -\hat{z} _{\alpha /2}s(\hat{\theta})\right]$$
-
----
-
-# Cálculo de IC bootstrap studentizado
-
-```{r,cache=TRUE}
-B <- 1000
-Tboot_b <- NULL
-Tboot_bm <- NULL
-sdboot_b <- NULL
-for (b in 1:B) {
-  xb <- sample(x, size = n, replace = TRUE)
-  Tboot_b[b] <- var(xb)
-  for (m in 1:B) {
-    xbm <- sample(xb, size = n, replace = TRUE)
-    Tboot_bm[m] <- var(xbm)
-  }
-  sdboot_b[b] <- sd(Tboot_bm)
-}
-z_star <- (Tboot_b - Tn) / sdboot_b
-```
-
----
-
-```{r}
-hist(z_star)
-```
+Construir un intervalo de confianza para el cociente de varianzas con un error de significación de 0,10.
 
 ---
 
 
-```{r }
-c(Tn - quantile(z_star, 1 - 0.05 / 2) * sdboot,
-  Tn - quantile(z_star, 0.05 / 2) * sdboot)
-```
+**Solución:** 
 
----
+Asumiendo que las poblaciones son normales defina $\mathrm{X}_{1}\equiv$ 'Producción de maíz del híbrido I' que sigue una $\mathrm{N}\left(\mu_{1},\sigma_{1}\right)$ y $\mathrm{X}_{2} \equiv$ ' Producción de maíz del híbrido II' que sigue una distribución $\mathrm{N}\left(\mu_{2}, \sigma_{2}\right)$
 
+Entonces
 
-## Bootstrap para calcular el intervalo de confianza pivotales
+$$\begin{equation*}\begin{array}{llll}n_{1}=5 & \bar{x}_{1}=85.20 & s_{1}^{2}=57.7 & \alpha / 2=0.05 \\n_{2}=5 & \bar{x}_{2}=88.6 & s_{2}^{2}=9.8 & s_{1}^{2} / s_{2}^{2}=57.7 / 9.8=5.89 \\\end{array}  \end{equation*}$$
 
-
-El intervalo de confianza pivotal de tamaño $1-\alpha$ es
-
-$$\left(2\widehat{\theta}_{n}-\widehat{\theta}_{L},2\widehat{\theta}_{n}-\widehat{\theta}_{U}\right)$$
+$$F_{0.05 , 4,4}  =6.3883 \quad  F_{0.95 , 4,4}=1 / F_{0,05 , 4,4}=1 / 6.3883=0.1565$$
 
 
-donde
-
-
-
-$$\hat{P}^*(\hat{\theta}^* \leq \hat{\theta}_L) = \frac{1}{B} \sum_{b=1}^{B} 1 {[ \hat{\theta}^{*(b)} \leq \hat{\theta}_{L} ]} \approx 1-\alpha/2$$
-
-$$\hat{P}^*(\hat{\theta}^* \leq \hat{\theta}_U) = \frac{1}{B} \sum_{b=1}^{B} 1 {[ \hat{\theta}^{*(b)} \leq \hat{\theta}_{U} ]} \approx \alpha/2$$
-
-
-El $2\hat{\theta}$ corrige el error por sesgo.
-
-La prueba de este resultado está en *All of nonparametric statistics* de Larry Wassermann, p.32.
-
-<!-- * IC percentiles corregido por sesgo. La opción anterior asume que el área debajo de la curva en las dos colas es igual. Si el estimador $\hat{\theta}$ no es la mediana de la distribución bootstrap, entonces esta condición no se cumple. En este caso debemos corregirlo, y hay varias opciones que no serán vistas en esta ocasión. -->
+$$\begin{align*} & \left[ \frac{\frac{S^{2}_{1}}{S^{2}_{2}}}{F_{0.05, 5-1, 5-1}} , \frac{\frac{S^{2}_{1}}{S^{2}_{2}}}{F^{-1}_{0.05, 5-1, 5-1}} \right] \\ & = \left[\frac{5.89}{6.3883} , \frac{5.89}{0.1565} \right] \\ & = \left[ 0.92, 37.64 \right]\end{align*}$$
 
 
 ---
 
-# IC pivotal
+## Intervalos de confianza para muestras grandes
 
-```{r, }
-c(2 * Tn - quantile(Tboot_b, 1 - 0.05 / 2),
-  2 * Tn - quantile(Tboot_b, 0.05 / 2))
-```
+Recordemos que cuando $n \to +\infty$ el Teorema del Límite Central nos dice que $\overline{X}$ converge en distribución a una $N(\mu, \frac{\sigma^2}{n})$. Por lo tanto, si queremos hacer una estimación por intervalo para $\mu$, suponiendo que conocemos el valor de $\sigma^2$, podemos hacer uso del siguiente pivote:
 
+$$Z_{n} = \frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}}$$
+
+De esta forma tenemos una cantidad pivote asintótica que se puede aplicar para este tipo de estimadores con muestras grandes. El desarrollo para obtener el intervalo es el mismo del caso de una estimación por intervalo para la media de una población normal. Por lo tanto tendremos un intervalo bilateral con probabilidad $1-\alpha$:
+
+$$\overline{X} \pm z_{1-\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}}$$
+
+---
+
+## Intervalos de confianza para muestras grandes
+
+Existen varios estimadores que se puede comprobar que tienen la forma de un $\overline{X}$ como por ejemplo $\hat{p}$, $\overline{X} - \overline{Y}$ y $\hat{p}_{1} - \hat{p}_{2}$, para estimar $p$, $\mu_{1} - \mu_{2}$ y $p_{1} - p_{2}$ respectivamente. Cada uno de estos caso también tendrá una expresión específica para la variancia $(\frac{p(1-p)}{n}$, $\frac{\sigma^{2}_{1}}{n_{1}} + \frac{\sigma^{2}_{2}}{n_{2}}$ y $\frac{p_{1}(1-p_{1})}{n_{1}} + \frac{p_{2}(1-p_{2})}{n_{2}}$, respectivamente).
+
+Nótese que este intervalo supone que conocemos la varancia poblacional de nuestra población. Sin embargo, podemos hacer uso del Teorema de Slutsky para mantener el pivote que converge en distribución a una $N(0,1)$ si conocemos un estimador consistente para la variancia poblacional. Este reemplazaría la variancia poblacional por su estimador consistente en la fórmula del intervalo anterior.
 
 ---
 
 
-## Referencias:
+**Ejemplo:** 
 
-* [UC3M - español](http://halweb.uc3m.es/esp/Personal/personas/jmmarin/esp/Boots/tema1BooPres.pdf)
+Se registraron los tiempos de compra de $n=64$ clientes
+seleccionados al azar en un supermercado local. El promedio y varianza de los 64
+tiempos de compra fueron 33 minutos y 256 minutos $^{2}$, respectivamente.
+Estime $\mu$, el verdadero promedio de tiempo de compra por cliente, con un
+coeficiente de confianza de $1-\alpha=.90$.
 
-* [Chicago - inglés](http://galton.uchicago.edu/~eichler/stat24600/Handouts/bootstrap.pdf)
+**Solución:**
 
-* Efron, B.; Tibshirani, R. (1993). An Introduction to the Bootstrap. Boca Raton, FL: Chapman & Hall/CRC. ISBN 0-412-04231-2.
+El intervalo tiene la forma:
+$$\begin{equation}\bar{x} \pm z_{\alpha / 2}\left(\frac{\sigma}{\sqrt{n}}\right) \approx \bar{x} \pm z_{\alpha / 2}\left(\frac{s}{\sqrt{n}}\right)\end{equation}$$
 
----
+ De la tabla de normales se deduce que $z_{\alpha/2} = z_{0.05} = 1.645$.
 
-## Práctica de Intervalos de Confianza
+ Por lo tanto el intervalo es
 
-1. La vida útil de cierto aparato de aire acondicionado sigue una distribución de Rayleigh, cuya función de densidad viene dada por la fórmula:
-
-$f(x|\theta) = \frac{x}{\theta^2} \exp{\left( \frac{-x^2}{2\theta^2} \right)} 1_{ \left( x>0 \right)}$
-
-Suponga que $X_1, X_2, \dots , X_n$ es una muestra aleatoria correspondiente a la vida útil de $n$ aparatos de aire acondicionado:
-
-a) Determine un estadístico suficiente para $\theta$.
-
-b)	Considere el pivote $\frac{1}{\theta^2} \sum_{j=1}^{n}X_j^2$ para construir un intervalo de confianza para $\theta$ con una confianza del $(1- \alpha)\%$.
-
-c)	¿Cuál es la relación entre el estimador de máxima verosimilitud obtenido en b) con la estimación por intervalo obtenido en c).
-
-d)	Considere la muestra aleatoria de $n = 15$ datos de una distribución $U(0,1)$ que se ofrece, para simular una muestra aleatoria de $15$ datos de una distribución de Rayleigh con $\theta =10$. Encuentre un intervalo de confianza del 95% para estimar $\theta$.
+$$\begin{align*}& \left[ 33-1.645\left(\frac{16}{8}\right), 33+1.645\left(\frac{16}{8}\right) \right]= \left[29.71, 36.29\right]\end{align*}$$
 
 ---
 
-## Práctica de Intervalos de Confianza
 
-```{r}
-data <- c(0.466, 0.589, 0.097, 0.809, 0.214, 0.315, 0.971, 0.298, 0.005, 0.126,
-          0.019, 0.553, 0.385, 0.232, 0.989)
-```
+**Ejemplo**
 
+Suponga que tienen datos de tiempos de espera en minutos en un banco con $n=25$ clientes. La distribución del tiempo se observa que sigue una distribución $Poisson(\theta)$ con $\bar{X} = 5$. Cual es el intervalo de confianza para $\theta$ a un 95%.
 
-2. Sea $X_1, X_2, \dots , X_n$ una muestra aleatoria de una población de Poisson con parámetro $\lambda$.
+**Solución:** 
 
-a)	Utilice la Desigualdad de Cramer-Rao, y la información de Fisher para demostrar que $\bar{X}$, es un estimador de variancia mínima para estimar $\lambda$.
+Recuerde que si $X$ es $Poisson(\theta)$, entonces $E[X] = Var(X) = \theta$.
 
-b)	Demuestre que la variable $U = \frac{\bar{X}-\lambda}{\sqrt{\bar{X}/n}}$ tiene distribución que converge a una normal estándar.
+Por el TLC se tiene que 
 
-c)	Utilice la variable $U$ del inciso anterior, como pivote para construir un intervalo de confianza para $\lambda$ con probabilidad del $95\%$.
-
----
-
-## Práctica de Intervalos de Confianza
+$$\begin{equation} \bar{X} \pm z_{\alpha / 2}\left(\frac{\sigma}{\sqrt{n}}\right) \approx \bar{X} \pm z_{\alpha / 2}\left(\frac{\sqrt{\theta}}{\sqrt{n}}\right) \approx  \bar{X} \pm z_{\alpha / 2}\left(\frac{\sqrt{\bar{X}}}{\sqrt{n}}\right)\end{equation}$$
 
 
-3. Si $Y_1, Y_2, \dots , Y_n$ corresponden a una muestra aleatoria de una distribución gamma con parámetros $\alpha$ desconocido y $\beta$ desconocido.
-
-a)	Demuestre que la variable $U = \frac{2 \sum_{j=1}^{n}Y_j}{\beta}$ puede ser utilizada como pivote para estimar el valor de $\beta$ y construya un intervalo de confianza de $1-\alpha$ para estimar el valor $\beta$.
-
-b)	Por teorema del límite central, la variable aleatoria $Z = \frac{\bar{X}-E(\bar{X})}{\sqrt{Var(\bar{Y})}}$ tiene distribución que converge a una $N(0,1)$. Supongamos que $n$ es suficientemente grande, determine la variable aleatoria $Z$ vinculada con este problema, que puede ser utilizada como pivote para estimar el valor de $\beta$. Construya un intervalo de confianza de  para estimar el valor $\beta$.
+$$\begin{align*}& \left[5-1.96\left(\frac{\sqrt{5}}{5}\right), 5+1.96\left(\frac{\sqrt{5}}{5}\right)  \right]   \\&= \left[ 4.12, 5.88\right]\end{align*}$$
 
 ---
 
-## Práctica de Intervalos de Confianza
+## Funciones estabilizadoras de varianza 
 
-c)	Considere la siguiente muestra aleatoria que pertenece a una distribución gamma con $\alpha = 3$:
+El caso anterior requería hacer el supuesto que los datos eran normales para construir el intervalo. 
 
-```{r}
-data <- c(66.8, 26.6, 8.7, 25.9, 17.0, 17.4, 9.2, 19.6, 27.8, 33.3)
-```
+Vamos a ver si podemos hacerlo mejor.   
 
-Utilice los resultados obtenidos en a) y b) para determinar dos intervalos de confianza del $95\%$ para estimar $\beta$, uno para cada método. Compare los resultados. ¿A qué atribuye las diferencias?
+La pregunta que siempre debemos hacernos, es 
+
+¿Cómo transformar $\hat{\theta}$ para que tenga varianza constante? 
+
+---
+
+**Ejemplo:** Retomemos el caso de los clientes en el banco. 
+
+En este caso hicimos el supuesto de normalidad y aproximamos la varianza con $\overline{X}$
+
+
+Por el método Delta, se tiene que para $g\left(\bar{X}_{n}\right)$ 
+$$\sqrt{n}\left(g(\overline{X}) - g(\mu)\right) \stackrel{d}{\to} N\left(0,\left( g^{\prime}(\mu) \sigma \right)^2\right)$$
+
+ 
+$$\begin{equation*}\left(g^{\prime}(\mu) \sigma\right)^{2}=g^{\prime}(\mu)^{2}\sigma^{2}(\mu)\end{equation*}$$
+
+Si se desea que la varianza sea constante con respecto a $\mu$, 
+
+$$\begin{equation*} \begin{aligned} g^{\prime}(u)^{2} \sigma^{2}(\mu) &=1 \\ \Longrightarrow g^{\prime}(\mu) &=\frac{1}{\sigma(\mu)} \quad(\sigma(\mu)>0) \\ \Longrightarrow g(\mu) &=\int_{a}^{\mu} \frac{1}{\sigma(x)}  \ dx \end{aligned}\end{equation*}$$
+
+donde $a$ es una constante arbitraria que hace la integral finita (y fácil de calcular).
+
+---
+
+
+Del ejemplo anterior, recuerde que $\sigma^{2}=\theta$, entonces se podría tomar que $\sigma=\sqrt{\theta}$ por lo tanto definimos
+
+$$g(\theta)=\int_{0}^{\theta} \frac{d x}{\sqrt{x}}=2 \sqrt{\theta}$$
+
+
+
+Por el método Delta, sabemos que 
+
+$$\sqrt{n}\left( 2 \bar{X}_{n}^{\frac{1}{2}} - 2 \theta^{\frac{1}{2}} \right) \stackrel{d}{\to} N(0,1)$$
+
+ 
+ O lo que es equivalente 
+
+$$2 \bar{X}_{n}^{\frac{1}{2}} \stackrel{d}{\to}  N\left(2 \theta^{\frac{1}{2}}, \frac{1}{n}\right)$$
+
+
+
+De esta manera un intervalo de confianza  para la cantidad $2\sqrt{\theta}$ con nivel 95% sería 
+
+
+
+
+$$2 \bar{X}_{n}^{\frac{1}{2}} \pm z_{\frac{\alpha}{2}}\cdot \frac{1}{\sqrt{n}}$$
+
+
+Usando los valores que teníamos anteriormente tenemos que
+
+
+$$\left[ 2\sqrt{5}  - 1.96 \frac{1}{\sqrt{25}},  2\sqrt{5}  + 1.96 \frac{1}{\sqrt{25}} \right] = [4.27, 4.67] $$
 
 
 ---
-class: center, middle
 
-# ¿Qué discutimos hoy?
+Sin embargo, esa cantidad no nos sirve para el ejercicio. Requerimos un intervalo para $\theta$.
 
-Bootstrap: concepto, ejemplos y definiciones. IC utilizando bootstrap
+Para eso vamos tomar la función inversa de cada uno de los extremos $\displaystyle y=2 x^{\frac{1}{2}} \Longrightarrow x=\frac{y^{2}}{4}$. 
 
+Aplicando esta transformación al intervalo anterior, se obtiene
+
+
+$$\begin{align*}
+& \left[\frac{1}{4}\left(2 \bar{X}_{n}^{\frac{1}{2}}-z_{\frac{\alpha}{2}} \cdot \frac{1}{\sqrt{n}} \right)^{2}, \frac{1}{4}\left(2 \bar{X}_{n}^{\frac{1}{2}}+z_{\frac{\alpha}{2}} \cdot \frac{1}{\sqrt{n}} \right)^{2}\right] \\
+&= \left[\frac{1}{4}\left( 4.27 \right)^{2}, \frac{1}{4}\left( 4.67 \right)^{2} \right] \\
+&= [4.56, 5.46]
+\end{align*}$$
+
+
+
+---
+
+**Ejemplo:** Suponga que $X_i \sim Binomial(n,p)$ encuentre un intervalo de confianza para $p$ usando el método de Wald y el método delta al 95%, con $n=25$ y $\bar{X} =0.5$.   
+
+El estimador para $p$ es $\bar{X}$.
+
+**Método Wald:** 
+
+$$\bar{X} \pm z_{\alpha / 2}\left(\frac{\sigma}{\sqrt{n}}\right) \approx \bar{X} \pm z_{\alpha / 2}\left(\frac{\sqrt{p(1-p)}}{\sqrt{n}}\right) \approx  \bar{X} \pm z_{\alpha / 2}\left(\frac{\sqrt{\bar{X}(1-\bar{X})}}{\sqrt{n}}\right)$$
+
+
+Haciendo el cálculo correspondiente el intervalo queda en $[0.304, 0.696]$
+
+---
+
+**Método delta:**
+
+Hay que encontrar la $g(p)$ para estabilizar la varianza.
+
+$$g(p)=\int_{a}^{p} \frac{1}{\sqrt{x(1-x)}} d x 
+=  2\int_{\sqrt{a}}^{\sqrt{p}} \frac{1}{\sqrt{1-u^2}} d u 
+= 2 \arcsin(\sqrt{p})$$
+
+
+$$\sqrt{n}\left( 2 \arcsin({\sqrt{\bar{X}_{n}}}) - 2\arcsin({\sqrt{p}})\right) \stackrel{d}{\to} N(0,1)$$
+
+
+
+$$2 \arcsin({\sqrt{\bar{X}_{n}}}) \pm z_{\alpha/2} \frac{1}{\sqrt{n}}$$
+
+usando los valores obtenemos 
+
+$$[1.179, 1.963]$$
+
+
+$$y = 2 \arcsin(\sqrt{x}) \Rightarrow  x = \sin^2 \left( \frac{y}{2} \right)$$
+
+$$\left[\sin^2\left(\frac{1.179}{2}\right),\sin^2\left(\frac{1.963}{2}\right)\right] \\= [0.309, 0.691]$$
+
+
+---
+
+## Ejercicio
+
+Suponga que $(X_i,Y_{i})$ provienen de una distribución normal con correlación $\rho$.     
+
+Suponga que usted estima la correlación muestral con la siguiente fórmula: 
+
+$$r_{n}=\frac{\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)\left(Y_{i}-\bar{Y}\right)}{\left\{\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\sum\left(Y_{i}-\bar{Y}\right)^{2}\right\}^{1 / 2}}$$
+
+Haciendo mucho cálculos, encontramos $Var(r_{n}) = 1-\rho^2$. Por lo tanto,  
+
+$$\sqrt{n}\left(r_{n}-\rho\right)\overset{d}{\rightarrow} N\left(0,\left(1-\rho^{2}\right)^{2}\right)$$
+
+Si suponemos que $r_n = 0.3$ y $n = 25$, encuentre un intervalo de confianza para $\rho$ al 95% usando un método de Wald y el método Delta.
+
+**Sugerencia: **
+
+Use el hecho que 
+
+$$\int\frac{1}{1-\rho^{2}}d\rho=\frac{1}{2}\log\frac{1+\rho}{1-\rho}=\operatorname{arctanh}\rho$$
+---
+
+<!-- # Bootstrap -->
+
+<!-- * La inferencia frecuentista se basa en modelos y supuestos. En muchos casos, las expresiones acerca de la exactitud (tales como el error estándar) están basadas en teoría asintótica, y por lo tanto no deberían usarse con muestras pequeñas. -->
+
+<!-- * En otros casos, no estamos usando teoría asintótica, pero no sabemos cómo hacer una suposición acerca de la distribución poblacional, debido a que la muestra no se parece a ninguna forma conocida. -->
+
+<!-- * Una alternativa "moderna" es el método de bootstrap, introducida por Efron así casi 40 años (1979). Bootstrap es un método de remuestreo que es computacionalmente intensivo, y que es aplicable a una gran variedad de casos, incluyendo aquellos en los que los supuestos son más realistas.  -->
+
+<!-- Visualmente: -->
+<!-- https://seeing-theory.brown.edu/frequentist-inference/es.html -->
+
+
+<!-- --- -->
+
+<!-- # Bootstrap -->
+
+<!-- ¿De dónde viene la expresión? -->
+
+
+<!-- ![](https://img.huffingtonpost.com/asset/5b6b3f1f2000002d00349e9d.jpeg?cache=92vfjlaeaf&ops=scalefit_720_noupscale) -->
+
+<!-- https://www.huffpost.com/entry/pull-yourself-up-by-your-bootstraps-nonsense_n_5b1ed024e4b0bbb7a0e037d4 -->
+
+<!-- --- -->
+
+<!-- ## Ejemplos de bootstrap -->
+
+<!-- ### Ejemplo 1: La exactitud de una media muestral. -->
+
+<!-- Tengo datos de sobrevivencia de 16 ratones luego de una cirugía de prueba: hay 9 ratones en el grupo control y 7 ratones en el grupo de tratamiento.  -->
+
+<!-- | Group         | Survival time (in days)      | Mean  | -->
+<!-- | ------------- |:----------------------------:| -----:| -->
+<!-- | Treatment     | 94,197,16,38,99,141,23       | 86.86 | -->
+<!-- | Control       | 52,104,146,10,51,30,40,27,46 | 56.22 | -->
+
+<!-- ¿Podemos decir que el tratamiento es efectivo? -->
+
+<!-- En estadística, resolvemos esa pregunta estimando $\bar{X}- \bar{Y} = 30.63$. El problema es cómo calcular la variabilidad, ¿podemos suponer lo mismo de siempre? -->
+<!-- --- -->
+
+<!-- ## Ejemplos de bootstrap -->
+
+<!-- ### Ejemplo 1: La exactitud de una media muestral. -->
+
+<!-- El problema se plantearía de la siguiente manera en teoría estadística: Suponga que una muestra $X_1, \dots, X_n$ es una muestra aleatoria con media $\mu$ y variancia $\sigma^2$. Entonces, el error estándar de la media muestral es:  -->
+
+<!-- $$se(\bar{X})= \sqrt(var(\bar{X})) = \frac{\sigma}{\sqrt{n}}$$  -->
+
+<!-- Esto sugiere que podemos estimar el error estándar con $\hat{se}(\bar{X})=\frac{s}{\sqrt{n}}$. Y aquí, tenemos dos opciones: la primera utilizar el teorema del límite central (teoría asintótica) o también podemos utilizar el estadístico: -->
+
+<!-- $$T = \frac{\bar{X}- \bar{Y}}{\sqrt{\hat{se}(\bar{X})^2 + \hat{se}(\bar{Y})^2}}$$ -->
+<!-- ¿Cuál es el problema? En el caso asintótico, necesitamos de una muestra grande, y en el segundo caso, la distribución de T NO es conocida (podríamos usar la aproximación de Satterthwaite, pero eso sería solo una aproximación). -->
+
+<!-- --- -->
+
+<!-- ## Ejemplos de bootstrap -->
+
+<!-- ### Ejemplo 2: La exactitud de una mediana muestral. -->
+
+<!-- Ahora suponga que queremos comparar las medianas de cada tratamiento, en lugar de las medias. De la tabla anterior podemos calcular: -->
+
+<!-- $med(X) = 94, \quad med(Y)=46 \quad \text{y} \quad T'= med(X) - med(Y)= 48$ -->
+
+<!-- ¿Cómo podemos cuantificar la exactitud de las medianas muestrales? -->
+
+<!-- * Teoría Estadística para Medianas muestrales: no existen fórmulas para el error estándar de las medianas muestrales en el caso de muestras pequeñas.  -->
+
+<!-- * Suponga que la distribución $P$ de $X_i$ es continua con densidad $p(x)$. Entonces, para muestras grandes, la mediana se distribuye aproximadamente como: -->
+
+<!-- $$med(X) \xrightarrow{d} N(m_p, \frac{\sigma^2}{4np(m_p)})$$ -->
+
+<!-- donde $m_p$ es la mediana de la distribución P. -->
+
+
+<!-- --- -->
+
+<!-- ## Ejemplos de bootstrap -->
+
+<!-- ### Ejemplo 2: La exactitud de una mediana muestral. -->
+
+<!-- ¿Cuál es el(los) problema(s)? -->
+
+<!-- * ¿Son 7 y 9 suficientes observaciones para utilizar una aproximación asintótica? -->
+
+<!-- * Podemos estimar de manera fiable la densidad de $p(m_p)$? -->
+
+<!-- * ¿Cómo afecta la estimación (asintótica) del error estándar el ancho del intervalo de confianza basado en la aproximación normal? -->
+
+
+<!-- ### Otros ejemplos para ver más adelante:  -->
+
+<!-- * ¿cómo estimar los errores de las estimaciones puntuales hechas con el algoritmo EM o SEM?  -->
+<!-- * ¿cómo contrastar hipótesis acerca de si una distribución tiene una o varias modas? -->
+
+<!-- --- -->
+
+<!-- # Principios de Bootstrap -->
+
+<!-- * Si no existe información acerca de la distribución, en la muestra observada podemos encontrar información acerca de la distribución subyacente. Por lo tanto, re-muestrear la muestra es la mejor forma de acercarnos a lo que obtendríamos si se pudiera la oportunidad de re-muestrear de la distribución poblacional. -->
+
+<!-- * Suponga que una muestra $X = (X_1, \dots, X_n)^T$ es utilizada para estimar un parámetro $\theta$. Sea $\hat{\theta}= s(X)$ un estadístico para estimar el parámetro $\theta$. Para hacer inferencia acerca de $\theta$, nos interesa la distribución muestral de $\hat{\theta}$, o ciertos aspectos acerca de esa distribución: la exactitud de nuestra estimación, el intervalo de confianza, etc. En muchas aplicaciones, la distribución muestral de $\hat{\theta}$ no se puede encontrar. -->
+
+<!-- * Si conociéramos la distribución poblacional $P$, podríamos sacar muestras $X^{(b)}, b=1,\dots,B$ de P usando métodos de Monte Carlo para estimar la distribución muestral del estimado. Sin embargo, si $F$ es desconocido, entonces bootstrap sugiere que podemos aproximar ese muestreo re-muestreando nuestra muestra original. Así, podemos encontrar la distribución *empírica* del estimador. -->
+
+<!-- https://seeing-theory.brown.edu/frequentist-inference/es.html -->
+
+<!-- --- -->
+
+
+<!-- <\!-- # Asignación del proyecto 2 -->
+
+<!-- https://malfaro2.github.io/XS3310-I20/proyecto2  -->
+
+
+<!-- --- -\-> -->
+
+<!-- class: center, middle -->
+
+<!-- # ¿Qué discutimos hoy? -->
+
+<!-- Estimación por intervalos, método del pivote. Fórmulas para las estimaciones por intervalo más comunes (media, diferencias de medias, variancias, etc., para distribuciones normales),  -->
+
+<!-- # ¿Qué nos falta para el II Parcial? -->
+
+<!-- Bootstrap y contrastes de hipótesis. -->

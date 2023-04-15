@@ -1,13 +1,13 @@
 ---
 title: "XS3310 Teoría Estadística"
-subtitle: "I Semestre 2021"
+subtitle: "I Semestre 2023"
 author:
   - "Escuela de Estadística"
-date: '`r Sys.Date()`'
+date: '28-04-2023'
 output:
   xaringan::moon_reader:
     lib_dir: libs
-    css: xaringan-themer.css
+    css: [default, xaringan-themer.css]
     nature:
       highlightStyle: github
       highlightLines: true
@@ -17,308 +17,444 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
 ```
 
 class: center, middle
 
 # ¿Qué hemos visto hasta ahora?
 
-Todo sobre estimadores puntuales + pivotes e intervalos de confianza. Bootstrap.
+Todo sobre estimadores puntuales + pivotes e intervalos de confianza.
 
 # ¿Qué vamos a discutir hoy?
 
-Contrastes de hipótesis - introducción
+Bootstrap
 
 ---
 
-# Contrastes de hipótesis
+## Bootstrap
 
-Tenemos un parámetro $\theta$ que es desconocido pero podemos decir que pertenece a un espacio paramétrico $\Omega$; este espacio incluye todos los posibles valores que $\theta$ podría tomar. Suponga que dividimos $\Omega$ en dos subconjuntos disjuntos $\Omega_0$ y $\Omega_1$ tales que:
+* La inferencia frecuentista se basa en modelos y supuestos. En muchos casos, las expresiones acerca de la exactitud (tales como el error estándar) están basadas en teoría asintótica, y por lo tanto no deberían usarse con muestras pequeñas.
 
-$$\Omega_{0} \cap \Omega_{1} = \emptyset \wedge \Omega_{0} \cup \Omega_{1} = \Omega.$$ 
+* En otros casos, no estamos usando teoría asintótica, pero no sabemos cómo hacer una suposición acerca de la distribución poblacional, debido a que la muestra no se parece a ninguna forma conocida.
 
-Si dividimos $\Omega$ de esta manera entonces es de esperar que $\theta$ se encuentre en $\Omega_{0}$ o en $\Omega_{1}$ (no puede estar en los dos al mismo tiempo). 
-	
-Así, podemos tener:
+* Una alternativa "moderna" es el método de bootstrap, introducida por Efron así casi 40 años (1979). Bootstrap es un método de remuestreo que es computacionalmente intensivo, y que es aplicable a una gran variedad de casos, incluyendo aquellos en los que los supuestos son más realistas.
 
- * una **hipótesis nula** tal que $H_{0}: \theta \in \Omega_{0}$
- * y una **hipótesis alternativa** tal que $H_{1}: \theta \in \Omega_{1}$. 
- 
-
-El procedimiento que sigue consiste en *contrastar* estas hipótesis mediante una *regla de decisión* que favorece una hipótesis sobre la otra al cumplirse cierta condición y viceversa si la condición no se cumple. 
-
----
-
-# Contrastes de hipótesis
-	
-  ![Método ciéntífico](./figs/metodocientifico.jpg)	
-
-https://www.youtube.com/watch?v=9jW9G8MO4PQ
-	
----
-
-# Contrastes de hipótesis
-  
-Dos posibles resultados: 
-
-* Rechazar la hipótesis nula o 
-
-* No rechazar la hipótesis nula. 
-
-Nunca decimos que se 'acepta' la hipótesis nula ya que es imposible que un experimento confirme una hipótesis. Sin embargo, si encontramos suficiente evidencia que sugiere que una hipótesis sea falsa podemos 'rechazar' la hipótesis. No obstante, por simplicidad, en el resto de este tema cuando mencione que 'se acepta $H_0$' se entenderá como 'no se rechaza $H_0$''.
-
-Supongamos que tenemos datos que provienen de una población Normal con media desconocida $\mu$ y variancia 1, además, que $\mu$ puede tomar solamente dos valores: $\mu = 1$ y $\mu = -1$. De este modo tenemos las hipótesis $H_{0}: \mu = 1$ y $H_{1}: \mu = -1$. Como con el método científico nuestro siguiente paso consiste en obtener datos y observar cuál de estas dos hipótesis es la más factible para los datos observados. En un ejemplo como este esperaríamos que si $H_{0}$ es cierto entonces hayan más datos positivos que negativos y que si $H_{1}$ es cierto entonces hayan más datos negativos que positivos. 
-
----
-
-## Contrastes de hipótesis
-	
-Supongamos que resumimos los datos de la muestra en el estadístico $\overline{X}$ y comparamos este valor contra un valor $k$ de manera que si $\overline{X}$ es mayor a $k$ entonces preferimos $H_{0}$ mientras que si $\overline{X}$ es menor a $k$ entonces preferimos a $H_{1}$, o como decimos usualmente, rechazamos $H_{0}$. Nótese que existe toda una región de posibles valores de $\overline{X}$ donde podemos rechazar $H_{0}$; esta región se llama la *región crítica* del contraste. 
-
-> Definición: **Región crítica**. Consideremos las hipótesis $H_{0}: \theta \in \Omega_{0}$ y $H_{1}: \theta \in \Omega_{1}$. Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria seleccionada sobre una distribución con parámetros desconocido $\theta$. Sea $S$ el espacio muestral para el vector aleatorio n-dimensional $\textbf{X} = \left\lbrace  X_{1}, X_{2}, ... , X_{n} \right\rbrace$ es decir, $S$ es el resultado de todas las posibles muestras aleatorias de tamaño $n$. Sea $\delta$ un contraste que consiste en dividir el espacio muestral $S$ en dos subconjuntos, el primero de ellos contiene los valores de $\textbf{X}$ para los cuales se rechaza $H_{0}$ y se denomina como la **región crítica del contraste**, denotada como $RC_{\delta}$. 
-	
----
-
-## Contrastes de hipótesis
-
-En los contrastes de hipótesis con los que acostumbramos trabajar solemos definir la región crítica en términos del estadístico de prueba. En el ejemplo que veníamos discutiendo anteriormente el *estadístico de prueba* es el que se usa en el contraste para resumir la información de la muestra es decir, $\overline{X}$. La región crítica se define como todos los valores de $\overline{X}$ que sean menores a $k$. Por otro lado, el valor $k$ es el valor que separa la región crítica de la región donde no rechazamos $H_{0}$, llamada la *región crítica complemento* (denotada como $RC_{\delta}^c$); por su parte el valor de $k$ se llama el *valor crítico* del contraste. Pueden existir contrastes con más de un valor crítico. 
- 
----
-
-## Contrastes de hipótesis
-	
-Dos características que tienen los contrastes: la potencia y el tamaño. El enfoque está en encontrar un "buen" contraste según estas características.  A continuación se define la potencia de la prueba: 
-	
-> Definición. **Función potencia:** Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria de una población con parámetro desconocido $\theta$ y sea $RC_{\delta}$ la región crítica de un contraste $\delta$ respecto a $\theta$. La **potencia del contraste**, denotada $\operatorname{Potencia}(\theta)$, es la probabilidad que el contraste indique rechazar $H_{0}$ para un valor dado de $\theta$ es decir, 
-$\operatorname{Potencia}(\theta) = P(\textbf{X} \in RC | \theta)$
----
-
-## Contrastes de hipótesis
-
-La función potencia nos da la probabilidad de que el estadístico de prueba se encuentre en la región crítica para un valor dado de $\theta$. Un contraste ideal, pero imposible en la práctica, sería tal que siempre rechace $H_{0}$ cuando este es falso y que no lo rechace cuando es cierto. Es decir, queremos que la Potencia para valores de $\theta$ en $\Omega_{0}$ sea cero mientras que para valores de $\theta$ en $\Omega_{1}$ queremos que la Potencia sea uno. De este modo estamos tomando la decisión correcta el $100\%$ de las veces. En la práctica queremos tener un contraste que tenga una función potencia lo más parecida a la función de potencia ideal. 
-
----
-
-## Contrastes de hipótesis
-
-Ejemplo de una función de potencia para un caso práctico. 
-
-![Función de potencia real](./figs/pot_real.png)
-
----
-
-
-## Contrastes de hipótesis
-
-Ejemplo de una función de potencia para el caso ideal.
-
-![Función de potencia ideal](./figs/pot_ideal.png)
+Visualmente:
+https://seeing-theory.brown.edu/frequentist-inference/es.html
 
 
 ---
 
-## Contrastes de hipótesis
+## Bootstrap
 
-Ejemplo: Sea $X_{1}, X_{2}, ... , X_{4}$ una muestra aleatoria de una población Normal con media desconocida $\mu$ y variancia 1. Suponga que se tienen las hipótesis $H_{0}: \mu = 1$ y $H_{1}: \mu = -1$. Para contrastar estas hipótesis se va a rechazar $H_{0}$ si $\overline{X}$ es menor a 0. Obtenga la función potencia para todos los valores de $\mu$ dentro de $\Omega$. 
-	
-Solución: En este caso todo el espacio paramétrico $\Omega$ se compone solo por dos valores de $\mu$: $\mu = 1$ y $\mu = -1$. Por lo tanto debemos calcular la Potencia para cada uno de estos valores. Empezaremos por la Potencia en $\mu = 1$:
-	
-$\operatorname{Potencia}(1) = P(\overline{X} < 0 | \mu = 1) = P\left( \frac{\overline{X} - 1}{\frac{1}{\sqrt{4}}} < \frac{0 - 1}{\frac{1}{\sqrt{4}}}  \right) = P(Z < -2) \approx 0.023$
-	
-Seguimos con la Potencia para $\mu = -1$:
-	
-$\text{Potencia}(-1) = P(\overline{X} < 0 | \mu = -1) = P\left( \frac{\overline{X} + 1}{\frac{1}{\sqrt{4}}} < \frac{0 + 1}{\frac{1}{\sqrt{4}}}  \right) = P(Z < 2) \approx 0.977$
+¿De dónde viene la expresión?
+
+
+
+![](./figs/boot.jpeg)
+
+https://www.huffpost.com/entry/pull-yourself-up-by-your-bootstraps-nonsense_n_5b1ed024e4b0bbb7a0e037d4
 
 ---
 
-## Contrastes de hipótesis
+## Dr. Bradley Efron
 
-Podríamos interpretar el primer valor diciendo que para este contraste la probabilidad de rechazar la hipótesis nula cuando esta es cierta es de 0.023, mientras que el segundo valor se puede interpretar diciendo que la probabilidad de rechazar la hipótesis nula cuando esta es falsa es de 0.977. Podemos ver que tenemos un buen contraste, ya que la probabilidad de cometer una equivocación al tomar nuestra decisión es muy baja.
-	
-Nótese que en cualquier contraste de hipótesis podemos tener cuatro posibles resultados. Podemos rechazar la hipótesis nula cuando esta es falsa, podemos rechazar la hipótesis nula cuando es verdadera, podemos no rechazar la hipótesis nula cuando esta es falsa o podemos no rechazar la hipótesis nula cuando esta es verdadera. Dos de estos resultados constituyen cometer una equivocación: rechazar la hipótesis nula cuando es cierta y no rechazar la hipótesis nula cuando es falsa. Estos errores reciben el nombre de *Error Tipo I* y *Error Tipo II*, respectivamente. 
-	
----
+https://www.youtube.com/embed/Cx5pgZCdDGM
 
-## Contrastes de hipótesis
-
-
-### Error Tipo I y Error Tipo II
-
-|		             | $H_0$ cierto  |  $H_0$ falso   |
-|:-------------- |:-------------:|:--------------:|
-|	Aceptar $H_0$  | Acierto       |  Error Tipo II |
-|	Rechazar $H_0$ | Error Tipo I  |  Acierto       |
-	
----
-
-## Contrastes de hipótesis
-
-![Error Tipo I y Error Tipo II](./figs/errors.jpg)
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Cx5pgZCdDGM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ---
 
-## Contrastes de hipótesis
+## Principios de Bootstrap
 
-Podemos definir la **probabilidad** de cometer estos dos tipos de errores en términos de la función potencia:
-	
->Definición. **Probabilidad de Error Tipo I y Error Tipo II:** Para un espacio paramétrico $\Omega$, dividido en dos subconjuntos $\Omega_0$ y $\Omega_1$, de un parámetro $\theta$, se define la probabilidad de cometer Error Tipo I, denotada como $\alpha(\delta)$ como: 
-> $$\alpha(\delta) = P(\text{rechazar } H_{0} \text{ cuando es cierta})$$
-$$\hspace{3.785cm}= P\left( \textbf{X} \in RC_{\delta} | \theta \in \Omega_0 \right) = \operatorname{Potencia}\left(\theta | \theta \in \Omega_0 \right)$$
-> Por otra parte la probabilidad de cometer Error Tipo II, denotada como $\beta(\delta)$, se define como: 
-> $$\beta(\delta) = P(\text{no rechazar } H_{0} \text{ cuando es falsa}  ) = P\left( \textbf{X} \in RC_{\delta}^{c} | \theta \in \Omega_1 \right)$$
-$$\hspace{-0.7cm}= 1 - P\left( \textbf{X} \in RC_{\delta} | \theta \in \Omega_1 \right) = 1 - \operatorname{Potencia}(\theta |\theta \in \Omega_1 )$$
-	
----
+* Si no existe información acerca de la distribución, en la muestra observada podemos encontrar información acerca de la distribución subyacente. Por lo tanto, re-muestrear la muestra es la mejor forma de acercarnos a lo que obtendríamos si se pudiera la oportunidad de re-muestrear de la distribución poblacional.
 
-## Contrastes de hipótesis
+* Suponga que una muestra $X = (X_1, \dots, X_n)^T$ es utilizada para estimar un parámetro $\theta$. Sea $\hat{\theta}= s(X)$ un estadístico para estimar el parámetro $\theta$. Para hacer inferencia acerca de $\theta$, nos interesa la distribución muestral de $\hat{\theta}$, o ciertos aspectos acerca de esa distribución: la exactitud de nuestra estimación, el intervalo de confianza, etc. En muchas aplicaciones, la distribución muestral de $\hat{\theta}$ no se puede encontrar.
 
-De la definición quedan claro algunos puntos sobre la probabilidad de Error Tipo I y la probabilidad de Error Tipo II. Primero, podemos ver que estos son funciones de $\theta$; vamos a tener valores distintos de estas probabilidades dependiendo del valor de $\theta$ que estemos evaluando. Nótese en la Figura 1 como en la gráfica de la potencia real todo aquello antes de la línea punteada corresponde a $\Omega_0$, por lo tanto la curva que está en ese dominio pertenece a $\alpha(\mu)$. Segundo, el $\alpha$ y $\beta$ no son probabilidades complementarias ya que están definidos en dos regiones distintas de $\Omega$. No obstante, estos presentan una relación inversamente proporcional, de forma que a medida de que aumenta la probabilidad de cometer un error, disminuye la probabilidad de cometer el otro. 
+* Si conociéramos la distribución poblacional $P$, podríamos sacar muestras $X^{(b)}, b=1,\dots,B$ de $P$ usando métodos de Monte Carlo para estimar la distribución muestral del estimador. Sin embargo, si $F$ es desconocido, entonces bootstrap sugiere que podemos aproximar ese muestreo re-muestreando nuestra muestra original. Así, podemos encontrar la distribución *empírica* del estimador.
+
+https://seeing-theory.brown.edu/frequentist-inference/es.html
 
 ---
 
-## Contrastes de hipótesis
+## Distribución Empírica
 
-En el ejemplo anterior podemos observar que solo tenemos un valor para la probabilidad de cada tipo de error. En ese caso:
-	
-$\alpha(1) = \operatorname{Potencia}(1) = 0.023$
-	
-$\beta(-1) = 1 - \operatorname{Potencia}(-1) = 1 - 0.977 = 0.023$
-	
-Por pura coincidencia ambos errores tienen la misma probabilidad en el ejemplo anterior. A continuación veremos otra forma de describir un contraste.
-	
-> Definición. **Tamaño del contraste**. Para un contraste de hipótesis $H_{0}: \theta \in \Omega_{0}$ y $H_{1}: \theta \in \Omega_{1}$ se denomina tamaño del contraste al valor $\alpha_c$ dado por:
->  $$\alpha_c = \operatorname{Sup}(\operatorname{Potencia}(\theta|\theta \in \Omega_{0})) = \operatorname{Sup}(\alpha(\delta))$$
->	Es decir, el tamaño de un contraste es la máxima probabilidad de cometer un Error Tipo I.
-	
----
+Para una muestra $X_1, \dots, X_n$ de variables aleatorias con valores reales, independientes con distribución $P$, definimos la distribución $\hat{P}$ como:
 
-## Contrastes de hipótesis
+$\hat{P} (A) = \frac{1}{n}\sum_{i=1}^{n} 1_A(X_i)$ para $A \subseteq \mathbb{R}$.
 
-Para la mayoría de los contrastes su tamaño se va a encontrar en los límites de $\Omega_{0}$. De no ser ese el caso podríamos derivar $\alpha(\delta)$ y ver si alcanza algún máximo dentro de su dominio. 
+$\hat{P}$ es la distribución empírica de la muestra $X$. $\hat{P}$ puede pensarse como una distribución que pone masa $1/n$ en cada observación $X_i$ (para valores que ocurren más de una vez la masa será un múltiplo de $1/n$). Entonces, $\hat{P}$ es una distribución de probabilidad discreta con un espacio efectivo de muestreo ${X_1, \dots, X_n}$.
 
-**Ejemplo:** Suponga que se selecciona una muestra aleatoria $X_{1}, X_{2}, ... , X_{n}$ sobre una distribución Uniforme en $(0,\theta)$, con $\theta$ desconocido y mayor a cero. Con esta muestra se desea contrastar las hipótesis:
-	
-$$H_{0}: 3 \leq \theta \leq 4 \qquad \qquad \ \  \Omega_{0} = \left[3,4\right]$$
-
-$$H_{1}: \theta < 3 \quad o \quad \theta > 4 \qquad \qquad\qquad \Omega_{1} = \left]0,3\right[ \cup \left]4,+\infty\right[$$
-	
-En este caso utilizaremos a $X_{(n)}$ para crear la región crítica. Sabemos que $X_{(n)}$ es el estimador de máxima verosimilitud de $\theta$ y que siempre será menor a $\theta$ (aunque con muestras grandes se va a aproximar mucho). Supongamos que por estas razones vamos a aceptar $H_0$ si $2.9 \leq X_{(n)} \leq 3.9$ y se rechaza en caso contrario. Entonces la región crítica del contraste incluye todas las muestras $\textbf{X}$ para las cuales $X_{(n)} < 2.9$ o $X_{(n)} > 3.9$, es decir, $RC_{\delta} = \left\lbrace \textbf{X} |X_{(n)} \in \textbf{X} \text{ y } X_{(n)} < 2.9 \text{ o } X_{(n)} > 3.9 \right\rbrace$. 
+Puede demostrarse que $\hat{P}$ es el estimador máximo verosimil no paramétrico de $P$, lo cual justifica que podamos estimar $P$ con $\hat{P}$ sin tener otra información acerca de P (como por ejemplo si P pertenece a una familia paramétrica).
 
 ---
 
+## Distribución Empírica
 
-## Contrastes de hipótesis
+### Resultados teóricos
 
-Determine una expresión para la función potencia de este contraste. 
-	
-**Solución:** Recordemos que la función potencia se define como la probabilidad de rechazar la hipótesis nula, es decir, de que la muestra se encuentre en la región crítica:
-	
-$\operatorname{Potencia}(\theta) = P(\textbf{X} \in RC_{\delta} ) = P\left(X_{(n)} < 2.9 \text{ o } X_{(n)} > 3.9 \right) =$
+Sea $A \subseteq \mathbb{R}$ (tal que $P(A)$ está definido), entonces tenemos: $\hat{P}(A) \xrightarrow{d} P(A)$ cuando $n \rightarrow \infty$.
 
-$P\left(X_{(n)} < 2.9\right) + P\left(X_{(n)} > 3.9\right) = F_{X_{(n)}}(2.9) + 1 - F_{X_{(n)}}(3.9)$
-	
-Recordemos que en este caso $X_{(n)} \sim \operatorname{Potencial}(n,\theta)$, por lo tanto su función de distribución viene dada por:
-	
-$$F_{X_{(n)}}(x) = \begin{cases} 0\quad si \quad x \leq 0 \\	\left(\dfrac{x}{\theta}\right)^{n} \quad si\quad 0<x<\theta \\ 1\quad si\quad x \geq \theta \end{cases}$$
+De forma alternativa, podemos ver este resultado  como una consecuencia directa de La Ley de los Grandes Números, ya que:
 
----
+$$n \hat{P}(A) = \sum_{i=0}^{n} 1_A(X_i) \sim Bin(n, P(A))$$
 
-## Contrastes de hipótesis
+por lo que $\hat{P}(A)$ tiende a su valor esperado $P(A)$ cuando $n \rightarrow \infty$.
 
-La evaluación de la expresión anterior va a depender del valor de $\theta$, ya que dependiendo de este se va a evaluar la función de distribución en distintos argumentos. En este ejemplo tenemos tres casos distintos:
-	
-Si $0 < \theta \leq 2.9$:
-	
-$F_{X_{(n)}}(2.9) = 1 \qquad \text{y} \qquad F_{X_{(n)}}(3.9) = 1$
+El teorema de Glivenko-Cantelli formaliza este resultado:
 
-$\Rightarrow \operatorname{Potencia}(\theta) = 1 + 1 - 1 = 1$
-	
-Si $2.9 \leq \theta \leq 3.9$:
-	
-$F_{X_{(n)}}(2.9) = \left(\dfrac{2.9}{\theta}\right)^{n}  \quad \text{y} \quad F_{X_{(n)}}(3.9) = \left(\dfrac{3.9}{\theta}\right)^{n} = 1$
-
-$\Rightarrow \operatorname{Potencia}(\theta) = \left(\dfrac{2.9}{\theta}\right)^{n} + 1 - 1 = \left(\dfrac{2.9}{\theta}\right)^{n}$
+$$\sup_{A\in I}|\hat{P}(A)-P(A)| \rightarrow 0 \quad \text{si} \quad n \rightarrow \infty$$
+donde $I$ es el conjunto de intervalos en $\mathbb{R}$. En otras palabras, la distribución P(A) puede ser aproximada por $\hat{P}(A)$ igual de bien para toda $A\in I$.
 
 ---
 
-## Contrastes de hipótesis
-	
-Finalmente, si $\theta > 4$:
-	
-$F_{X_{(n)}}(2.9) = \left(\dfrac{2.9}{\theta}\right)^{n}  \quad \text{y} \quad F_{X_{(n)}}(3.9) = \left(\dfrac{3.9}{\theta}\right)^{n}$
+## Distribución Empírica
 
-$\Rightarrow \operatorname{Potencia}(\theta) = \left(\dfrac{2.9}{\theta}\right)^{n} + 1 - \left(\dfrac{3.9}{\theta}\right)^{n}$
+### Muestras de una distribución empírica $\hat{P}$
 
-De esta manera podemos resumir la función potencia en la siguiente expresión:
-	
-$\operatorname{Potencia}(\theta) = \begin{cases} 1 \quad si \quad 0 < \theta \leq 2.9 \\ \left(\dfrac{2.9}{\theta}\right)^{n} \quad si \quad 2.9 < \theta \leq 3.9 \\ \left(\dfrac{2.9}{\theta}\right)^{n} + 1 - \left(\dfrac{3.9}{\theta}\right)^{n} \quad si \quad \theta > 3.9 \end{cases}$
-	
+Suponga que queremos una muestra iid de $\hat{P}$: $X^* = (X^*_1, \dots, X^*_n)^T$. Como mencionamos antes, $\hat{P}$ pone masa $1/n$ en cada observación $X_i$. Entonces, cuando muestreamos de $\hat{P}$, la observación i-ésima $X_i$ en la muestra original puede ser seleccionada con probabilidad $1/n$. Esto nos lleva al siguiente proceso:
 
----
+* Seleccione $i_1, \dots, i_n$ independientemente de una distribución uniforme en ${1, \dots, n}$.
 
-## Contrastes de hipótesis
+* Ahora haga $X_{j}^{*} = X_{i_{j}}$ y $X^* = (X^*_1, \dots, X^*_n)^T$.
 
-Podemos graficar la forma de esta función para un tamaño de muestra dado. La siguiente figura muestra la forma de la Potencia con $n = 10$, con $\Omega_{0}$ delimitado por las líneas rojas punteadas.
-
-![Función potencia con $n = 10$](figs/potenciaEJ2.jpeg)
+En otras palabras, saque una muestra aleatoria con reemplazo de la muestra original $X_1, \dots, X_n$.
 
 ---
 
-## Contrastes de hipótesis
+## El Principio de Bootstrap
 
-- De la Figura anterior podemos detallar que el tamaño de contraste se encuentra cuando $\theta = 3$. Con $n = 10$ tenemos que el tamaño del contraste sería:
-$$\alpha_c = \operatorname{Potencia}(3) = \left(\frac{2.9}{3}\right)^{10} = 0.712$$
-	
----
+* $X = (X_1, \dots, X_n)^T$ es una muestra aleatoria de una distribución $P$.
 
-## Contrastes de hipótesis
+* $\theta = t(P)$ es algún parámetro de la distribución.
 
-Podemos decir que para una muestra de tamaño 10, este contraste tiene una máxima probabilidad de cometer un Error Tipo I de 0.712. Como un ejemplo adicional podemos calcular la probabilidad de cometer Error Tipo 2 para algún valor de $\theta$ en $\Omega_{1}$. Para propósitos del ejemplo usaremos $\theta = 5$:
-	
-$$\beta(5) = 1 - \operatorname{Potencia}(5) = 1 - \left( \left(\dfrac{2.9}{5}\right)^{10} + 1 - \left(\dfrac{3.9}{5}\right)^{10} \right) = 0.079$$
-	
-Un uso que tiene el tamaño como una característica del contraste es que podemos definir una región crítica para un tamaño de contraste dado. 
+* $\hat{\theta} = s(X)$ es un estimador para $\theta$.
+
+La distribución muestral de $\hat{\theta}$ es entonces estimada por su equivalente de bootstrap:
+
+$$\hat{P}(\hat{\theta} \in A) = P^*(\hat{\theta} \in A)$$
 
 ---
 
-## Contrastes de hipótesis
+## El Principio de Bootstrap
 
-**Ejemplo:** Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria tal que $X_j \sim N(\mu, 1)$. Se desea contrastar las hipótesis $H_{0}: \mu = 5$ contra la alternativa $H_{1}: \mu > 5$. La región crítica se define como $RC_{\delta} = \left\lbrace \textbf{X} | \overline{X} > c \right\rbrace$. Encuentre el valor de $c$ para que este contraste tenga un tamaño igual a 0.10. 
-	
-**Solución:** Note que el contraste se rechaza cuando $\overline{X}$ es mayor que $c$, por lo tanto podemos definir la potencia de la siguiente forma:
-	
-$\text{Potencia}(\mu) = P(\overline{X} > c | \mu) = P\left( Z > \sqrt{n}(c-\mu) \right)$
-	
-Sabemos que el tamaño del contraste se define como la máxima probabilidad de cometer Error Tipo I, pero en este caso solo tenemos una probabilidad de Error Tipo I, que sucede cuando $\mu = 5$. Por lo tanto:
-	
-$\alpha_c = \operatorname{Potencia}(5) = P\left( Z > \sqrt{n}(c-5) \right) = 0.10$
+![Diagrama](figs/BOOT.png)
+
 
 ---
 
-## Contrastes de hipótesis
 
-Podemos utilizar las tablas para buscar el valor de la normal estándar que acumula a su derecha una probabilidad de 0.10 (que equivale a una probabilidad acumulada a su izquierda de 0.90). Por lo tanto tenemos que 
-	
-$\sqrt{n}(c-5) = 1.28$ 
 
-$\Rightarrow c = 5 + \frac{1.28}{\sqrt{n}}$
-	
-Una observación importante de resaltar es que si tenemos una distribución de probabilidad discreta no es posible encontrar un tamaño de contraste para cualquier valor de $c$, ya que las variable aleatorias discretas tienen probabilidades acumuladas a solo ciertos valores. Esto se puede solucionar por medio de contrastes aleatorizados, que dependen del lanzamiento de una moneda con cierta probabilidad de caer escudo, o con bootstrap (que veremos al final de esta sección). 
+# Ejemplo concreto
+
+```{r, CommuteAtlanta}
+CommuteAtlanta <- read.csv2("data/CommuteAtlanta.csv")
+```
+
+
+```{r, echo=FALSE}
+knitr::kable(head(CommuteAtlanta))
+```
+
 
 ---
 
-## Contrastes de hipótesis
 
-Otro punto importante de destacar es que en la práctica usualmente utilizamos la hipótesis nula puntual $H_{0}: \theta = \theta_0$ ya que esta no pierde generalidad. Supongamos que se quiere contrastar $H_{0}: \theta \leq \theta_0$ contra $H_{1}: \theta > \theta_0$. En casi todos los casos la función potencia de un contraste es monótona en todo el dominio de $\theta$; en este caso sería una función creciente. Ya que el tamaño se define como la máxima potencia en $\Omega_{0}$ esto va a suceder en su extremo derecho, el cual es $\theta_0$. Esto ocasiona que el contraste tenga el mismo tamaño a que si la hipótesis nula hubiera sido $H_{0}: \theta = \theta_0$. Por lo tanto en la práctica es más común encontrar la hipótesis nula formulada en $\theta_0$, siendo este el valor de $\Omega_{0}$ más próximo a $\Omega_{1}$. 
+# La aproximación de Monte Carlo
+
+* En algunas ocasiones la forma de la distribución poblacional es conocida, pero la evaluación de la distribución exacta de la distribución muestral no es calculable.
+
+* El procedimiento consiste en:
+
+    - Escoja B muestras bootstrap independientes $X^{*(1)}, \dots, X^{*(B)}$ de $\hat{P}$: $X_1^{*(b)}, \dots, X^{*(b)}_n \sim_{iid} \hat{P}$ para $b = 1, \dots, B$.
+    - Evalúe las repeticiones de bootstrap: $\hat{\theta}^{*(b)}=s(X^{*(b)})$.
+    - Estime la distribución muestral de $\theta$ con la distribución empírica de las repeticiones bootstrap: $\hat{\theta}^{*(1)}, \dots,\hat{\theta}^{*(B)}$:
+
+    $$\hat{P}(\hat{\theta}(A)) = \frac{1}{B}\sum_{b=1}^{B} 1_A(\hat{\theta}^{*(b)})$$
+
+para conjuntos apropiados de $A \subseteq \mathbb{R}^p$ (si $\hat{\theta} \in \mathbb{R}^p$).
+
+Pero, ¿y si solo queremos una cantidad de esa distribución muestral? pues hay fórmulas para calcularlas directamente.
+
+
+---
+
+## Bootstrap para calcular errores estándar
+
+Sea $\hat{\theta}$ un estimador de $\theta$ y suponga que queremos conocer el error estándar de $\hat{\theta}$. Un error estándar estimado de bootstrap se puede obtener con el siguiente algoritmo:
+
+  - Escoja B muestras bootstrap independientes $X^{*(1)}, \dots, X^{*(B)}$ de $\hat{P}$: $X_1^{*(b)}, \dots, X^{*(b)}_n \sim_{iid} \hat{P}$ para $b = 1, \dots, B$.
+  - Evalúe las repeticiones de bootstrap: $\hat{\theta}^{*(b)}=s(X^{*(b)})$.
+  - Estime los errores estándar con la desviación estándar de las B repeticiones:
+
+$$\hat{s}_{boot} = \sqrt{\frac{1}{B-1}\sum_{b=1}^{B}\left(\hat{\theta}^{*(b)}-\hat{\theta}^{*(.)}\right)^2}$$
+
+donde $\hat{\theta}^{*(.)} = \frac{1}{B}\sum_{b=1}^{B}\hat{\theta}^{*(b)}$.
+
+---
+
+# Estimadores usuales
+
+```{r, assign-Time-to-x}
+x <- CommuteAtlanta$Time
+(n <- length(x))
+```
+```{r, varTime}
+(Tn <- var(x))
+```
+
+
+---
+
+# Muestra bootstrap
+```{r}
+B <- 1000
+Tboot_b <- NULL
+for(b in 1:B) {
+  xb <- sample(x, size = n, replace = TRUE)
+  Tboot_b[b] <- var(xb)
+}
+Tboot_b[1:10]
+```
+
+---
+
+# Distribución $\hat{P}$
+
+
+```{r}
+hist(Tboot_b, main= "Distribución de var(X)*")
+```
+
+
+---
+
+
+## Bootstrap para calcular el sesgo
+
+Suponga que queremos estimar un parámetro $\theta = t(P)$ con el estadístico $\hat{\theta}= s(X)$. El sesgo de un estimador $\hat{\theta}$ está definido como:
+
+$$bias(\hat{\theta})= E(\hat{\theta})-\theta$$
+
+Si sustituimos $P$ por la distribución empírica $\hat{P}$, entonces obtenemos el estimado bootstrap del sesgo:
+
+$$\widehat{bias(\hat{\theta})}= bias^*(\hat{\theta}^*) =  E(\hat{\theta}^*)-\hat{\theta}$$
+donde $\hat{\theta}$ es el estimador empírico de la muestra.
+
+---
+
+# Cálculo de estadísticos bootstrap
+
+```{r, }
+(Tboot <- mean(Tboot_b))
+```
+
+```{r, }
+(Vboot <- var(Tboot_b))
+```
+
+```{r, }
+(sdboot <- sqrt(Vboot))
+```
+
+El sesgo bootstrap es
+
+```{r}
+mean(Tboot_b) - Tn
+```
+
+---
+
+
+
+## Bootstrap para calcular el intervalo de confianza
+
+Si tenemos las repeticiones bootstrap $\hat{\theta}^{*(1)}, \dots,\hat{\theta}^{*(B)}$, podemos estimar la distribución muestral de $\hat{\theta}$. A partir de esto, podemos construir intervalos de confianza para $\theta$. Hay cuatro opciones: IC estándar, IC bootstrap t, IC percentiles, IC percentiles corregido por sesgo.
+
+* IC normal: Utilizamos el resultado del TLC para decir que $\hat{\theta}$ es distribuido aproximadamente normal con media $\theta$ y variancia $s(\hat{\theta})^2$. Entonces, un IC $(1-\alpha)$ aproximado para $\theta$ está dado por:
+
+$$\hat{\theta} \pm z_{\alpha/2} \hat{s}_{boot}(\hat{\theta})$$
+
+
+---
+
+
+
+# Cálculo de IC normal
+
+
+```{r, }
+(z <- qnorm(1 - 0.05 / 2))
+```
+
+```{r, }
+c(Tn - z * sdboot, Tn + z * sdboot)
+```
+---
+
+
+## Bootstrap para calcular el intervalo de confianza
+
+
+* IC bootstrap studentizado: Utilizando el mismo resultado anterior, pero ahora usando $\hat{s}_X(\hat{\theta})$ como estimador de $s(\hat{\theta})$ basado en la muestra $X$. De las muestras bootstrap $X^{*(b)}$ se calcula:
+
+$$Z^{*(b)} = \frac{\hat{\theta}^{*(b)}-\hat{\theta}}{\hat{s}_{X^*}(\hat{\theta})}$$
+
+De los valores $Z^{*(b)}$, podemos estimar el valor crítico $z_{\alpha/2}$ como $\hat{z}_{\alpha/2}$ tal que:
+
+$$\frac{1}{B} \sum_{b=1}^{B} 1_{[ Z^{*(b)} \leq \hat{z}_{\alpha} ]} \approx \alpha$$
+
+Entonces:
+
+$$\left[\hat{\theta} - \hat{z}_{1-\alpha /2}s(\hat{\theta}), \hat{\theta} -\hat{z} _{\alpha /2}s(\hat{\theta})\right]$$
+
+---
+
+# Cálculo de IC bootstrap studentizado
+
+```{r,cache=TRUE}
+B <- 1000
+Tboot_b <- NULL
+Tboot_bm <- NULL
+sdboot_b <- NULL
+for (b in 1:B) {
+  xb <- sample(x, size = n, replace = TRUE)
+  Tboot_b[b] <- var(xb)
+  for (m in 1:B) {
+    xbm <- sample(xb, size = n, replace = TRUE)
+    Tboot_bm[m] <- var(xbm)
+  }
+  sdboot_b[b] <- sd(Tboot_bm)
+}
+z_star <- (Tboot_b - Tn) / sdboot_b
+```
+
+---
+
+```{r}
+hist(z_star)
+```
+
+---
+
+
+```{r }
+c(Tn - quantile(z_star, 1 - 0.05 / 2) * sdboot,
+  Tn - quantile(z_star, 0.05 / 2) * sdboot)
+```
+
+---
+
+
+## Bootstrap para calcular el intervalo de confianza pivotales
+
+
+El intervalo de confianza pivotal de tamaño $1-\alpha$ es
+
+$$\left(2\widehat{\theta}_{n}-\widehat{\theta}_{L},2\widehat{\theta}_{n}-\widehat{\theta}_{U}\right)$$
+
+
+donde
+
+
+
+$$\hat{P}^*(\hat{\theta}^* \leq \hat{\theta}_L) = \frac{1}{B} \sum_{b=1}^{B} 1 {[ \hat{\theta}^{*(b)} \leq \hat{\theta}_{L} ]} \approx 1-\alpha/2$$
+
+$$\hat{P}^*(\hat{\theta}^* \leq \hat{\theta}_U) = \frac{1}{B} \sum_{b=1}^{B} 1 {[ \hat{\theta}^{*(b)} \leq \hat{\theta}_{U} ]} \approx \alpha/2$$
+
+
+El $2\hat{\theta}$ corrige el error por sesgo.
+
+La prueba de este resultado está en *All of nonparametric statistics* de Larry Wassermann, p.32.
+
+<!-- * IC percentiles corregido por sesgo. La opción anterior asume que el área debajo de la curva en las dos colas es igual. Si el estimador $\hat{\theta}$ no es la mediana de la distribución bootstrap, entonces esta condición no se cumple. En este caso debemos corregirlo, y hay varias opciones que no serán vistas en esta ocasión. -->
+
+
+---
+
+# IC pivotal
+
+```{r, }
+c(2 * Tn - quantile(Tboot_b, 1 - 0.05 / 2),
+  2 * Tn - quantile(Tboot_b, 0.05 / 2))
+```
+
+
+---
+
+
+## Referencias:
+
+* [UC3M - español](http://halweb.uc3m.es/esp/Personal/personas/jmmarin/esp/Boots/tema1BooPres.pdf)
+
+* [Chicago - inglés](http://galton.uchicago.edu/~eichler/stat24600/Handouts/bootstrap.pdf)
+
+* Efron, B.; Tibshirani, R. (1993). An Introduction to the Bootstrap. Boca Raton, FL: Chapman & Hall/CRC. ISBN 0-412-04231-2.
+
+---
+
+## Práctica de Intervalos de Confianza
+
+1. La vida útil de cierto aparato de aire acondicionado sigue una distribución de Rayleigh, cuya función de densidad viene dada por la fórmula:
+
+$f(x|\theta) = \frac{x}{\theta^2} \exp{\left( \frac{-x^2}{2\theta^2} \right)} 1_{ \left( x>0 \right)}$
+
+Suponga que $X_1, X_2, \dots , X_n$ es una muestra aleatoria correspondiente a la vida útil de $n$ aparatos de aire acondicionado:
+
+a) Determine un estadístico suficiente para $\theta$.
+
+b)	Considere el pivote $\frac{1}{\theta^2} \sum_{j=1}^{n}X_j^2$ para construir un intervalo de confianza para $\theta$ con una confianza del $(1- \alpha)\%$.
+
+c)	¿Cuál es la relación entre el estimador de máxima verosimilitud obtenido en b) con la estimación por intervalo obtenido en c).
+
+d)	Considere la muestra aleatoria de $n = 15$ datos de una distribución $U(0,1)$ que se ofrece, para simular una muestra aleatoria de $15$ datos de una distribución de Rayleigh con $\theta =10$. Encuentre un intervalo de confianza del 95% para estimar $\theta$.
+
+---
+
+## Práctica de Intervalos de Confianza
+
+```{r}
+data <- c(0.466, 0.589, 0.097, 0.809, 0.214, 0.315, 0.971, 0.298, 0.005, 0.126,
+          0.019, 0.553, 0.385, 0.232, 0.989)
+```
+
+
+2. Sea $X_1, X_2, \dots , X_n$ una muestra aleatoria de una población de Poisson con parámetro $\lambda$.
+
+a)	Utilice la Desigualdad de Cramer-Rao, y la información de Fisher para demostrar que $\bar{X}$, es un estimador de variancia mínima para estimar $\lambda$.
+
+b)	Demuestre que la variable $U = \frac{\bar{X}-\lambda}{\sqrt{\bar{X}/n}}$ tiene distribución que converge a una normal estándar.
+
+c)	Utilice la variable $U$ del inciso anterior, como pivote para construir un intervalo de confianza para $\lambda$ con probabilidad del $95\%$.
+
+---
+
+## Práctica de Intervalos de Confianza
+
+
+3. Si $Y_1, Y_2, \dots , Y_n$ corresponden a una muestra aleatoria de una distribución gamma con parámetros $\alpha$ desconocido y $\beta$ desconocido.
+
+a)	Demuestre que la variable $U = \frac{2 \sum_{j=1}^{n}Y_j}{\beta}$ puede ser utilizada como pivote para estimar el valor de $\beta$ y construya un intervalo de confianza de $1-\alpha$ para estimar el valor $\beta$.
+
+b)	Por teorema del límite central, la variable aleatoria $Z = \frac{\bar{X}-E(\bar{X})}{\sqrt{Var(\bar{Y})}}$ tiene distribución que converge a una $N(0,1)$. Supongamos que $n$ es suficientemente grande, determine la variable aleatoria $Z$ vinculada con este problema, que puede ser utilizada como pivote para estimar el valor de $\beta$. Construya un intervalo de confianza de  para estimar el valor $\beta$.
+
+---
+
+## Práctica de Intervalos de Confianza
+
+c)	Considere la siguiente muestra aleatoria que pertenece a una distribución gamma con $\alpha = 3$:
+
+```{r}
+data <- c(66.8, 26.6, 8.7, 25.9, 17.0, 17.4, 9.2, 19.6, 27.8, 33.3)
+```
+
+Utilice los resultados obtenidos en a) y b) para determinar dos intervalos de confianza del $95\%$ para estimar $\beta$, uno para cada método. Compare los resultados. ¿A qué atribuye las diferencias?
+
 
 ---
 class: center, middle
 
 # ¿Qué discutimos hoy?
 
-Contrastes de hipótesis - introducción
-
-
+Bootstrap: concepto, ejemplos y definiciones. IC utilizando bootstrap
 

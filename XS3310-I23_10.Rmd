@@ -1,9 +1,9 @@
 ---
 title: "XS3310 Teoría Estadística"
-subtitle: "I Semestre 2023"
-author:
+subtitle: "I Semestre 2023"  
+author: 
   - "Escuela de Estadística"
-date: '25-04-2023'
+date: '21-04-2023'
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -23,514 +23,228 @@ class: center, middle
 
 # ¿Qué hemos visto hasta ahora?
 
-Todo sobre estimadores puntuales + intro a los pivotes. Algunos intervalos de confianza clásicos.
+Todo sobre estimadores puntuales + intro a los pivotes.
 
 # ¿Qué vamos a discutir hoy?
 
-Otros intervalos de confianza clásicos. Intervalos de confianza para muestras grandes. Funciones estabilizadores de varianza.
+Intervalos de confianza clásicos.
 
----
-
-
-# Técnica del pivote
-
-**La semana pasada:**
-
-Esta técnica consiste en definir una variable aleatoria, $U$, que llamaremos **pivote**. El pivote debe cumplir con las siguientes condiciones:
-
-* Para una muestra aleatoria $X_{1}, X_{2}, ... , X_{n}$ y un parámetro desconocido $\theta$, $U$ debe estar definido en términos de los elementos de la muestra aleatoria y del parámetro desconocido, donde el parámetro desconocido $\theta$ sea la única cantidad desconocida.
-
-* La distribución de probabilidad de U debe ser conocido y no depender de $\theta$.
-
-* Se recomienda iniciar con un estadístico suficiente
-
-* Se puede usar como guía las distribuciones con parámetros de posición - escala.
-
----
-
-
-# Ejemplo de un IC para $\mu$ cuando la varianza es desconocida.
-
-Se toma el tiempo en milisegundos para que los nervios se recuperen después de administrar una droga a 4 ratones.
-
-$$1.7, 1.6, 1.8, 1.9$$
-
-Si se supone que la población es nornal, entonces calcule un intervalo de confianza para  el promedio este tiempo a un 90% de confianza.
-
----
-
-**Solución:**
-
-Para este caso tenemos que $\bar{X} = 1.75$ y $S^{2} = 0.017$ y $S = \sqrt{0.017} = 0.13$.
-
-En este caso vamos a tomar una $t_{0.05,3} = 2.353 \ (\alpha/2 = 0.1/2 = 0.05$)
-
-\begin{align*}
-& P\left(\bar{X}- t_{0.05,3} \cdot  \frac{s}{\sqrt{4}} \leq \mu \leq \bar{X}+ t_{0.05,3} \cdot  \frac{s}{\sqrt{n}}\right) \\
-& = P\left(1.75- 2.353 \cdot \frac{0.13}{2}  \leq \mu \leq 1.75+ 2.353 \cdot  \frac{0.13}{2} \right) \\
-&= P\left(1.597  \leq \mu \leq 1.903 \right) = 0.9.
-\end{align*}
-
-Por lo que, con una confianza del 90%, el intervalo $[1.597, 1.903]$ contiene al verdadero valor de $\mu$.
-
----
-
-
-## Ejemplos de un intervalo de confianza para la diferencia de medias
-
-En un hospital se realiza un estudio sobre la influencia del estrés en el peso
-de los bebés al nacer. Se consideran dos grupos de mujeres embarazadas: aquellas
-que viven en el campo y aquellas que viven en la ciudad, y se obtienen los
-siguientes datos sobre el peso de sus hijos.
-
-
-$$\begin{equation*} \begin{array}{|c|c||c|c|} \hline & \text { Muestra } & \begin{array}{c} \text { Peso medio } \\ \text { de los bebés } \end{array} & \begin{array}{c} \text { Desviación } \\ \text { estándar } \end{array} \\ \hline \text { campo } & \mathrm{n}_{1}=320 & \overline{\mathrm{X}}_{1}=3.8 & \sigma_{1}=0.6 \\ \hline \text { ciudad } & \mathrm{n}_{2}=240 & \overline{\mathrm{X}}_{2}=3.4 &\sigma_{2}=0.8 \\\hline\end{array}\end{equation*}$$
-
-
-Asumiendo que los datos son normales, determine cómo influye que la madre viva en el campo o en la ciudad en el peso de su hijo al nacer, utilizando un intervalo de confianza para la diferencia de medias con un nivel de confianza del 95%.
-
----
-
-**Solución:** 
-
-Intervalo de confianza del $95 \%$ :
-
-$1-\alpha=0.95 \Rightarrow \alpha=1-0,95=0,05$
-
-Buscamos en el la tabla de normales aquel valor que cumpla $P(Z\leq z_{\alpha / 2}) = 0.05/2 = 0.025$
-
-Obtenemos que $\Rightarrow z_{\alpha / 2}=z_{0.025}=1.96$
-
-$$\begin{align*}&\left(\left(\overline{\mathrm{X}}_{1}-\overline{\mathrm{X}}_{2}\right)-z_{\alpha / 2}\sqrt{\frac{\sigma_{1}^{2}}{\mathrm{n}_{1}}+\frac{\sigma_{2}^{2}}{\mathrm{n}_{2}}},\left(\overline{\mathrm{X}}_{1}-\overline{\mathrm{X}}_{2}\right)+z_{\alpha / 2}\sqrt{\frac{\sigma_{1}^{2}}{\mathrm{n}_{1}}+\frac{\sigma_{2}^{2}}{\mathrm{n}_{2}}}\right)\\&=\left((3.8-3.4)-1.96 \sqrt{\frac{0.6^{2}}{320}+\frac{0.8^{2}}{240}},(3.8-3.4)+1.96\sqrt{\frac{0.6^{2}}{320}+\frac{0.8^{2}}{240}}\right)\\&=[0.279,0.520]\end{align*}$$
 
 
 ---
 
+### Cómo leer  los cuantiles de las tablas en los libros 
 
-## Intervalos de confianza para poblaciones normales
+Algunas tablas en los libros se expresan sus cuantiles de formas diferentes. 
 
-### Intervalo de confianza para $\sigma^2$
+Hay que tener mucho cuidado si acumulan hacia la izquierda o hacia la derecha.
 
-Nos interesa constuir un intervalo de confianza de probabilidad $1-\alpha$ para la variancia poblacional, $\sigma^2$. En este caso nuestra población sigue siendo Normal con parámetros $\mu$ y $\sigma^2$, donde ambos parámetros son desconocidos. Si queremos obtener una estimación por intervalo para $\sigma^2$ debemos primero obtener una variable aleatoria que funcione como pivote. En este caso esta variable aleatoria debe estar en términos de $X_{1}, X_{2}, ... , X_{n}$ y de $\sigma^2$, y su distribución no puede depender de $\sigma^2$. Con lo que conocemos de transformaciones a partir de muestras Normales podríamos utilizar el siguiente pivote:
-
-$$U = \frac{(n-1)S^{2}}{\sigma^2}$$
-
----
-
-## Intervalo de confianza para $\sigma^2$
-
-Sabemos que $U \sim \chi^{2}(n-1)$. Por lo tanto esta variable aleatoria cumple todas las condiciones necesarias para ser un pivote. Ahora debemos encontrar los valores de $a$ y $b$ tales que:
-
-$$P(U < a) = \frac{\alpha}{2} \qquad P(U > b) = \frac{\alpha}{2}$$
-
- El valor de $a$ es aquel que acumula $1-\frac{\alpha}{2}$ a su derecha, mientras que el valor de $b$ solo acumula $\frac{\alpha}{2}$ a la derecha. Por lo tanto tenemos que $a = \chi^{2}_{1-\frac{\alpha}{2}, n-1}$ y $b = \chi^{2}_{\frac{\alpha}{2}, n-1}$. En este caso no hay simetría que podamos utilizar para poner $a$ en términos de $b$ como hemos estado haciendo anteriormente. Ahora despejamos $\sigma^2$:
-
-$$\begin{align*}P(a \leq U \leq b) &= P\left( \chi^{2}_{1-\frac{\alpha}{2}, n-1}  \leq\frac{(n-1)S^{2}}{\sigma^2} \leq \chi^{2}_{\frac{\alpha}{2}, n-1} \right) \\
-&= P\left( \frac{(n-1)S^{2}}{\chi^{2}_{\frac{\alpha}{2}, n-1}}  \leq \sigma^2 \leq  \frac{(n-1)S^{2}}{\chi^{2}_{1-\frac{\alpha}{2}, n-1}}  \right) = 1 - \alpha\end{align*}$$
-
-
----
-
-## Intervalo de confianza para $\sigma^2$
-
-Por lo tanto, con una confianza del $(1 - \alpha)\%$ el intervalo $\left[ \frac{(n-1)S^{2}}{\chi^{2}_{\frac{\alpha}{2}, n-1}}  ,  \frac{(n-1)S^{2}}{\chi^{2}_{1-\frac{\alpha}{2}, n-1}} \right]$ incluye el valor de $\sigma^2$.
-
-Ahora volvemos al caso donde tenemos dos poblaciones independientes, una de las cuales es $N(\mu_{1}, \sigma^{2}_{1})$ y la otra es $N(\mu_{2}, \sigma^{2}_{2})$. Supongase que se obtiene una muestra $X_{1}, X_{2}, ... , X_{n}$ de la primera población y otra $Y_{1}, Y_{2}, ... , Y_{m}$ de la segunda. Nuestro interés yace en encontrar una estimación por intervalo, con probabilidad $1-\alpha$, para el parámetro $\frac{\sigma^2_{1}}{\sigma^2_{2}}$.
-
-
----
-
-## Intervalo de confianza para $\frac{\sigma^2_{1}}{\sigma^2_{2}}$
-
-
-Debemos construir un parámetro que incluya las dos muestras aleatorias y al
-parámetros desconocido. En el caso anterior habiamos usado una $\chi^{2}$-cuadrado como pivote ya que esta incluía la muestra aleatoria y la varianza poblacional. Podriamos pensar en hacer lo mismo para cada muestra y de alguna forma juntar ambas $\chi^{2}$-cuadrado. Para ello recordemos la forma de una distribución F:
-                                                                                                                                                                                                        $$F =\frac{\frac{V}{v_1}}{\frac{W}{v_2}}$$
-
-donde $V \sim \chi^{2}(v_1)$ y $W \sim \chi^{2}(v_2)$. Sabemos de antemano que $\frac{(n - 1)S^{2}_{1}}{\sigma^{2}_{1}} \sim \chi^{2}(n-1)$ y $\frac{(m - 1)S^{2}_{2}}{\sigma^{2}_{2}} \sim \chi^{2}(m-1)$. Podemos usar estas variables aleatorias en la construcción de una F que incluya el parámetro de interés:
-
-$$F = \frac{\frac{\frac{(n - 1)S^{2}_{1}}{\sigma^{2}_{1}}}{n-1}}{\frac{\frac{(m - 1)S^{2}_{2}}{\sigma^{2}_{2}}}{m-1}} = \frac{S^{2}_{1}}{S^{2}_{2}} \cdot \frac{\sigma^{2}_{2}}{\sigma^{2}_{1}} \sim F(n-1,m-1)$$
-
-
----
-
-## Intervalo de confianza para $\frac{\sigma^2_{1}}{\sigma^2_{2}}$
-
-
-Esta variable aleatoria cumple todas las condiciones para ser un pivote y podemos usarlo para encontrar los valores de $a$ y $b$. Recordemos que se debe cumplir que $P(F<a) = P(F>b) = \frac{\alpha}{2}$. Podemos hacer uso de las tablas de la F, la cual acumula hacia la derecha. Por lo tanto tenemos que $a$ es el valor F que acumula $1-\frac{\alpha}{2}$ a la derecha mientras que $b$ acumula $\frac{\alpha}{2}$. Podemos notar estos valores como
-
-$a = F_{1-\frac{\alpha}{2}, n-1, m-1}   \qquad  b = F_{\frac{\alpha}{2}, n-1, m-1}$
-
-No obstante, vemos que hay un problema al usar las tablas para encontrar $F_{1-\frac{\alpha}{2}, n-1, m-1}$ si la probabilidad que se busca es mayor a 0.20, el cual es el caso en la gran mayoría de los casos. Para ello podemos hacer uso de una propiedad de la distribución F, que dice que la inversa multiplicativa de una F también se distribuye F pero con los grados de libertad del numerador y denominador intercambiados. Por lo tanto podemos decir que: $a = F_{1-\frac{\alpha}{2}, n-1, m-1} = F^{-1}_{\frac{\alpha}{2}, m-1, n-1}$.
-
----
-
-## Intervalo de confianza para $\frac{\sigma^2_{1}}{\sigma^2_{2}}$
-
-Finalmente podemos proceder a despejar el valor del parámetro de interés de la expresión $P(a \leq F \leq b)$ y obtenemos el siguiente intervalo:
-
-$$\left[ \frac{\frac{S^{2}_{1}}{S^{2}_{2}}}{F_{\frac{\alpha}{2}, n-1, m-1}} , \frac{\frac{S^{2}_{1}}{S^{2}_{2}}}{F^{-1}_{\frac{\alpha}{2}, m-1, n-1}} \right]$$
-
-el cual incluye el valor de $\frac{\sigma^{2}_{1}}{\sigma^{2}_{2}}$ con una confianza del  $(1-\alpha)\%$.
-
----
-
-
-## Ejercicio
-
-Un instituto de investigaciones agronómicas siembra, en cinco parcelas diferentes, dos tipos de maíz híbrido. Las producciones en quintales métricos por hectárea son:
-
-
-$$\begin{equation*} \begin{array}{|l|c|c|c|c|c|} \hline \text{Tipo de maíz} & 1 & 2 & 3 & 4 & 5 \\ \hline \text { Híbrido I } & 90 & 85 & 95 & 76 & 80 \\ \hline \text { Híbrido II } & 84 & 87 & 90 & 92 & 90 \\ \hline \end{array} \end{equation*}$$
-
-
-Construir un intervalo de confianza para el cociente de varianzas con un error de significación de 0,10.
-
----
-
-
-**Solución:** 
-
-Asumiendo que las poblaciones son normales defina $\mathrm{X}_{1}\equiv$ 'Producción de maíz del híbrido I' que sigue una $\mathrm{N}\left(\mu_{1},\sigma_{1}\right)$ y $\mathrm{X}_{2} \equiv$ ' Producción de maíz del híbrido II' que sigue una distribución $\mathrm{N}\left(\mu_{2}, \sigma_{2}\right)$
-
-Entonces
-
-$$\begin{equation*}\begin{array}{llll}n_{1}=5 & \bar{x}_{1}=85.20 & s_{1}^{2}=57.7 & \alpha / 2=0.05 \\n_{2}=5 & \bar{x}_{2}=88.6 & s_{2}^{2}=9.8 & s_{1}^{2} / s_{2}^{2}=57.7 / 9.8=5.89 \\\end{array}  \end{equation*}$$
-
-$$F_{0.05 , 4,4}  =6.3883 \quad  F_{0.95 , 4,4}=1 / F_{0,05 , 4,4}=1 / 6.3883=0.1565$$
-
-
-$$\begin{align*} & \left[ \frac{\frac{S^{2}_{1}}{S^{2}_{2}}}{F_{0.05, 5-1, 5-1}} , \frac{\frac{S^{2}_{1}}{S^{2}_{2}}}{F^{-1}_{0.05, 5-1, 5-1}} \right] \\ & = \left[\frac{5.89}{6.3883} , \frac{5.89}{0.1565} \right] \\ & = \left[ 0.92, 37.64 \right]\end{align*}$$
-
-
----
-
-## Intervalos de confianza para muestras grandes
-
-Recordemos que cuando $n \to +\infty$ el Teorema del Límite Central nos dice que $\overline{X}$ converge en distribución a una $N(\mu, \frac{\sigma^2}{n})$. Por lo tanto, si queremos hacer una estimación por intervalo para $\mu$, suponiendo que conocemos el valor de $\sigma^2$, podemos hacer uso del siguiente pivote:
-
-$$Z_{n} = \frac{\overline{X}-\mu}{\frac{\sigma}{\sqrt{n}}}$$
-
-De esta forma tenemos una cantidad pivote asintótica que se puede aplicar para este tipo de estimadores con muestras grandes. El desarrollo para obtener el intervalo es el mismo del caso de una estimación por intervalo para la media de una población normal. Por lo tanto tendremos un intervalo bilateral con probabilidad $1-\alpha$:
-
-$$\overline{X} \pm z_{1-\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}}$$
-
----
-
-## Intervalos de confianza para muestras grandes
-
-Existen varios estimadores que se puede comprobar que tienen la forma de un $\overline{X}$ como por ejemplo $\hat{p}$, $\overline{X} - \overline{Y}$ y $\hat{p}_{1} - \hat{p}_{2}$, para estimar $p$, $\mu_{1} - \mu_{2}$ y $p_{1} - p_{2}$ respectivamente. Cada uno de estos caso también tendrá una expresión específica para la variancia $(\frac{p(1-p)}{n}$, $\frac{\sigma^{2}_{1}}{n_{1}} + \frac{\sigma^{2}_{2}}{n_{2}}$ y $\frac{p_{1}(1-p_{1})}{n_{1}} + \frac{p_{2}(1-p_{2})}{n_{2}}$, respectivamente).
-
-Nótese que este intervalo supone que conocemos la varancia poblacional de nuestra población. Sin embargo, podemos hacer uso del Teorema de Slutsky para mantener el pivote que converge en distribución a una $N(0,1)$ si conocemos un estimador consistente para la variancia poblacional. Este reemplazaría la variancia poblacional por su estimador consistente en la fórmula del intervalo anterior.
-
----
-
-
-**Ejemplo:** 
-
-Se registraron los tiempos de compra de $n=64$ clientes
-seleccionados al azar en un supermercado local. El promedio y varianza de los 64
-tiempos de compra fueron 33 minutos y 256 minutos $^{2}$, respectivamente.
-Estime $\mu$, el verdadero promedio de tiempo de compra por cliente, con un
-coeficiente de confianza de $1-\alpha=.90$.
-
-**Solución:**
-
-El intervalo tiene la forma:
-$$\begin{equation}\bar{x} \pm z_{\alpha / 2}\left(\frac{\sigma}{\sqrt{n}}\right) \approx \bar{x} \pm z_{\alpha / 2}\left(\frac{s}{\sqrt{n}}\right)\end{equation}$$
-
- De la tabla de normales se deduce que $z_{\alpha/2} = z_{0.05} = 1.645$.
-
- Por lo tanto el intervalo es
-
-$$\begin{align*}& \left[ 33-1.645\left(\frac{16}{8}\right), 33+1.645\left(\frac{16}{8}\right) \right]= \left[29.71, 36.29\right]\end{align*}$$
-
----
-
-
-**Ejemplo**
-
-Suponga que tienen datos de tiempos de espera en minutos en un banco con $n=25$ clientes. La distribución del tiempo se observa que sigue una distribución $Poisson(\theta)$ con $\bar{X} = 5$. Cual es el intervalo de confianza para $\theta$ a un 95%.
-
-**Solución:** 
-
-Recuerde que si $X$ es $Poisson(\theta)$, entonces $E[X] = Var(X) = \theta$.
-
-Por el TLC se tiene que 
-
-$$\begin{equation} \bar{X} \pm z_{\alpha / 2}\left(\frac{\sigma}{\sqrt{n}}\right) \approx \bar{X} \pm z_{\alpha / 2}\left(\frac{\sqrt{\theta}}{\sqrt{n}}\right) \approx  \bar{X} \pm z_{\alpha / 2}\left(\frac{\sqrt{\bar{X}}}{\sqrt{n}}\right)\end{equation}$$
-
-
-$$\begin{align*}& \left[5-1.96\left(\frac{\sqrt{5}}{5}\right), 5+1.96\left(\frac{\sqrt{5}}{5}\right)  \right]   \\&= \left[ 4.12, 5.88\right]\end{align*}$$
-
----
-
-## Funciones estabilizadoras de varianza 
-
-El caso anterior requería hacer el supuesto que los datos eran normales para construir el intervalo. 
-
-Vamos a ver si podemos hacerlo mejor.   
-
-La pregunta que siempre debemos hacernos, es 
-
-¿Cómo transformar $\hat{\theta}$ para que tenga varianza constante? 
-
----
-
-**Ejemplo:** Retomemos el caso de los clientes en el banco. 
-
-En este caso hicimos el supuesto de normalidad y aproximamos la varianza con $\overline{X}$
-
-
-Por el método Delta, se tiene que para $g\left(\bar{X}_{n}\right)$ 
-$$\sqrt{n}\left(g(\overline{X}) - g(\mu)\right) \stackrel{d}{\to} N\left(0,\left( g^{\prime}(\mu) \sigma \right)^2\right)$$
-
+Ver ejemplos.
  
-$$\begin{equation*}\left(g^{\prime}(\mu) \sigma\right)^{2}=g^{\prime}(\mu)^{2}\sigma^{2}(\mu)\end{equation*}$$
-
-Si se desea que la varianza sea constante con respecto a $\mu$, 
-
-$$\begin{equation*} \begin{aligned} g^{\prime}(u)^{2} \sigma^{2}(\mu) &=1 \\ \Longrightarrow g^{\prime}(\mu) &=\frac{1}{\sigma(\mu)} \quad(\sigma(\mu)>0) \\ \Longrightarrow g(\mu) &=\int_{a}^{\mu} \frac{1}{\sigma(x)}  \ dx \end{aligned}\end{equation*}$$
-
-donde $a$ es una constante arbitraria que hace la integral finita (y fácil de calcular).
-
 ---
 
+class: justify
 
-Del ejemplo anterior, recuerde que $\sigma^{2}=\theta$, entonces se podría tomar que $\sigma=\sqrt{\theta}$ por lo tanto definimos
-
-$$g(\theta)=\int_{0}^{\theta} \frac{d x}{\sqrt{x}}=2 \sqrt{\theta}$$
-
-
-
-Por el método Delta, sabemos que 
-
-$$\sqrt{n}\left( 2 \bar{X}_{n}^{\frac{1}{2}} - 2 \theta^{\frac{1}{2}} \right) \stackrel{d}{\to} N(0,1)$$
-
+## IC para poblaciones normales
+	
  
- O lo que es equivalente 
+  
+### Intervalos de confianza para $\mu$
+	
+Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria de una población Normal con media $\mu$ y variancia $\sigma^2$, donde $\mu$ es desconocido pero $\sigma^2$ es conocido. Vamos a construir un intervalo de confianza bilateral para $\mu$ con probabilidad $1-\alpha$. 
+	
+Primero debemos encontrar un pivote que dependa de la muestra y de $\mu$ en su forma de cálculo pero cuya distribución no dependa de $\mu$. Como habiamos visto en un ejemplo anterior podemos utilizar como pivote a $Z = \dfrac{\overline{X} - \mu}{\dfrac{\sigma}{\sqrt{n}}}$, ya que $Z \sim N(0,1)$. Luego procedemos a encontrar los valroes $a$ y $b$ que satisfacen $P(a \leq Z \leq b) = 1-\alpha$ y $P(Z < a) = P(Z > b) = \frac{\alpha}{2}$. 
 
-$$2 \bar{X}_{n}^{\frac{1}{2}} \stackrel{d}{\to}  N\left(2 \theta^{\frac{1}{2}}, \frac{1}{n}\right)$$
+Como no conocemos una expresión cerrada para la función de distribución de una Normal Estándar, procedemos a utilizar las tablas. Estas tablas acumulan hacia la izquierda (a menos de), por lo que $a$ es el valor de la tabla que acumula a su izquierda una probabilidad de $\frac{\alpha}{2}$, mientras que $b$ es el valor de la tabla que acumula a su izquierda $1 - \frac{\alpha}{2}$. Por simplicidad llamaremos a estos valores $z_{\frac{\alpha}{2}}$ y $z_{1-\frac{\alpha}{2}}$, respectivamente. 
 
-
-
-De esta manera un intervalo de confianza  para la cantidad $2\sqrt{\theta}$ con nivel 95% sería 
-
-
-
-
-$$2 \bar{X}_{n}^{\frac{1}{2}} \pm z_{\frac{\alpha}{2}}\cdot \frac{1}{\sqrt{n}}$$
+---
 
 
-Usando los valores que teníamos anteriormente tenemos que
+Sin embargo, sabemos que la distribución Normal Estándar es simétrica alrededor de cero, por lo que $z_{\frac{\alpha}{2}} = -z_{1-\frac{\alpha}{2}}$. Por lo tanto tenemos que, $a = -z_{1-\frac{\alpha}{2}}$ y $b = z_{1-\frac{\alpha}{2}}$
+	
+![Cuantiles de una distribución N(0,1)](figs/normal.jpeg)
+---
 
 
-$$\left[ 2\sqrt{5}  - 1.96 \frac{1}{\sqrt{25}},  2\sqrt{5}  + 1.96 \frac{1}{\sqrt{25}} \right] = [4.27, 4.67] $$
+
+Con estos valores podemos proceder a despejar $\mu$ de la expresión $P(a \leq Z \leq b) = 1-\alpha$: 
+	
+$P(a \leq Z \leq b) = P\left(-z_{1-\frac{\alpha}{2}} \leq \dfrac{\overline{X} - \mu}{\dfrac{\sigma}{\sqrt{n}}} \leq z_{1-\frac{\alpha}{2}} \right)$
+
+
+$= P\left( \overline{X} - z_{1-\frac{\alpha}{2}} \dfrac{\sigma}{\sqrt{n}} \leq \mu \leq \overline{X} + z_{1-\frac{\alpha}{2}} \dfrac{\sigma}{\sqrt{n}} \right) = 1-\alpha$
+		
+Por lo tanto, con confianza del $(1-\alpha)\%$, el intervalo $\overline{X} \pm z_{1-\frac{\alpha}{2}} \dfrac{\sigma}{\sqrt{n}}$ contiene al valor de $\mu$. 
+
+---
+
+	
+### ¿Qué sucede si $\sigma^2$ es desconocido? 
+	
+Si esto pasa no podemos hacer uso del mismo pivote pues no cumple la primera condición de ser un pivote. Recordemos que esta condición nos pide que el pivote esté en términos de la muestra y el parámetro desconocido, pero además no puede estar en términos de otro parámetro desconocido. Hasta el momento todos los otros parámetros que no eran en el de interés eran conocidos, pero ahora $\sigma^2$, que formaba parte del pivote, ya no es conocido. Por lo tanto, debemos hacer uso de un nuevo pivote. 
+	
+En este caso podemos usar la siguiente variable aleatoria: 
+	
+$$T = \dfrac{\overline{X} - \mu}{\dfrac{s}{\sqrt{n}}}$$
+	
+Recordemos que esta variable aleatoria se distribuye como una t-student con $n-1$ grados de libertad. Nótese que esta variable aleatoria sí cumple todas las condiciones de un pivote pues está en términos de la muestra aleatoria (a través de $\overline{X}$ y $S$) y del parámetro desconocido $\mu$ y ya no depende del parámetro desconocido $\sigma^2$. Adicionalmente su distribución es conocida y no depende de $\mu$. Ahora procedemos a encontrar los valores de $a$ y $b$. 
+
+---
+
+
+
+Las tablas de la t-student que utilizamos acumulan hacia la derecha, por lo que $a$ es el valor de la tabla con $n-1$ grados de libertad que acumula a su derecha una probabilidad de $1-\frac{\alpha}{2}$ y por lo tanto $b$ es el valor de la misma tabla que acumula a su derecha $\frac{\alpha}{2}$. Por simplicidad llamaremos a estos valores $t_{1-\frac{\alpha}{2}, n-1}$ y $t_{\frac{\alpha}{2}, n-1}$, respectivamente. Nuevamente, podemos hacer uso de la simetría alrededor de cero que tiene la t-student. Por lo tanto, 
+	
+$a = -t_{\frac{\alpha}{2}, n-1}$ y $b = t_{\frac{\alpha}{2}, n-1}$
+
+---
+
+
+![Cuantiles de una t-student con v grados de libertad](figs/tstud.jpeg)
+	
+Si despejamos el valor de $\mu$ de $P(a \leq T \leq b) = 1-\alpha$, obtenemos el intervalo $\overline{X} \pm t_{\frac{\alpha}{2}, n-1} \dfrac{s}{\sqrt{n}}$. Por lo tanto podemos concluir que con una confianza del $(1-\alpha)\%$ el intervalo $\overline{X} \pm t_{\frac{\alpha}{2}, n-1} \dfrac{s}{\sqrt{n}}$ contiene el verdadero valor de $\mu$. 
+
+---
+
+## Intervalos de confianza para $\mu_{1} - \mu_{2}$
+	
+Ahora supongamos que tenemos dos poblaciones Normales e independientes y que obtenemos una muestra de cada una. Sean $X_{1}, X_{2}, ... , X_{n}$ y $Y_{1}, Y_{2}, ... , Y_{m}$ estas dos muestras aleatorias, tal que $X_{j} \sim N(\mu_{1}, \sigma^{2}_{1})$ y $Y_{i} \sim N(\mu_{2}, \sigma^{2}_{2})$, donde $\mu_{1}$ y $\mu_2$ son parámetros desconocidos y $\sigma^{2}_{1}$ y $\sigma^{2}_{2}$ son parámetros conocidos. Nos interesa construir un intervalo bilateral, con una confianza del $(1-\alpha)\%$, para $\mu_{1} - \mu_{2}$.
+	
+Igual que siempre, nuesto primer paso es obtener una cantidad pivote. Ya conocemos como se distribuyen los promedios muestrales, por lo que podemos partir de ahí. Recordemos que $\overline{X} \sim N\left(\mu_{1}, \dfrac{\sigma^{2}_{1}}{n}\right)$ y $\overline{Y} \sim N\left(\mu_{2}, \dfrac{\sigma^{2}_{2}}{m}\right)$. Como ambos son Normales entonces una combinación lineal de ellos también sería Normal; necesitamos una combinación lineal de estos dos que tenga como parámetro a $\mu_{1} - \mu_{2}$. 
+
+---
+
+
+
+Esto lo podemos lograr utilizando $\overline{X} - \overline{Y}$, la cual se distribuye Normal con media $\mu_{1} - \mu_{2}$ y variancia $\dfrac{\sigma^{2}_{1}}{n} + \dfrac{\sigma^{2}_{2}}{m}$. Dado que esta variancia es conocida podemos usar como pivote una Normal Estandár, la cual tendría la siguiente forma:
+	
+$$Z = \dfrac{(\overline{X} - \overline{Y}) - (\mu_{1} - \mu_{2})}{\sqrt{\dfrac{\sigma^{2}_{1}}{n} + \dfrac{\sigma^{2}_{2}}{m}}}$$
+	
+Ya con esto podemos proceder como habiamos hecho en el primer caso de esta sección. De esta manera volveriamos a obtener que $a = -z_{1-\frac{\alpha}{2}}$ y $b = z_{1-\frac{\alpha}{2}}$. Ahora procedemos a despejar nuestro parámetro de interés, $\mu_{1} - \mu_{2}$, de la expresión $P(a \leq Z \leq b) = 1-\alpha$. Después de hacer el despeje podemos ver que con una confianza del $(1-\alpha)\%$, el intervalo $(\overline{X} - \overline{Y}) \pm z_{1-\frac{\alpha}{2}} \sqrt{\dfrac{\sigma^{2}_{1}}{n} + \dfrac{\sigma^{2}_{2}}{m}}$ incluye el verdadero valor de $\mu_{1} - \mu_{2}$. 
+	
+
+---
+
+	
+	
+Si fuese el caso donde las variancias poblaciones son conocidas (*i.e.* $\sigma^{2}_{1} = \sigma^{2}_{2} = \sigma^{2}$) Entonces podriamos escribir el intervalo como: 
+	
+$$(\overline{X} - \overline{Y}) \pm z_{1-\frac{\alpha}{2}} \cdot \sigma \sqrt{\dfrac{1}{n} + \dfrac{1}{m}}$$
+	
+
+---
+
+	
+	
+Nuevamente podemos postular la interrogante: ¿qué sucede si se desconocen las variancias poblaciones? 
+	
+En este caso vamos a hacer el supuesto de que $\sigma^{2}_{1} = \sigma^{2}_{2} = \sigma^{2}$ (homoscedasticidad) para poder encontrar un pivote satisfactorio. Podemos intentar volver a utilizar una t-student para solventar el problema de las variancias desconocidas. Recordemos que para una variable aleatoria $T$, esta se distribuye t-student si 
+	
+$$T = \dfrac{Z}{\sqrt{\dfrac{W}{v}}}$$
+	
+donde $Z \sim N(0,1)$ y $W \sim \chi^{2}(v)$. Para este caso podemos usar la misma $Z$ que usamos anteriormente:
+	
+$$Z = \dfrac{(\overline{X} - \overline{Y}) - (\mu_{1} - \mu_{2})}{\sigma \sqrt{\dfrac{1}{n} + \dfrac{1}{m}}}$$
+
+---
+
+	
+	
+Ahora debemos construir una $\chi^2$ adecuada que nos permita cancelar el $\sigma$ que se encuentra en $Z$. Sabemos lo siguiente:
+	
+$$\dfrac{(n-1)S^{2}_1}{\sigma^{2}} \sim \chi^{2}(n-1) \qquad \dfrac{(m-1)S^{2}_2}{\sigma^{2}} \sim \chi^{2}(m-1)$$
+	
+donde $S^{2}_1$ y $S^{2}_2$ son las variancias muestrales de la primera y segunda población, respectivamente. También sabemos que la suma de ji-cuadrado es una ji-cuadrado con la suma de los grados de libertad:
+	
+$$W = \dfrac{(n-1)S^{2}_{1} + (m-1)S^{2}_{2} }{\sigma^{2}} \sim \chi^{2}(n+m-2)$$
+
+---
+
+	
+		
+Si procedemos a dividir esta ji-cuadrado entre sus grados de libertad obtenemos:
+	
+$$\dfrac{W}{v} = \dfrac{(n-1)S^{2}_{1} + (m-1)S^{2}_{2} }{\sigma^{2}(n+m-2)}$$
+	
+Para simplificar un poco esta expresión vamos a definir $S^{2}_{p} = \dfrac{(n-1)S^{2}_{1} + (m-1)S^{2}_{2}}{(n+m-2)}$, por lo tanto
+	
+$$\dfrac{W}{v} = \dfrac{S^{2}_{p}}{\sigma^{2}}$$
+	
+Ya con esto podemos montar una t-student, la cual tendría la forma:
+	
+$$T = \dfrac{(\overline{X} - \overline{Y}) - (\mu_{1} - \mu_{2})}{S_{p} \sqrt{\dfrac{1}{n} + \dfrac{1}{m}}}$$
+
+---
+
+	
+Esta es una t-student con $n+m-2$ grados de libertad y la podemos usar como pivote pues cumple todas las condiciones y ya no está en términos de parámetros desconocidos. El procedimiento a seguir es similar al otro caso donde teniamos una t-student y luego de desarrollarlo obtenemos el intervalo 
+	
+$$\displaystyle (\overline{X} - \overline{Y}) \pm t_{\frac{\alpha}{2}, n+m-2} \cdot S_{p} \sqrt{\frac{1}{n} + \dfrac{1}{m}}$$ 
+	
+Concluimos que con una confianza del $(1-\alpha)\%$ el intervalo $\displaystyle (\overline{X} - \overline{Y}) \pm t_{\frac{\alpha}{2}, n+m-2} \cdot S_{p} \sqrt{\dfrac{1}{n} + \dfrac{1}{m}}$ contiene el verdadero valor de $\mu_{1} - \mu_{2}$. 
 
 
 ---
 
-Sin embargo, esa cantidad no nos sirve para el ejercicio. Requerimos un intervalo para $\theta$.
+# Pivotes para distribuciones con forma posición-escala
 
-Para eso vamos tomar la función inversa de cada uno de los extremos $\displaystyle y=2 x^{\frac{1}{2}} \Longrightarrow x=\frac{y^{2}}{4}$. 
+En los ejercicios 9.8 y 9.9 de Casella y Berger, se utiliza la siguiente tabla para clasificar las distribuciones de densidad según forma. En esta tabla se refieren a la mayoría de distribuciones de la familia Exponencial, en las cuales la función de densidad (o pdf) se puede reescribir siguiendo la forma de la primera columna.
 
-Aplicando esta transformación al intervalo anterior, se obtiene
+Forma del pdf        | Tipo de pdf      | Pivote       |
+---------------------|------------------|--------------|
+$f(x-\mu)$           | Posición         | $\bar{X}-\mu$|
+$\dfrac{1}{\sigma}f(x/\sigma)$ | Escala  | $\dfrac{\bar{X}}{\sigma}$|
+$\dfrac{1}{\sigma}f\left( \dfrac{x-\mu}{\sigma}\right)$|Posición-Escala| $\dfrac{\bar{X}-\mu}{S}$|
+
+---
+
+# Pivotes para distribuciones con forma posición-escala
+
+Para aclarar un poco más la columna de formas, voy a poner un ejemplo para cada una. 
+
+Para $f(x-\mu)$:
+
+Sea $X \sim N(\mu, 1)$, entonces la función de densidad es:
+
+$$f(x) = \dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}(x-\mu)^2\right)} = g(z)$$
+en donde $z = x-\mu$, y $g(z)=\dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}(z)^2\right)}$.
+
+---
+
+# Pivotes para distribuciones con forma posición-escala
 
 
-$$\begin{align*}
-& \left[\frac{1}{4}\left(2 \bar{X}_{n}^{\frac{1}{2}}-z_{\frac{\alpha}{2}} \cdot \frac{1}{\sqrt{n}} \right)^{2}, \frac{1}{4}\left(2 \bar{X}_{n}^{\frac{1}{2}}+z_{\frac{\alpha}{2}} \cdot \frac{1}{\sqrt{n}} \right)^{2}\right] \\
-&= \left[\frac{1}{4}\left( 4.27 \right)^{2}, \frac{1}{4}\left( 4.67 \right)^{2} \right] \\
-&= [4.56, 5.46]
-\end{align*}$$
+Para $\dfrac{1}{\sigma}f(x/\sigma)$:
+
+Sea $X \sim N(0, \sigma^2)$, entonces la función de densidad es:
+
+$$f(x) = \dfrac{1}{\sigma}\dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}(x/\sigma)^2\right)} = \dfrac{1}{\sigma} g(z)$$
+en donde $z = x/\sigma$, y $g(z)=\dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}(z)^2\right)}$.
+
+---
+
+# Pivotes para distribuciones con forma posición-escala
+
+Finalmente, para $\dfrac{1}{\sigma}f\left(\dfrac{x-\mu}{\sigma}\right)$:
+
+Sea $X \sim N(\mu, \sigma^2)$, entonces la función de densidad es:
+
+$$f(x) = \dfrac{1}{\sigma}\dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}\left(\dfrac{x-\mu}{\sigma}\right)^2\right)} = \dfrac{1}{\sigma} g(z)$$
+en donde $z = \dfrac{x-\mu}{\sigma}$, y $g(z)=\dfrac{1}{\sqrt{2\pi}} \exp{\left(\dfrac{-1}{2}(z)^2\right)}$.
 
 
 
 ---
+class: center, middle
 
-**Ejemplo:** Suponga que $X_i \sim Binomial(n,p)$ encuentre un intervalo de confianza para $p$ usando el método de Wald y el método delta al 95%, con $n=25$ y $\bar{X} =0.5$.   
+# ¿Qué discutimos hoy?
 
-El estimador para $p$ es $\bar{X}$.
+Estimación por intervalos, método del pivote. Fórmulas para las estimaciones por intervalo más comunes (media, diferencias de medias para distribuciones normales), 
 
-**Método Wald:** 
+# ¿Qué nos falta para el I Parcial?
 
-$$\bar{X} \pm z_{\alpha / 2}\left(\frac{\sigma}{\sqrt{n}}\right) \approx \bar{X} \pm z_{\alpha / 2}\left(\frac{\sqrt{p(1-p)}}{\sqrt{n}}\right) \approx  \bar{X} \pm z_{\alpha / 2}\left(\frac{\sqrt{\bar{X}(1-\bar{X})}}{\sqrt{n}}\right)$$
+Intervalos de confianza para variancias, para muestras grandes
 
+Bootstrap y contrastes de hipótesis.
 
-Haciendo el cálculo correspondiente el intervalo queda en $[0.304, 0.696]$
 
----
-
-**Método delta:**
-
-Hay que encontrar la $g(p)$ para estabilizar la varianza.
-
-$$g(p)=\int_{a}^{p} \frac{1}{\sqrt{x(1-x)}} d x 
-=  2\int_{\sqrt{a}}^{\sqrt{p}} \frac{1}{\sqrt{1-u^2}} d u 
-= 2 \arcsin(\sqrt{p})$$
-
-
-$$\sqrt{n}\left( 2 \arcsin({\sqrt{\bar{X}_{n}}}) - 2\arcsin({\sqrt{p}})\right) \stackrel{d}{\to} N(0,1)$$
-
-
-
-$$2 \arcsin({\sqrt{\bar{X}_{n}}}) \pm z_{\alpha/2} \frac{1}{\sqrt{n}}$$
-
-usando los valores obtenemos 
-
-$$[1.179, 1.963]$$
-
-
-$$y = 2 \arcsin(\sqrt{x}) \Rightarrow  x = \sin^2 \left( \frac{y}{2} \right)$$
-
-$$\left[\sin^2\left(\frac{1.179}{2}\right),\sin^2\left(\frac{1.963}{2}\right)\right] \\= [0.309, 0.691]$$
-
-
----
-
-## Ejercicio
-
-Suponga que $(X_i,Y_{i})$ provienen de una distribución normal con correlación $\rho$.     
-
-Suponga que usted estima la correlación muestral con la siguiente fórmula: 
-
-$$r_{n}=\frac{\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)\left(Y_{i}-\bar{Y}\right)}{\left\{\sum_{i=1}^{n}\left(X_{i}-\bar{X}\right)^{2}\sum\left(Y_{i}-\bar{Y}\right)^{2}\right\}^{1 / 2}}$$
-
-Haciendo mucho cálculos, encontramos $Var(r_{n}) = 1-\rho^2$. Por lo tanto,  
-
-$$\sqrt{n}\left(r_{n}-\rho\right)\overset{d}{\rightarrow} N\left(0,\left(1-\rho^{2}\right)^{2}\right)$$
-
-Si suponemos que $r_n = 0.3$ y $n = 25$, encuentre un intervalo de confianza para $\rho$ al 95% usando un método de Wald y el método Delta.
-
-**Sugerencia: **
-
-Use el hecho que 
-
-$$\int\frac{1}{1-\rho^{2}}d\rho=\frac{1}{2}\log\frac{1+\rho}{1-\rho}=\operatorname{arctanh}\rho$$
----
-
-<!-- # Bootstrap -->
-
-<!-- * La inferencia frecuentista se basa en modelos y supuestos. En muchos casos, las expresiones acerca de la exactitud (tales como el error estándar) están basadas en teoría asintótica, y por lo tanto no deberían usarse con muestras pequeñas. -->
-
-<!-- * En otros casos, no estamos usando teoría asintótica, pero no sabemos cómo hacer una suposición acerca de la distribución poblacional, debido a que la muestra no se parece a ninguna forma conocida. -->
-
-<!-- * Una alternativa "moderna" es el método de bootstrap, introducida por Efron así casi 40 años (1979). Bootstrap es un método de remuestreo que es computacionalmente intensivo, y que es aplicable a una gran variedad de casos, incluyendo aquellos en los que los supuestos son más realistas.  -->
-
-<!-- Visualmente: -->
-<!-- https://seeing-theory.brown.edu/frequentist-inference/es.html -->
-
-
-<!-- --- -->
-
-<!-- # Bootstrap -->
-
-<!-- ¿De dónde viene la expresión? -->
-
-
-<!-- ![](https://img.huffingtonpost.com/asset/5b6b3f1f2000002d00349e9d.jpeg?cache=92vfjlaeaf&ops=scalefit_720_noupscale) -->
-
-<!-- https://www.huffpost.com/entry/pull-yourself-up-by-your-bootstraps-nonsense_n_5b1ed024e4b0bbb7a0e037d4 -->
-
-<!-- --- -->
-
-<!-- ## Ejemplos de bootstrap -->
-
-<!-- ### Ejemplo 1: La exactitud de una media muestral. -->
-
-<!-- Tengo datos de sobrevivencia de 16 ratones luego de una cirugía de prueba: hay 9 ratones en el grupo control y 7 ratones en el grupo de tratamiento.  -->
-
-<!-- | Group         | Survival time (in days)      | Mean  | -->
-<!-- | ------------- |:----------------------------:| -----:| -->
-<!-- | Treatment     | 94,197,16,38,99,141,23       | 86.86 | -->
-<!-- | Control       | 52,104,146,10,51,30,40,27,46 | 56.22 | -->
-
-<!-- ¿Podemos decir que el tratamiento es efectivo? -->
-
-<!-- En estadística, resolvemos esa pregunta estimando $\bar{X}- \bar{Y} = 30.63$. El problema es cómo calcular la variabilidad, ¿podemos suponer lo mismo de siempre? -->
-<!-- --- -->
-
-<!-- ## Ejemplos de bootstrap -->
-
-<!-- ### Ejemplo 1: La exactitud de una media muestral. -->
-
-<!-- El problema se plantearía de la siguiente manera en teoría estadística: Suponga que una muestra $X_1, \dots, X_n$ es una muestra aleatoria con media $\mu$ y variancia $\sigma^2$. Entonces, el error estándar de la media muestral es:  -->
-
-<!-- $$se(\bar{X})= \sqrt(var(\bar{X})) = \frac{\sigma}{\sqrt{n}}$$  -->
-
-<!-- Esto sugiere que podemos estimar el error estándar con $\hat{se}(\bar{X})=\frac{s}{\sqrt{n}}$. Y aquí, tenemos dos opciones: la primera utilizar el teorema del límite central (teoría asintótica) o también podemos utilizar el estadístico: -->
-
-<!-- $$T = \frac{\bar{X}- \bar{Y}}{\sqrt{\hat{se}(\bar{X})^2 + \hat{se}(\bar{Y})^2}}$$ -->
-<!-- ¿Cuál es el problema? En el caso asintótico, necesitamos de una muestra grande, y en el segundo caso, la distribución de T NO es conocida (podríamos usar la aproximación de Satterthwaite, pero eso sería solo una aproximación). -->
-
-<!-- --- -->
-
-<!-- ## Ejemplos de bootstrap -->
-
-<!-- ### Ejemplo 2: La exactitud de una mediana muestral. -->
-
-<!-- Ahora suponga que queremos comparar las medianas de cada tratamiento, en lugar de las medias. De la tabla anterior podemos calcular: -->
-
-<!-- $med(X) = 94, \quad med(Y)=46 \quad \text{y} \quad T'= med(X) - med(Y)= 48$ -->
-
-<!-- ¿Cómo podemos cuantificar la exactitud de las medianas muestrales? -->
-
-<!-- * Teoría Estadística para Medianas muestrales: no existen fórmulas para el error estándar de las medianas muestrales en el caso de muestras pequeñas.  -->
-
-<!-- * Suponga que la distribución $P$ de $X_i$ es continua con densidad $p(x)$. Entonces, para muestras grandes, la mediana se distribuye aproximadamente como: -->
-
-<!-- $$med(X) \xrightarrow{d} N(m_p, \frac{\sigma^2}{4np(m_p)})$$ -->
-
-<!-- donde $m_p$ es la mediana de la distribución P. -->
-
-
-<!-- --- -->
-
-<!-- ## Ejemplos de bootstrap -->
-
-<!-- ### Ejemplo 2: La exactitud de una mediana muestral. -->
-
-<!-- ¿Cuál es el(los) problema(s)? -->
-
-<!-- * ¿Son 7 y 9 suficientes observaciones para utilizar una aproximación asintótica? -->
-
-<!-- * Podemos estimar de manera fiable la densidad de $p(m_p)$? -->
-
-<!-- * ¿Cómo afecta la estimación (asintótica) del error estándar el ancho del intervalo de confianza basado en la aproximación normal? -->
-
-
-<!-- ### Otros ejemplos para ver más adelante:  -->
-
-<!-- * ¿cómo estimar los errores de las estimaciones puntuales hechas con el algoritmo EM o SEM?  -->
-<!-- * ¿cómo contrastar hipótesis acerca de si una distribución tiene una o varias modas? -->
-
-<!-- --- -->
-
-<!-- # Principios de Bootstrap -->
-
-<!-- * Si no existe información acerca de la distribución, en la muestra observada podemos encontrar información acerca de la distribución subyacente. Por lo tanto, re-muestrear la muestra es la mejor forma de acercarnos a lo que obtendríamos si se pudiera la oportunidad de re-muestrear de la distribución poblacional. -->
-
-<!-- * Suponga que una muestra $X = (X_1, \dots, X_n)^T$ es utilizada para estimar un parámetro $\theta$. Sea $\hat{\theta}= s(X)$ un estadístico para estimar el parámetro $\theta$. Para hacer inferencia acerca de $\theta$, nos interesa la distribución muestral de $\hat{\theta}$, o ciertos aspectos acerca de esa distribución: la exactitud de nuestra estimación, el intervalo de confianza, etc. En muchas aplicaciones, la distribución muestral de $\hat{\theta}$ no se puede encontrar. -->
-
-<!-- * Si conociéramos la distribución poblacional $P$, podríamos sacar muestras $X^{(b)}, b=1,\dots,B$ de P usando métodos de Monte Carlo para estimar la distribución muestral del estimado. Sin embargo, si $F$ es desconocido, entonces bootstrap sugiere que podemos aproximar ese muestreo re-muestreando nuestra muestra original. Así, podemos encontrar la distribución *empírica* del estimador. -->
-
-<!-- https://seeing-theory.brown.edu/frequentist-inference/es.html -->
-
-<!-- --- -->
-
-
-<!-- <\!-- # Asignación del proyecto 2 -->
-
-<!-- https://malfaro2.github.io/XS3310-I20/proyecto2  -->
-
-
-<!-- --- -\-> -->
-
-<!-- class: center, middle -->
-
-<!-- # ¿Qué discutimos hoy? -->
-
-<!-- Estimación por intervalos, método del pivote. Fórmulas para las estimaciones por intervalo más comunes (media, diferencias de medias, variancias, etc., para distribuciones normales),  -->
-
-<!-- # ¿Qué nos falta para el II Parcial? -->
-
-<!-- Bootstrap y contrastes de hipótesis. -->
