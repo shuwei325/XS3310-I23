@@ -3,7 +3,7 @@ title: "XS3310 Teoría Estadística"
 subtitle: "I Semestre 2023"
 author:
   - "Escuela de Estadística"
-date: '28-04-2023'
+date: '02-05-2023'
 output:
   xaringan::moon_reader:
     lib_dir: libs
