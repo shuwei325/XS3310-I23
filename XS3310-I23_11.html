@@ -4,7 +4,7 @@
     <title>XS3310 Teoría Estadística</title>
     <meta charset="utf-8" />
     <meta name="author" content="Escuela de Estadística" />
-    <script src="libs/header-attrs-2.18/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.21/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -396,10 +396,29 @@ usando los valores obtenemos
 
 `$$\left[\sin^2\left(\frac{1.179}{2}\right),\sin^2\left(\frac{1.963}{2}\right)\right] \\= [0.309, 0.691]$$`
 
+---
+
+## Práctica de Intervalos de Confianza
+
+1. La vida útil de cierto aparato de aire acondicionado sigue una distribución de Rayleigh, cuya función de densidad viene dada por la fórmula:
+
+`\(f(x|\theta) = \frac{x}{\theta^2} \exp{\left( \frac{-x^2}{2\theta^2} \right)} 1_{ \left( x&gt;0 \right)}\)`
+
+Suponga que `\(X_1, X_2, \dots , X_n\)` es una muestra aleatoria correspondiente a la vida útil de `\(n\)` aparatos de aire acondicionado:
+
+a) Determine un estadístico suficiente para `\(\theta\)`.
+
+b) Obtenga el estimador de máxima verosimilitud para `\(\theta\)`.
+
+c)	Considere el pivote `\(\frac{1}{\theta^2} \sum_{j=1}^{n}X_j^2\)` para construir un intervalo de confianza para `\(\theta\)` con una confianza del `\((1- \alpha)\%\)`.
+
+d)	¿Cuál es la relación entre el estimador de máxima verosimilitud obtenido en b) con la estimación por intervalo obtenido en c).
+
+e)	Considere la muestra aleatoria de `\(n = 15\)` datos de una distribución `\(U(0,1)\)` que se ofrece, para simular una muestra aleatoria de `\(15\)` datos de una distribución de Rayleigh con `\(\theta =10\)`. Encuentre un intervalo de confianza del 95% para estimar `\(\theta\)`.
 
 ---
 
-## Ejercicio
+## Práctica de método delta.
 
 Suponga que `\((X_i,Y_{i})\)` provienen de una distribución normal con correlación `\(\rho\)`.     
 
@@ -418,134 +437,19 @@ Si suponemos que `\(r_n = 0.3\)` y `\(n = 25\)`, encuentre un intervalo de confi
 Use el hecho que 
 
 `$$\int\frac{1}{1-\rho^{2}}d\rho=\frac{1}{2}\log\frac{1+\rho}{1-\rho}=\operatorname{arctanh}\rho$$`
+
+
 ---
+class: center, middle
 
-&lt;!-- # Bootstrap --&gt;
+# ¿Qué discutimos hoy?
 
-&lt;!-- * La inferencia frecuentista se basa en modelos y supuestos. En muchos casos, las expresiones acerca de la exactitud (tales como el error estándar) están basadas en teoría asintótica, y por lo tanto no deberían usarse con muestras pequeñas. --&gt;
+Intervalos de confianza para variancias, para muestras grandes. Aplicación de método delta.
 
-&lt;!-- * En otros casos, no estamos usando teoría asintótica, pero no sabemos cómo hacer una suposición acerca de la distribución poblacional, debido a que la muestra no se parece a ninguna forma conocida. --&gt;
+# ¿Qué nos falta para el I Parcial?
 
-&lt;!-- * Una alternativa "moderna" es el método de bootstrap, introducida por Efron así casi 40 años (1979). Bootstrap es un método de remuestreo que es computacionalmente intensivo, y que es aplicable a una gran variedad de casos, incluyendo aquellos en los que los supuestos son más realistas.  --&gt;
+Bootstrap.
 
-&lt;!-- Visualmente: --&gt;
-&lt;!-- https://seeing-theory.brown.edu/frequentist-inference/es.html --&gt;
-
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Bootstrap --&gt;
-
-&lt;!-- ¿De dónde viene la expresión? --&gt;
-
-
-&lt;!-- ![](https://img.huffingtonpost.com/asset/5b6b3f1f2000002d00349e9d.jpeg?cache=92vfjlaeaf&amp;ops=scalefit_720_noupscale) --&gt;
-
-&lt;!-- https://www.huffpost.com/entry/pull-yourself-up-by-your-bootstraps-nonsense_n_5b1ed024e4b0bbb7a0e037d4 --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- ## Ejemplos de bootstrap --&gt;
-
-&lt;!-- ### Ejemplo 1: La exactitud de una media muestral. --&gt;
-
-&lt;!-- Tengo datos de sobrevivencia de 16 ratones luego de una cirugía de prueba: hay 9 ratones en el grupo control y 7 ratones en el grupo de tratamiento.  --&gt;
-
-&lt;!-- | Group         | Survival time (in days)      | Mean  | --&gt;
-&lt;!-- | ------------- |:----------------------------:| -----:| --&gt;
-&lt;!-- | Treatment     | 94,197,16,38,99,141,23       | 86.86 | --&gt;
-&lt;!-- | Control       | 52,104,146,10,51,30,40,27,46 | 56.22 | --&gt;
-
-&lt;!-- ¿Podemos decir que el tratamiento es efectivo? --&gt;
-
-&lt;!-- En estadística, resolvemos esa pregunta estimando `\(\bar{X}- \bar{Y} = 30.63\)`. El problema es cómo calcular la variabilidad, ¿podemos suponer lo mismo de siempre? --&gt;
-&lt;!-- --- --&gt;
-
-&lt;!-- ## Ejemplos de bootstrap --&gt;
-
-&lt;!-- ### Ejemplo 1: La exactitud de una media muestral. --&gt;
-
-&lt;!-- El problema se plantearía de la siguiente manera en teoría estadística: Suponga que una muestra `\(X_1, \dots, X_n\)` es una muestra aleatoria con media `\(\mu\)` y variancia `\(\sigma^2\)`. Entonces, el error estándar de la media muestral es:  --&gt;
-
-&lt;!-- `$$se(\bar{X})= \sqrt(var(\bar{X})) = \frac{\sigma}{\sqrt{n}}$$`  --&gt;
-
-&lt;!-- Esto sugiere que podemos estimar el error estándar con `\(\hat{se}(\bar{X})=\frac{s}{\sqrt{n}}\)`. Y aquí, tenemos dos opciones: la primera utilizar el teorema del límite central (teoría asintótica) o también podemos utilizar el estadístico: --&gt;
-
-&lt;!-- `$$T = \frac{\bar{X}- \bar{Y}}{\sqrt{\hat{se}(\bar{X})^2 + \hat{se}(\bar{Y})^2}}$$` --&gt;
-&lt;!-- ¿Cuál es el problema? En el caso asintótico, necesitamos de una muestra grande, y en el segundo caso, la distribución de T NO es conocida (podríamos usar la aproximación de Satterthwaite, pero eso sería solo una aproximación). --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- ## Ejemplos de bootstrap --&gt;
-
-&lt;!-- ### Ejemplo 2: La exactitud de una mediana muestral. --&gt;
-
-&lt;!-- Ahora suponga que queremos comparar las medianas de cada tratamiento, en lugar de las medias. De la tabla anterior podemos calcular: --&gt;
-
-&lt;!-- `\(med(X) = 94, \quad med(Y)=46 \quad \text{y} \quad T'= med(X) - med(Y)= 48\)` --&gt;
-
-&lt;!-- ¿Cómo podemos cuantificar la exactitud de las medianas muestrales? --&gt;
-
-&lt;!-- * Teoría Estadística para Medianas muestrales: no existen fórmulas para el error estándar de las medianas muestrales en el caso de muestras pequeñas.  --&gt;
-
-&lt;!-- * Suponga que la distribución `\(P\)` de `\(X_i\)` es continua con densidad `\(p(x)\)`. Entonces, para muestras grandes, la mediana se distribuye aproximadamente como: --&gt;
-
-&lt;!-- `$$med(X) \xrightarrow{d} N(m_p, \frac{\sigma^2}{4np(m_p)})$$` --&gt;
-
-&lt;!-- donde `\(m_p\)` es la mediana de la distribución P. --&gt;
-
-
-&lt;!-- --- --&gt;
-
-&lt;!-- ## Ejemplos de bootstrap --&gt;
-
-&lt;!-- ### Ejemplo 2: La exactitud de una mediana muestral. --&gt;
-
-&lt;!-- ¿Cuál es el(los) problema(s)? --&gt;
-
-&lt;!-- * ¿Son 7 y 9 suficientes observaciones para utilizar una aproximación asintótica? --&gt;
-
-&lt;!-- * Podemos estimar de manera fiable la densidad de `\(p(m_p)\)`? --&gt;
-
-&lt;!-- * ¿Cómo afecta la estimación (asintótica) del error estándar el ancho del intervalo de confianza basado en la aproximación normal? --&gt;
-
-
-&lt;!-- ### Otros ejemplos para ver más adelante:  --&gt;
-
-&lt;!-- * ¿cómo estimar los errores de las estimaciones puntuales hechas con el algoritmo EM o SEM?  --&gt;
-&lt;!-- * ¿cómo contrastar hipótesis acerca de si una distribución tiene una o varias modas? --&gt;
-
-&lt;!-- --- --&gt;
-
-&lt;!-- # Principios de Bootstrap --&gt;
-
-&lt;!-- * Si no existe información acerca de la distribución, en la muestra observada podemos encontrar información acerca de la distribución subyacente. Por lo tanto, re-muestrear la muestra es la mejor forma de acercarnos a lo que obtendríamos si se pudiera la oportunidad de re-muestrear de la distribución poblacional. --&gt;
-
-&lt;!-- * Suponga que una muestra `\(X = (X_1, \dots, X_n)^T\)` es utilizada para estimar un parámetro `\(\theta\)`. Sea `\(\hat{\theta}= s(X)\)` un estadístico para estimar el parámetro `\(\theta\)`. Para hacer inferencia acerca de `\(\theta\)`, nos interesa la distribución muestral de `\(\hat{\theta}\)`, o ciertos aspectos acerca de esa distribución: la exactitud de nuestra estimación, el intervalo de confianza, etc. En muchas aplicaciones, la distribución muestral de `\(\hat{\theta}\)` no se puede encontrar. --&gt;
-
-&lt;!-- * Si conociéramos la distribución poblacional `\(P\)`, podríamos sacar muestras `\(X^{(b)}, b=1,\dots,B\)` de P usando métodos de Monte Carlo para estimar la distribución muestral del estimado. Sin embargo, si `\(F\)` es desconocido, entonces bootstrap sugiere que podemos aproximar ese muestreo re-muestreando nuestra muestra original. Así, podemos encontrar la distribución *empírica* del estimador. --&gt;
-
-&lt;!-- https://seeing-theory.brown.edu/frequentist-inference/es.html --&gt;
-
-&lt;!-- --- --&gt;
-
-
-&lt;!-- &lt;\!-- # Asignación del proyecto 2 --&gt;
-
-&lt;!-- https://malfaro2.github.io/XS3310-I20/proyecto2  --&gt;
-
-
-&lt;!-- --- -\-&gt; --&gt;
-
-&lt;!-- class: center, middle --&gt;
-
-&lt;!-- # ¿Qué discutimos hoy? --&gt;
-
-&lt;!-- Estimación por intervalos, método del pivote. Fórmulas para las estimaciones por intervalo más comunes (media, diferencias de medias, variancias, etc., para distribuciones normales),  --&gt;
-
-&lt;!-- # ¿Qué nos falta para el II Parcial? --&gt;
-
-&lt;!-- Bootstrap y contrastes de hipótesis. --&gt;
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

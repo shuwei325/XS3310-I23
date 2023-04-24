@@ -245,6 +245,6 @@ Estimación por intervalos, método del pivote. Fórmulas para las estimaciones 
 
 Intervalos de confianza para variancias, para muestras grandes
 
-Bootstrap y contrastes de hipótesis.
+Bootstrap.
 
 
