@@ -222,107 +222,221 @@ Casella: Capítulo 7 Ejercicios (pp.355 to 367): <br> 7.2, 7.6, 7.7,
 Quiz 1 y repaso
 </td>
 <tr>
-
-        <td colspan="5" style="text-align: center">&nbsp; <b> Tema 2: Estimación por intervalo  </b> </td>
-        <tr>
-            <td ROWSPAN="2"> 5 </td>
-            <td> 18/04 </td>
-            <td> <a href="XS3310-I23_9.html">Clase09</a> </td>
-            <td> <a href="https://www.youtube.com/watch?v=nNZH9FXnjvM">¿Qué es un intervalo de confianza?</a><br>
-                <a href="https://www.youtube.com/watch?v=LO2BOtWxMyY">Método pivotal</a><br>
-            </td>
-            <td> Mendenhall 8.39 - 8.49 </td>
-        </tr>
-        <tr>
-            <td> 21/04 </td>
-            <td> <a href="XS3310-I23_10.html">Clase10</a> </td>
-            <td> <a href="https://www.youtube.com/watch?v=vWnMWhoKad0">Intervalo de confianza: distribuci&oacute;n Bernoulli</a><br>
-                <a href="https://www.youtube.com/watch?v=VTrZ10vbJfw">Intervalo de confianza: distribuci&oacute;n exponencial</a><br> </td>
-            <td> Casella: 9.1,9.2,9.3,9.8,9.9, 9.12,9.13 </td>
-        </tr>
-        <tr>
-            <td ROWSPAN="2"> 6 </td>
-            <td> 25/04 </td>
-            <td> <a href="XS3310-I23_11.html">Clase11</a> </td>
-            <td ROWSPAN="2"> <a href="https://www.youtube.com/watch?v=D_wakA5YsQc">Intervalos de confianza: distribuci&oacute;n normal</a> </td>
-            <td> Práctica: 8.1 - 8.20 de Mendenhall, <br> Ej. 13 y 14 de Cap. 6 DeGroot (Método Delta)</td>
-        </tr>
-        <td> 28/04 </td>
-        <td> Continua <br>
-            <a href="XS3310-I23_11.html">Clase11</a> <br>
-            <a href="XS3310-I23_12.html">Clase12</a> <br> </td>
-        <td> <a href="https://docs.google.com/document/d/1YJ_CPac33nAJDXokrHzahu5aWRJAwmoaKkBfpzj1wMw/edit?usp=sharing">Ejercicios Extra</a> </td>
-
-        <tr>
-            <td ROWSPAN="2"> 7 </td>
-            <td> 02/05 </td>
-            <td> <a href="XS3310-I23_13.html">Clase13</a> </td>
-            <td ROWSPAN="2"> <a href="https://www.youtube.com/watch?v=Cx5pgZCdDGM">Bootstrap</a> </td>
-            <td ROWSPAN="2"> Práctica incluida en la presentación </td>
-        </tr>
-        <tr>
-            <td> 05/05 </td>
-            <td> Quiz 2 y repaso </td>
-        </tr>
-
-
-
-        <td colspan="5" style="text-align: center">&nbsp; <b> Tema 3: Contraste de hipótesis  </b> </td>
-        <tr>
-            <td ROWSPAN="2"> 8 </td>
-            <td> 09/05 </td>
-            <td> <a href="XS3310-I23_15.html">Clase15</a> </td>
-            <td> <a href="https://www.youtube.com/watch?v=bBjXWspAmbA"> ¿Qu&eacute; es una prueba de hip&oacute;tesis?</a><br>
-                <a href="https://www.youtube.com/watch?v=PucB1LgjOsE">Funci&oacute;n potencia</a><br>
-                <a href="https://www.youtube.com/watch?v=Qlrs2gd8JbI">Regiones de rechazo y tipos de errores</a><br>
-            </td>
-            <td> Mendenhall 10.88 - 10.104 </td>
-        </tr>
-        <tr>
-            <td> 12/05 </td>
-            <td> <a href="XS3310-I23_16.html">Clase16</a> </td>
-            <td> <a href="https://www.youtube.com/watch?v=fr96C4YVTlU">Ejemplo de prueba de hip&oacute;tesis sobre la distribuci&oacute;n Bernoulli</a><br>
-                <a href="https://www.youtube.com/watch?v=MDgWCNLi8zw">Ejemplos de pruebas de hip&oacute;tesis sobre la distribuci&oacute;n normal</a><br> </td>
-            <td> </td>
-        </tr>
-        <tr>
-            <td ROWSPAN="2"> 9 </td>
-            <td> 16/05 </td>
-            <td> <a href="XS3310-I23_17.html">Clase17</a> </td>
-            <td ROWSPAN="2"> <a href="https://www.youtube.com/watch?v=lam4GyjVeJs">Lema de Neyman-Pearson</a><br>
-                <a href="https://www.youtube.com/watch?v=l_oQUwp_2hM">Ejemplo de aplicaci&oacute;n del lema de Neyman-Pearson</a> </td>
-            <td> <a href="https://www.probabilitycourse.com/chapter8/8_4_6_solved_probs.php">Ejercicios Extras</a> </td>
-        </tr>
-        <td> 19/05 </td>
-        <td> Continua <br>
-            <a href="XS3310-I23_17.html">Clase17</a> <br> </td>
-        <td> <a href="https://docs.google.com/document/d/1YJ_CPac33nAJDXokrHzahu5aWRJAwmoaKkBfpzj1wMw/edit?usp=sharing">Ejercicios Extra</a> </td>
-
-        <tr>
-            <td ROWSPAN="2"> 10 </td>
-            <td> 23/05 </td>
-            <td> <a href="XS3310-I23_19.html">Clase19</a> </td>
-            <td ROWSPAN="2"> </td>
-            <td ROWSPAN="2"> Casella: 8.1, 8.2, 8.3, 8.5, 8.6, 8.7, 8.8, 8.9 </td>
-        </tr>
-        <tr>
-            <td> 26/05 </td>
-            <td> Continua <br>
-                <a href="XS3310-I23_19.html">Clase19</a> <br> </td>
-        </tr>
-
-        <tr>
-            <td ROWSPAN="2"> 11 </td>
-            <td> 30/05 </td>
-            <td> <a href="XS3310-I23_21.html">Clase21</a> </td>
-            <td ROWSPAN="2"> </td>
-            <td ROWSPAN="2"> Casella: 8.20, 8.22, 8.23, 8.24, 8.25, 8.27, 8.28<br> Ejercicios: DeGroot: 9.1: 2,3,11; 9.2: 2,4,7; 9.3: 2,3,8,13; 9.41,3,4; 9.5: 2,3,8,9; 9.6: 2,5,11; 9.7: 1,7,9<br> </td>
-        </tr>
-        <tr>
-            <td> 02/06 </td>
-            <td> Quiz 3 y repaso </td>
-        </tr>
-        <tr>
-        
-        
-        
+<td colspan="5" style="text-align: center">
+  <b> Tema 2: Estimación por intervalo </b>
+</td>
+<tr>
+<td ROWSPAN="2">
+5
+</td>
+<td>
+18/04
+</td>
+<td>
+<a href="XS3310-I23_9.html">Clase09</a>
+</td>
+<td>
+<a href="https://www.youtube.com/watch?v=nNZH9FXnjvM">¿Qué es un
+intervalo de confianza?</a><br>
+<a href="https://www.youtube.com/watch?v=LO2BOtWxMyY">Método
+pivotal</a><br>
+</td>
+<td>
+Mendenhall 8.39 - 8.49
+</td>
+</tr>
+<tr>
+<td>
+21/04
+</td>
+<td>
+<a href="XS3310-I23_10.html">Clase10</a>
+</td>
+<td>
+<a href="https://www.youtube.com/watch?v=vWnMWhoKad0">Intervalo de
+confianza: distribución Bernoulli</a><br>
+<a href="https://www.youtube.com/watch?v=VTrZ10vbJfw">Intervalo de
+confianza: distribución exponencial</a><br>
+</td>
+<td>
+Casella: 9.1,9.2,9.3,9.8,9.9, 9.12,9.13
+</td>
+</tr>
+<tr>
+<td ROWSPAN="2">
+6
+</td>
+<td>
+25/04
+</td>
+<td>
+<a href="XS3310-I23_11.html">Clase11</a>
+</td>
+<td ROWSPAN="2">
+<a href="https://www.youtube.com/watch?v=D_wakA5YsQc">Intervalos de
+confianza: distribución normal</a>
+</td>
+<td>
+Práctica: 8.1 - 8.20 de Mendenhall, <br> Ej. 13 y 14 de Cap. 6 DeGroot
+(Método Delta)
+</td>
+</tr>
+<td>
+28/04
+</td>
+<td>
+Continua <br> <a href="XS3310-I23_11.html">Clase11</a> <br>
+<a href="XS3310-I23_12.html">Clase12</a> <br>
+</td>
+<td>
+<a href="https://docs.google.com/document/d/1YJ_CPac33nAJDXokrHzahu5aWRJAwmoaKkBfpzj1wMw/edit?usp=sharing">Ejercicios
+Extra</a>
+</td>
+<tr>
+<td ROWSPAN="2">
+7
+</td>
+<td>
+02/05
+</td>
+<td>
+<a href="XS3310-I23_13.html">Clase13</a>
+</td>
+<td ROWSPAN="2">
+<a href="https://www.youtube.com/watch?v=Cx5pgZCdDGM">Bootstrap</a>
+</td>
+<td ROWSPAN="2">
+Práctica incluida en la presentación
+</td>
+</tr>
+<tr>
+<td>
+05/05
+</td>
+<td>
+Quiz 2 y repaso
+</td>
+</tr>
+<td colspan="5" style="text-align: center">
+  <b> Tema 3: Contraste de hipótesis </b>
+</td>
+<tr>
+<td ROWSPAN="2">
+8
+</td>
+<td>
+09/05
+</td>
+<td>
+<a href="XS3310-I23_15.html">Clase15</a>
+</td>
+<td>
+<a href="https://www.youtube.com/watch?v=bBjXWspAmbA"> ¿Qué es una
+prueba de hipótesis?</a><br>
+<a href="https://www.youtube.com/watch?v=PucB1LgjOsE">Función
+potencia</a><br>
+<a href="https://www.youtube.com/watch?v=Qlrs2gd8JbI">Regiones de
+rechazo y tipos de errores</a><br>
+</td>
+<td>
+Mendenhall 10.88 - 10.104
+</td>
+</tr>
+<tr>
+<td>
+12/05
+</td>
+<td>
+<a href="XS3310-I23_16.html">Clase16</a>
+</td>
+<td>
+<a href="https://www.youtube.com/watch?v=fr96C4YVTlU">Ejemplo de prueba
+de hipótesis sobre la distribución Bernoulli</a><br>
+<a href="https://www.youtube.com/watch?v=MDgWCNLi8zw">Ejemplos de
+pruebas de hipótesis sobre la distribución normal</a><br>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td ROWSPAN="2">
+9
+</td>
+<td>
+16/05
+</td>
+<td>
+<a href="XS3310-I23_17.html">Clase17</a>
+</td>
+<td ROWSPAN="2">
+<a href="https://www.youtube.com/watch?v=lam4GyjVeJs">Lema de
+Neyman-Pearson</a><br>
+<a href="https://www.youtube.com/watch?v=l_oQUwp_2hM">Ejemplo de
+aplicación del lema de Neyman-Pearson</a>
+</td>
+<td>
+<a href="https://www.probabilitycourse.com/chapter8/8_4_6_solved_probs.php">Ejercicios
+Extras</a>
+</td>
+</tr>
+<td>
+19/05
+</td>
+<td>
+Continua <br> <a href="XS3310-I23_17.html">Clase17</a> <br>
+</td>
+<td>
+<a href="https://docs.google.com/document/d/1YJ_CPac33nAJDXokrHzahu5aWRJAwmoaKkBfpzj1wMw/edit?usp=sharing">Ejercicios
+Extra</a>
+</td>
+<tr>
+<td ROWSPAN="2">
+10
+</td>
+<td>
+23/05
+</td>
+<td>
+<a href="XS3310-I23_19.html">Clase19</a>
+</td>
+<td ROWSPAN="2">
+</td>
+<td ROWSPAN="2">
+Casella: 8.1, 8.2, 8.3, 8.5, 8.6, 8.7, 8.8, 8.9
+</td>
+</tr>
+<tr>
+<td>
+26/05
+</td>
+<td>
+Continua <br> <a href="XS3310-I23_19.html">Clase19</a> <br>
+</td>
+</tr>
+<tr>
+<td ROWSPAN="2">
+11
+</td>
+<td>
+30/05
+</td>
+<td>
+<a href="XS3310-I23_21.html">Clase21</a>
+</td>
+<td ROWSPAN="2">
+</td>
+<td ROWSPAN="2">
+Casella: 8.20, 8.22, 8.23, 8.24, 8.25, 8.27, 8.28<br> Ejercicios:
+DeGroot: 9.1: 2,3,11; 9.2: 2,4,7; 9.3: 2,3,8,13; 9.41,3,4; 9.5: 2,3,8,9;
+9.6: 2,5,11; 9.7: 1,7,9<br>
+</td>
+</tr>
+<tr>
+<td>
+02/06
+</td>
+<td>
+Quiz 3 y repaso
+</td>
+</tr>
+<tr>
