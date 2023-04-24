@@ -1,0 +1,158 @@
+---
+title: "XS3310 Teoría Estadística"
+subtitle: "I Semestre 2023"
+author:
+  - "Escuela de Estadística"
+date: '28-04-2023'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, xaringan-themer.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+class: center, middle
+
+
+# ¿Qué hemos visto hasta ahora?
+
+Todo sobre estimadores puntuales + pivotes e intervalos de confianza.
+
+# ¿Qué vamos a discutir hoy?
+
+Bootstrap
+
+---
+		
+# Bootstrap
+
+* La inferencia frecuentista se basa en modelos y supuestos. En muchos casos, las expresiones acerca de la exactitud (tales como el error estándar) están basadas en teoría asintótica, y por lo tanto no deberían usarse con muestras pequeñas.
+
+* En otros casos, no estamos usando teoría asintótica, pero no sabemos cómo hacer una suposición acerca de la distribución poblacional, debido a que la muestra no se parece a ninguna forma conocida.
+
+* Una alternativa "moderna" es el método de bootstrap, introducida por Efron así casi 40 años (1979). Bootstrap es un método de remuestreo que es computacionalmente intensivo, y que es aplicable a una gran variedad de casos, incluyendo aquellos en los que los supuestos son más realistas. 
+
+Visualmente:
+https://seeing-theory.brown.edu/frequentist-inference/es.html
+
+
+---
+
+# Bootstrap
+
+¿De dónde viene la expresión?
+
+
+![](https://img.huffingtonpost.com/asset/5b6b3f1f2000002d00349e9d.jpeg?cache=92vfjlaeaf&ops=scalefit_720_noupscale)
+
+https://www.huffpost.com/entry/pull-yourself-up-by-your-bootstraps-nonsense_n_5b1ed024e4b0bbb7a0e037d4
+
+---
+
+## Ejemplos de bootstrap
+
+### Ejemplo 1: La exactitud de una media muestral.
+
+Tengo datos de sobrevivencia de 16 ratones luego de una cirugía de prueba: hay 9 ratones en el grupo control y 7 ratones en el grupo de tratamiento. 
+
+| Group         | Survival time (in days)      | Mean  |
+| ------------- |:----------------------------:| -----:|
+| Treatment     | 94,197,16,38,99,141,23       | 86.86 |
+| Control       | 52,104,146,10,51,30,40,27,46 | 56.22 |
+
+¿Podemos decir que el tratamiento es efectivo?
+
+En estadística, resolvemos esa pregunta estimando $\bar{X}- \bar{Y} = 30.63$. El problema es cómo calcular la variabilidad, ¿podemos suponer lo mismo de siempre?
+---
+
+## Ejemplos de bootstrap
+
+### Ejemplo 1: La exactitud de una media muestral.
+
+El problema se plantearía de la siguiente manera en teoría estadística: Suponga que una muestra $X_1, \dots, X_n$ es una muestra aleatoria con media $\mu$ y variancia $\sigma^2$. Entonces, el error estándar de la media muestral es: 
+
+$$se(\bar{X})= \sqrt(var(\bar{X})) = \frac{\sigma}{\sqrt{n}}$$ 
+
+Esto sugiere que podemos estimar el error estándar con $\hat{se}(\bar{X})=\frac{s}{\sqrt{n}}$. Y aquí, tenemos dos opciones: la primera utilizar el teorema del límite central (teoría asintótica) o también podemos utilizar el estadístico:
+
+$$T = \frac{\bar{X}- \bar{Y}}{\sqrt{\hat{se}(\bar{X})^2 + \hat{se}(\bar{Y})^2}}$$
+¿Cuál es el problema? En el caso asintótico, necesitamos de una muestra grande, y en el segundo caso, la distribución de T NO es conocida (podríamos usar la aproximación de Satterthwaite, pero eso sería solo una aproximación).
+
+---
+
+## Ejemplos de bootstrap
+
+### Ejemplo 2: La exactitud de una mediana muestral.
+
+Ahora suponga que queremos comparar las medianas de cada tratamiento, en lugar de las medias. De la tabla anterior podemos calcular:
+
+$med(X) = 94, \quad med(Y)=46 \quad \text{y} \quad T'= med(X) - med(Y)= 48$
+
+¿Cómo podemos cuantificar la exactitud de las medianas muestrales?
+
+* Teoría Estadística para Medianas muestrales: no existen fórmulas para el error estándar de las medianas muestrales en el caso de muestras pequeñas. 
+
+* Suponga que la distribución $P$ de $X_i$ es continua con densidad $p(x)$. Entonces, para muestras grandes, la mediana se distribuye aproximadamente como:
+
+$$med(X) \xrightarrow{d} N(m_p, \frac{\sigma^2}{4np(m_p)})$$
+
+donde $m_p$ es la mediana de la distribución P.
+
+
+---
+
+## Ejemplos de bootstrap
+
+### Ejemplo 2: La exactitud de una mediana muestral.
+
+¿Cuál es el(los) problema(s)?
+
+* ¿Son 7 y 9 suficientes observaciones para utilizar una aproximación asintótica?
+
+* Podemos estimar de manera fiable la densidad de $p(m_p)$?
+
+* ¿Cómo afecta la estimación (asintótica) del error estándar el ancho del intervalo de confianza basado en la aproximación normal?
+
+
+### Otros ejemplos para ver más adelante: 
+
+* ¿cómo estimar los errores de las estimaciones puntuales hechas con el algoritmo EM o SEM? 
+* ¿cómo contrastar hipótesis acerca de si una distribución tiene una o varias modas?
+
+---
+
+# Principios de Bootstrap
+
+* Si no existe información acerca de la distribución, en la muestra observada podemos encontrar información acerca de la distribución subyacente. Por lo tanto, re-muestrear la muestra es la mejor forma de acercarnos a lo que obtendríamos si se pudiera la oportunidad de re-muestrear de la distribución poblacional.
+
+* Suponga que una muestra $X = (X_1, \dots, X_n)^T$ es utilizada para estimar un parámetro $\theta$. Sea $\hat{\theta}= s(X)$ un estadístico para estimar el parámetro $\theta$. Para hacer inferencia acerca de $\theta$, nos interesa la distribución muestral de $\hat{\theta}$, o ciertos aspectos acerca de esa distribución: la exactitud de nuestra estimación, el intervalo de confianza, etc. En muchas aplicaciones, la distribución muestral de $\hat{\theta}$ no se puede encontrar.
+
+* Si conociéramos la distribución poblacional $P$, podríamos sacar muestras $X^{(b)}, b=1,\dots,B$ de P usando métodos de Monte Carlo para estimar la distribución muestral del estimado. Sin embargo, si $F$ es desconocido, entonces bootstrap sugiere que podemos aproximar ese muestreo re-muestreando nuestra muestra original. Así, podemos encontrar la distribución *empírica* del estimador.
+
+https://seeing-theory.brown.edu/frequentist-inference/es.html
+
+---
+
+# Asignación del proyecto 2
+
+
+
+---
+class: center, middle
+
+# ¿Qué discutimos hoy?
+
+Introducción a Bootstrap
+
+# ¿Qué nos falta para el I Parcial?
+
+Bootstrap.
+

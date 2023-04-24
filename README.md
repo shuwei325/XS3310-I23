@@ -286,6 +286,7 @@ Práctica: 8.1 - 8.20 de Mendenhall, <br> Ej. 13 y 14 de Cap. 6 DeGroot
 </td>
 <td>
 Continua <br> <a href="XS3310-I23_11.html">Clase11</a> <br>
+<a href="XS3310-I23_12.html">Clase12</a> <br>
 </td>
 <td>
 <a href="https://docs.google.com/document/d/1YJ_CPac33nAJDXokrHzahu5aWRJAwmoaKkBfpzj1wMw/edit?usp=sharing">Ejercicios
