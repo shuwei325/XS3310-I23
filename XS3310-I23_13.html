@@ -91,7 +91,15 @@ https://seeing-theory.brown.edu/frequentist-inference/es.html
 
 Para una muestra `\(X_1, \dots, X_n\)` de variables aleatorias con valores reales, independientes con distribución P, definimos la distribución `\(\hat{P}\)` como:
 
-`\(P(A) = \frac{1}{n}\sum_{i=1}^{n} 1_A(X_i)\)` para `\(A \subseteq \mathbb{R}\)`.
+`$$\hat{P}(A) = \frac{1}{n}\sum_{i=1}^{n} 1_A(X_i),$$` 
+para `\(A \subseteq \mathbb{R}\)` y `\(1_A(X_i)\)` es la función indicadora definida como:
+
+`$$1_A(X_i)=\left\lbrace \begin{aligned}
+				1 &amp; \text{,  si  } X_i \in A,  \\
+				0 &amp; \text{,  si  } X_i \notin A.
+\end{aligned} \right.
+$$
+
 
 `\(\hat{P}\)` es la distribución empírica de la muestra `\(X\)`. `\(\hat{P}\)` puede pensarse como una distribución que pone masa `\(1/n\)` en cada observación `\(X_i\)` (para valores que ocurren más de una vez la masa será un múltiplo de `\(1/n\)`). Entonces, `\(\hat{P}\)` es una distribución de probabilidad discreta con un espacio efectivo de muestreo `\({X_1, \dots, X_n}\)`.
 
