@@ -22,7 +22,7 @@ b. Recuerde que ustedes están entregando un reporte con un mensaje, asegúrense
 
 c. Pueden adjuntar el código que utilizó como anexo (este paso es recomendado, para asegurar reproducibilidad y transparencia). 
 
-d. La **fecha de entrega** es el martes 8 de mayo a las 23:59 horas (medianoche) vía Mediación Virtual. Solamente es necesario una entrega por grupo. No se aceptarán trabajos por correo electrónico, ni por cualquier otro medio. El día 12 de mayo, llamaré aleatoriamente a dos personas para que presenten sus resultados a la clase. Si las personas no pueden explicar lo que hicieron, se bajará la nota de entrega. NOTA: si alguien no puede asistir a la clase presencial ese día, por favor enviarme una nota con la justificación.
+d. La **fecha de entrega** es el martes 9 de mayo a las 23:59 horas (medianoche) vía Mediación Virtual. Solamente es necesario una entrega por grupo. No se aceptarán trabajos por correo electrónico, ni por cualquier otro medio. El día 12 de mayo, llamaré aleatoriamente a dos personas para que presenten sus resultados a la clase. Si las personas no pueden explicar lo que hicieron, se bajará la nota de entrega. NOTA: si alguien no puede asistir a la clase presencial ese día, por favor enviarme una nota con la justificación.
 
 e. El **formato recomendado** para la elaboración es .Rmd, pero se acepta cualquier otro formato de elaboración (puede ser a mano) siempre y cuando el resultado (entregable) sea un solo archivo .pdf y este sea LEGIBLE. Además, si su respuesta no es clara y no hay evidencia de cómo lo hizo (no incluye todos los pasos para llegar a su respuesta o no es comprensible), no podemos darle puntos parciales. Los nombres de los integrantes del grupo deben venir AL INICIO del quiz en el archivo de entrega.
 
