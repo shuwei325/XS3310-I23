@@ -1,0 +1,179 @@
+---
+title: ""
+author: ""
+date: ""
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Universidad de Costa Rica, Facultad de Ciencias Económicas** 
+## **Escuela de Estadística - Curso: XS3310- Teoría Estadística** 
+## **Prof. Shu Wei Chou-Chen**
+# **Quiz # 2**
+
+**Instrucciones y recomendaciones para la entrega**: 
+
+a. En la respuesta de cada uno de los siguientes ejercicios deben aparecer todos los procedimientos necesarios para la obtención del resultado. Debe justificar todos sus pasos claramente. En cada caso debe aparecer el planteo, desarrollo y la respuesta correspondiente. Se permite como **máximo 3 integrantes en cada grupo** de entrega. El examen corto consta de 2 partes con sus respectivos puntos en cada pregunta.
+
+b. Recuerde que ustedes están entregando un reporte con un mensaje, asegúrense de dejar claro ese mensaje y responder la pregunta de su objetivo utilizando tablas y/o gráficos según vea necesario.
+
+c. Pueden adjuntar el código que utilizó como anexo (este paso es recomendado, para asegurar reproducibilidad y transparencia). 
+
+d. La **fecha de entrega** es el martes 8 de mayo a las 23:59 horas (medianoche) vía Mediación Virtual. Solamente es necesario una entrega por grupo. No se aceptarán trabajos por correo electrónico, ni por cualquier otro medio. El día 12 de mayo, llamaré aleatoriamente a dos personas para que presenten sus resultados a la clase. Si las personas no pueden explicar lo que hicieron, se bajará la nota de entrega. NOTA: si alguien no puede asistir a la clase presencial ese día, por favor enviarme una nota con la justificación.
+
+e. El **formato recomendado** para la elaboración es .Rmd, pero se acepta cualquier otro formato de elaboración (puede ser a mano) siempre y cuando el resultado (entregable) sea un solo archivo .pdf y este sea LEGIBLE. Además, si su respuesta no es clara y no hay evidencia de cómo lo hizo (no incluye todos los pasos para llegar a su respuesta o no es comprensible), no podemos darle puntos parciales. Los nombres de los integrantes del grupo deben venir AL INICIO del quiz en el archivo de entrega.
+
+f. El total de puntos de este proyecto es de 11 puntos, pero se calcula la nota con base 10, es decir, 1 punto corresponde a punto extra del quiz 2. 
+
+# Parte I. Comparación de la distribución muestral teórica y empírica.
+
+Sea $X_1, X_2, ..., X_n$ una muestra aleatoria que viene de una población con función de densidad dada por
+$$
+f(x)=\left\lbrace 
+\begin{aligned}
+\lambda e^{-\lambda(x-\theta)}, & & x\geq \theta \\
+0, & &  x<\theta,
+\end{aligned}
+\right. 
+$$
+con $\theta \in \mathbb{R}$ y $\lambda>0$. Note que esta distribución es conocida como la exponencial con dislocación y se denota como $Exp(\lambda,\theta)$. 
+
+Suponga que $\lambda = a$ es conocido y $\theta$ desconocido,
+
+--------------------------------------
+
+**ATENCIÓN**: $\lambda = a$ donde el valor de $a$ depende del último número del carné de la primera persona del grupo, ordenada de orden arfabética de acuerdo con el primer apellido:
+
+* Último número de carné es un 0,1: $a = 1/2$
+* Último número de carné es un 2,3: $a = 1/3$
+* Último número de carné es un 4,5: $a = 1/4$
+* Último número de carné es un 6,7: $a = 1/5$
+* Último número de carné es un 8,9: $a = 2$
+
+Por ejemplo, si un grupo está integrado por dos miembros: Pedro Mendez y Isabel Aguilar, entonces se debe tomar el último número del carné de Isabel Aguilar.
+
+--------------------------------------
+
+1.  Encuentre la distribución de $X_{(1)}=min\{X_1,...,X_n\}$. (1 punto)
+
+2.  Demuestre que $X_{(1)}$ es un estimador sesgado y calcule el sesgo $B(X_{(1)})$.(1 punto)
+
+3.  Busque un estimador insesgado, $\hat{\theta}$ a partir de $X_{(1)}$.(1 punto)
+
+4.  Suponga que nos interesa una muestra aleatoria de tamaño $n=20$. Simule $K=1000$ repeticiones de una muestra aleatoria de tamaño $n=20$. Calcule $X_{(1)}^{(k)}$ y $\hat{\theta}^{(k)}$, para $k=1,...,K$. Luego, construya el histograma de $X_{(1)}^{(k)}$ y de $\hat{\theta}^{(k)}$, y calcule sus medias y variancias. Compárelos con la distribución muestral de $X_{(1)}$ y de $\hat{\theta}$ de los incisos (1) y (3). Comente sobre los resultados obtenidos. (2 puntos)
+
+
+
+# Parte II. Comparación de intervalos de confianza (IC) utilizando la técnica de pivote vs la técnica bootstrap. 
+
+Sea $X$ una variable aleatoria que se distribuye como Exponencial, con parámetro $\theta$, que describe la vida útil de los bombillos de $60$ watts, es decir, su función de densidad es:
+
+
+$$
+f(x)=\left\lbrace 
+\begin{aligned}
+\frac{1}{\theta} e^{-\frac{1}{\theta} x}, & & x\geq 0 \\
+0, & &  x<0.
+\end{aligned}
+\right. 
+$$
+
+Queremos encontrar el intervalo de confianza del $95\%$ para el parámetro $\theta$, utilizando dos métodos: 
+
+* 1. la definición de pivote, 
+
+* 2. el IC bootstrap utilizando una función disponible en CRAN. 
+
+En adelante utilizaremos los siguientes términos:
+
+* B = número de muestras de bootstrap
+
+* S = número de simulaciones.
+
+* n = tamaño de la muestra original.
+
+Este ejercicio consiste en llevar a cabo un pequeño estudio de simulación para comparar la cobertura del intervalo de confianza calculado utilizando el pivote con respecto a la cobertura de cualquier opción de bootstrap, a la luz del problema de la vida útil de los bombillos, arriba descrito.
+
+# Estudio de simulación
+
+Debemos generar muestras de la distribución que estamos asumiendo como cierta, con un valor paramétrico fijado de antemano (para poder calcular coberturas). Entonces, en este caso, vamos a generar $S=1000$ muestras aleatorias de $n=15$ observaciones cada una, de una distribución exponencial con parámetro $\theta=900$. 
+
+```{r}
+set.seed(16)
+gen_fun <- function(nrep = 15, theta = 900) {
+  X <- rexp(nrep, rate = 1/theta)
+  return(X)
+}
+data <- replicate(n = 1000,gen_fun(), simplify = FALSE )
+```
+
+Ahora que tenemos una lista con $S=1000$ conjuntos de datos distintos (todos de la misma distribución y cada uno con $n=15$), vamos a calcular los dos tipos de intervalos con cada uno de ellos.
+
+## Intervalo usando pivote $U = \frac{\sum_{i=1}^{n} X}{\theta}$:
+
+```{r}
+CI_pivote <- function(X){
+  n <- length(X)
+  IC1 <- c(0.95,sum(X)/qgamma(0.975,n,1), 
+          sum(X)/qgamma(0.025,n,1))
+  return(IC1)
+}
+```
+
+## Intervalo IC bootstrap del CRAN
+
+De esta referencia: https://www.statmethods.net/advstats/bootstrapping.html podemos encontrar que una función del CRAN para encontrar IC usando boostrap es boot.ci. Para utilizarla, necesitamos generar un objeto bootstrap para la estimación puntual. Aquí, hay 5 tipos de intervalos: c("norm","basic", "stud", "perc", "bca"). En este proyecto solo vamos a usar "basic", "bca" y "perc", es decir, vamos a ignorar "norm" y "stud" por ahora.
+
+```{r}
+library(boot)
+CI_boot <- function(dat, type){
+mean_func <- function(data, indices){
+  a<-mean(data[indices], na.rm=TRUE)
+  return(a)}
+results <- boot(data=dat, statistic=mean_func,R=1000)
+return(boot.ci(results, type=type)[[4]][-c(2,3)])}
+```
+
+## Utilice la función que utiliza el pivote y al menos 1 tipo de boostrap para calcular los intervalos, y a la vez calcular su cobertura:
+
+
+```{r warning=FALSE}
+library(purrr) 
+
+cal_fun <- function(dat) {
+  CI1<-CI_pivote(dat)
+  CI2<-CI_boot(dat,"bca")
+  CI3<-CI_boot(dat,"basic")
+  CI4<-CI_boot(dat,"perc")
+  return(c(findInterval(vec=CI1[-1],x=900)==1,
+           findInterval(vec=CI2[-1],x=900)==1,
+           findInterval(vec=CI3[-1],x=900)==1,
+           findInterval(vec=CI4[-1],x=900)==1))
+}
+
+results <- map(data, cal_fun)
+```
+
+## Cobertura de cada uno de los intervalos:
+
+La cobertura se refiere al porcentaje de intervalos que incluyen al verdadero parámetro.
+
+```{r}
+apply(do.call(rbind,results),2,sum)/1000
+```
+
+**Los ejercicios de la parte II consiste en:**
+
+1. Redacte de manera clara y concisa el objetivo del estudio de Monte Carlo (simulación), demostrando matemáticamente de dónde salió la fórmula del IC usando el pivote recomendado, y mecionando cuál(es) intervalos de confianza de bootstrap está utilizando, aunque estos últimos no necesitan una explicación. (2 punto)
+
+2. Presente los resultados de la simulación tal como está planteada en una tabla resumida, incluyendo medidas de variabilidad para cada estimación que esté haciendo. (1 punto). NOTA: Ud puede modificar la simulación, sin embargo, lo que pide esta pregunta es que utilice el código que ya está escrito para tratar de responder sus objetivos.
+
+3. Compare la cobertura del IC obtenido mediante el método del pivote con al menos uno de bootstrap. ¿Difieren los resultados del $95\%$ con el que se trabajó? ¿Cuál cobertura esperaba Ud para la opción construida con el pivote y por qué? En este caso estamos trabajando con una semilla de 16 (set.seed(16)), intente con varias semillas y note si el resultado de cobertura cambia.  (2 puntos)
+
+4. Describa brevemente cómo diseñaría una simulación que elabore de una manera más completa y con más evidencia su respuesta anterior (no hace falta llevarla a cabo, solo tiene que describir cómo la haría).  (1 punto)
+
+
+

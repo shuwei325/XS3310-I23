@@ -314,7 +314,7 @@ Práctica incluida en la presentación
 05/05
 </td>
 <td>
-Quiz 2 y repaso
+<a href="Quiz02.html">Quiz 2</a> y repaso
 </td>
 </tr>
 <td colspan="5" style="text-align: center">
