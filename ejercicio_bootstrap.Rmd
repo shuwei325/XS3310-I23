@@ -1,0 +1,140 @@
+---
+title: "Ejercicio Bootstrap"
+author: "Shu Wei"
+date: "2023-05-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Ejemplo 1 (diapositiva 5 de la Clase 12)
+
+Tengo datos de sobrevivencia de 16 ratones luego de una cirugía de prueba: hay 9 ratones en el grupo control y 7 ratones en el grupo de tratamiento. 
+
+| Group         | Survival time (in days)      | Mean  |
+| ------------- |:----------------------------:| -----:|
+| Treatment     | 94,197,16,38,99,141,23       | 86.86 |
+| Control       | 52,104,146,10,51,30,40,27,46 | 56.22 |
+
+¿Podemos decir que el tratamiento es efectivo?
+
+En estadística, resolvemos esa pregunta estimando $\bar{X}- \bar{Y} = 30.63$. El problema es cómo calcular la variabilidad, ¿podemos suponer lo mismo de siempre?
+
+
+## Datos
+
+```{r}
+X<-c(94,197,16,38,99,141,23)
+Y<-c(52,104,146,10,51,30,40,27,46)
+```
+
+## Estimación de $\bar{X}$.
+
+1. Estimación por intervalo del tiempo promedio de sobrevivencia del tratamiento.
+
+```{r}
+(estimacion<-mean(X))
+sd(X)
+n<-length(X)
+```
+Asumiendo normalidad de la población, tenemos que el intervalo de confianza de 95% es dado por:
+
+```{r}
+estimacion+c(-1,1)*qt(p=0.975,df=(n-1))*sd(X)/n
+```
+2. IC estándar de Bootstrap
+
+```{r}
+B <- 1000
+Tboot_b <- NULL
+for(b in 1:B) {
+  xb <- sample(X, size = n, replace = TRUE)
+  Tboot_b[b] <- mean(xb)
+}
+Tboot_b[1:10]
+
+hist(Tboot_b)
+```
+
+2.1. Sesgo del bootstrap
+
+```{r}
+(sesgo_bootstrap <- mean(Tboot_b))
+estimacion
+sesgo_bootstrap-estimacion
+```
+2.2. Intervalos de confianza de 95%
+
+```{r}
+(cuantil_z <- qnorm(1 - 0.05 / 2))
+(sdboot <- sd(Tboot_b))
+estimacion + c(-1,1)*cuantil_z * sdboot
+```
+3. IC bootstrap t 
+
+
+```{r}
+B <- 1000
+Tboot_b <- NULL
+Tboot_bm <- NULL
+sdboot_b <- NULL
+for (b in 1:B) {
+  xb <- sample(X, size = n, replace = TRUE)
+  Tboot_b[b] <- mean(xb)
+  for (m in 1:B) {
+    xbm <- sample(xb, size = n, replace = TRUE)
+    Tboot_bm[m] <- mean(xbm)
+  }
+  sdboot_b[b] <- sd(Tboot_bm)
+}
+z_star <- (Tboot_b - estimacion) / sdboot_b
+
+hist(z_star)
+summary(z_star)
+```
+
+
+```{r}
+cuantil_t_empirico <- quantile(z_star, 1 - 0.05 / 2)
+estimacion +c(-1,1) *cuantil_t_empirico* sdboot
+```
+
+
+
+4. IC percentil de bootstrap 
+
+```{r}
+B <- 1000
+Tboot_b <- NULL
+for(b in 1:B) {
+  xb <- sample(X, size = n, replace = TRUE)
+  Tboot_b[b] <- mean(xb)
+}
+hist(Tboot_b)
+quantile(Tboot_b,0.05 / 2)
+quantile(Tboot_b, 1 - 0.05 / 2)
+```
+
+
+5. Con el paquete `boots` de R.
+
+```{r}
+library(boot) 
+mean_fun=function(datos,indice){ 
+  m=mean(datos[indice]) 
+  v=var(datos[indice]) 
+  c(m,v)
+}
+
+X.boot<-boot(X,mean_fun,R=1000) 
+(results<-boot.ci(X.boot,type=c("basic","stud","perc")))
+```
+
+## Repitan el ejercicio pero para la diferencia de medias.
+
+
+
+
+

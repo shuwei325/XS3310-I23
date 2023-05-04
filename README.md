@@ -314,7 +314,8 @@ Práctica incluida en la presentación
 05/05
 </td>
 <td>
-<a href="Quiz02.html">Quiz 2</a> y repaso
+<a href="Quiz02.html">Quiz 2</a> y
+<a href="ejercicio_bootstrap.html">ejercicios</a>
 </td>
 </tr>
 <td colspan="5" style="text-align: center">
