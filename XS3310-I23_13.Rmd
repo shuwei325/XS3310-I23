@@ -85,8 +85,7 @@ para $A \subseteq \mathbb{R}$ y $1_A(X_i)$ es la función indicadora definida co
 $$1_A(X_i)=\left\lbrace \begin{aligned}
 				1 & \text{,  si  } X_i \in A,  \\
 				0 & \text{,  si  } X_i \notin A.
-\end{aligned} \right.
-$$
+\end{aligned} \right.$$
 
 
 $\hat{P}$ es la distribución empírica de la muestra $X$. $\hat{P}$ puede pensarse como una distribución que pone masa $1/n$ en cada observación $X_i$ (para valores que ocurren más de una vez la masa será un múltiplo de $1/n$). Entonces, $\hat{P}$ es una distribución de probabilidad discreta con un espacio efectivo de muestreo ${X_1, \dots, X_n}$.

@@ -47,7 +47,7 @@ Contrastes de hipótesis - introducción
 
 Tenemos un parámetro `\(\theta\)` que es desconocido pero podemos decir que pertenece a un espacio paramétrico `\(\Omega\)`; este espacio incluye todos los posibles valores que `\(\theta\)` podría tomar. Suponga que dividimos `\(\Omega\)` en dos subconjuntos disjuntos `\(\Omega_0\)` y `\(\Omega_1\)` tales que:
 
-`$$\Omega_{0} \cap \Omega_{1} = \emptyset \wedge \Omega_{0} \cup \Omega_{1} = \Omega.$$` 
+`$$\Omega_{0} \cap \Omega_{1} = \emptyset~~~~~ \wedge~~~~~ \Omega_{0} \cup \Omega_{1} = \Omega.$$` 
 
 Si dividimos `\(\Omega\)` de esta manera entonces es de esperar que `\(\theta\)` se encuentre en `\(\Omega_{0}\)` o en `\(\Omega_{1}\)` (no puede estar en los dos al mismo tiempo). 
 	
@@ -77,7 +77,7 @@ Dos posibles resultados:
 
 * No rechazar la hipótesis nula. 
 
-Nunca decimos que se 'acepta' la hipótesis nula ya que es imposible que un experimento confirme una hipótesis. Sin embargo, si encontramos suficiente evidencia que sugiere que una hipótesis sea falsa podemos 'rechazar' la hipótesis. No obstante, por simplicidad, en el resto de este tema cuando mencione que 'se acepta `\(H_0\)`' se entenderá como 'no se rechaza `\(H_0\)`''.
+Nunca decimos que se 'acepta' la hipótesis nula ya que es imposible que un experimento confirme una hipótesis. Sin embargo, si encontramos suficiente evidencia que sugiere que una hipótesis sea falsa podemos 'rechazar' la hipótesis. No obstante, por simplicidad, en el resto de este tema cuando mencione que 'se acepta `\(H_0\)`' se entenderá como 'no se rechaza `\(H_0\)`'.
 
 Supongamos que tenemos datos que provienen de una población Normal con media desconocida `\(\mu\)` y variancia 1, además, que `\(\mu\)` puede tomar solamente dos valores: `\(\mu = 1\)` y `\(\mu = -1\)`. De este modo tenemos las hipótesis `\(H_{0}: \mu = 1\)` y `\(H_{1}: \mu = -1\)`. Como con el método científico nuestro siguiente paso consiste en obtener datos y observar cuál de estas dos hipótesis es la más factible para los datos observados. En un ejemplo como este esperaríamos que si `\(H_{0}\)` es cierto entonces hayan más datos positivos que negativos y que si `\(H_{1}\)` es cierto entonces hayan más datos negativos que positivos. 
 
@@ -87,7 +87,7 @@ Supongamos que tenemos datos que provienen de una población Normal con media de
 	
 Supongamos que resumimos los datos de la muestra en el estadístico `\(\overline{X}\)` y comparamos este valor contra un valor `\(k\)` de manera que si `\(\overline{X}\)` es mayor a `\(k\)` entonces preferimos `\(H_{0}\)` mientras que si `\(\overline{X}\)` es menor a `\(k\)` entonces preferimos a `\(H_{1}\)`, o como decimos usualmente, rechazamos `\(H_{0}\)`. Nótese que existe toda una región de posibles valores de `\(\overline{X}\)` donde podemos rechazar `\(H_{0}\)`; esta región se llama la *región crítica* del contraste. 
 
-&gt; Definición: **Región crítica**. Consideremos las hipótesis `\(H_{0}: \theta \in \Omega_{0}\)` y `\(H_{1}: \theta \in \Omega_{1}\)`. Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria seleccionada sobre una distribución con parámetros desconocido `\(\theta\)`. Sea `\(S\)` el espacio muestral para el vector aleatorio n-dimensional `\(\textbf{X} = \left\lbrace  X_{1}, X_{2}, ... , X_{n} \right\rbrace\)` es decir, `\(S\)` es el resultado de todas las posibles muestras aleatorias de tamaño `\(n\)`. Sea `\(\delta\)` un contraste que consiste en dividir el espacio muestral `\(S\)` en dos subconjuntos, el primero de ellos contiene los valores de `\(\textbf{X}\)` para los cuales se rechaza `\(H_{0}\)` y se denomina como la **región crítica del contraste**, denotada como `\(RC_{\delta}\)`. 
+&gt; **Definición: Región crítica**. Consideremos las hipótesis `\(H_{0}: \theta \in \Omega_{0}\)` y `\(H_{1}: \theta \in \Omega_{1}\)`. Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria seleccionada sobre una distribución con parámetros desconocido `\(\theta\)`. Sea `\(S\)` el espacio muestral para el vector aleatorio n-dimensional `\(\textbf{X} = \left\lbrace  X_{1}, X_{2}, ... , X_{n} \right\rbrace\)` es decir, `\(S\)` es el resultado de todas las posibles muestras aleatorias de tamaño `\(n\)`. Sea `\(\delta\)` un contraste que consiste en dividir el espacio muestral `\(S\)` en dos subconjuntos, el primero de ellos contiene los valores de `\(\textbf{X}\)` para los cuales se rechaza `\(H_{0}\)` y se denomina como la **región crítica del contraste**, denotada como `\(RC_{\delta}\)`. 
 	
 ---
 
@@ -101,7 +101,7 @@ En los contrastes de hipótesis con los que acostumbramos trabajar solemos defin
 	
 Dos características que tienen los contrastes: la potencia y el tamaño. El enfoque está en encontrar un "buen" contraste según estas características.  A continuación se define la potencia de la prueba: 
 	
-&gt; Definición. **Función potencia:** Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria de una población con parámetro desconocido `\(\theta\)` y sea `\(RC_{\delta}\)` la región crítica de un contraste `\(\delta\)` respecto a `\(\theta\)`. La **potencia del contraste**, denotada `\(\operatorname{Potencia}(\theta)\)`, es la probabilidad que el contraste indique rechazar `\(H_{0}\)` para un valor dado de `\(\theta\)` es decir, 
+&gt; **Definición. Función potencia:** Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria de una población con parámetro desconocido `\(\theta\)` y sea `\(RC_{\delta}\)` la región crítica de un contraste `\(\delta\)` respecto a `\(\theta\)`. La **potencia del contraste**, denotada `\(\operatorname{Potencia}(\theta)\)`, es la probabilidad que el contraste indique rechazar `\(H_{0}\)` para un valor dado de `\(\theta\)` es decir, 
 `\(\operatorname{Potencia}(\theta) = P(\textbf{X} \in RC | \theta)\)`
 ---
 
