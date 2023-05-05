@@ -42,7 +42,7 @@ n<-length(X)
 Asumiendo normalidad de la población, tenemos que el intervalo de confianza de 95% es dado por:
 
 ```{r}
-estimacion+c(-1,1)*qt(p=0.975,df=(n-1))*sd(X)/n
+estimacion+c(-1,1)*qt(p=0.975,df=(n-1))*sd(X)/sqrt(n)
 ```
 2. IC estándar de Bootstrap
 
