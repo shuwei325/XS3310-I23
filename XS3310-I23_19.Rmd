@@ -1,0 +1,219 @@
+---
+title: "XS3310 Teoría Estadística"
+subtitle: "I Semestre 2023"
+author:
+  - "Escuela de Estadística"
+date: '30-05-2023'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, xaringan-themer.css]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+class: center, middle
+
+# ¿Qué hemos visto hasta ahora?
+
+Todo sobre estimadores puntuales + pivotes e intervalos de confianza. Bootstrap y contrastes de hipótesis (función de potencia, tamaño del contraste, el valor p, contrastes más potentes, uniformemente más potentes, cocientes de verosimilitud y razón de verosimiliud).
+
+# ¿Qué vamos a discutir hoy?
+
+Contrastes de hipótesis: Razón de verosimilitudes para muestras grandes. Bootstrap para contrastes.
+
+---
+
+# Repaso: contraste de razón de verosimilitudes
+
+> Estadístico de la razón de verosimilitudes: Suponga que se tiene una muestra aleatoria $X_{1}, X_{2}, ... , X_{n}$ de una población con vector de parámetros $\Theta = (\theta_1, \theta_2, ... , \theta_k)$ y con función de verosimilitud $\mathcal{L}(\Theta)$. Se desea hacer un contraste de hipótesis sobre uno o más de estos parámetros, de forma que las hipótesis sean compuestas, es decir podemos tener hipótesis $H_{0}: \Theta \in \Omega_{0}$ contra $H_{1}: \Theta \in \Omega_{1}$. Entonces se definen $\mathcal{L}(\hat{\Omega}_{0}) = Max_{\Theta \in \Omega_{0}}\mathcal{L}(\Theta)$ y $\mathcal{L}(\hat{\Omega}) = Max_{\Theta \in \Omega}\mathcal{L}(\Theta)$. Estos corresponden a las funciones de verosimilitud evaluadas en sus correspondientes máximos de verosimilitud. Se define el **estadístico de la razón de verosimilitudes**, denotado $\lambda$, como $\frac{\mathcal{L}(\hat{\Omega}_{0})}{\mathcal{L}(\hat{\Omega})}$.
+
+---
+
+# Contraste de razón de verosimilitudes
+
+Ejemplo: Sean $X_{1}, X_{2}, ... , X_{n}$ y $Y_{1}, Y_{2}, ... , Y_{n}$ dos muestras aleatorias independientes tales que $X_{j} \sim Poisson(\theta_1)$ y $Y_{j} \sim Poisson(\theta_2)$. Se desea contrastar las hipótesis $H_{0}: \theta_1 = \theta_2$ contra $H_{1}: \theta_1 \neq \theta_2$. Encuentre un contraste para estas hipótesis utilizando el Teorema de Wilks. 
+
+Solución: Empecemos por definir los espacios paramétricos para tener una mejor idea del problema. En el caso de $\Omega_{0}$ tenemos que este se define como $\Omega_{0} = \left\lbrace (\theta_1 , \theta_2) | \theta_1 = \theta_2 = \theta \right\rbrace$. Por otra parte, $\Omega = \left\lbrace (\theta_1 , \theta_2) | \theta_1 , \theta_2 \in \mathbb{R}^{+}  \right\rbrace$. Por lo tanto tenemos que $\Theta_{0}  = \theta$ y $\Theta = (\theta_1 , \theta_2)$ y sus dimensiones son 1 y 2, respectivamente. Procedamos a encontrar la verosimilitud:
+
+$\mathcal{L}(\Theta) = \mathcal{L}(\theta_1 , \theta_2) = \mathcal{L}(\theta_1) \mathcal{L}(\theta_2) = \frac{\theta_{1}^{\sum X_{j}} e^{-n\theta_{1}}}{\prod X_{j}!} \frac{\theta_{2}^{\sum Y_{j}} e^{-n\theta_{2}}}{\prod Y_{j}!} = \frac{\left( \theta_{1}^{\overline{X}} \theta_{2}^{\overline{Y}}  \right)^{n} e^{-n(\theta_{1}+\theta_{2})} }{\prod X_{j}! \prod Y_{j}!}$
+
+---
+
+# Contraste de razón de verosimilitudes
+
+
+Se puede demostrar que de esta expresión se obtiene $\overline{X}$ como EMV de $\theta_1$ y $\overline{Y}$ como EMV de $\theta_2$. Ahora procedamos a encontrar la verosimilitud evaluada en $\Theta_{0}$:
+
+$\mathcal{L}(\Theta_0) = \mathcal{L}(\theta) = \frac{\theta^{ n(\overline{X} + \overline{Y}) } e^{-2n\theta} }{\prod X_{j}! \prod Y_{j}!}$
+
+Ahora debemos encontrar el EMV de $\theta$. Para ello sacamos primero la log-verosimilitud:
+
+$\ell(\theta) = n(\overline{X} + \overline{Y})\ln(\theta) - 2n\theta - \ln\left( \prod X_{j}! \prod Y_{j}! \right)$
+
+$\Rightarrow \frac{\partial \ell (\theta)}{\partial \theta} = \frac{ n(\overline{X} + \overline{Y}) }{\theta} - 2n = 0$
+
+$\Rightarrow \hat{\theta} = \frac{\overline{X} + \overline{Y}}{2}$
+
+---
+
+# Contraste de razón de verosimilitudes
+
+
+La segunda derivada con respecto a $\theta$ sería negativa, por lo que $\hat{\theta}$ es el EMV. Ahora procedemos a encontrar $\mathcal{L}(\hat{\Omega})$ y $\mathcal{L}(\hat{\Omega}_0)$.
+
+$\mathcal{L}(\hat{\Omega}_0) = \frac{ \left( \frac{\overline{X} + \overline{Y}}{2} \right) ^{ n(\overline{X} + \overline{Y}) } e^{-n(\overline{X} + \overline{Y})} }{\prod X_{j}! \prod Y_{j}!}$
+
+$\mathcal{L}(\hat{\Omega}) = \frac{\left( \overline{X}^{\overline{X}} \overline{Y}^{\overline{Y}}  \right)^{n} e^{-n(\overline{X}+\overline{Y})} }{\prod X_{j}! \prod Y_{j}!}$
+
+---
+
+# Contraste de razón de verosimilitudes
+
+Por lo tanto, el estadístico $\lambda$ sería:
+
+$\lambda = \frac{\mathcal{L}(\hat{\Omega}_0)}{\mathcal{L}(\hat{\Omega})} = \left( \frac{\left( \frac{\overline{X} + \overline{Y}}{2} \right) ^{ (\overline{X} + \overline{Y}) }}{\overline{X}^{\overline{X}} \overline{Y}^{\overline{Y}}} \right)^{n}$
+
+Ya con esto podemos encontrar una expresión para la estadística $G$:
+
+$G = -2\ln(\lambda) = -2\ln \left( \frac{\left( \frac{\overline{X} + \overline{Y}}{2} \right) ^{ (\overline{X} + \overline{Y}) }}{\overline{X}^{\overline{X}} \overline{Y}^{\overline{Y}}} \right)^{n}$
+
+$= -2n\left[ (\overline{X} + \overline{Y}) \ln\left( \frac{\overline{X} + \overline{Y}}{2}\right)  - \overline{X} \ln(\overline{X}) - \overline{Y} \ln(\overline{Y}) \right]$
+
+Por el Teorema de Wilks, rechazamos la hipótesis nula si este valor es mayor a $\chi^{2}_{1,\alpha_0}$. 
+
+---
+
+# Contraste de razón de verosimilitudes
+
+Como parte adicional del ejemplo, supongamos que $n=100$, $\overline{x} = 20$, $\overline{y} = 22$ y $\alpha_0 = 0.01$. Utilicemos estos valores para contrastar las hipótesis del ejemplo. Con estos valores se tiene que $G \approx 9.53$ y que $\chi^{2}_{1,0.01} = 6.635$. Tenemos que $G > \chi^{2}_{1,0.01}$ por lo que rechazamos la hipótesis nula. 
+
+
+---
+class: inverse, center, middle
+
+
+# Bootstrap
+
+
+---
+
+# Bootstrap
+
+¿Qué pasa cuando una aproximación no es suficiente, o cuando queremos una segunda opinión?
+
+*Idea*: podemos remuestrar el estadístico $T$ para construir la distribución empírica y así calcular el valor p de una manera empírica.
+
+Sea $X$ y $Y$ dos muestras de dos poblaciones distribuidas como $P$ y $Q$, dos distribuciones posiblemente distintas y desconocidas. Nos interesa contrastar la hipótesis nula de igualdad de distribuciones:
+
+$H_0: P = Q \quad \text{vs} \quad H_0: P \not= Q$
+
+Asuma que existe un estadístico de prueba adecuado $T$ para construir el contraste para este problema, en ese caso cuando observamos $T = t$ para el estadístico de prueba, y tenemos evidencia para rechazar hipótesis nula con un tamaño de contraste de $\alpha$ si:
+
+$$P(T \geq t ) \leq \alpha$$
+bajo la hipótesis nula.
+
+---
+
+# Bootstrap
+
+En muchas aplicaciones, la distribución muestral del estadístico de prueba $T$ no es conocido (o exactamente conocido), y el valor p no se puede calcular. Esto sugiere el uso de bootstrap para estimar el valor p con:
+
+$$\hat{P}(T \geq t) = P^*(T^* \geq t)$$
+
+Un asunto importante de aclarar en este punto, es que para calcular el valor p, SIEMPRE vamos a muestrar asumiendo que la hipótesis nula es cierta.
+
+Por ejemplo, para el problema anterior, se remuestrea $X^{*(b)}$ y $Y^{*(b)}$ de una muestra conjunta $(X,Y)$. De estas muestras bootstrap, podemos calcular las iteraciones bootstrap del estadístico $T$:
+
+$$T^{*(b)} = s(X^{*(b)},Y^{*(b)})$$
+
+y luego estimar el valor p con:
+
+$$\hat{P}(T \geq t) = \frac{1}{B}\sum_{b=1}^{B} 1 { \{ T^{*(b)} \geq t \}}$$.
+
+---
+
+# Bootstrap
+
+### Ejemplo 1: Datos de ratones.
+
+Tengo datos de sobrevivencia de 16 ratones luego de una cirugía de prueba: hay 9 ratones en el grupo control y 7 ratones en el grupo de tratamiento. La pregunta de investigación es si el nuevo tratamiento prolonga el tiempo de sobrevivencia.
+
+| Group         | Survival time (in days)      | Mean  |
+| ------------- |:----------------------------:| -----:|
+| Treatment     | 94,197,16,38,99,141,23       | 86.86 |
+| Control       | 52,104,146,10,51,30,40,27,46 | 56.22 |
+
+Es decir, queremos contrastar la siguiente hipótesis:
+
+$$H_0: \mu_X = \mu_Y \quad \text{vs} \quad H_0: \mu_X \not = \mu_Y$$
+
+A diferencia de la hipótesis general que vimos antes, en este caso la hipótesis nula requiere únicamente la igualdad de las medias, pero no por ejemplo de las variancias. 
+
+---
+
+# Bootstrap
+
+Como las medias son distintas y necesitamos generar datos asumiendo que la hipótesis nula es cierta, entonces podemos hacer una pequeña transformación a los datos originales (para poder generar datos bajo el supuesto de que la hipótesis nula es cierta):
+
+$$\tilde{X}_i = X_i - \bar{X} + \bar{Z}$$
+$$\tilde{Y}_i = Y_i - \bar{Y} + \bar{Z}$$
+
+donde:
+
+$$\bar{Z} = \frac{1}{n_X + n_Y} [\sum_{i=1}^{n_X}X_i + \sum_{i=1}^{n_Y}Y_i]$$.
+
+Ahora, con esa transformación, la distribución empírica de las dos variables transformadas tendrá iguales medias y por ende, satisface la condición de que la hipótesis nula es verdadera. 
+
+---
+
+# Algoritmo de Bootstrap
+
+1. Remuestree $X_1^{*(b)}, \dots X_{n_X}^{*(b)}$ independientemente de $\tilde{X}$.
+2. Remuestree $Y_1^{*(b)}, \dots Y_{n_X}^{*(b)}$ independientemente de $\tilde{Y}$.
+3. Evalúe las iteraciones de bootstrap:
+$$T^{*(b)}=\frac{\bar{X}^{*(b)}-\bar{Y}^{*(b)}}{\sqrt{\frac{s^2_{X^{*(b)}}}{n_X}+\frac{s^2_{Y^{*(b)}}}{n_Y}}}$$
+4. Estime el valor de p:
+$$\hat{P}(T\geq t)= \frac{1}{B}\sum_{b=1}^{B}1{\{T^{*(b)}\geq t \}}$$
+
+donde $t$ es el valor observado del contraste usando el estadístico t. 
+
+Específicamente, en el ejemplo de los ratones, el valor observado de $T$ era $t=1.06$. Con $B=1000$ iteraciones bootstrap de $T$, 133 eran mayores o iguales a $t$, entonces $\hat{P}(T \geq t)=0.133$ y no encontramos evidencia para rechazar la hipótesis nula. 
+
+---
+
+# Bootstrap
+
+* Útil cuando no tenemos la distribución empírica del estadístico de prueba. 
+
+* Puede ser difícil encontrar la transformación que permita remuestrear de una muestra asumiendo la hipótesis nula como cierta.
+
+* Recuerden que tanto en este caso como en los ejercicios de simulación, estamos calculando el valor p con aproximaciones empíricas.
+---
+
+# Ejercicio para la siguiente clase:
+
+![](figs/ejercicio.png)
+
+
+---
+class: center, middle
+
+# ¿Qué discutimos hoy?
+
+Contrastes de hipótesis: Razón de verosimilitud y bootstrap.
+
+# ¿Qué nos falta para el II Parcial?
+
+Discusión de ensayos de valores p, repaso de estadística inferencial clásica. 
+
+
+Slides creadas via R package [**xaringan**](https://github.com/yihui/xaringan).
+

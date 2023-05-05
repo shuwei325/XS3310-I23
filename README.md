@@ -384,11 +384,9 @@ Extras</a>
 19/05
 </td>
 <td>
-Continua <br> <a href="XS3310-I23_17.html">Clase17</a> <br>
+Parcial I
 </td>
 <td>
-<a href="https://docs.google.com/document/d/1YJ_CPac33nAJDXokrHzahu5aWRJAwmoaKkBfpzj1wMw/edit?usp=sharing">Ejercicios
-Extra</a>
 </td>
 <tr>
 <td ROWSPAN="2">
@@ -398,12 +396,13 @@ Extra</a>
 23/05
 </td>
 <td>
-<a href="XS3310-I23_19.html">Clase19</a>
+<a href="XS3310-I23_18.html">Clase18</a>
 </td>
 <td ROWSPAN="2">
 </td>
 <td ROWSPAN="2">
-Casella: 8.1, 8.2, 8.3, 8.5, 8.6, 8.7, 8.8, 8.9
+<a href="https://docs.google.com/document/d/1YJ_CPac33nAJDXokrHzahu5aWRJAwmoaKkBfpzj1wMw/edit?usp=sharing">Ejercicios
+Extra</a> <br> Casella: 8.1, 8.2, 8.3, 8.5, 8.6, 8.7, 8.8, 8.9
 </td>
 </tr>
 <tr>
@@ -411,7 +410,7 @@ Casella: 8.1, 8.2, 8.3, 8.5, 8.6, 8.7, 8.8, 8.9
 26/05
 </td>
 <td>
-Continua <br> <a href="XS3310-I23_19.html">Clase19</a> <br>
+<a href="XS3310-I23_19.html">Clase19</a> <br>
 </td>
 </tr>
 <tr>
@@ -422,7 +421,7 @@ Continua <br> <a href="XS3310-I23_19.html">Clase19</a> <br>
 30/05
 </td>
 <td>
-<a href="XS3310-I23_21.html">Clase21</a>
+<a href="XS3310-I23_20.html">Clase20</a>
 </td>
 <td ROWSPAN="2">
 </td>
@@ -437,7 +436,7 @@ DeGroot: 9.1: 2,3,11; 9.2: 2,4,7; 9.3: 2,3,8,13; 9.41,3,4; 9.5: 2,3,8,9;
 02/06
 </td>
 <td>
-Quiz 3 y repaso
+Quiz 3
 </td>
 </tr>
 <tr>

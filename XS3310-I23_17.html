@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>XS3310 Teoría Estadística</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Escuela de Estadística" />
+    <script src="libs/header-attrs-2.21/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# XS3310 Teoría Estadística
+]
+.subtitle[
+## I Semestre 2023
+]
+.author[
+### Escuela de Estadística
+]
+.date[
+### 09-05-2023
+]
+
+---
+
+
+
+
+
+class: center, middle
+
+# ¿Qué hemos visto hasta ahora?
+
+Todo sobre estimadores puntuales + pivotes e intervalos de confianza. Bootstrap y contrastes de hipótesis (función de potencia, tamaño del contraste, el valor p).
+
+# ¿Qué vamos a discutir hoy?
+
+Contrastes de hipótesis: constrastes más potentes y uniformemente más potentes. Cocientes de verosimilitud.
+
+---
+
+# Contrastes más potentes
+	
+  * Es deseable encontrar un contraste donde las probabilidades `\(\alpha(\delta)\)` y `\(\beta(\delta)\)` sean lo más pequeñas posibles. 
+  
+  * Es posible que uno de los dos errores tenga probabilidad cero, por ejemplo tener un contraste donde `\(H_0\)` se rechace siempre haciendo que la probabilidad de Error Tipo I siempre sea cero. No obstante, este contraste hace que la probabilidad de cometer un Error Tipo II sea siempre 1, lo que es indeseable. 
+  
+  * Es imposible encontrar un contraste que minimice ambas probabilidades de error por lo que nos enfocamos en minimizar una combinación lineal de estas. 
+	
+---
+
+# Contrastes más potentes
+	
+  * Una manera de hacer esto es fijar el tamaño del contraste y encontrar el contraste que tenga la *mayor potencia*. 
+  
+  * Para demostrar el procedimiento, vamos a enfocarnos en un tipo de contraste de hipótesis que contrasta una hipótesis simple contra otra hipótesis simple. Una hipótesis simple y una hipótesis compuesta se definen de la siguiente manera:
+	
+&gt; Hipótesis simple e hipótesis compuesta: Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria de una distribución con parámetro `\(\theta\)`. Se dice que una hipótesis es **simple** si *especifica de manera única* la distribución de la población. Cualquier hipótesis que no sea simple se denomina **hipótesis compuesta**.
+
+---
+
+# Contrastes más potentes
+	
+Supongamos que tenemos una muestra aleatoria donde `\(X_j \sim N(\mu,1)\)` y tenemos las hipótesis `\(H_{0}: \mu = 0\)` y `\(H_{1}: \mu \neq 0\)`. En este caso la hipótesis nula nos dice que los datos pertenecen a una población `\(N(0,1)\)` mientras que la hipótesis alterna no especifica la distribución de manera única, por lo que `\(H_0\)` es una *hipótesis simple* mientras que `\(H_1\)` es una *hipótesis compuesta*. 
+	
+Supongamos ahora que `\(X_j \sim N(\mu,\sigma^2)\)` donde `\(\sigma^{2} &gt; 0\)` y es desconocido. En este caso la hipótesis nula `\(H_{0}: \mu = 0\)` es una *hipótesis compuesta* ya que no está especificando la distribución de la población de una única manera (depende de `\(\sigma^{2}\)`, el cual puede ser cualquier valor positivo).
+	
+---
+
+# Contrastes más potentes
+	
+Volviendo al objetivo de encontrar un buen contraste supongamos que queremos contrastar dos hipótesis simples y que fijamos el tamaño del contraste en un valor `\(\alpha_0\)` dado. De todos los posibles contrastes que existan con el mismo tamaño `\(\alpha_0\)`, el **contraste más potente** va a ser aquel que tenga la mayor potencia en `\(\Omega_{1}\)`. Este valor `\(\alpha_0\)` fijo usualmente se conoce como el **nivel de significancia**.
+	
+&gt; Contraste más potente: Suponga que se desean contrastar las hipótesis simples `\(H_{0}: \theta = \theta_0\)` contra `\(H_{1}: \theta = \theta_1\)` basados en una muestra aleatoria de una población con distribución que depende de `\(\theta\)`. Para un valor  `\(\alpha_0 \in \left] 0,1 \right[\)` sea
+`\(\mathbb{T}_{\alpha_0} = \left\lbrace \delta | \alpha(\delta) = \alpha_0 \right\rbrace\)`
+el conjunto de todos los contrastes `\(\delta\)` que tienen tamaño `\(\alpha_0\)`. Entonces el contraste de tamaño `\(\alpha_0\)` **más potente**, denotado `\(\delta^*\)`, satisface:
+* `\(\delta^* \in \mathbb{T}_{\alpha_0}\)`
+* `\(\beta(\delta^*) \leq \beta(\delta)\)`, `\(\forall \delta \in \mathbb{T}_{\alpha_0}\)`
+
+---
+
+# Contrastes más potentes
+	
+El punto de este tema es que al enfocarse en solo dos valores para `\(\theta\)` y fijar el tamaño del contraste en `\(\alpha_0\)` entonces solo tenemos que concentrarnos en la potencia en `\(\theta_1\)`. En general y en la práctica es raro fijar una hipótesis alterna que sea simple por lo que tendríamos que comparar toda la función potencia en `\(\Omega_{1}\)` entre distintos contrastes, lo que es considerablemente más complicado de hacer que solo comparar dos valores. No obstante, más adelante en el tema veremos una forma de lograr esto para ciertos contrastes. 
+
+---
+
+# Lema de Neyman-Pearson
+	
+Una manera de encontrar la región crítica para un contraste más potente `\(\delta^*\)` se da por medio del Lema de Neyman-Pearson. Este dice lo siguiente:
+	
+&gt; Lema de Neyman-Pearson: Supongamos que se desea contrastar las hipótesis simples `\(H_{0}: \theta = \theta_0\)` contra `\(H_{1}: \theta = \theta_1\)` basados en una muestra aleatoria de una población con distribución que depende de `\(\theta\)`. Además, sea `\(\mathcal{L}(\theta)\)` la función de verosimilitud de la muestra para un valor de `\(\theta\)`. Para un tamaño dado `\(\alpha_0\)`, el contraste que minimiza `\(\beta(\delta)\)` tiene una región crítica determinada por: `\(RC_{\delta^*} = \left\lbrace \mathbf{X} | \frac{\mathcal{L}(\theta_0)}{\mathcal{L}(\theta_1)} &lt; k \right\rbrace\)`
+	
+De acuerdo con el teorema anterior, se rechaza `\(H_0\)` si `\(\mathcal{L}(\theta_0) &lt; k\mathcal{L}(\theta_1)\)` y se acepta `\(H_0\)` si `\(\mathcal{L}(\theta_0) &gt; k\mathcal{L}(\theta_1)\)`. En el caso en que `\(\mathcal{L}(\theta_0) = k\mathcal{L}(\theta_1)\)` se puede favorecer cualquiera de las dos hipótesis. El valor de `\(k\)` se selecciona de manera que el contraste tenga tamaño `\(\alpha_0\)`. Este contraste se denomina como **contraste más potente** para un tamaño `\(\alpha_0\)`, pues es la prueba con un valor máximo de `\(Potencia(\theta_1)\)`. 
+
+---
+
+# Contrastes más potentes
+	
+Podemos observar que un contraste con esta región crítica tiene sentido con la interpretación de la función de verosimilitud. Recordemos que entre más verosímil es un valor de `\(\theta\)` para la muestra dada, mayor es su función de verosimilitud. Por lo tanto, si `\(\theta = \theta_0\)` entonces se espera que `\(\mathcal{L}(\theta_0) &gt; \mathcal{L}(\theta_1)\)`, favoreciendo a `\(H_0\)` sobre `\(H_1\)` y viceversa. De esta manera el contraste más potente consiste en escoger la hipótesis más verosímil para la muestra obtenida, fijando de antemano una máxima probabilidad de cometer Error Tipo I. 
+	
+Ejemplo: Suponga que `\(Y\)` representa una sola observación con función de densidad dada por: 
+	
+`\(f_{Y}(y) = \begin{cases}\theta y^{\theta-1} \quad si \quad 0 \leq y \leq 1 \\0 \quad en \quad otros \quad casos \end{cases}\)`
+	
+Determine el contraste más potente con un tamaño `\(\alpha_0 = 0.05\)`, para contrastar `\(H_{0}: \theta = 2\)` contra `\(H_{1}: \theta = 1\)`. 
+
+---
+
+# Contrastes más potentes
+
+Solución: Por el Lema de Neyman-Pearson sabemos que se rechaza `\(H_0\)` si `\(\frac{\mathcal{L}(2)}{\mathcal{L}(1)} &lt; k\)`. Debemos encontrar esta expresión para el ejemplo que tenemos. En este caso la verosimilitud viene dada por:
+`\(\mathcal{L}(\theta) = \theta y^{\theta-1}\)`
+	
+Por lo tanto, al evaluar en `\(\Omega_{0}\)` y `\(\Omega_{1}\)` tenemos:
+
+`\(\mathcal{L}(2) = 2y, \qquad \qquad \mathcal{L}(1) = 1, \qquad \qquad \Rightarrow \frac{\mathcal{L}(2)}{\mathcal{L}(1)} = 2y\)`
+	
+Por lo tanto, rechazamos `\(H_0\)` si `\(2Y &lt; k\)`, lo que equivale a decir que rechazamos si `\(Y &lt; k^{\prime}\)`, donde `\(k^{\prime} = k/2\)`. Ahora debemos encontrar el valor de `\(k^{\prime}\)` para que el contraste tenga un tamaño de 0.05. 
+	
+`\(P(Y &lt; k^{\prime} | \theta = 2) = F_{Y}(k^{\prime}| \theta = 2) = {k^{\prime}}^{2} = 0.05, \quad \Rightarrow k^{\prime} = \sqrt{0.05}\)`
+	
+Podemos concluir que el contraste más potente consiste en rechazar `\(H_0\)` si `\(Y &lt; \sqrt{0.05}\)`, con un nivel de significancia de 0.05. Observen que no es necesario encontrar el valor de `\(k\)` exacto, ya que el tamaño del contraste va a seguir siendo igual. Solo queremos encontrar una regla de decisión para el contraste. 
+
+---
+
+# Contrastes más potentes
+
+	
+Ejemplo: Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria tal que `\(X_j \sim N(\mu,1)\)`. Se desea contrastar las hipótesis `\(H_{0}: \mu = \mu_0\)` contra `\(H_{1}: \mu = \mu_1\)`, donde `\(\mu_0 &lt; \mu_1\)`. Obtenga el contraste más potente para un tamaño dado `\(\alpha_0\)`. 
+	
+Solución: Recordemos que para esta muestra normal la verosimilitud viene dada por la siguiente expresión:
+	
+`\(\mathcal{L}(\mu) = (2\pi)^{-\frac{n}{2}} e^{-\frac{\sum(x_{j}-\mu)^{2}}{2}} = (2\pi)^{-\frac{n}{2}} e^{-\frac{\sum{x_{j}^{2}} -2n\mu \overline{x} + n\mu^2 }{2}}\)`
+	
+Por lo tanto cuando obtenemos el cociente de las verosimilitudes para encontrar la región crítica según el Lema de Neyman-Pearson obtenemos:
+	
+`\(\frac{\mathcal{L}(\mu_0)}{\mathcal{L}(\mu_1)} = \frac{e^{n\mu_{0} \overline{x} -\frac{n\mu_{0}^{2}}{2}}}{e^{n\mu_{1} \overline{x} -\frac{n\mu_{1}^{2}}{2}}} = e^{n\left( \overline{x}(\mu_0 - \mu_1 )  -\frac{1}{2}( \mu_{0}^2 - \mu_{1}^2 )    \right) } = e^{ n\overline{x}(\mu_0 - \mu_1 ) } \cdot e^{ -\frac{n}{2}( \mu_{0}^2 - \mu_{1}^2 ) } &lt; k\)`
+
+---
+
+# Contrastes más potentes
+
+A partir de esta expresión debemos encontrar el valor crítico de la prueba, ya sabemos que rechazamos `\(H_{0}\)` si:
+	
+`\(e^{ n\overline{x}(\mu_0 - \mu_1 ) } \cdot e^{ -\frac{n}{2}( \mu_{0}^2 - \mu_{1}^2 ) } &lt; k\)`
+`\(\Rightarrow  e^{ n\overline{x}(\mu_0 - \mu_1 ) } &lt; k e^{\frac{n}{2}( \mu_{0}^2 - \mu_{1}^2 ) }\)`
+`\(\Rightarrow n\overline{x}(\mu_0 - \mu_1 ) &lt; \ln{ \left(  k e^{\frac{n}{2}( \mu_{0}^2 - \mu_{1}^2 ) } \right)  }\)`
+`\(\Rightarrow \overline{x} &gt; \frac{ \ln{ \left(  k e^{\frac{n}{2}( \mu_{0}^2 - \mu_{1}^2 ) } \right)  } }{n(\mu_0 - \mu_1 )} = k^{\prime}\)`
+	
+Por lo tanto, nuestro contraste consiste en rechazar `\(H_0\)` si `\(\overline{X} &gt; k^{\prime}\)`. Ahora debemos encontrar el valor de `\(k^{\prime}\)` para un tamaño dado `\(\alpha_0\)`:
+	
+`\(\alpha_0 = P\left( \overline{X} &gt; k^{\prime} | \mu = \mu_{0} \right) = P\left( Z &gt; \sqrt{n}(k^{\prime} - \mu_{0}) \right)\)`
+	
+Usando el software adecuado podemos encontrar que `\(z_{1-\alpha_0} = \sqrt{n}(k^{\prime} - \mu_{0})\)`. Por lo tanto podemos despejar el valor de `\(k^{\prime}\)` y encontrar que queda: `\(k^{\prime} = \mu_{0} + \frac{z_{1-\alpha_0}}{\sqrt{n}}\)`, y por lo tanto, nuestro contraste más potente consiste en rechazar `\(H_0\)` si `\(\overline{X} &gt; \mu_{0} + \frac{z_{1-\alpha_0}}{\sqrt{n}}\)` para un nivel de significancia `\(\alpha_0\)`.
+	
+---
+
+# Contrastes uniformemente más potentes
+	
+Una observación interesante que podemos realizar del ejemplo anterior es que este no depende realmente del valor de la hipótesis alterna, solo depende del valor de la hipótesis nula y de la relación entre ambos valores; esto es un patrón común con los contrastes obtenidos mediante el Lema de Neyman-Pearson. Por lo tanto, en ciertos casos, nos es posible generalizar el resultado de este tipo de contrastes para más de un valor en `\(H_1\)`. 
+	
+Supongamos que se desea probar las hipótesis `\(H_{0}: \theta = \theta_0\)` contra `\(H_{1}: \theta &gt; \theta_0\)`. En este caso parece que no podemos aplicar el Lema de Neyman-Pearson pues la hipótesis alterna es compuesta. Sin embargo, podemos redefinir la hipótesis alterna como `\(H_{1}: \theta = \theta_1\)`, donde `\(\theta_1 &gt; \theta_0\)`. De esta manera tenemos un contraste de hipótesis simples al que le podemos aplicar el Lema de Neyman-Pearson y que donde ya vimos que el valor de `\(\theta_1\)` no se utiliza en la definición de la región crítica. Podemos definir esto de la siguiente manera:
+
+---
+
+# Contrastes uniformemente más potentes
+	
+&gt; Contraste uniformemente más potente: Un contraste de tamaño `\(\alpha_0\)` es **uniformemente más potente** (UMP) para contrastar `\(H_{0}:\theta = \theta_0\)` contra `\(H_{1}: \theta \in \Omega_{1}\)` si es más potente para `\(H_{0}:\theta = \theta_0\)` contra `\(H_{1}: \theta = \theta_1\)`, para todo `\(\theta_1 \in \Omega_{1}\)`.
+
+Bajo esta definición vamos a poder encontrar fácilmente contrastes UMP para las hipótesis alternas `\(H_{1}: \theta &gt; \theta_0\)` o `\(H_{1}: \theta &lt; \theta_0\)`, siempre y cuando la distribución poblacional lo permite. Sin embargo, no es posible encontrar un contraste UMP para la hipótesis alterna `\(H_{1}: \theta \neq \theta_0\)` ya que será imposible encontrar el mismo contraste más potente para todo valor de `\(\theta_1\)` diferente de `\(\theta_0\)`. 
+
+---
+
+# Contrastes uniformemente más potentes
+	
+Ejemplo: Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria tal que `\(X_j \sim N(\mu,1)\)`. Se desea contrastar las hipótesis `\(H_{0}: \mu = \mu_0\)` contra `\(H_{1}: \mu &gt; \mu_0\)`, con un nivel de significancia de `\(\alpha_0\)`. 
+	
+Solución: Empecemos por definir un valor de `\(\mu_1\)` tal que `\(\mu_1 &gt; \mu_0\)`. De esta forma podemos re-escribir la hipótesis alterna como `\(H_{1}: \mu = \mu_1\)`, `\(\forall \mu_{1} &gt; \mu_{0}\)`. Una vez hecho esto el ejercicio se vuelve idéntico al anterior y por lo tanto podemos concluir que el contraste UMP consiste en rechazar `\(H_0\)` si `\(\overline{X} &gt; \mu_{0} + \frac{z_{1-\alpha_0}}{\sqrt{n}}\)` para un nivel de significancia `\(\alpha_0\)`.
+	
+Cuando se da el caso de que exista un contraste UMP (que será el caso para los ejemplos vistos en clases), existe una definición y un teorema que nos facilita la obtención del contraste. 
+
+&gt; Cociente de verosimilitudes monótono: Una muestra aleatoria con función de verosimilitud `\(\mathcal{L}(\theta)\)` tiene un **cociente de verosimilitudes monótono** (CVM) en un estadístico `\(T = T(X_{1}, X_{2}, ... , X_{n})\)` si, para `\(\theta_0 &lt; \theta_1\)`, el cociente `\(\frac{\mathcal{L}(\theta_0)}{\mathcal{L}(\theta_1)}\)` es una función monótona de `\(T\)`. 
+
+---
+
+# Contrastes uniformemente más potentes
+	
+	
+Ejemplo: Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria tal que `\(X_j \sim N(\mu,1)\)`. Demuestre que `\(\mathcal{L}(\mu)\)` tiene un CVM en el estadístico `\(\overline{X}\)`. 
+	
+Solución: Sea `\(\mu_0 &lt; \mu_1\)`. Anteriormente habíamos trabajado una expresión para este cociente de verosimilitudes: 
+	
+`\(\frac{\mathcal{L}(\mu_0)}{\mathcal{L}(\mu_1)} = e^{ n\overline{x}(\mu_0 - \mu_1 ) } \cdot e^{ -\frac{1}{2}( \mu_{0}^2 - \mu_{1}^2 ) }\)`
+	
+Lo que nos interesa es demostrar que esta es una función monótona de `\(\overline{X}\)`. Observemos que la cantidad `\(e^{ -\frac{1}{2}( \mu_{0}^2 - \mu_{1}^2 )}\)` no depende de `\(\overline{X}\)`, por lo que puede ser tratada como una constante. Por otro lado la expresión `\(e^{ n\overline{x}(\mu_0 - \mu_1 )}\)` es una función de `\(\overline{X}\)`, y sabemos que la exponencial es siempre creciente si su exponente es positivo o siempre decreciente si su exponente es negativo; no obstante, indiferentemente del signo del exponente, esta va a ser siempre una función monótona para  `\(\overline{X}\)`.
+			
+Por lo tanto, concluimos que `\(\mathcal{L}(\mu)\)` tiene un CVM en `\(\overline{X}\)`.
+
+---
+
+# Contrastes uniformemente más potentes
+
+	
+&gt; Si la distribución tiene un CVM en el estadístico `\(T\)`, entonces el contraste UMP para `\(H_{0}: \theta = \theta_0\)` contra `\(H_{1}: \theta &gt; \theta_0\)` o `\(H_{1}: \theta &lt; \theta_0\)` existe y este se puede expresar en términos de `\(T\)`, en lugar del cociente `\(\frac{\mathcal{L}(\theta_0)}{\mathcal{L}(\theta_1)}\)`. 
+
+	
+	
+Este teorema nos facilita la obtención del contraste UMP pues nos garantiza que la regla de decisión va a depender de `\(T\)`. Además, al ser el cociente de verosimilitudes una función monótona de `\(T\)` entonces existe una relación directa entre la hipótesis alternativa y la regla de decisión. Básicamente si `\(\mathcal{L}(\theta)\)` tiene CVM en `\(T\)` y tenemos `\(H_{1}: \theta &gt; \theta_0\)` entonces el teorema anterior nos garantiza que rechazamos `\(H_0\)` si `\(T &gt; c\)`, mientras que si `\(H_{1}: \theta &lt; \theta_0\)` entonces rechazamos `\(H_0\)` si `\(T &lt; c\)`. El valor de `\(c\)` se obtiene al igual que anteriormente, fijando el tamaño del contraste en `\(\alpha_0\)`. 
+
+---
+
+# Contrastes uniformemente más potentes
+	
+		
+Ejemplo: Sea `\(X_{1}, X_{2}, ... , X_{n}\)` una muestra aleatoria tal que `\(X_j \sim N(\mu,1)\)`. Se desea contrastar las hipótesis `\(H_{0}: \mu = \mu_0\)` contra `\(H_{1}: \mu &lt; \mu_0\)`. Obtenga el contraste UMP para un tamaño dado `\(\alpha_0\)`. 
+	
+Solución: Anteriormente se demostró que `\(\mathcal{L}(\mu)\)` tiene un CVM en `\(\overline{X}\)` por lo que por el teorema anterior sabemos que vamos a rechazar `\(H_0\)` si `\(\overline{X} &lt; c\)`. Procedemos a encontrar el valor de `\(c\)`:
+	
+`\(\alpha_0 = P\left( \overline{X} &lt; c | \mu = \mu_0 \right)  = P\left( Z &lt; \sqrt{n}(c - \mu_0 ) \right)\)`
+	
+Utilizando software podemos encontrar que `\(\sqrt{n}(c - \mu_0 ) = z_{\alpha_0} = - z_{1 - \alpha_0}\)`. Despejando obtenemos que `\(c = \mu_0 - \frac{z_{1 - \alpha_0}}{\sqrt{n}}\)`. Por lo tanto, el contraste UMP consiste en rechazar `\(H_0\)` si `\(\overline{X} &lt; \mu_0 - \frac{z_{1 - \alpha_0}}{\sqrt{n}}\)`. 
+
+---
+class: center, middle
+
+# ¿Qué discutimos hoy?
+
+Contrastes de hipótesis - contrastes más potentes, uniformemente más potentes, razón de verosimilitud.
+
+# ¿Qué nos falta para el II Parcial?
+
+Contrastes de hipótesis: cociente de verosimilitud y razón de verosimilitudes. Bootstrap y debate acerca de valores p.
+
+
+Slides creadas via R package [**xaringan**](https://github.com/yihui/xaringan).
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
