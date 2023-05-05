@@ -63,7 +63,7 @@ Por ejemplo, si un grupo está integrado por dos miembros: Pedro Mendez y Isabel
 
 3.  Busque un estimador insesgado, $\hat{\theta}$ a partir de $X_{(1)}$.(1 punto)
 
-4.  Suponga que nos interesa una muestra aleatoria de tamaño $n=20$. Simule $K=1000$ repeticiones de una muestra aleatoria de tamaño $n=20$. Calcule $X_{(1)}^{(k)}$ y $\hat{\theta}^{(k)}$, para $k=1,...,K$. Luego, construya el histograma de $X_{(1)}^{(k)}$ y de $\hat{\theta}^{(k)}$, y calcule sus medias y variancias. Compárelos con la distribución muestral de $X_{(1)}$ y de $\hat{\theta}$ de los incisos (1) y (3). Comente sobre los resultados obtenidos. (2 puntos)
+4.  Suponga que nos interesa una muestra aleatoria de tamaño $n=20$ proveniente de una población con $\theta=2$, es decir $X\sim Exp(\lambda,2)$. Simule $K=1000$ repeticiones de una muestra aleatoria de tamaño $n=20$. Calcule $X_{(1)}^{(k)}$ y $\hat{\theta}^{(k)}$, para $k=1,...,K$. Luego, construya el histograma de $X_{(1)}^{(k)}$ y de $\hat{\theta}^{(k)}$, y calcule sus medias y variancias. Compárelos con la distribución muestral de $X_{(1)}$ y de $\hat{\theta}$ de los incisos (1) y (3). Comente sobre los resultados obtenidos. (2 puntos)
 
 
 
