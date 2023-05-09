@@ -182,14 +182,14 @@ De la definición quedan claro algunos puntos sobre la probabilidad de Error Tip
 
 En el ejemplo anterior podemos observar que solo tenemos un valor para la probabilidad de cada tipo de error. En ese caso:
 	
-$\alpha(1) = \operatorname{Potencia}(1) = 0.023$
+$\alpha(\delta) = \operatorname{Potencia}(1) = 0.023$
 	
-$\beta(-1) = 1 - \operatorname{Potencia}(-1) = 1 - 0.977 = 0.023$
+$\beta(\delta) = 1 - \operatorname{Potencia}(-1) = 1 - 0.977 = 0.023$
 	
 Por pura coincidencia ambos errores tienen la misma probabilidad en el ejemplo anterior. A continuación veremos otra forma de describir un contraste.
 	
 > Definición. **Tamaño del contraste**. Para un contraste de hipótesis $H_{0}: \theta \in \Omega_{0}$ y $H_{1}: \theta \in \Omega_{1}$ se denomina tamaño del contraste al valor $\alpha_c$ dado por:
->  $$\alpha_c = \operatorname{Sup}(\operatorname{Potencia}(\theta|\theta \in \Omega_{0})) = \operatorname{Sup}(\alpha(\delta))$$
+> $$\alpha_c = \sup_{\theta \in \Omega_0} Potencia(\theta|\delta) = \sup_{\theta \in \Omega_0} \alpha(\delta),$$
 >	Es decir, el tamaño de un contraste es la máxima probabilidad de cometer un Error Tipo I.
 	
 ---
@@ -245,7 +245,7 @@ $\Rightarrow \operatorname{Potencia}(\theta) = \left(\dfrac{2.9}{\theta}\right)^
 
 ## Contrastes de hipótesis
 	
-Finalmente, si $\theta > 4$:
+Finalmente, si $\theta > 3.9$:
 	
 $F_{X_{(n)}}(2.9) = \left(\dfrac{2.9}{\theta}\right)^{n}  \quad \text{y} \quad F_{X_{(n)}}(3.9) = \left(\dfrac{3.9}{\theta}\right)^{n}$
 
@@ -281,37 +281,6 @@ $$\beta(5) = 1 - \operatorname{Potencia}(5) = 1 - \left( \left(\dfrac{2.9}{5}\ri
 	
 Un uso que tiene el tamaño como una característica del contraste es que podemos definir una región crítica para un tamaño de contraste dado. 
 
----
-
-## Contrastes de hipótesis
-
-**Ejemplo:** Sea $X_{1}, X_{2}, ... , X_{n}$ una muestra aleatoria tal que $X_j \sim N(\mu, 1)$. Se desea contrastar las hipótesis $H_{0}: \mu = 5$ contra la alternativa $H_{1}: \mu > 5$. La región crítica se define como $RC_{\delta} = \left\lbrace \textbf{X} | \overline{X} > c \right\rbrace$. Encuentre el valor de $c$ para que este contraste tenga un tamaño igual a 0.10. 
-	
-**Solución:** Note que el contraste se rechaza cuando $\overline{X}$ es mayor que $c$, por lo tanto podemos definir la potencia de la siguiente forma:
-	
-$\text{Potencia}(\mu) = P(\overline{X} > c | \mu) = P\left( Z > \sqrt{n}(c-\mu) \right)$
-	
-Sabemos que el tamaño del contraste se define como la máxima probabilidad de cometer Error Tipo I, pero en este caso solo tenemos una probabilidad de Error Tipo I, que sucede cuando $\mu = 5$. Por lo tanto:
-	
-$\alpha_c = \operatorname{Potencia}(5) = P\left( Z > \sqrt{n}(c-5) \right) = 0.10$
-
----
-
-## Contrastes de hipótesis
-
-Podemos utilizar las tablas para buscar el valor de la normal estándar que acumula a su derecha una probabilidad de 0.10 (que equivale a una probabilidad acumulada a su izquierda de 0.90). Por lo tanto tenemos que 
-	
-$\sqrt{n}(c-5) = 1.28$ 
-
-$\Rightarrow c = 5 + \frac{1.28}{\sqrt{n}}$
-	
-Una observación importante de resaltar es que si tenemos una distribución de probabilidad discreta no es posible encontrar un tamaño de contraste para cualquier valor de $c$, ya que las variable aleatorias discretas tienen probabilidades acumuladas a solo ciertos valores. Esto se puede solucionar por medio de contrastes aleatorizados, que dependen del lanzamiento de una moneda con cierta probabilidad de caer escudo, o con bootstrap (que veremos al final de esta sección). 
-
----
-
-## Contrastes de hipótesis
-
-Otro punto importante de destacar es que en la práctica usualmente utilizamos la hipótesis nula puntual $H_{0}: \theta = \theta_0$ ya que esta no pierde generalidad. Supongamos que se quiere contrastar $H_{0}: \theta \leq \theta_0$ contra $H_{1}: \theta > \theta_0$. En casi todos los casos la función potencia de un contraste es monótona en todo el dominio de $\theta$; en este caso sería una función creciente. Ya que el tamaño se define como la máxima potencia en $\Omega_{0}$ esto va a suceder en su extremo derecho, el cual es $\theta_0$. Esto ocasiona que el contraste tenga el mismo tamaño a que si la hipótesis nula hubiera sido $H_{0}: \theta = \theta_0$. Por lo tanto en la práctica es más común encontrar la hipótesis nula formulada en $\theta_0$, siendo este el valor de $\Omega_{0}$ más próximo a $\Omega_{1}$. 
 
 ---
 class: center, middle
