@@ -154,7 +154,7 @@ Otro punto importante de destacar es que en la práctica usualmente utilizamos l
 
 El Valor p es una herramienta que se puede utilizar para contrastar hipótesis que tiene características que pueden solucionar algunos problemas con los contrastes anteriores. Por ejemplo, no todos los contrastes van a tener un tamaño de contraste exacto (como en los casos donde las variables aleatorias son discretas.) Por otro lado, ni el tamaño ni la potencia están directamente relacionados con los datos observados. El valor p corrige estos problemas. Para propósitos del curso definiremos el valor p como:
 
-> Definición. Valor p. Sea $T = T(X_1, X_2, \dots, X_n)$ un estadístico y considere $H_0: \theta = \theta_0$ contra $H1: \theta < \theta_0$ (o $H1: \theta > \theta_0$). Suponga que el contraste rechaza H0 si $T \leq k$ (o $T > k$). Sea $t = T(x_1, x_2, \dots, x_n$) un valor observado de T. Entonces se define el valor p (denotado pval(t)) como:
+> Definición. Valor p. Sea $T = T(X_1, X_2, \dots, X_n)$ un estadístico y considere $H_0: \theta = \theta_0$ contra $H_1: \theta < \theta_0$ (o $H_1: \theta > \theta_0$). Suponga que el contraste rechaza H_0 si $T \leq k$ (o $T > k$). Sea $t = T(x_1, x_2, \dots, x_n$) un valor observado de T. Entonces se define el valor p (denotado pval(t)) como:
 $$pval(t) = P(T \leq t|\theta = \theta_0)$$ o 
 $$pval(t) = P(T > t|\theta = \theta_0)$$
 
@@ -164,7 +164,7 @@ $$pval(t) = P(T > t|\theta = \theta_0)$$
 
 Nótese que de esta manera no hay ningún problema si la distribución de T es discreta o continua, pues la probabilidad puede ser calculada sin ningún problema. Formalmente, el valor p se conoce como la probabilidad, bajo la hipótesis nula, de observar nuestro estadístico de prueba o un valor más extremo. Esto significa que si el valor p es grande entonces nuestro estadístico de prueba es un valor muy común de T y se sitúa en el centro de la distribución, brindando así evidencia a favor de la hipótesis nula. Por otra parte, si el valor p es pequeño entonces el estadístico de prueba es un valor poco común de T, situándose en las colas de su distribución, y por lo tanto brindando evidencia en contra de $H_0$ y a favor de $H_1$. Existe la posibilidad de que el valor de t haya sido un punto extremo de la distribución de T bajo $H_0$, pero esto se considera algo como sumamente improbable.
 
-Como altos valores p dan evidencia a favor de H0 y bajos valores dan evidencia en contra, sería posible idear un contraste de hipótesis que consista en rechazar H0 si pval(t) < α. Si la distribución de T es continua entonces el valor de α sería un tamaño de contraste exacto. En la práctica así es cómo se utiliza el valor p, comparándolo contra el nivel de significancia (tamaño del contraste) y decidiendo si se rechaza o no la hipótesis nula.
+Como altos valores p dan evidencia a favor de H_0 y bajos valores dan evidencia en contra, sería posible idear un contraste de hipótesis que consista en rechazar H_0 si pval(t) < α. Si la distribución de T es continua entonces el valor de α sería un tamaño de contraste exacto. En la práctica así es cómo se utiliza el valor p, comparándolo contra el nivel de significancia (tamaño del contraste) y decidiendo si se rechaza o no la hipótesis nula.
 
 ---
 
@@ -177,7 +177,7 @@ Solución: Recordemos que el contraste consistía en rechazar $H_0: \mu = 5$ a f
 $$pval(5,21) = P(\bar{X} > 5,21|\mu = 5) = P(Z > \sqrt{4}(5,21 − 5)))$$
 $$= P(Z > 0,42) = 0,337$$
 
-Por lo tanto si comparamos este valor contra el tamaño de contraste que utilizamos anteriormente ($0.10$), decimos que no hay suficiente evidencia estadística para rechazar la hipótesis nula de que $\mu = 5$, ya que $pval(5,21) = 0,337 > 0,10 = \alpha_0$. Esta conclusión es consistente con el
+Por lo tanto si comparamos este valor contra el tamaño de contraste que utilizamos anteriormente $(0.10)$, decimos que no hay suficiente evidencia estadística para rechazar la hipótesis nula de que $\mu = 5$, ya que $pval(5,21) = 0,337 > 0,10 = \alpha_0$. Esta conclusión es consistente con el
 contraste que consiste en comparar $\bar{x}$ contra $5 + \frac{1,28}{\sqrt{n}}$. En este caso el valor crítico sería $5.64$, por lo que nuestro estadístico de prueba es menor y entonces no rechazamos la hipótesis nula.
 
 ---
@@ -223,7 +223,7 @@ Contrastes de hipótesis: función de potencia, tamaño del contraste, el valor 
 
 # ¿Qué nos falta para el II Parcial?
 
-Contrastes de hipótesis - contrastes más potentes, uniformemente más potentes, razón de verosimilitud.
+Contrastes de hipótesis - contrastes más potentes, uniformemente más potentes, razón de verosimilitud. Estadística Bayesiana.
 
 
 Slides creadas via R package [**xaringan**](https://github.com/yihui/xaringan).
