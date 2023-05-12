@@ -154,7 +154,7 @@ Otro punto importante de destacar es que en la práctica usualmente utilizamos l
 
 El Valor p es una herramienta que se puede utilizar para contrastar hipótesis que tiene características que pueden solucionar algunos problemas con los contrastes anteriores. Por ejemplo, no todos los contrastes van a tener un tamaño de contraste exacto (como en los casos donde las variables aleatorias son discretas.) Por otro lado, ni el tamaño ni la potencia están directamente relacionados con los datos observados. El valor p corrige estos problemas. Para propósitos del curso definiremos el valor p como:
 
-> Definición. Valor p. Sea $T = T(X_1, X_2, \dots, X_n)$ un estadístico y considere $H_0: \theta = \theta_0$ contra $H_1: \theta < \theta_0$ (o $H_1: \theta > \theta_0$). Suponga que el contraste rechaza H_0 si $T \leq k$ (o $T > k$). Sea $t = T(x_1, x_2, \dots, x_n$) un valor observado de T. Entonces se define el valor p (denotado pval(t)) como:
+> Definición. Valor p. Sea $T = T(X_1, X_2, \dots, X_n)$ un estadístico y considere $H_0: \theta = \theta_0$ contra $H_1: \theta < \theta_0$ (o $H_1: \theta > \theta_0$). Suponga que el contraste rechaza $H_0$ si $T \leq k$ (o $T > k$). Sea $t = T(x_1, x_2, \dots, x_n$) un valor observado de T. Entonces se define el valor p (denotado pval(t)) como:
 $$pval(t) = P(T \leq t|\theta = \theta_0)$$ o 
 $$pval(t) = P(T > t|\theta = \theta_0)$$
 
@@ -164,7 +164,7 @@ $$pval(t) = P(T > t|\theta = \theta_0)$$
 
 Nótese que de esta manera no hay ningún problema si la distribución de T es discreta o continua, pues la probabilidad puede ser calculada sin ningún problema. Formalmente, el valor p se conoce como la probabilidad, bajo la hipótesis nula, de observar nuestro estadístico de prueba o un valor más extremo. Esto significa que si el valor p es grande entonces nuestro estadístico de prueba es un valor muy común de T y se sitúa en el centro de la distribución, brindando así evidencia a favor de la hipótesis nula. Por otra parte, si el valor p es pequeño entonces el estadístico de prueba es un valor poco común de T, situándose en las colas de su distribución, y por lo tanto brindando evidencia en contra de $H_0$ y a favor de $H_1$. Existe la posibilidad de que el valor de t haya sido un punto extremo de la distribución de T bajo $H_0$, pero esto se considera algo como sumamente improbable.
 
-Como altos valores p dan evidencia a favor de H_0 y bajos valores dan evidencia en contra, sería posible idear un contraste de hipótesis que consista en rechazar H_0 si pval(t) < α. Si la distribución de T es continua entonces el valor de α sería un tamaño de contraste exacto. En la práctica así es cómo se utiliza el valor p, comparándolo contra el nivel de significancia (tamaño del contraste) y decidiendo si se rechaza o no la hipótesis nula.
+Como altos valores p dan evidencia a favor de $H_0$ y bajos valores dan evidencia en contra, sería posible idear un contraste de hipótesis que consista en rechazar $H_0$ si $\text{pval}(t) < \alpha$. Si la distribución de T es continua entonces el valor de α sería un tamaño de contraste exacto. En la práctica así es cómo se utiliza el valor p, comparándolo contra el nivel de significancia (tamaño del contraste) y decidiendo si se rechaza o no la hipótesis nula.
 
 ---
 
@@ -189,7 +189,7 @@ Existen algunas malas interpretaciones del valor p que no debemos cometer en la 
 * El valor p no es la probabilidad de que la hipótesis nula sea cierta. La hipótesis nula es un valor de θ fijo y por lo tanto es cierta o no lo es; no existen probabilidades en este ámbito.
 
 * El valor p no es la probabilidad de cometer un Error Tipo I, dado los datos. El cálculo del valor p no tiene nada que ver con la decisión de aceptar o rechazar la hipótesis nula;
-es simplemente la probabilidad de una cola de la distribución muestral de T que se puede usar para cuantificar la evidencia de los datos a favor de H0. No obstante, sí se puede
+es simplemente la probabilidad de una cola de la distribución muestral de T que se puede usar para cuantificar la evidencia de los datos a favor de $H_0$. No obstante, sí se puede
 usar el valor p para tomar decisiones, pero entonces obviamente en esos caso no sería la probabilidad de Error Tipo I.
 
 * En algunos casos el valor p se conoce como el "tamaño del contraste observado" pues su cálculo es similar al del tamaño del contraste pero utilizando el estadístico de prueba en lugar del valor crítico. No obstante esta es una interpretación que no me gusta pues tiende a confundir
