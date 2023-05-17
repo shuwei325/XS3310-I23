@@ -103,7 +103,7 @@ Una manera de hacer esto es por medio del contraste de razón de verosimilitudes
 
 # Contraste de razón de verosimilitudes
 
-&gt; Estadístico de la razón de verosimilitudes: Suponga que se tiene una muestra aleatoria `\(X_{1}, X_{2}, ... , X_{n}\)` de una población con vector de parámetros `\(\Theta = (\theta_1, \theta_2, ... , \theta_k)\)` y con función de verosimilitud `\(\mathcal{L}(\Theta)\)`. Se desea hacer un contraste de hipótesis sobre uno o más de estos parámetros, de forma que las hipótesis sean compuestas, es decir podemos tener hipótesis `\(H_{0}: \Theta \in \Omega_{0}\)` contra `\(H_{1}: \Theta \in \Omega_{1}\)`. Entonces se definen `\(\mathcal{L}(\hat{\Omega}_{0}) = Max_{\Theta \in \Omega_{0}}\mathcal{L}(\Theta)\)` y `\(\mathcal{L}(\hat{\Omega}) = Max_{\Theta \in \Omega}\mathcal{L}(\Theta)\)`. Estos corresponden a las funciones de verosimilitud evaluadas en sus correspondientes máximos de verosimilitud. Se define el **estadístico de la razón de verosimilitudes**, denotado `\(\lambda\)`, como `\(\frac{\mathcal{L}(\hat{\Omega}_{0})}{\mathcal{L}(\hat{\Omega})}\)`. 
+&gt; Estadístico de la razón de verosimilitudes: Suponga que se tiene una muestra aleatoria `\(X_{1}, X_{2}, ... , X_{n}\)` de una población con vector de parámetros `\(\Theta = (\theta_1, \theta_2, ... , \theta_k)\)` y con función de verosimilitud `\(\mathcal{L}(\Theta)\)`. Se desea hacer un contraste de hipótesis sobre uno o más de estos parámetros, de forma que las hipótesis sean compuestas, es decir podemos tener hipótesis `\(H_{0}: \Theta \in \Omega_{0}\)` contra `\(H_{1}: \Theta \in \Omega_{1}\)`. Entonces se definen `\(\mathcal{L}(\hat{\Omega}_{0}) = \max\limits_{\Theta \in \Omega_{0}}\mathcal{L}(\Theta)\)` y `\(\mathcal{L}(\hat{\Omega}) = \max\limits_{\Theta \in \Omega}\mathcal{L}(\Theta)\)`. Estos corresponden a las funciones de verosimilitud evaluadas en sus correspondientes máximos de verosimilitud. Se define el **estadístico de la razón de verosimilitudes**, denotado `\(\lambda\)`, como `\(\frac{\mathcal{L}(\hat{\Omega}_{0})}{\mathcal{L}(\hat{\Omega})}\)`. 
 
 De esta definición podemos inferir el uso que se le puede dar a dicho estadístico. Se puede demostrar que `\(0 &lt; \lambda &lt; 1\)`. Si `\(\lambda\)` es un valor muy cercano a uno esto significa que la mejor explicación de la verosimilitud está siendo dada por los valores de `\(\Omega_{0}\)`, mientras que pasa lo contrario si `\(\lambda\)` se aproxima mucho a cero. Por lo tanto, un buen contraste consistiría en rechazar `\(H_0\)` si `\(\lambda &lt; k\)`, donde el `\(k\)` se elije como anteriormente, fijando el tamaño.
 
@@ -128,7 +128,7 @@ Solución: Lo primero que se puede notar es que la hipótesis alterna es compues
 
 `\(\mathcal{L}(\hat{\Omega}_0) = \mathcal{L}(\mu_0) = (2\pi)^{-\frac{n}{2}} (\sigma^2)^{-\frac{n}{2}} e^{-\frac{\sum(X_{j} -\mu_0)^2}{2\sigma^2}} = (2\pi)^{-\frac{n}{2}} (\sigma^2)^{-\frac{n}{2}} e^{-\frac{ \sum{X_{j}^{2}} - 2n\mu_{0} \overline{X} + n\mu_{0}^2 }{2\sigma^2}}\)`
 
-También sabemos, de temas anteriories del curso, que el estimador de máxima verosimilitud para `\(\mu\)` es `\(\hat{\mu} = \overline{X}\)`. Evaluando esto en la verosimilitud de todo Omega obtenemos:
+También sabemos, de temas anteriores del curso, que el estimador de máxima verosimilitud para `\(\mu\)` es `\(\hat{\mu} = \overline{X}\)`. Evaluando esto en la verosimilitud de todo `\(\Omega\)` obtenemos:
 
 `\(\mathcal{L}(\hat{\Omega}) = \mathcal{L}(\hat{\mu}) =  \mathcal{L}(\overline{X}) = (2\pi)^{-\frac{n}{2}} (\sigma^2)^{-\frac{n}{2}} e^{-\frac{ \sum{X_{j}^{2}} - 2n\overline{X} \cdot \overline{X} + n\overline{X}^2 }{2\sigma^2}} = (2\pi)^{-\frac{n}{2}} (\sigma^2)^{-\frac{n}{2}} e^{-\frac{ \sum{X_{j}^{2}} - n\overline{X}^2 }{2\sigma^2}}\)`
 
@@ -186,6 +186,7 @@ Obtenga un contraste con un nivel de significancia de `\(\alpha_0\)`.
 Solución: A diferencia del caso pasado, ahora ambas hipótesis son compuestas. En este caso tenemos que `\(\Theta = (\mu, \sigma^2)\)`, a diferencia del caso anterior en donde solo teníamos un parámetro desconocido. Por lo tanto vamos a requerir los EMV de cada parámetro:
 
 `\(\hat{\mu} = \overline{X}\)`
+
 `\(\hat{\sigma}^2 =\frac{\sum(x_{j} -\overline{X})^2}{n}\)`
 
 ---
@@ -237,8 +238,8 @@ El método de la razón de verosimilitudes tiene un inconveniente y es que en mu
 
 # Contraste de razón de verosimilitudes
 
-&gt; Teorema de Wilks:	Suponga que `\(X_{1}, X_{2}, ... , X_{n}\)` tiene una función de verosimilitud `\(\mathcal{L}(\Theta)\)` y se tienen las hipótesis `\(H_{0}: \Theta \in \Omega_0\)` contra `\(H_{1}: \Theta \in \Omega_1\)`. Sea `\(\Theta\)` el vector de parámetros y `\(\Theta_0\)` el vector de parámetros definidos en `\(\Omega_0\)`, de forma que podemos definir `\(d = \dim(\Theta)\)` y `\(d_0 = \dim(\Theta_0)\)`. Si `\(n \to +\infty\)` entonces
-	`\(G=-2\ln(\lambda)  \xrightarrow{\text{d}} \chi^{2}(d-d_0)\)`
+&gt; **Teorema de Wilks:**	Suponga que `\(X_{1}, X_{2}, ... , X_{n}\)` tiene una función de verosimilitud `\(\mathcal{L}(\Theta)\)` y se tienen las hipótesis `\(H_{0}: \Theta \in \Omega_0\)` contra `\(H_{1}: \Theta \in \Omega_1\)`. Sea `\(\Theta\)` el vector de parámetros y `\(\Theta_0\)` el vector de parámetros definidos en `\(\Omega_0\)`, de forma que podemos definir `\(d = \dim(\Theta)\)` y `\(d_0 = \dim(\Theta_0)\)`. Si `\(n \to +\infty\)` entonces
+	`\(G=-2\ln(\lambda)  \xrightarrow{\text{d}} \chi^{2}_{(d-d_0)}\)`
 	 
 El resultado de este teorema es inmediato pues podemos ver que para cualquier contraste de tamaño `\(\alpha_0\)` vamos a poder rechazar la hipótesis nula si `\(G=-2\ln(\lambda) &gt; \chi^{2}_{d-d_{0},\alpha_0}\)`. De esta forma tenemos una región crítica genérica que dependerá del tamaño del contraste y de `\(d\)` y `\(d_0\)`. Empecemos haciendo un ejemplo con un solo parámetro desconocido donde podemos encontrar tanto el contraste exacto como el aproximado por medio del Teorema de Wilks. 
 
@@ -279,7 +280,7 @@ Sin embargo, para este contraste podemos encontrar una región crítica exacta, 
 
 `\(\lambda = g(T) = n^{-n} T^{n} e^{-(T-n)}\)`
 
-Recuerde que el contraste de la razón de verosimilitudes consiste en rechazar la hipótesis nula si `\(\lambda &lt; k\)` es decir, si `\(g(T) &lt; k\)`. En la Figura 3a podemos observar la gráfica de `\(g(T)\)` para `\(T &gt;0\)`. La línea punteada en el gráfico corresponde al valor teórico de `\(k\)`. Nótese que `\(g(T) &lt; k\)` si `\(T &lt; k_1\)` o si `\(T &gt; k_2\)`, donde `\(k_1\)` y `\(k_2\)` se eligen utilizando el tamaño del contraste. Por lo tanto, vamos a rechazar la hipótesis nula si `\(T &lt; k_1\)` o `\(T &gt; k_2\)`. 
+Recuerde que el contraste de la razón de verosimilitudes consiste en rechazar la hipótesis nula si `\(\lambda &lt; k\)` es decir, si `\(g(T) &lt; k\)`. En la siguiente figura podemos observar la gráfica de `\(g(T)\)` para `\(T &gt;0\)`. La línea punteada en el gráfico corresponde al valor teórico de `\(k\)`. Nótese que `\(g(T) &lt; k\)` si `\(T &lt; k_1\)` o si `\(T &gt; k_2\)`, donde `\(k_1\)` y `\(k_2\)` se eligen utilizando el tamaño del contraste. Por lo tanto, vamos a rechazar la hipótesis nula si `\(T &lt; k_1\)` o `\(T &gt; k_2\)`. 
 
 ---
 
@@ -314,68 +315,10 @@ Por lo tanto `\(k_{1}^{\prime} = \chi^{2}_{2n,1-\frac{\alpha_0 }{2}}\)` y `\(k_{
 
 # Contraste de razón de verosimilitudes
 
-En la Figura 3b podemos ver una comparación de la potencia exacta y aproximada para este ejemplo, utilizando `\(n=7\)`, `\(\alpha_0 = 0.05\)` y `\(\theta_{0} = 1\)`. Nótese como la prueba aproximada tiene un perdida en potencia para `\(\theta &gt; 1\)`. 
+En la Figura de la potencia podemos ver una comparación de la potencia exacta y aproximada para este ejemplo, utilizando `\(n=7\)`, `\(\alpha_0 = 0.05\)` y `\(\theta_{0} = 1\)`. Nótese como la prueba aproximada tiene una perdida en potencia para `\(\theta &gt; 1\)`. 
 
 A continuación veremos un ejemplo de la aplicación del Teorema de Wilks para un problema con más de un parámetro desconocido.
 
----
-
-# Contraste de razón de verosimilitudes
-
-
-Ejemplo: Sean `\(X_{1}, X_{2}, ... , X_{n}\)` y `\(Y_{1}, Y_{2}, ... , Y_{n}\)` dos muestras aleatorias independientes tales que `\(X_{j} \sim Poisson(\theta_1)\)` y `\(Y_{j} \sim Poisson(\theta_2)\)`. Se desea contrastar las hipótesis `\(H_{0}: \theta_1 = \theta_2\)` contra `\(H_{1}: \theta_1 \neq \theta_2\)`. Encuentre un contraste para estas hipótesis utilizando el Teorema de Wilks. 
-
-Solución: Empecemos por definir los espacios paramétricos para tener una mejor idea del problema. En el caso de `\(\Omega_{0}\)` tenemos que este se define como `\(\Omega_{0} = \left\lbrace (\theta_1 , \theta_2) | \theta_1 = \theta_2 = \theta \right\rbrace\)`. Por otra parte, `\(\Omega = \left\lbrace (\theta_1 , \theta_2) | \theta_1 , \theta_2 \in \mathbb{R}^{+}  \right\rbrace\)`. Por lo tanto tenemos que `\(\Theta_{0}  = \theta\)` y `\(\Theta = (\theta_1 , \theta_2)\)` y sus dimensiones son 1 y 2, respectivamente. Procedamos a encontrar la verosimilitud:
-
-`\(\mathcal{L}(\Theta) = \mathcal{L}(\theta_1 , \theta_2) = \mathcal{L}(\theta_1) \mathcal{L}(\theta_2) = \frac{\theta_{1}^{\sum X_{j}} e^{-n\theta_{1}}}{\prod X_{j}!} \frac{\theta_{2}^{\sum Y_{j}} e^{-n\theta_{2}}}{\prod Y_{j}!} = \frac{\left( \theta_{1}^{\overline{X}} \theta_{2}^{\overline{Y}}  \right)^{n} e^{-n(\theta_{1}+\theta_{2})} }{\prod X_{j}! \prod Y_{j}!}\)`
-
----
-
-# Contraste de razón de verosimilitudes
-
-
-Se puede demostrar que de esta expresión se obtiene `\(\overline{X}\)` como EMV de `\(\theta_1\)` y `\(\overline{Y}\)` como EMV de `\(\theta_2\)`. Ahora procedamos a encontrar la verosimilitud evaluada en `\(\Theta_{0}\)`:
-
-`\(\mathcal{L}(\Theta_0) = \mathcal{L}(\theta) = \frac{\theta^{ n(\overline{X} + \overline{Y}) } e^{-2n\theta} }{\prod X_{j}! \prod Y_{j}!}\)`
-
-Ahora debemos encontrar el EMV de `\(\theta\)`. Para ello sacamos primero la log-verosimilitud:
-
-`\(\ell(\theta) = n(\overline{X} + \overline{Y})\ln(\theta) - 2n\theta - \ln\left( \prod X_{j}! \prod Y_{j}! \right)\)`
-
-`\(\Rightarrow \frac{\partial \ell (\theta)}{\partial \theta} = \frac{ n(\overline{X} + \overline{Y}) }{\theta} - 2n = 0\)`
-
-`\(\Rightarrow \hat{\theta} = \frac{\overline{X} + \overline{Y}}{2}\)`
-
----
-
-# Contraste de razón de verosimilitudes
-
-
-La segunda derivada con respecto a `\(\theta\)` sería negativa, por lo que `\(\hat{\theta}\)` es el EMV. Ahora procedemos a encontrar `\(\mathcal{L}(\hat{\Omega})\)` y `\(\mathcal{L}(\hat{\Omega}_0)\)`.
-
-`\(\mathcal{L}(\hat{\Omega}_0) = \frac{ \left( \frac{\overline{X} + \overline{Y}}{2} \right) ^{ n(\overline{X} + \overline{Y}) } e^{-n(\overline{X} + \overline{Y})} }{\prod X_{j}! \prod Y_{j}!}\)`
-
-`\(\mathcal{L}(\hat{\Omega}) = \frac{\left( \overline{X}^{\overline{X}} \overline{Y}^{\overline{Y}}  \right)^{n} e^{-n(\overline{X}+\overline{Y})} }{\prod X_{j}! \prod Y_{j}!}\)`
-
----
-
-# Contraste de razón de verosimilitudes
-
-Por lo tanto, el estadístico `\(\lambda\)` sería:
-
-`\(\lambda = \frac{\mathcal{L}(\hat{\Omega}_0)}{\mathcal{L}(\hat{\Omega})} = \left( \frac{\left( \frac{\overline{X} + \overline{Y}}{2} \right) ^{ (\overline{X} + \overline{Y}) }}{\overline{X}^{\overline{X}} \overline{Y}^{\overline{Y}}} \right)^{n}\)`
-
-Ya con esto podemos encontrar una expresión para la estadística `\(G\)`:
-
-`\(G = -2\ln(\lambda) = -2\ln \left( \frac{\left( \frac{\overline{X} + \overline{Y}}{2} \right) ^{ (\overline{X} + \overline{Y}) }}{\overline{X}^{\overline{X}} \overline{Y}^{\overline{Y}}} \right)^{n} = -2n\left[ (\overline{X} + \overline{Y}) \ln\left( \frac{\overline{X} + \overline{Y}}{2}\right)  - \overline{X} \ln(\overline{X}) - \overline{Y} \ln(\overline{Y}) \right]\)`
-
-Por el Teorema de Wilks, rechazamos la hipótesis nula si este valor es mayor a `\(\chi^{2}_{1,\alpha_0}\)`. 
-
----
-
-# Contraste de razón de verosimilitudes
-
-Como parte adicional del ejemplo, supongamos que `\(n=100\)`, `\(\overline{x} = 20\)`, `\(\overline{y} = 22\)` y `\(\alpha_0 = 0.01\)`. Utilicemos estos valores para contrastar las hipótesis del ejemplo. Con estos valores se tiene que `\(G \approx 9.53\)` y que `\(\chi^{2}_{1,0.01} = 6.635\)`. Tenemos que `\(G &gt; \chi^{2}_{1,0.01}\)` por lo que rechazamos la hipótesis nula. 
 
 ---
 class: center, middle

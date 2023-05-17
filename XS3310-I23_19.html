@@ -22,7 +22,7 @@ class: center, middle, inverse, title-slide
 ### Escuela de Estadística
 ]
 .date[
-### 09-05-2023
+### 30-05-2023
 ]
 
 ---
@@ -45,7 +45,7 @@ Contrastes de hipótesis: Razón de verosimilitudes para muestras grandes. Boots
 
 # Repaso: contraste de razón de verosimilitudes
 
-&gt; Estadístico de la razón de verosimilitudes: Suponga que se tiene una muestra aleatoria `\(X_{1}, X_{2}, ... , X_{n}\)` de una población con vector de parámetros `\(\Theta = (\theta_1, \theta_2, ... , \theta_k)\)` y con función de verosimilitud `\(\mathcal{L}(\Theta)\)`. Se desea hacer un contraste de hipótesis sobre uno o más de estos parámetros, de forma que las hipótesis sean compuestas, es decir podemos tener hipótesis `\(H_{0}: \Theta \in \Omega_{0}\)` contra `\(H_{1}: \Theta \in \Omega_{1}\)`. Entonces se definen `\(\mathcal{L}(\hat{\Omega}_{0}) = Max_{\Theta \in \Omega_{0}}\mathcal{L}(\Theta)\)` y `\(\mathcal{L}(\hat{\Omega}) = Max_{\Theta \in \Omega}\mathcal{L}(\Theta)\)`. Estos corresponden a las funciones de verosimilitud evaluadas en sus correspondientes máximos de verosimilitud. Se define el **estadístico de la razón de verosimilitudes**, denotado `\(\lambda\)`, como `\(\frac{\mathcal{L}(\hat{\Omega}_{0})}{\mathcal{L}(\hat{\Omega})}\)`.
+&gt; Estadístico de la razón de verosimilitudes: Suponga que se tiene una muestra aleatoria `\(X_{1}, X_{2}, ... , X_{n}\)` de una población con vector de parámetros `\(\Theta = (\theta_1, \theta_2, ... , \theta_k)\)` y con función de verosimilitud `\(\mathcal{L}(\Theta)\)`. Se desea hacer un contraste de hipótesis sobre uno o más de estos parámetros, de forma que las hipótesis sean compuestas, es decir podemos tener hipótesis `\(H_{0}: \Theta \in \Omega_{0}\)` contra `\(H_{1}: \Theta \in \Omega_{1}\)`. Entonces se definen `\(\mathcal{L}(\hat{\Omega}_{0}) = \max\limits_{\Theta \in \Omega_{0}}\mathcal{L}(\Theta)\)` y `\(\mathcal{L}(\hat{\Omega}) = \max\limits_{\Theta \in \Omega}\mathcal{L}(\Theta)\)`. Estos corresponden a las funciones de verosimilitud evaluadas en sus correspondientes máximos de verosimilitud. Se define el **estadístico de la razón de verosimilitudes**, denotado `\(\lambda\)`, como `\(\frac{\mathcal{L}(\hat{\Omega}_{0})}{\mathcal{L}(\hat{\Omega})}\)`.
 
 ---
 
@@ -210,7 +210,7 @@ Específicamente, en el ejemplo de los ratones, el valor observado de `\(T\)` er
 * Recuerden que tanto en este caso como en los ejercicios de simulación, estamos calculando el valor p con aproximaciones empíricas.
 ---
 
-# Ejercicio para la siguiente clase:
+# Ejercicio:
 
 ![](figs/ejercicio.png)
 
@@ -224,7 +224,7 @@ Contrastes de hipótesis: Razón de verosimilitud y bootstrap.
 
 # ¿Qué nos falta para el II Parcial?
 
-Discusión de ensayos de valores p, repaso de estadística inferencial clásica. 
+Repaso de estadística inferencial clásica. Estadística Bayesiana.
 
 
 Slides creadas via R package [**xaringan**](https://github.com/yihui/xaringan).
