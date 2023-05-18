@@ -274,20 +274,16 @@ Recuerde que el contraste de la razón de verosimilitudes consiste en rechazar l
 
 # Contraste de razón de verosimilitudes
 
+Figura suponiendo $n=7$, $\alpha_0 = 0.05$ y $\theta_{0} = 1$
+
 ![Gráfico de g(T)](figs/graf_T.png)
 
----
-
-# Contraste de razón de verosimilitudes
-
-![Comparación de potencias](figs/graf_potenc.png)
 
 ---
 
 # Contraste de razón de verosimilitudes
 
 
-Figuras para el ejemplo anterior con $n=7$, $\alpha_0 = 0.05$ y $\theta_{0} = 1$
 
 Para obtener los valores $k_1$ y $k_2$ los despejamos de la siguiente ecuación:
 
@@ -299,13 +295,21 @@ $P\left( W < k_{1}^{\prime} | \theta_0 \right) = P\left( W > k_{2}^{\prime} | \t
 
 Por lo tanto $k_{1}^{\prime} = \chi^{2}_{2n,1-\frac{\alpha_0 }{2}}$ y $k_{2}^{\prime} = \chi^{2}_{2n,\frac{\alpha_0 }{2}}$. Es decir, vamos a rechazar la hipótesis nula si $\frac{2n\overline{X}}{\theta_0} < \chi^{2}_{2n,1-\frac{\alpha_0 }{2}}$ o si $\frac{2n\overline{X}}{\theta_0} > \chi^{2}_{2n,\frac{\alpha_0 }{2}}$. 
 
+
+---
+
+# Contraste de razón de verosimilitudes
+
+![Comparación de potencias](figs/graf_potenc.png)
+
 ---
 
 # Contraste de razón de verosimilitudes
 
 En la Figura de la potencia podemos ver una comparación de la potencia exacta y aproximada para este ejemplo, utilizando $n=7$, $\alpha_0 = 0.05$ y $\theta_{0} = 1$. Nótese como la prueba aproximada tiene una perdida en potencia para $\theta > 1$. 
 
-A continuación veremos un ejemplo de la aplicación del Teorema de Wilks para un problema con más de un parámetro desconocido.
+
+En la próxima clase, veremos un ejemplo de la aplicación del Teorema de Wilks para un problema con más de un parámetro desconocido.
 
 
 ---
