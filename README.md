@@ -401,7 +401,7 @@ Parcial I
 <td>
 <a href="https://youtu.be/yzzD137zmag">Clase asincrónica</a>
 </td>
-<td>
+<td ROWSPAN="2">
 <a href="https://docs.google.com/document/d/1YJ_CPac33nAJDXokrHzahu5aWRJAwmoaKkBfpzj1wMw/edit?usp=sharing">Ejercicios
 Extra</a> <br> Casella: 8.1, 8.2, 8.3, 8.5, 8.6, 8.7, 8.8, 8.9
 </td>
