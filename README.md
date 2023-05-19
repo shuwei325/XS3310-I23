@@ -398,9 +398,10 @@ Parcial I
 <td>
 <a href="XS3310-I23_18.html">Clase18</a>
 </td>
-<td ROWSPAN="2">
+<td>
+<a href="https://youtu.be/yzzD137zmag">Clase asincrónica</a>
 </td>
-<td ROWSPAN="2">
+<td>
 <a href="https://docs.google.com/document/d/1YJ_CPac33nAJDXokrHzahu5aWRJAwmoaKkBfpzj1wMw/edit?usp=sharing">Ejercicios
 Extra</a> <br> Casella: 8.1, 8.2, 8.3, 8.5, 8.6, 8.7, 8.8, 8.9
 </td>
@@ -411,6 +412,9 @@ Extra</a> <br> Casella: 8.1, 8.2, 8.3, 8.5, 8.6, 8.7, 8.8, 8.9
 </td>
 <td>
 <a href="XS3310-I23_19.html">Clase19</a> <br>
+</td>
+<td>
+<a href="https://youtu.be/Zzix_8Lh3ZE">Clase asincrónica</a>
 </td>
 </tr>
 <tr>
