@@ -440,7 +440,135 @@ DeGroot: 9.1: 2,3,11; 9.2: 2,4,7; 9.3: 2,3,8,13; 9.41,3,4; 9.5: 2,3,8,9;
 02/06
 </td>
 <td>
-Quiz 3
+Repaso y ejercicios
+</td>
+</tr>
+<td colspan="5" style="text-align: center">
+  <b> Tema 4: Estadísitca Bayesiana </b>
+</td>
+<tr>
+<td ROWSPAN="2">
+12
+</td>
+<td>
+06/06
+</td>
+<td>
+<a href="XS3310-I23_22.html">Clase22</a>
+</td>
+<td>
+</td>
+<td>
+Lista de ejercicios en las notas de clase
+</td>
+</tr>
+<tr>
+<td>
+09/06
+</td>
+<td>
+<a href="XS3310-I23_23.html">Clase23</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td ROWSPAN="2">
+13
+</td>
+<td>
+13/06
+</td>
+<td>
+Quiz 3 <br> <a href="XS3310-I23_24.html">Clase24</a>
+</td>
+<td ROWSPAN="2">
+</td>
+<td>
+DeGroot: <br> - 7.2: 2, 5, 10 <br> - 7.3: 5,6,7,9,12,17,19,21 <br> -
+7.4: 1,2,5,10
+</td>
+</tr>
+<td>
+16/06
+</td>
+<td>
+<a href="XS3310-I23_25.html">Clase25</a>
+</td>
+<td>
+</td>
+<tr>
+<td ROWSPAN="2">
+14
+</td>
+<td>
+20/06
+</td>
+<td>
+<a href="XS3310-I23_26.html">Clase26</a>
+</td>
+<td>
+</td>
+<td ROWSPAN="2">
+</td>
+</tr>
+<tr>
+<td>
+23/06
+</td>
+<td>
+<a href="XS3310-I23_27.html">Clase27</a> <br>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td ROWSPAN="2">
+15
+</td>
+<td>
+27/06
+</td>
+<td>
+<a href="XS3310-I23_28.html">Clase28</a>
+</td>
+<td ROWSPAN="2">
+</td>
+<td ROWSPAN="2">
+Lista de ejercicios en las notas de clase
+</td>
+</tr>
+<tr>
+<td>
+30/06
+</td>
+<td>
+<a href="XS3310-I23_29.html">Clase29</a>
+</td>
+</tr>
+<tr>
+<td ROWSPAN="2">
+16
+</td>
+<td>
+04/07
+</td>
+<td>
+Debate
+</td>
+<td ROWSPAN="2">
+</td>
+<td ROWSPAN="2">
+</td>
+</tr>
+<tr>
+<td>
+07/07
+</td>
+<td>
+Parcial II
 </td>
 </tr>
 <tr>
