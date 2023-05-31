@@ -532,7 +532,7 @@ DeGroot: <br> - 7.2: 2, 5, 10 <br> - 7.3: 5,6,7,9,12,17,19,21 <br> -
 27/06
 </td>
 <td>
-<a href="XS3310-I23_28.html">Clase28</a>
+Quiz 4 <br> <a href="XS3310-I23_28.html">Clase28</a>
 </td>
 <td ROWSPAN="2">
 </td>
