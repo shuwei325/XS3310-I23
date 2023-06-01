@@ -444,7 +444,7 @@ Repaso y ejercicios
 </td>
 </tr>
 <td colspan="5" style="text-align: center">
-  <b> Tema 4: Estadísitca Bayesiana </b>
+  <b> Tema 4: Estadística Bayesiana </b>
 </td>
 <tr>
 <td ROWSPAN="2">
@@ -482,7 +482,7 @@ Lista de ejercicios en las notas de clase
 13/06
 </td>
 <td>
-Quiz 3 <br> <a href="XS3310-I23_24.html">Clase24</a>
+Quiz 3
 </td>
 <td ROWSPAN="2">
 </td>
@@ -507,7 +507,7 @@ DeGroot: <br> - 7.2: 2, 5, 10 <br> - 7.3: 5,6,7,9,12,17,19,21 <br> -
 20/06
 </td>
 <td>
-<a href="XS3310-I23_26.html">Clase26</a>
+Continua <a href="XS3310-I23_25.html">Clase25</a>
 </td>
 <td>
 </td>
@@ -532,7 +532,7 @@ DeGroot: <br> - 7.2: 2, 5, 10 <br> - 7.3: 5,6,7,9,12,17,19,21 <br> -
 27/06
 </td>
 <td>
-Quiz 4 <br> <a href="XS3310-I23_28.html">Clase28</a>
+Quiz 4
 </td>
 <td ROWSPAN="2">
 </td>
@@ -545,7 +545,7 @@ Lista de ejercicios en las notas de clase
 30/06
 </td>
 <td>
-<a href="XS3310-I23_29.html">Clase29</a>
+Repaso y ejercicios
 </td>
 </tr>
 <tr>

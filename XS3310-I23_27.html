@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>XS3310 Teoría Estadística</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Escuela de Estadística" />
+    <script src="libs/header-attrs-2.21/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# XS3310 Teoría Estadística
+]
+.subtitle[
+## I Semestre 2023
+]
+.author[
+### Escuela de Estadística
+]
+.date[
+### 23-06-2023
+]
+
+---
+
+
+
+
+
+class: center, middle
+
+# ¿Qué hemos visto hasta ahora?
+
+Introducción a la Estadística Bayesiana: filosofía, historia y un poco de cálculo. Distribuciones previas informativas y conjugadas.
+
+# ¿Qué vamos a discutir hoy?
+
+Inferencia Bayesiana.
+
+---
+
+## Inferencia Bayesiana
+
+
+Como en la estadística Bayesiana la posteriori es la distribución que contiene toda la información pertinente sobre `\(\theta\)`, los problemas de inferencia estadística se solucionan trabajando con esta distribución. A continuación veremos de manera general los temas del curso pero dentro del enfoque Bayesiano. 
+
+### Estimación puntual
+	
+En estadística Bayesiana se tiene el inconveniente de que tenemos incertidumbre sobre el parámetro y hay que ver cómo se puede sacar un valor puntual para `\(\theta\)` de toda esta incertidumbre. La respuesta tradicional es buscar el centro de la distribución a posteriori de `\(\theta\)`. Por lo tanto, el **estimador de Bayes** más tradicional se define como la media de la distribución a posteriori de `\(\theta\)`. Es decir, `\(\hat{\theta}_{B} = E(\theta|x)\)`. 
+	
+---
+
+## Estimación puntual
+
+En los ejemplos que vimos anteriormente donde encontrábamos la distribución a posteriori y calculamos los valores esperados de esta, lo que realmente estábamos haciendo era obteniendo el estimador de Bayes. A estos estimadores se le pueden volver a estudiar todas las propiedades que ya vimos en el curso (Insesgado, Eficiente, Consistente y Suficiente) e incluso comparar contra otros estimadores frecuentistas. 
+	
+Por lo general, los estimadores puntuales Bayesianos están asociados a una **función de pérdida**, denotada como `\(\ell(\hat{\theta},\theta)\)`, que mide la penalización en la que se incurre al utilizar `\(\hat{\theta}\)` para estimar `\(\theta\)`. La función de pérdida más común es la de pérdida cuadrática que se define como `\(\ell(\hat{\theta},\theta) = (\hat{\theta}-\theta)^{2}\)`. 
+	
+---
+
+## Estimación puntual
+
+El objetivo es encontrar el valor de `\(\hat{\theta}\)` que minimice `\(E\left( \ell(\hat{\theta},\theta) \,\middle|\, x \right) = \int \ell(\hat{\theta},\theta) \pi(\theta|x) d\theta\)`, llamado el riesgo Bayesiano a posteriori. Por lo tanto, podemos ver que el estimador de Bayes que minimiza el riesgo Bayesiano utilizando la función de pérdida cuadrática se obtiene minimizando la expresión
+	
+`$$\int (\hat{\theta}-\theta)^{2} \pi(\theta|x) d\theta = E\left( (\hat{\theta}-\theta)^{2} \,\middle|\, x \right)$$`
+	
+Encontremos el valor de `\(\hat{\theta}\)` que minimiza esta expresión. Primero simplifiquemos la expresión anterior un poco:
+	
+`$$E\left( (\hat{\theta}-\theta)^{2} \,\middle|\, x \right) = E\left( \hat{\theta}^{2} -2\theta\hat{\theta} +\theta^{2} \,\middle|\, x \right) = \hat{\theta}^{2} -2\hat{\theta}E(\theta|x) + E(\theta^{2}|x)$$`
+	
+---
+
+## Estimación puntual
+
+Derivamos esta expresión con respecto a `\(\hat{\theta}\)`:
+	
+`$$\frac{\partial }{\partial \hat{\theta}}  E\left( (\hat{\theta}-\theta)^{2} \,\middle|\, x \right) = 2\hat{\theta} - 2E(\theta|x) = 0$$`
+`$$\Rightarrow \hat{\theta} = E(\theta|x)$$`
+	
+Como la segunda derivada es positiva entonces tenemos que `\(\hat{\theta} = E(\theta|x)\)` es el valor que minimiza el riesgo de Bayes con pérdida cuadrática. Este valor es el mismo al estimador de Bayes usualmente utilizando, por lo que podríamos decir que siempre que usemos la media a posteriori como estimador de `\(\theta\)` estamos usando el valor que minimiza el riesgo de Bayes con pérdida cuadrática. Si cambiamos la función de pérdida entonces el estimador de Bayes cambiaría. 
+	
+---
+
+## Intervalos de credibilidad
+	
+El análogo Bayesiano a los intervalos de confianza se llama intervalos de credibilidad (o de veracidad). Recordemos que en la estadística frecuentista la interpretación de un intervalo de confianza se hace tratando al intervalo como variable aleatoria, por lo que es incorrecto decir que `\(\theta\)` se encuentra entre tanto y tanto con tanta probabilidad. Sin embargo, en el punto de vista Bayesiano si es posible hacer una conclusión como esa pues tenemos todo un modelo probabilístico a posteriori sobre los posibles valores que podría tomar `\(\theta\)`. 
+	
+Existen dos formas usualmente utilizadas para obtener intervalos de credibilidad. Nosotros nos estaremos enfocando más en generar intervalos del primer tipo ya que los de la segunda forma son más complejos de generar en papel y lápiz.
+
+---
+
+## Intervalos de credibilidad
+	
+	
+* **Intervalos de credibilidad de colas iguales**. Estos son posiblemente los más utilizados en la práctica. Son intervalos de la forma `\(\left[a,b \right]\)` de probabilidad `\(1-\alpha\)`, donde `\(a\)` y `\(b\)` se definen mediante las ecuaciones
+		
+`$$P(a &lt; \theta &lt; b|x) = 1-\alpha$$`
+`$$P(\theta \leq a|x) = P(\theta \geq b |x) = \frac{\alpha}{2}$$` 
+		
+Por lo general están centrados alrededor de la media (si la distribución a posteriori es bastante simétrica). También existen las versiones unilaterales. 
+		
+* **Intervalos de credibilidad de máxima densidad a posteriori**. Se conocen como intervalos HPD por sus siglas en inglés. Su definición viene dada para un valor de corte `\(c &gt; 0\)` tal que 
+		
+`$$H(c) = \left\lbrace \theta : \pi(\theta|x) \geq c  \right\rbrace$$`
+		
+El valor `\(c\)` se encuentra de forma que `\(P(\theta \in H(c) | x) = 1- \alpha\)`. Encontrar este tipo de intervalos equivale a dibujar líneas horizontales en la densidad a posteriori a partir de la moda e ir bajando la línea horizontal (el valor de `\(c\)`) hasta que por debajo de esa línea se acumule una probabilidad de `\(1-\alpha\)`. 
+
+---
+
+## Intervalos de credibilidad
+	
+Veremos un ejemplo para in intervalo de credibilidad de colas iguales: 
+	
+Ejemplo: Sea `\(X_1 , X_2 , ... , X_n\)` una muestra aleatoria tal que `\(X_j \sim N(\mu,\sigma^2)\)`, donde `\(\sigma^{2}\)` es conocido. Obtenga un intervalo de credibilidad de colas iguales para `\(\mu\)` de probabilidad `\(1-\alpha\)` utilizando como priori una distribución Uniforme. 
+	
+Solución: Lo primero que tenemos que hacer es encontrar la distribución a posteriori para `\(\mu\)`. Como la priori es uniforme entonces tenemos que 
+	
+`$$\pi(\mu|x) \propto \mathcal{L}(\mu|x) = (2\pi)^{-\frac{n}{2}} (\sigma^2)^{-\frac{n}{2}} e^{-\frac{\sum (x_j - \mu)^{2} }{2\sigma^2}} \propto e^{-\frac{\sum (x_j - \mu)^{2} }{2\sigma^2}}$$`
+	
+Trabajando esta expresión un poco tenemos que
+	
+`$$e^{-\frac{\sum (x_j - \mu)^{2} }{2\sigma^2}} = e^{ -\frac{\sum (x_j - \overline{x})^{2} + n(\overline{x} - \mu)^{2}}{2\sigma^2}  }  = e^{ -\frac{\sum (x_j - \overline{x})^{2}}{2\sigma^2}  }e^{ -\frac{ n(\overline{x} - \mu)^{2}}{2\sigma^2}  }  \propto e^{ -\frac{ n(\overline{x} - \mu)^{2}}{2\sigma^2}  }$$`
+
+Esta expresión se puede reescribir de la forma `\(e^{ -\frac{ n(\mu - \overline{x})^{2}}{2\sigma^2}  }\)`. Este es el núcleo de una distribución Normal para `\(\mu\)` con media `\(\overline{x}\)` y variancia `\(\frac{\sigma^2}{n}\)`. Por lo tanto tenemos que
+`$$\mu|x \sim N\left( \overline{x}, \frac{\sigma^2}{n} \right)$$`
+
+
+---
+
+## Intervalos de credibilidad
+	
+	
+Ahora podemos proceder a encontrar el intervalo de credibilidad. Tenemos que encontrar valores `\(a\)` y `\(b\)` tales que `\(P(a &lt; \mu &lt; b|x) = 1-\alpha\)` y `\(P(\mu \leq a|x) = P(\mu \geq b |x) = \frac{\alpha}{2}\)`. Por lo tanto
+	
+`$$P(\mu \leq a|x) = P\left( \frac{\mu - \overline{x}}{\frac{\sigma}{\sqrt{n}}} \leq \frac{a - \overline{x}}{\frac{\sigma}{\sqrt{n}}} \,\middle|\, x \right)  = P\left( Z \leq \frac{\sqrt{n}(a - \overline{x}) }{\sigma} \,\middle|\, x \right)  = \frac{\alpha}{2}$$`
+	
+Esto quiere decir que tenemos que buscar el cuantil de una normal estándar que acumula `\(\frac{\alpha}{2}\)` en su cola derecha. Este valor lo denotamos como `\(z_{\frac{\alpha}{2}}\)` que por simetría es igual a `\(-z_{1-\frac{\alpha}{2}}\)`. Por lo tanto 
+	
+`$$\frac{\sqrt{n}(a - \overline{x}) }{\sigma} = -z_{1-\frac{\alpha}{2}}$$`
+	
+`$$\Rightarrow a =  \overline{x} -z_{1-\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}}$$`
+
+---
+
+## Intervalos de credibilidad
+	
+			
+Si hacemos este procedimiento para encontrar `\(b\)` vamos a obtener que `\(b = \overline{x} + z_{1-\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}}\)`. Por lo tanto vamos a tener una probabilidad de `\(1-\alpha\)` de encontrar el verdadero valor de `\(\mu\)` en el intervalo `\(\overline{x} \pm z_{1-\frac{\alpha}{2}} \frac{\sigma}{\sqrt{n}}\)`. Vean que este intervalo es completamente idéntico al intervalo de confianza para `\(\mu\)` frecuentista; inclusive el estimador de Bayes es igual al estimador de máxima verosimilitud para `\(\mu\)`. Esto se debe a que se utilizó una priori no informativa para obtener la posteriori, por lo que el resultado a posteriori es muy similar al resultado frecuentista. No obstante, el ejemplo se hizo con propósitos ilustrativos de cómo encontrar un intervalo de credibilidad con colas iguales.
+
+---
+
+## Factor de Bayes
+	
+Recordemos que nosotros tenemos las hipótesis `\(H_{0}: \theta \in \Omega_{0}\)` contra  `\(H_{1}: \theta \in \Omega_{1}\)`. En la estadística frecuentista es imposible calcular las probabilidades de estas hipótesis por lo que tenemos que generar un contraste a partir de ciertos criterios para las probabilidades de Error Tipo I y de Error Tipo II. Sin embargo, en el caso Bayesiano donde tenemos una distribución a posteriori para `\(\theta\)` entonces sí es posible calcular las probabilidades de que `\(H_0\)` o `\(H_1\)` sean ciertos. Es decir, calcularíamos `\(\alpha_{0} = P(\theta \in \Omega_{0} | x)\)` y `\(\alpha_{1} = P(\theta \in \Omega_{1} | x)\)`. 
+	
+Por lo tanto un contraste de hipótesis Bayesiano usualmente se reduce a comparar estas probabilidades y concluir correspondientemente. Podríamos decir que un Bayesiano va a rechazar la hipótesis nula si `\(\alpha_0  &lt; 0.5\)`. Aunque es posible obtener la potencia de este contraste, por lo general en estadística Bayesiana no nos preocupamos por estas medidas. Aunque este es el método usual de comparar hipótesis, algunos prefieren hacer una comparación de odds a priori y a posteriori, lo cual produce un contraste un poco distinto. Para esta explicación denotará las probabilidades a priori de `\(H_0\)` y `\(H_1\)` como `\(\pi_0\)` y `\(\pi_1\)`, respectivamente. Es decir, `\(\pi_0 = P(\theta \in \Omega_{0})\)` y `\(\pi_1 = P(\theta \in \Omega_{1})\)`. 
+
+---
+
+## Factor de Bayes
+
+	
+La cantidad `\(\frac{\alpha_{0}}{\alpha_{1}}\)` se define como los *odds* a posteriori de `\(H_0\)` con respecto a `\(H_1\)`. Por otro lado podemos definir `\(\frac{\pi_{0}}{\pi_{1}}\)` como los \textit{odds} a priori. Por lo tanto podemos definir la medida 
+	
+`$$B = \frac{\frac{\alpha_{0}}{\alpha_{1}}}{\frac{\pi_{0}}{\pi_{1}}} = \frac{\alpha_{0}\pi_{1}}{\alpha_{1}pi_{0}}$$`
+	
+como los *odds ratio* a favor de `\(H_0\)`. Este valor se denomina el **factor de Bayes**. En ocasiones este factor se interpreta como "los odds de `\(H_0\)` con respecto a `\(H_1\)` dados por los datos".  Esta interpretación es válida cuando las hipótesis son simples es decir, cuando `\(\Omega_{0} = \left\lbrace \theta_0\right\rbrace\)` y `\(\Omega_{1} = \left\lbrace \theta_1\right\rbrace\)`. En este caso tenemos que 
+	
+`$$\alpha_{0} = P(\theta = \theta_0 |x) = \frac{\mathcal{L}(\theta_0|x)\pi_0}{\mathcal{L}(\theta_0|x)\pi_0 + \mathcal{L}(\theta_1|x)\pi_1}$$`
+	
+`$$\alpha_{1} = P(\theta = \theta_1 |x) = \frac{\mathcal{L}(\theta_1|x)\pi_1}{\mathcal{L}(\theta_0|x)\pi_0 + \mathcal{L}(\theta_1|x)\pi_1}$$`
+
+---
+
+## Factor de Bayes
+
+	
+Por lo tanto,
+	
+`$$\frac{\alpha_{0}}{\alpha_{1}} = \frac{\mathcal{L}(\theta_0|x)\pi_0}{\mathcal{L}(\theta_1|x)\pi_1}$$`
+	
+`$$\Rightarrow B = \frac{\alpha_{0}\pi_{1}}{\alpha_{1}pi_{0}} = \frac{\mathcal{L}(\theta_0|x)}{\mathcal{L}(\theta_1|x)} = \lambda$$`
+	
+En otras palabras, `\(B\)` equivale a la razón de verosimilitudes de `\(H_0\)` con respecto a `\(H_1\)`, la cual usualmente es interpretada como los odds de `\(H_0\)` con respecto a `\(H_1\)` dados por los datos, incluso por estadísticos frecuentistas. Sin embargo, cuando las hipótesis no son simples resulta que el factor de Bayes es distinto al estadístico de la razón de verosimilitudes pues este cubre todos los posibles valores de `\(\theta\)` en `\(\Omega_{0}\)` y `\(\Omega_{1}\)` en lugar de solo tomar en cuenta sus estimadores máximo verosímiles.
+	
+Si `\(B &gt; 1\)` esto indica que `\(H_0\)` es más apoyado por los datos que `\(H_1\)` mientras que si `\(B &lt; 1\)` entonces los datos apoyan más a `\(H_1\)` que a `\(H_0\)`. El Cuadro 2 presenta la escala que desarrolló Jeffreys, enmendada por Kass y Raftery, para medir la magnitud del apoyo a `\(H_0\)` o `\(H_1\)`.
+
+---
+
+## Factor de Bayes
+
+	
+Escala de evidencia de Jeffreys para el factor de Bayes
+
+Factor de Bayes    | Interpretación                  |
+-------------------|---------------------------------|
+`\(B &lt; 1/150\)`        |  Evidencia muy fuerte para `\(H_1\)`|
+`\(1/150 &lt; B &lt; 1/20\)` |  Evidencia fuerte para `\(H_1\)`    |
+`\(1/20 &lt; B &lt; 1/3\)`   |  Evidencia moderada para `\(H_1\)`  |
+`\(1/3 &lt; B &lt; 1\)`      |  Evidencia débil para `\(H_1\)`     | 
+`\(1 &lt; B &lt; 3\)`        |  Evidencia débil para `\(H_0\)`     |
+`\(3 &lt; B &lt; 20\)`       |  Evidencia moderada para `\(H_0\)`  |
+`\(20 &lt; B &lt; 150\)`     |  Evidencia fuerte para `\(H_0\)`    |
+`\(B &gt; 150\)`          |  Evidencia muy fuerte para `\(H_0\)`|
+
+---
+
+## Factor de Bayes
+
+
+Ejemplo: Retornemos al ejemplo de los apartamentos donde `\(\theta\)` solo podía tomar los valores 2, 2.5 y 3. Supongamos que se quiere contrastar las hipótesis `\(H_0: \theta = 2\)` contra `\(H_1: \theta &gt; 2\)`. 
+
+Solución: Como ya para ese ejemplo obtuvimos la función de probabilidad a posteriori entonces podemos calcular las probabilidades de cada hipótesis:
+	
+`$$\alpha_0 = P(\theta = 2|x) = 0.416$$`
+`$$\alpha_1 = P(\theta &gt; 2 | x) = P(\theta = 2.5|x) + P(\theta = 3|x) = 0.311 + 0.273 = 0.584 = 1 - \alpha_0$$` 
+
+---
+
+## Factor de Bayes
+
+	
+Comparando únicamente estos dos valores vemos que preferimos a `\(H_1\)` sobre `\(H_0\)`. Si fuésemos a calcular el factor de Bayes entonces vamos a necesitar los odds a priori a posteriori. Estos vienen dados por
+	
+`$$\frac{\pi_{0}}{\pi_{1}} = \frac{\pi_0}{1-\pi_0} = \frac{0.50}{0.50} = 1$$`
+
+`$$\frac{\alpha_{0}}{\alpha_{1}} = \frac{\alpha_{0}}{1-\alpha_{0}} = \frac{0.416}{0.584} = 0.713$$`
+	
+`$$\Rightarrow B = \frac{0.713}{1} = 0.713$$`
+
+Es decir, tenemos que los odds de `\(H_0\)` a posteriori disminuyeron un `\(28.7\%\)` al pasar de la información a priori a la información a posteriori. Es decir, nuestros datos brindaron evidencia a favor de la hipótesis alterna. Viendo la escala del Cuadro 2 vemos que en este caso tenemos evidencia débil a favor de `\(H_1\)`. 
+
+---
+
+## Factor de Bayes
+
+	
+Ejemplo: Sea `\(X_1 , X_2 , X_3 , X_4\)` una muestra aleatoria tal que `\(X_j \sim N(\mu, 1)\)`. Suponiendo que se utilizó una priori Uniforme(0,30) para `\(\mu\)` y quieren contrastar las hipótesis `\(H_{0}: \mu \geq 14\)` contra `\(H_{1}: \mu &lt; 14\)`, encuentre el factor de Bayes. Suponga que de la muestra se obtuvo que `\(\overline{x} = 15.3\)`. 
+	
+Solución: Sabemos que con esta priori entonces `\(\mu|x \sim N\left( \overline{x},\frac{1}{n}\right)\)`, por lo tanto con los datos que observamos de la muestra tenemos que
+	
+`$$\mu|x \sim N(15.3; 0.25 )$$`
+	
+Ya que conocemos la priori y la posteriori de `\(\mu\)` debemos calcular las probabilidades de las hipótesis a prioi y a posteriori. Como la priori es una uniforme entonces tenemos que `\(\pi_0 = P(\mu \geq 14) = \frac{30-14}{30} = 0.533\)`. Por lo tanto se cumple que `\(\pi_1 = P(\mu &lt; 14) = 1 - \pi_0 = 0.467\)`. Por lo tanto, los odds a priori son `\(\frac{0.533}{0.467} = 1.143\)`. 
+
+---
+
+## Factor de Bayes
+
+	
+Ahora calculamos las probabilidades a posteriori. Como la distribución a posteriori es una Normal vamos a tener que estandarizar para poder calcular probabilidades mediante la tabla de la normal estándar (o usar la calculadora o R). Por lo tanto tenemos que la probabilidad a posteriori de `\(H_0\)` viene dada por `\(\alpha_{0} = P(\mu \geq 14 | x) = P\left( Z \geq 2(14-15.3) | x \right) = 1 - P(Z &lt; -2.6) = 0.9953\)`. Por consiguiente tenemos que `\(\alpha_{1} = 0.0047\)` y los odds a posteriori son `\(213.5376\)`.
+	 
+Esto significa que el factor de Bayes sería `\(\frac{213.5376}{1.143} = 186.8454\)` el cual, según la escala de Jeffreys, muestra evidencia muy fuerte a favor de `\(H_0\)`. 
+
+---
+
+class: center, middle
+
+# ¿Qué discutimos hoy?
+
+Distribuciones previas o a previa. Estadística Bayesiana: inferencia (estimación puntual, intervalos de credibilidad y factores de Bayes).
+
+# Faltan evaluaciones finales
+
+
+
+
+Slides creadas via R package [**xaringan**](https://github.com/yihui/xaringan).
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
