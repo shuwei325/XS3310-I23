@@ -436,16 +436,26 @@ DeGroot: 9.1: 2,3,11; 9.2: 2,4,7; 9.3: 2,3,8,13; 9.41,3,4; 9.5: 2,3,8,9;
 </td>
 </tr>
 <tr>
-<td>
-02/06
-</td>
-<td>
-Repaso y ejercicios
-</td>
 </tr>
 <td colspan="5" style="text-align: center">
   <b> Tema 4: Estadística Bayesiana </b>
 </td>
+<tr>
+<td>
+11
+</td>
+<td>
+02/06
+</td>
+<td>
+<a href="XS3310-I23_21.html">Clase21</a>
+</td>
+<td>
+</td>
+<td>
+Lista de ejercicios en las notas de clase
+</td>
+</tr>
 <tr>
 <td ROWSPAN="2">
 12
@@ -459,7 +469,6 @@ Repaso y ejercicios
 <td>
 </td>
 <td>
-Lista de ejercicios en las notas de clase
 </td>
 </tr>
 <tr>
@@ -467,7 +476,8 @@ Lista de ejercicios en las notas de clase
 09/06
 </td>
 <td>
-<a href="XS3310-I23_23.html">Clase23</a>
+Continua <a href="XS3310-I23_22.html">Clase22</a> <br> repaso y
+ejercicios
 </td>
 <td>
 </td>
