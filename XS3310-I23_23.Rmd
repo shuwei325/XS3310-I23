@@ -164,7 +164,7 @@ $$\pi(\theta|X) = \dfrac{\theta^{n+3}e^{-(20000+y)\theta}}{\Gamma(n+4)} (20000+y
 que es una $\Gamma(n+4,20000+y)$.
 
 Con 5 observaciones (horas): 2911, 3403, 3237, 3509, 3118.
-$$y = \sum_{i=1}^{5}X_i = 16478, \quad n= 5$$
+$$y = \sum_{i=1}^{5}X_i = 16178, \quad n= 5$$
 por lo que $\theta|X \sim \Gamma(9,36178)$
 
 
@@ -257,6 +257,7 @@ Bajo independencia condicional no hay diferencia en la posterior si los datos so
 Luego,
 
 $$\begin{align} g_n(X) & = \int_{\Omega} f(X_n|\theta) \pi(\theta|X_1,\dots, X_{n-1})~d\theta \\ & = P(X_n|X_1,\dots,X_{n-1}) \text{ (Predicción para }X_n) \end{align}$$
+**Ejemplo**.
 
 Continuando con el ejemplo de los artefactos, $P(X_6>3000|X_1,X_2,X_3,X_4,X_5)$.
 Se necesita calcular $f(X_6|X)$. Dado que 
@@ -264,14 +265,33 @@ $$\pi(\theta|X) = 2.6\times 10^{36}\theta^8 e^{-36178\theta}$$
 
 se tiene 
 
-$$f(X_6|X) = 2.6 \times 10^{36} \int_{0}^1 \underbrace{\theta e^{-\theta X_6}}_{\text{Densidad de } X_6} \theta^8 e^{-36178\theta}~d\theta= \dfrac{9.55 \times 10^{41}}{(X_6+36178)^{10}}$$ 
+$$f(X_6|X) = 2.6 \times 10^{36} \int_{0}^\infty \underbrace{\theta e^{-\theta X_6}}_{\text{Densidad de } X_6} \theta^8 e^{-36178\theta}~d\theta= \dfrac{9.55 \times 10^{41}}{(X_6+36178)^{10}}$$ 
 
 Entonces, 
 
 $$P(X_6>3000)=\int_{3000}^{\infty} \dfrac{9.55\times10^{41}}{(X_6+36178)^{10}}\; dX_6 =
 0.4882$$
 
-La vida media se calcula como $\dfrac{1}{2} = P(X_6>u|X)$.
+
+
+---
+
+```{r}
+func<-function(x){9.55*10^41/(x+36178)^10}
+integrate(func,lower=3000,upper=Inf)
+```
+
+La vida mediana se calcula como $\dfrac{1}{2} = P(X_6>u|X)$.
+
+
+La vida media se calcula como $E(X_6|X) = \int_{0}^{\infty} x_6 f(x_6|X) dx_6$.
+
+
+```{r}
+func<-function(x){x*9.55*10^41/(x+36178)^10}
+integrate(func,lower=0,upper=Inf)
+```
+
 
 ---
 ## Retomando el ejemplo de la clase anterior
