@@ -26,168 +26,8 @@ Introducción a la Estadística Bayesiana: filosofía, historia y un poco de cá
 
 # ¿Qué vamos a discutir hoy?
 
-Distribuciones previas
+Modelo Bayesiano. Distribuciones previas
 
----
-
-## Aclaración de parametrización
-
-Para facilitar algunos cálculos en este tema estaremos usando una parametrización alterna de la Gamma (y por ende de la ji-cuadrado y la Exponencial). Anteriormente si teníamos una $Gamma(\alpha,\beta)$ su función de densidad venía dada por 
-	
-$$f_{X}(x) = \frac{x^{\alpha - 1} e^{-\frac{x}{\beta}}  }{\beta^{\alpha} \Gamma(\alpha) } \quad si \quad x > 0$$
-	
-Con la nueva parametrización que vamos a estar utilizando, la función de densidad vendría dada de la siguiente manera
-
-$$f_{X}(x) = \frac{ \beta^{\alpha} x^{\alpha - 1} e^{-\beta x}  }{ \Gamma(\alpha) } \quad si \quad x > 0$$
-	
-Noten que la única diferencia es que el $\beta$ de la nueva parametrización, llamémoslo $\beta^{\prime}$ por un momento, es el inverso multiplicativo del beta de la parametrización vieja. Es decir, $\beta^{\prime} = \frac{1}{\beta}$. Por lo tanto, para la nueva parametrización de la Gamma tenemos que $E(X) = \frac{\alpha}{\beta}$ y $Var(X) = \frac{\alpha}{\beta^2}$.
-			
-			
----
-
-## Densidades previas conjugadas y estimadores de Bayes
-    
-### Distribución previa (distribución a priori)
-
-Suponga que tenemos un modelo estadístico con parámetro $\theta$. Su $\theta$ es aleatorio entonces su densidad (antes de observar cualquier muestra) se llama **densidad previa**: $\pi$.
-
-**Ejemplo**: $X_1,\dots, X_n \sim \text{Exp}(\theta)$ y $\theta$ es aleatorio tal que $\theta \sim \Gamma(\stackrel{\alpha}{1},\stackrel{\beta}{2})$ entonces
-
-$$ \pi(\theta) = \dfrac{1}{\Gamma(\alpha)}\beta^\alpha\theta^{\alpha-1}e^{\beta\theta} = 2e^{-2\theta}, \quad \theta > 0$$
-
----
-
-**Ejemplo**: Sea $\theta$ la probabilidad de obtener cara al tirar una moneda.
-
-En este caso antes de modelar exactamente el $\theta$, lo importante es modelar el tipo de moneda. Es decir, supongamos que tenemos dos opciones
-
-- *Moneda justa:* $\theta = \dfrac{1}{2}$ con probabilidad previa $0.8$ $(\pi(\frac{1}{2}) = 0.8)$.
-
-- *Moneda con solo una cara:* $\theta = 1$  con probabilidad previa $0.2$ $(\pi(1) = 0.2)$.
-
-En este ejemplo si tuviéramos 100 monedas con probabilidad previa $\pi$ entonces 20 tendrían solo una cara y 80 serían monedas normales. 
-
----
-
-**Notas**:
-
-- $\pi$ está definida en $\Omega$ (espacio paramétrico).
-
-- $\pi$ es definida antes de obtener la muestra.
-
-**Ejemplo** (Componentes eléctricos) Supoga que se quiere conocer el tiempo de
-vida de cierto componente eléctrico. Sabemos que este tiempo se puede modelar
-con una distribución exponencial con parámetro $\theta$ desconocido.
-Este parámetro asumimos que tiene una distribución previa Gamma.
-
-Un experto en componentes eléctricos conoce mucho de su área y sabe
-que el parámetro $\theta$ tiene las siguientes características: 
-
-$$
-\mathbb{E}[\theta] = 0.0002, \quad \sqrt{\text{Var}(\theta)} = 0.0001.
-$$
-
-Como sabemos que la previa  $\pi$ es Gamma, podemos deducir lo siguiente:
-
-$$
- \mathbb{E}[\theta] = \dfrac{\alpha}{\beta}, \text{Var}(\theta) = \dfrac{\alpha}{\beta^2}
-$$
-
-$$\implies \begin{cases}\dfrac{\alpha}{\beta} = 2\times 10^{-4}\\\sqrt{\dfrac{\alpha}{\beta^2}} = 1 \times 10^{-4}\end{cases} \implies \beta = 20000, \alpha = 4$$
-
----
-
-**Notación**:
-
-- $X = (X_1,\dots, X_n)$: vector que contiene la muestra aleatoria.
-
-- Densidad conjunta de $X$: $f_\theta(x)$.
-
-- Densidad de $X$ condicional en $\theta$: $f_n(x|\theta)$.
-
-**Supuesto**: $X$ viene de una muestra aleatoria  si y solo si $X$ es condicionalmente independiente dado $\theta$.
-
-**Consecuencia**: $$f_n(X|\theta) = f(X_1|\theta)\cdot f(X_2|\theta)\cdots f(X_n|\theta)$$
-
-**Ejemplo**
-
-Si $X = (X_1,\dots, X_n)$ es una muestra tal que $X_i\sim \text{Exp}(\theta)$,
-
-\begin{align*}
-f_n(X|\theta) &= \begin{cases}\prod_{i=1}^n \theta e^{-\theta X_i} & \text{si } X_i>0\\
-0 & \text{si no}
-\end{cases}  \\
-&= \begin{cases}\theta^n e^{-\theta\sum_{i=1}^n X_i} & X_i > 0  \\ 0 & \text{si no}\end{cases}
-\end{align*}
-
----
-## Densidad posterior
-
-**Definición**. Considere un modelo estadístico con parámetro $\theta$ y muestra
-aleatoria $X_1,\dots, X_n$. La densidad condicional de $\theta$ dado
-$X_1,\dots,X_n$ se llama *densidad posterior*: $\pi(\theta|X)$
-
-
-**Teorema**. Bajo las condiciones anteriores: 
-
-$$
-\pi(\theta|X) =
-\dfrac{f(X_1|\theta)\cdots f(X_n|\theta)\pi(\theta)}{g_n(X)} 
-$$
-
-para $\theta \in \Omega$, donde $g_n$ es una constante de
-normalización.
-
-*Prueba*:
-
-\begin{align*}
-\pi(\theta|X) & = \dfrac{\pi(\theta,X)}{\text{marginal de X}} = \dfrac{\pi(\theta,X)}{\int \pi(\theta,X)\;d\theta}= \dfrac{P(X|\theta)\cdot \pi(\theta)}{\int \pi(\theta,X)\;d\theta}\\
-& \dfrac{f_n(X|\theta)\cdot \pi(\theta)}{g_n(X)} = \dfrac{f(X_1|\theta)\cdots f(X_n|\theta)\pi(\theta)}{g_n(X)}
-\end{align*}
-
-Del ejemplo anterior, 
-
-$$f_n(X|\theta) = \theta^n e^{-\theta y}, y = \sum{X_i} \text{ (estadístico})$$
-
----
-
-- Numerador:
-
-$$f_n(X|\theta)\pi(\theta) = \underbrace{\theta^n e^{-\theta y}}_{f_n(X|\theta)} \cdot \underbrace{\dfrac{200000^4}{3!}\theta^3e^{-20000\cdot\theta}}_{\pi(\theta)} = \dfrac{20000^4}{3!}\theta^{n+3}e^{(20000+y)\theta}$$
-
-- Denominador:
-
-$$g_n(x) = \int_{0}^{+\infty}\theta^{n+3}e^{-(20000+y)\theta}\;d\theta = \dfrac{\Gamma(n+4)}{(20000+y)^{n+4}}$$
-
-Entonces la posterior corresponde a
-$$\pi(\theta|X) = \dfrac{\theta^{n+3}e^{-(20000+y)\theta}}{\Gamma(n+4)} (20000+y)^{n+4}$$
-que es una $\Gamma(n+4,20000+y)$.
-
-Con 5 observaciones (horas): 2911, 3403, 3237, 3509, 3118.
-$$y = \sum_{i=1}^{5}X_i = 16178, \quad n= 5$$
-por lo que $\theta|X \sim \Gamma(9,36178)$
-
-
----
-
-
-```{r 02-distribuciones-previas-posteriores-1, echo=F, warning=FALSE, out.width="60%"}
-library(ggplot2)
-library(tidyr)
-rango <- seq(0,1e6,by = 6)
-previa <- dgamma(rango, shape = 4, scale = 20000)
-posterior <- dgamma(rango,shape = 9,scale = 36178)
-densidades <- data.frame(rango = rango, Previa = previa, Posterior = posterior) 
-densidades <- gather(densidades, key = "Densidad", value = "valor", -rango)
-ggplot(data=densidades, aes(x=rango, y=valor*100, color = Densidad)) + 
-  geom_line() + xlab("") + theme_minimal()+ theme(axis.title.y=element_blank(),
-                                                  axis.text.y=element_blank(),
-                                                  axis.ticks.y=element_blank())
-```
-
-Es sensible al tamaño de la muestra (una muestra grande implica un efecto de la previa menor).
-
-**Hiperparámetros**: parámetros de la previa o posterior.
 
 ---
 ## Proceso de modelación de parámetros. 
@@ -294,22 +134,11 @@ integrate(func,lower=0,upper=Inf)
 
 
 ---
-## Retomando el ejemplo de la clase anterior
-
-|i |$$\theta_i$$|$$\pi(\theta_i)$$|$$\mathcal{L}(\theta_i\shortmid x)$$|$$\mathcal{L}(\theta_i\shortmid x)\pi(\theta_i)$$| $$\pi(\theta_i\shortmid x)$$|
-|--|------------|-----------------|------------------------------------|--------------------------------------|--------------------------| 
-|1 | 2          | 0.50            | $$2.15 \cdot 10^{-4}$$             | $$10.76\cdot 10^{-5}$$               | 0.416                     |
-|2 | 2.5        | 0.25            | $$3.21 \cdot 10^{-4}$$             | $$8.03\cdot 10^{-5}$$                | 0.311                     |
-|3 | 3          | 0.25            | $$2.82 \cdot 10^{-4}$$             | $$7.06\cdot 10^{-5}$$                | 0.273                     |
-
-* ¿Cuál fue el aporte Bayesiano al estudio? 
-
-* ¿Qué hubiera pasado si hubiéramos asignado probabilidades iguales a previa para cada valor de $\theta$? Esto se llama utilizar una *previa no informativa* pues no está influyendo mucho en los valores que pueda tomar $\theta$.
-
----
 ## Distribuciones previas
 
-* Supongamos ahora que $\theta$ ya no toma solo ciertos valores, sino que puede tomar cualquier valor mayor a cero. Ya no vamos a poder usar una distribución de probabilidad como previa sino que más bien necesitamos una función de densidad. Podríamos usar una previa no informativa, de manera que $\theta \sim Unif(0,B)$ donde $B$ va a representar un valor arbitrario muy grande. 
+**Ejemplo**:
+
+* Podríamos usar una previa no informativa, de manera que $\theta \sim Unif(0,B)$ donde $B$ va a representar un valor arbitrario muy grande. 
 
 * Ahora vamos a suponer que tenemos una muestra aleatoria $X_1 , X_2 , ... , X_n$ tal que $X_j \sim Poisson(\theta)$, por lo que se cumple que $\mathcal{L}(\theta|x) = \frac{ \theta^{\sum_{j=1}^{n}x_j} e^{-n\theta} }{\prod_{j=1}^{n} x_{j}! }$. Para llegar a cuál sería la función de densidad a posteriori podemos utilizar el Teorema de Bayes:
 	
@@ -414,6 +243,12 @@ Hasta el momento hemos hecho la selección de la previa un poco intuitivamente, 
 	
 1. Previas informativas
 2. Previas no informativas
+
+
+
+# Ejercicio:
+
+![](figs/ejercicio.png)
 
 ---
 

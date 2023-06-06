@@ -476,8 +476,7 @@ Lista de ejercicios en las notas de clase
 09/06
 </td>
 <td>
-Continua <a href="XS3310-I23_22.html">Clase22</a> <br> repaso y
-ejercicios
+<a href="XS3310-I23_23.html">Clase23</a> <br> repaso y ejercicios
 </td>
 <td>
 </td>
