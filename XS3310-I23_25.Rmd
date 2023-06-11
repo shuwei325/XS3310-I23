@@ -74,10 +74,10 @@ entonces decimos que $\psi$ es una familia conjugada de previas.
   Gamma es familia conjugada.
 
 La función de densidad de una Poisson es $P(X_i = k) = e^{-\lambda}\dfrac{\lambda^k}{k!}$. La verosimilitud corresponde a 
-$$f_n(X|\lambda) = \prod_{i=1}^{n}e^{-\lambda}\dfrac{\lambda^X_i}{X_i!} = \dfrac{e^{-n\lambda^y}}{\prod_{i=1}^n X_i}.$$
+$$f_n(X|\lambda) = \prod_{i=1}^{n}e^{-\lambda}\dfrac{\lambda^{X_i}}{X_i!} = \dfrac{e^{-n\lambda}\lambda^Y}{\prod_{i=1}^n X_i!}~~~ \text{ donde } Y=\sum_{i=1}^n X_i.$$
 La previa de $\lambda$ está definida por $\pi(\lambda)\propto\lambda^{\alpha-1}e^{-\beta\lambda}$. Por lo tanto, la posterior es
-$$ \pi(\lambda|X) \propto \lambda^{y+\alpha-1}e^{-(\beta+n)\lambda} \implies
- \lambda|X \sim \Gamma(y+\alpha,\beta+n)$$ 
+$$ \pi(\lambda|X) \propto \lambda^{Y+\alpha-1}e^{-(\beta+n)\lambda} \implies
+ \lambda|X \sim \Gamma(Y+\alpha,\beta+n)$$ 
 
 ---
 * En el caso normal, si $X_1,\dots,X_n\sim N(\theta,\sigma^2)$,entonces la familia normal es conjugada si $\sigma^2$ es conocido.
@@ -89,8 +89,9 @@ Combina de manera ponderada la previa y la de los datos.
 
 **Ejemplo**
 
-Considere una verosimilitud Poisson($\lambda$) y una previa
-$$ \pi(\lambda) = \begin{cases}2e^{-2\lambda} & \lambda> 0 \\ 0 & \lambda \geq 0\end{cases} \quad \lambda \sim \Gamma(1,2)$$
+Considere una verosimilitud Poisson $(\lambda)$ y una previa
+
+$$\pi(\lambda) = \begin{cases}2e^{-2\lambda} & \lambda> 0 \\ 0 & \lambda \leq 0\end{cases} \quad \lambda \sim \Gamma(1,2)$$
 
 Supongamos que es una muestra aleatoria de tamaño $n$. ¿Cuál es el número de observciones para reducir la varianza, a lo sumo, a 0.01?
 
@@ -101,12 +102,11 @@ $$\dfrac{\alpha}{\beta^2} = \dfrac{\sum x_i + 1}{(n+2)^2} \leq 0.01 \implies \df
 ---
 **Teorema**. Si $X_1,\dots,X_n \sim N(\theta, \sigma^2)$ con $\sigma^2$ conocido y la previa es $\theta \sim N(\mu_0,V_0^2)$, entonces $\theta|X\sim N(\mu_1,V_1^2)$ donde
 $$ \mu_1 =  \dfrac{\sigma^2\mu_0 + nV_0^2 \bar X_n}{\sigma^2 + nV_0^2}, \quad V_1^2 = \dfrac{\sigma^2V_0^2}{\sigma^2 + nV_0^2}$$
-
 *Prueba*:
 
 * **Verosimilitud**:
 
-$$f_n(X|\theta) \propto \exp\left[- \dfrac{1}{2\sigma^2} \sum_{i=1}^{n}(X_i\theta)^2\right]$$
+$$f_n(X|\theta) \propto \exp\left[- \dfrac{1}{2\sigma^2} \sum_{i=1}^{n}(X_i-\theta)^2\right]$$
 Luego, 
 \begin{align*}
 \sum_{i=1}^n (X_i-\theta)^2 & = \sum_{i=1}^n (X_i-\bar X + \bar X - \theta)^2 \\
@@ -277,7 +277,7 @@ Una técnica para seleccionar distribuciones impropia es sustituir los hiperpar�
 
 **Ejemplo**:
 
-Se presenta el número de soldados prusianos muertos por una patada de caballo (280 conteros, unidades de combate en 20 años).
+Se presenta el número de soldados prusianos muertos por una patada de caballo (280 conteos, unidades de combate en 20 años).
 
 | Unidades | Ocurrencias |  
 |----------|-------------|
@@ -328,7 +328,7 @@ Asuma que $\theta$ tiene una previa. La pérdida esperada es
 $$ \mathbb{E}[L(\theta,a)] = \int_{\Omega}L(\theta, a) \pi(\theta)\;d\theta$$
 la cual es una función de $a$, que a su vez es función de $X_1,\dots,X_n$. Asuma que $a$ se selecciona el minimizar esta esperanza. A ese estimador $a = \delta^*(X_1,\dots, X_n)$ se le llama **estimador bayesiano**, si ponderamos los parámetros con respecto a la posterior.
 
-$$\mathbb{E}[L(\theta, \delta^*)|X] = \int_{\Omega}L(\theta, a) \pi(\theta)\;d\theta = \min_a \mathbb{E}[L(\theta|a)X].$$
+$$\mathbb{E}[L(\theta, \delta^*)|X] = \int_{\Omega}L(\theta, a) \pi(\theta)\;d\theta = \min_a \mathbb{E}[L(\theta|a)|X].$$
 
 ---
 
@@ -369,7 +369,7 @@ Resuelva para $X_{0.5}$.
 
 * $L(\theta,a) = |\theta-a|^k$, $k\ne 1,2$, $0<k<1$.
 
-* $L(\theta,a) = \lambda(\theta)|\theta-a|^2$ ($\lambda(\theta)$ penaliza la magnitud del parámetro).
+* $L(\theta,a) = \lambda(\theta)|\theta-a|^2$ $(\lambda(\theta)$ penaliza la magnitud del parámetro).
 
 * $L(\theta,a)=\begin{cases}3(\theta-a)^2 & \theta\leq a \text{ (sobreestima)}\\ (\theta-a)^2&\theta\geq a \text{ (subestima)} \end{cases}$
 
@@ -396,15 +396,15 @@ La media es $\bar X_n = \dfrac{10}{100} = 0.1$.
 ---
 ## Consistencia
 
-**Definición**. Un estimador de $\theta$ $\delta(X_1,\dots, X_n)$ es consistente si  $$\delta(X_1,\dots, X_n)\xrightarrow[n\to \infty]{\mathbb{P}}\theta.$$
+**Definición**. Un estimador de $\theta$, $\delta(X_1,\dots, X_n)$ es consistente si  $$\delta(X_1,\dots, X_n)\xrightarrow[n\to \infty]{\mathbb{P}}\theta.$$
 
-Bajo pérdida cuadrática, $\mathbb{E}[\theta|X] = W_1\mathbb{E}[\theta] + X_2\bar X_n = \delta^*$. Sabemos, por ley de grandes números, que $\bar X_n \xrightarrow[n\to \infty]{\mathbb{P}}\theta$. Además, $W_1\xrightarrow[n\to \infty]{}0$ y  $W_2\xrightarrow[n\to \infty]{}1$. 
+Bajo pérdida cuadrática, $\mathbb{E}[\theta|X] = W_1\mathbb{E}[\theta] + W_2\bar X_n = \delta^*$. Sabemos, por ley de grandes números, que $\bar X_n \xrightarrow[n\to \infty]{\mathbb{P}}\theta$. Además, $W_1\xrightarrow[n\to \infty]{}0$ y  $W_2\xrightarrow[n\to \infty]{}1$. 
 
 En los ejemplos que hemos analizado 
-$$\delta^* \xrightarrow[n\to \infty]{\mathbb{P}}\theta $$
+$$\delta^* \xrightarrow[n\to \infty]{\mathbb{P}}\theta$$
 **Teorema**. Bajo condiciones generales, los estimadores bayesianos son consistentes.
 
-**Estimador**. Si $X_1,\dots, X_n$ es una muestra en un modelo indexado por $\theta$, $\theta \in \Omega$ ($k$-dimensiones), sea
+**Estimador**. Si $X_1,\dots, X_n$ es una muestra en un modelo indexado por $\theta$, $\theta \in \Omega$ ( $k$-dimensiones), sea
 
 $$h:\Omega \to H \subset \mathbb{R}^d.$$
 Sea $\psi = h(\theta)$. Un **estimador** de $\psi$ es un estadístico $\delta^*(X_1,\dots, X_n) \in H$. A $\delta^*(X_1,\dots, X_n)$ estimador de $\psi$ se puede evaluar y construir estimadores nuevos.
@@ -425,9 +425,6 @@ Es estimador se calcula de la siguiente manera:
 
 Por otro lado, vea que $\mathbb{E}(\theta|X) = \dfrac{4}{8.6}$. El estimador *plug-in* correspondería a
 $$\dfrac{1}{\mathbb{E}(\theta|X)} = \dfrac{8.6}{4} = 2.15.$$
-
-
-
 
 ---
 ### Distribución previa 
@@ -652,8 +649,7 @@ ggplot(data = data.frame(x = c(-5, 15)), aes(x)) +
 ```
 
 ---
-Si los datos por si solo son muy variable, la posterior tiende a parecerse a la
-distribución previa en lugar que a la verosimilitud.
+Si los datos por si solo son muy variable, la posterior tiende a parecerse a la distribución previa en lugar que a la verosimilitud.
 
 ```{r 02-distribuciones-previas-posteriores-10a}
 x <- rnorm(n = 10, mean = 10, sd = 5)
@@ -718,7 +714,7 @@ alpha <- 9
 beta <- 36178
 ```
 
-- **Pérdida cuadrática:** Recoremos que la media de una gamma es $\alpha/\beta$ entonces 
+- **Pérdida cuadrática:** Recordemos que la media de una gamma es $\alpha/\beta$ entonces 
 
 ```{r 02-distribuciones-previas-posteriores-12 }
 (theta <- alpha/beta)
