@@ -1,0 +1,101 @@
+---
+title: "Ejercicio Bayes"
+author: "Shu Wei"
+date: "2023-06-13"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Ejemplo con distribución Poisson
+
+Suponga que tenemos una muestra aleatoria $X_1,...,X_{10}$ tal que $X_j \sim Poisson(\theta)$. Recordemos que
+
+
+## 1. Datos
+
+```{r}
+set.seed(10000)
+n<-10
+X<-rpois(n, 4) #suponemos que theta = 4.
+X
+mean(X)
+```
+
+Tenemos que la verosimilitud es:
+
+$\mathcal{L}(\theta|x) = \frac{ \theta^{\sum_{j=1}^{n}x_j} e^{-n\theta} }{\prod_{j=1}^{n} x_{j}! }$
+
+## 2. Distribución previa no informativa.
+
+$$\theta \sim Unif(0,B)$$ 
+donde $B$ va a representar un valor arbitrario muy grande. 
+
+La distribución a posteriori es:
+
+$$\pi(\theta| x) \propto \mathcal{L}(\theta |x)\pi(\theta)$$
+
+$$\Rightarrow \pi(\theta| x) \propto \frac{ \theta^{\sum x_j} e^{-n\theta} }{\prod x_{j}! } \cdot \frac{1}{B} \propto \theta^{n\bar{x}} e^{-n\theta}$$
+Esto indica que la distribución posterior tiene nucleo de una distribución gamma:
+
+$$\theta|x \sim Gamma(n\bar{x} + 1, n)$$
+```{r}
+B<-100
+
+alfa1<- n*mean(X)+1
+beta1<- n
+
+theta <- seq(0,10,by=0.1)
+pi.theta <- dgamma(x=theta,shape=alfa1,rate=beta1)
+plot(theta,pi.theta,type="l")
+abline(v=mean(X),col=2)
+abline(h=1/B,col=3)
+```
+
+
+La media posterior usando una previa no informativa.
+
+```{r}
+alfa1/beta1
+```
+
+
+## 3. Distribución previa informativa.
+
+Suponga que conocemos de antemano información respecto a $\theta$,
+	
+$$\pi(\theta) = \frac{ \beta^{\alpha} \theta^{\alpha - 1} e^{-\beta \theta}  }{ \Gamma(\alpha) }$$
+$$\pi(\theta|x) =  \frac{\mathcal{L}(\theta |x)\pi(\theta)}{\int_{0}^{+\infty} \mathcal{L}(\theta|x)\pi(\theta)} \propto \mathcal{L}(\theta |x)\pi(\theta) = \frac{ \theta^{n\bar{x}} e^{-n\theta} }{\prod x_{j}! } \cdot \frac{ \beta^{\alpha} \theta^{\alpha - 1} e^{-\beta \theta}  }{ \Gamma(\alpha) }$$
+$$\propto \theta^{n\bar{x}} e^{-n\theta} \cdot \theta^{\alpha - 1} e^{-\beta \theta} = \theta^{n\bar{x} + \alpha - 1} e^{-\theta(n + \beta)}$$
+
+Por lo tanto concluimos que $\theta|x \sim Gamma(n\bar{x} + \alpha , n + \beta)$.
+
+
+```{r}
+alfa0 <- 4
+beta0 <- 2
+  
+alfa1<- n*mean(X)+alfa0
+beta1<- n+beta0
+
+theta <- seq(0,10,by=0.1)
+pi.theta.prior <- dgamma(x=theta,shape=alfa0,rate=beta0)
+pi.theta <- dgamma(x=theta,shape=alfa1,rate=beta1)
+plot(theta,pi.theta.prior,type="l", ylim=c(0,1))
+points(theta,pi.theta,type="l",col=2)
+abline(v=mean(X),col=3)
+```
+
+
+La media posterior usando una previa informativa (depende de la información a priori).
+```{r}
+alfa1/beta1
+```
+Recuerde que:
+
+$$E(\theta|x) = \frac{n\bar{x} + \beta\left( \frac{\alpha}{\beta}\right)}{n + \beta}$$
+
+
+

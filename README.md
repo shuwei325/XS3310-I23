@@ -491,7 +491,8 @@ Lista de ejercicios en las notas de clase
 13/06
 </td>
 <td>
-Quiz 3
+Quiz 3 <br> <a href="ejercicio_Bayes.html">ejercicios</a>
+</td>
 </td>
 <td ROWSPAN="2">
 </td>
