@@ -64,7 +64,14 @@ Por lo general, los estimadores puntuales Bayesianos están asociados a una **fu
 
 ## Estimación puntual
 
-El objetivo es encontrar el valor de `\(\hat{\theta}\)` que minimice `\(E\left( \ell(\hat{\theta},\theta) \,\middle|\, x \right) = \int \ell(\hat{\theta},\theta) \pi(\theta|x) d\theta\)`, llamado el riesgo Bayesiano a posteriori. Por lo tanto, podemos ver que el estimador de Bayes que minimiza el riesgo Bayesiano utilizando la función de pérdida cuadrática se obtiene minimizando la expresión
+El objetivo es encontrar el valor de `\(\hat{\theta}\)` que minimice `\(E\left( \ell(\hat{\theta},\theta) \,\middle|\, x \right) = \int \ell(\hat{\theta},\theta) \pi(\theta|x) d\theta\)`, llamado el riesgo Bayesiano a posteriori, i.e.
+
+
+`$$\arg\min_{\hat{\theta}} = E\left( \ell(\hat{\theta},\theta) \,\middle|\, x \right)$$`
+
+
+
+Por lo tanto, podemos ver que el estimador de Bayes que minimiza el riesgo Bayesiano utilizando la función de pérdida cuadrática se obtiene minimizando la expresión
 	
 `$$\int (\hat{\theta}-\theta)^{2} \pi(\theta|x) d\theta = E\left( (\hat{\theta}-\theta)^{2} \,\middle|\, x \right)$$`
 	
@@ -82,6 +89,30 @@ Derivamos esta expresión con respecto a `\(\hat{\theta}\)`:
 `$$\Rightarrow \hat{\theta} = E(\theta|x)$$`
 	
 Como la segunda derivada es positiva entonces tenemos que `\(\hat{\theta} = E(\theta|x)\)` es el valor que minimiza el riesgo de Bayes con pérdida cuadrática. Este valor es el mismo al estimador de Bayes usualmente utilizando, por lo que podríamos decir que siempre que usemos la media a posteriori como estimador de `\(\theta\)` estamos usando el valor que minimiza el riesgo de Bayes con pérdida cuadrática. Si cambiamos la función de pérdida entonces el estimador de Bayes cambiaría. 
+	
+	
+---
+
+## Estimación puntual
+
+- **Función de pérdida absoluta** es `\(\ell(\hat{\theta},\theta) = |\hat{\theta}-\theta)|\)`. Se puede demostrar que para este caso: 
+
+`$$\arg\min_{\hat{\theta}} = E\left( \ell(\hat{\theta},\theta) \,\middle|\, x \right) = E\left( |\hat{\theta}-\theta)| \,\middle|\, x \right)= Mediana(\theta|x)$$`
+Es decir, `\(\hat{\theta}\)` es el valor que satisface
+
+`$$F_{\theta|x}(\hat{\theta})=\frac{1}{2}.$$`
+
+
+
+### Otras funciones de pérdida
+
+* `\(l(\theta,a) = |\theta-a|^k\)`, `\(k\ne 1,2\)`, `\(0&lt;k&lt;1\)`.
+
+* `\(l(\theta,a) = \lambda(\theta)|\theta-a|^2\)` `\((\lambda(\theta)\)` penaliza la magnitud del parámetro).
+
+* `\(l(\theta,a)=\begin{cases}3(\theta-a)^2 &amp; \theta\leq a \text{ (sobreestima)}\\ (\theta-a)^2&amp;\theta\geq a \text{ (subestima)} \end{cases}\)`
+	
+	
 	
 ---
 
@@ -164,7 +195,7 @@ Por lo tanto un contraste de hipótesis Bayesiano usualmente se reduce a compara
 ## Factor de Bayes
 
 	
-La cantidad `\(\frac{\alpha_{0}}{\alpha_{1}}\)` se define como los *odds* a posteriori de `\(H_0\)` con respecto a `\(H_1\)`. Por otro lado podemos definir `\(\frac{\pi_{0}}{\pi_{1}}\)` como los \textit{odds} a priori. Por lo tanto podemos definir la medida 
+La cantidad `\(\frac{\alpha_{0}}{\alpha_{1}}\)` se define como los *odds* a posteriori de `\(H_0\)` con respecto a `\(H_1\)`. Por otro lado podemos definir `\(\frac{\pi_{0}}{\pi_{1}}\)` como los *odds* a priori. Por lo tanto podemos definir la medida 
 	
 `$$B = \frac{\frac{\alpha_{0}}{\alpha_{1}}}{\frac{\pi_{0}}{\pi_{1}}} = \frac{\alpha_{0}\pi_{1}}{\alpha_{1}pi_{0}}$$`
 	
