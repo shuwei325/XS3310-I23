@@ -315,7 +315,21 @@ donde `\(\displaystyle\int_{0}^{\infty}\dfrac{1}{\lambda} d\lambda = \infty\)`.
 
 Por teorema de Bayes, `$$\theta|X \sim \Gamma(196,280)$$`
 	
-	
+---
+
+
+
+```r
+alfa1 &lt;- 196 
+beta1 &lt;- 280
+theta &lt;- seq(0,2,by=0.01)
+posterior &lt;- dgamma(theta,shape = alfa1, rate = beta1)
+plot(theta,posterior, type="l")
+abline(v=196/280) # media a posteriori = media muestral
+```
+
+&lt;img src="XS3310-I23_25_files/figure-html/unnamed-chunk-2-1.png" width="60%" /&gt;
+
 
 ---
 

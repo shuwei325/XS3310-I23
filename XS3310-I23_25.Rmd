@@ -305,7 +305,19 @@ donde $\displaystyle\int_{0}^{\infty}\dfrac{1}{\lambda} d\lambda = \infty$.
 
 Por teorema de Bayes, $$\theta|X \sim \Gamma(196,280)$$
 	
-	
+---
+
+
+```{r, out.width="60%"}
+alfa1 <- 196 
+beta1 <- 280
+theta <- seq(0,2,by=0.01)
+posterior <- dgamma(theta,shape = alfa1, rate = beta1)
+plot(theta,posterior, type="l")
+abline(v=196/280) # media a posteriori = media muestral
+
+```
+
 
 ---
 
