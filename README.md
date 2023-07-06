@@ -578,6 +578,31 @@ Debate
 07/07
 </td>
 <td>
+Repaso y ejercicios
+</td>
+<tr>
+<td>
+17
+</td>
+<td>
+12/07
+</td>
+<td>
 Parcial II
+</td>
+<td ROWSPAN="2">
+</td>
+<td ROWSPAN="2">
+</td>
+</tr>
+<tr>
+<td>
+18
+</td>
+<td>
+21/07
+</td>
+<td>
+Ampliación
 </td>
 </tr>
